@@ -1,15 +1,27 @@
 <div id="header">
-
-	<div id="logo" onclick="location.href=location.href">
-		<div id="logoGraphic"></div><div class="logoText">${titlePrimary}</div> <div class="logoText offsetColor">${titleOffset}</div>
-	</div>
-	<div id="top_menu">
-		<button class="reset button headerButton">Reset</button> 
-		<span class="separator" style="display: none;">|</span> 
-		<button id="userGuideLink" class="infoLinks button headerButton" style="display: none;">Help</button>
-		<span class="separator">|</span> 
-		<button id="highlightsLink" class="infoLinks button headerButton">About</button> 
-		<span class="separator" style="display: none;">|</span> 
-		<button id="headerLogin" class="infoLinks login button headerButton" style="display: none;">Login</button>
+	<div class="container">
+		<ul class="nav">
+			<a href="#"><img
+				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
+			<a href="#"><img
+				src="resources/css/css/css/css/images/WHO ARE WE.png"
+				alt="WHO ARE WE"></a>
+			<a href="#"><img
+				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
+				alt="REGULATIONS AND LAWS"></a>
+			<a href="#"><img
+				src="resources/css/css/css/css/images/OTHER HOLDINGS.png"
+				alt="OTHER HOLDINGS"></a>
+			<a href="<c:url value='view_fayoum'/>"><img
+				src="resources/css/css/css/css/images/BY FORCE.png" alt="BY FORCE"></a>
+			<a href="<c:url value='view_wadigedeed'/>"><img
+				src="resources/css/css/css/css/images/RENT.png" alt="RENT"></a>
+			<a href="<c:url value='view_beheira'/>"><img
+				src="resources/css/css/css/css/images/OWNERSHIP.png" alt="OWNERSHIP"></a>
+			<a href="http://localhost:8080/beheiraportal/"><img
+				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
+		</ul>
+		<img src="resources/css/css/css/css/images/projectname.png"
+			alt="project name" class="projectname">
 	</div>
 </div>

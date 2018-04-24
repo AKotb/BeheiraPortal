@@ -12,6 +12,8 @@
 
 <link rel="stylesheet" href="resources/css/jquery-ui-ogpTheme.custom.css" type="text/css" />
 
+<link rel="stylesheet" href="resources/css/css/css/css/tooplate-style.css">
+
 <script>
 if (!Object.create) {
 	Object.create = function(o) {

@@ -19,7 +19,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 				var width = this.model.get("openWidth");
 				var margin = width - jQuery("#roll_right").width();
 				jQuery("#left_col").show().width(width).css({
-					"margin-left" : "-" + margin  + "px"
+					"margin-right" : "-" + margin  + "px"
 				});
 
 			},
@@ -28,7 +28,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 				"click .arrow_left" : "goLeft"
 			},
 			// these are really controllers
-			goRight : function() {
+			goLeft : function() {
 				// analytics.track("Interface", "Expand/Collapse Buttons",
 				// "Collapse Right");
 				var mode = this.model.get("mode");
@@ -42,7 +42,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 					});
 				}
 			},
-			goLeft : function() {
+			goRight : function() {
 				// analytics.track("Interface", "Expand/Collapse Buttons",
 				// "Collapse Left");
 				var mode = this.model.get("mode");
@@ -98,11 +98,11 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 				var panelOffset = panelWidth - jQuery("#roll_right").width();
 
 				this.$el.show().width(panelWidth).css({
-					"margin-left" : -1 * panelOffset
+					"margin-right" : -1 * panelOffset
 				});
 				var that = this;
 				this.$el.add(".slideHorizontal").animate({
-					'margin-left' : '+=' + panelOffset
+					'margin-right' : '+=' + panelOffset
 				}, {
 					queue : false,
 					duration : 500,
@@ -135,7 +135,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 					duration : 500,
 					complete : function() {
 						jQuery(".slideHorizontal").css({
-							'margin-left' : panelOffset
+							'margin-right' : panelOffset
 						}).not(".corner").fadeIn();
 						
 						jQuery(this).trigger("adjustContents");
@@ -155,7 +155,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 				var panelOffset = panelWidth - jQuery("#roll_right").width();
 				
 				this.$el.add(".slideHorizontal").animate({
-					'margin-left' : '-=' + panelOffset
+					'margin-right' : '-=' + panelOffset
 				}, {
 					queue : false,
 					duration : 500,
@@ -196,7 +196,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 									// correctly
 					start : function(event, ui) {
 						var margin = parseInt(jQuery(".slideHorizontal").css(
-								"margin-left"));
+								"margin-right"));
 
 						that.model.set({
 							alsoMovesMargin : margin
@@ -220,7 +220,7 @@ OpenGeoportal.Views.LeftPanel = Backbone.View
 						this.prevWidth = ui.size.width;
 						//var newMargin = that.model.get("alsoMovesMargin") + delta;
 						jQuery(".slideHorizontal").css({
-							"margin-left" : "+=" + delta
+							"margin-right" : "+=" + delta
 						});
 						jQuery(this).trigger("panelResizing");
 

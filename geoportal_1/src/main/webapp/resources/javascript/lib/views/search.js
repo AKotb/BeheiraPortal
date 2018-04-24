@@ -252,23 +252,7 @@ OpenGeoportal.Views.Query = Backbone.View
 
 			fireSearch : function() {
 				try{
-					var layerID='NARSS.EGY_DISTRICTS';
-					jQuery(document).trigger("previewLayerOn", {
-						LayerId : layerID
-					});
-				}catch(e){
-					console.log(e)
-				}
-				try{
-					var layerID='NARSS.EGY_ROADS';
-					jQuery(document).trigger("previewLayerOn", {
-						LayerId : layerID
-					});
-				}catch(e){
-					console.log(e)
-				}
-				try{
-					var layerID='NARSS.EG_RIVERS';
+					var layerID='NARSS.FAYOUM';
 					jQuery(document).trigger("previewLayerOn", {
 						LayerId : layerID
 					});

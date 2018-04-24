@@ -5,146 +5,62 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
+<title>EL-BEHIRA GOVERNORATE</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="Tooplate">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!--- basic page needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>BEHIRA GOV</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- mobile specific metas
-    ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="resources/css/css/css/base.css">
-    <link rel="stylesheet" href="resources/css/css/css/vendor.css">
-    <link rel="stylesheet" href="resources/css/css/css/main.css">
-
-    <!-- script
-    ================================================== -->
-    <script src="resources/javascript/js/js/modernizr.js"></script>
-    <script src="resources/javascript/js/js/pace.min.js"></script>
-
-    <!-- favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- CSS -->
+<link rel="stylesheet"
+	href="resources/css/css/css/css/tooplate-style.css">
 
 </head>
 
-<body id="top">
+<body>
+	<!-- MENU -->
 
-    <!-- header
-    ================================================== -->
-    <header class="s-header">
-
-        <div class="header-logo">
-            <a class="site-logo" href="#">
-                <img src="resources/css/css/css/images/narsslogo.jpg" alt="Homepage">
-                <img src="resources/css/css/css/images/behira logo.jpg" alt="Homepage">
-            </a>
-        </div>
-
-        <nav class="header-nav">
-
-            <a href="#0" class="header-nav__close" title="close"><span>Close</span></a>
-
-            <div class="header-nav__content">
-                <h3>Navigation</h3>
-                
-                <ul class="header-nav__list">
-                    <li class="current"><a class="smoothscroll"  href="<c:url value='view_fayoum'/>" title="home">تمليك</a></li>
-                    <li><a class="smoothscroll"  href="<c:url value='view_wadigedeed'/>" title="about">إيجار</a></li>
-                    <li><a class="smoothscroll"  href="<c:url value='view_beheira'/>" title="services">وضع يد</a></li>
-                    <li><a class="smoothscroll"  href="#works" title="works">حيازات أخري</a></li>
-                    <li><a class="smoothscroll"  href="#works" title="works">اللوائح و القوانين</a></li>
-                    <li><a class="smoothscroll"  href="http://www.narss.sci.eg" title="works">من نحن</a></li>
-                </ul>
-            </div> <!-- end header-nav__content -->
-
-        </nav>  <!-- end header-nav -->
-
-        <a class="header-menu-toggle" href="#0">
-            <span class="header-menu-text">Menu</span>
-            <span class="header-menu-icon"></span>
-        </a>
-
-    </header> <!-- end s-header -->
+	<div class="container">
+		<ul class="nav">
+			<a href="#"><img
+				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
+			<a href="#"><img
+				src="resources/css/css/css/css/images/WHO ARE WE.png"
+				alt="WHO ARE WE"></a>
+			<a href="#"><img
+				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
+				alt="REGULATIONS AND LAWS"></a>
+			<a href="#"><img
+				src="resources/css/css/css/css/images/OTHER HOLDINGS.png"
+				alt="OTHER HOLDINGS"></a>
+			<a href="<c:url value='view_fayoum'/>"><img
+				src="resources/css/css/css/css/images/BY FORCE.png" alt="BY FORCE"></a>
+			<a href="<c:url value='view_wadigedeed'/>"><img
+				src="resources/css/css/css/css/images/RENT.png" alt="RENT"></a>
+			<a href="<c:url value='view_beheira'/>"><img
+				src="resources/css/css/css/css/images/OWNERSHIP.png" alt="OWNERSHIP"></a>
+			<a href="http://localhost:8080/beheiraportal/"><img
+				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
+		</ul>
+		<img src="resources/css/css/css/css/images/projectname.png"
+			alt="project name" class="projectname">
+	</div>
+	<!-- HOME -->
+	<section id="home" class="slider"></section>
 
 
-    <!-- home
-    ================================================== -->
-    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="resources/css/css/css/images/opera home.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
-
-        <div class="overlay"></div>
-        <div class="shadow-overlay"></div>
-
-        <div class="home-content">
-
-            <div class="row home-content__main">
-
-                
-
-                <h1 align="center">
-                    مشروع أراضي ولاية محافظة البحيرة
-                    <br>
-                   نطاق وادي النطرون
-                   <br>
-                    قرار رئيس الجمهورية رقم 529 لعام 2017 
-                    
-                </h1>
-
-                
-            </div>
-
-            <div class="home-content__scroll">
-                <a href="#about" class="scroll-link smoothscroll">
-                    <span>Scroll Down</span>
-                </a>
-            </div>
-
-            <div class="home-content__line"></div>
-
-        </div> <!-- end home-content -->
-
-
-       
-
-    </section> <!-- end s-home -->
-
-
-    <!-- about
-    ================================================== -->
-    
-    ================================================== -->
-    
-                        
-
-
-    <!-- preloader
-    ================================================== -->
-    <div id="preloader">
-        <div id="loader">
-            <div class="line-scale-pulse-out">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Java Script
-    ================================================== -->
-    <script src="resources/javascript/js/js/jquery-3.2.1.min.js"></script>
-    <script src="resources/javascript/js/js/plugins.js"></script>
-    <script src="resources/javascript/js/js/main.js"></script>
+	<!-- SCRIPTS -->
+	<script src="resources/javascript/js/js/js/jquery.js"></script>
+	<script src="resources/javascript/js/js/js/bootstrap.min.js"></script>
+	<script src="resources/javascript/js/js/js/jquery.sticky.js"></script>
+	<script src="resources/javascript/js/js/js/jquery.stellar.min.js"></script>
+	<script src="resources/javascript/js/js/js/wow.min.js"></script>
+	<script src="resources/javascript/js/js/js/smoothscroll.js"></script>
+	<script src="resources/javascript/js/js/js/owl.carousel.min.js"></script>
+	<script src="resources/javascript/js/js/js/custom.js"></script>
 
 </body>
-
 </html>

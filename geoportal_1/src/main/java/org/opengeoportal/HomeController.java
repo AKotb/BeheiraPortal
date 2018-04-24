@@ -21,35 +21,9 @@ public class HomeController {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/*@RequestMapping(value = { "/index", "/" }, method = RequestMethod.GET)
-	public ModelAndView getHomePage(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
-			@RequestParam(value = "bbox", defaultValue = "-180,-90,180,90") String bbox,
-			@RequestParam(value = "layer[]", defaultValue = "") Set<String> layers,
-			@RequestParam(value = "minX", defaultValue = "-180") String minx,
-			@RequestParam(value = "maxX", defaultValue = "180") String maxx,
-			@RequestParam(value = "minY", defaultValue = "-90") String miny,
-			@RequestParam(value = "maxY", defaultValue = "90") String maxy,
-			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
-		ModelAndView mav = new ModelAndView("ogp_home");
-		mav.addObject("dev", isDev);
-		if (!layerIds.isEmpty()) {
-			mav.addObject("shareIds", getQuotedSet(layerIds));
-			mav.addObject("shareBbox", bbox);
-		} else if (!layers.isEmpty()) {
-			mav.addObject("shareIds", getQuotedSet(layers));
-			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
-		} else {
-			mav.addObject("shareIds", layerIds);
-			mav.addObject("shareBbox", bbox);
-		}
-		addConfig(mav);
-		return mav;
-
-	}*/
-	
 	@RequestMapping(value = { "/index", "/" }, method = RequestMethod.GET)
 	public ModelAndView getHomePage() throws Exception {
-		ModelAndView mav = new ModelAndView("ogp_home_applied");
+		ModelAndView mav = new ModelAndView("ogp_home_contractual");
 		addConfig(mav);
 		return mav;
 	}
@@ -65,15 +39,10 @@ public class HomeController {
 			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
-		layers.add("NARSS.EGY_DISTRICTS");
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
-			minx="24.69450759500006";
-			miny="21.999127739000073";
-			maxx="36.90870738700007";
-			maxy="31.670279953000062";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
@@ -96,15 +65,15 @@ public class HomeController {
 			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
-		layers.add("NARSS.EGY_ROADS");
+		layers.add("NARSS.FAYOUM");
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
-			minx="24.81860167059555";
-			miny="22.004806420363636";
-			maxx="35.61644362140641";
-			maxy="31.60827818240766";
+			minx = "29.75863298227907";
+			miny = "28.879101324538016";
+			maxx = "31.197188957612415";
+			maxy = "29.77685641304137";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
@@ -126,15 +95,10 @@ public class HomeController {
 			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
-		layers.add("NARSS.EG_RIVERS");
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
-			minx="29.850088";
-			miny="22.005644";
-			maxx="33.08036";
-			maxy="31.524937";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {

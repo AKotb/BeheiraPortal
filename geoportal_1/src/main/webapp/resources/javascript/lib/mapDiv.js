@@ -240,7 +240,7 @@ OpenGeoportal.MapController = function() {
 
 		// set default background map; should get this value from config instead
 		var defaultBasemapModel = this.basemaps.findWhere({
-			name : "googlePhysical"
+			name : "blankMap"
 		});
 		defaultBasemapModel.set({
 			selected : true
@@ -257,20 +257,20 @@ OpenGeoportal.MapController = function() {
 	 */
 	this.addMapToolbarElements = function() {
 
-		this.addMapToolbarButton({
+		/*this.addMapToolbarButton({
 			displayClass : "saveImageButton",
 			title : "Save map image",
 			buttonText : "Save Image"
-		}, this.saveImage);
+		}, this.saveImage);*/
 
-		this.addMapToolbarButton({
+		/*this.addMapToolbarButton({
 			displayClass : "printButton",
 			title : "Print map",
 			buttonText : "Print"
-		}, OpenGeoportal.Utility.doPrint);
+		}, OpenGeoportal.Utility.doPrint);*/
 
 		// add the HTML for the basemap menu to the toolbar
-		this.addToMapToolbar(this.template.basemapMenu());
+		//this.addToMapToolbar(this.template.basemapMenu());
 
 		// the menu itself is implemented as a view of the Basemap collection
 		this.basemapMenu = new OpenGeoportal.Views.CollectionSelect({
@@ -508,8 +508,8 @@ OpenGeoportal.MapController = function() {
 			this.addLayer(model.get("getLayerDefinition").call(model));
 
 			// NARSS how to hide Basemap
-			//var layer = this.getLayersBy("basemapType", model.get("type"))[0];
-			//layer.setVisibility(false);
+			var layer = this.getLayersBy("basemapType", model.get("type"))[0];
+			layer.setVisibility(false);
 		} else {
 			var layer = this.getLayersBy("basemapType", model.get("type"))[0];
 			layer.mapObject.setMapTypeId(model.get("subType"));
@@ -548,7 +548,26 @@ OpenGeoportal.MapController = function() {
 	this.createBaseMaps = function() {
 		var that = this;
 
-		var googlePhysical = {
+		var blankMap = {
+				displayName : "Bank Map",
+				name : "blankMap",
+				selected : false,
+				subType : google.maps.MapTypeId.TERRAIN,
+				type : "Google",
+				zoomLevels : 15,
+				getLayerDefinition : that.googleMapsLayerDefinition,
+				showOperations : function() {
+					that.googleMapsShow(this);
+				},
+				hideOperations : function() {
+					that.baseMapHide(this);
+					jQuery("div.olLayerGooglePoweredBy").children().css("display",
+							"none");
+				},
+				initialRenderCallback : that.googleMapsRenderCallback
+			};
+		
+		/*var googlePhysical = {
 			displayName : "Google Physical",
 			name : "googlePhysical",
 			selected : false,
@@ -566,9 +585,9 @@ OpenGeoportal.MapController = function() {
 						"none");
 			},
 			initialRenderCallback : that.googleMapsRenderCallback
-		};
+		};*/
 
-		var googleHybrid = {
+		/*var googleHybrid = {
 			displayName : "Google Hybrid",
 			name : "googleHybrid",
 			selected : false,
@@ -585,9 +604,9 @@ OpenGeoportal.MapController = function() {
 						"none");
 			},
 			initialRenderCallback : that.googleMapsRenderCallback
-		};
+		};*/
 
-		var googleSat = {
+		/*var googleSat = {
 			displayName : "Google Satellite",
 			name : "googleSatellite",
 			selected : false,
@@ -604,9 +623,9 @@ OpenGeoportal.MapController = function() {
 						"none");
 			},
 			initialRenderCallback : that.googleMapsRenderCallback
-		};
+		};*/
 
-		var googleStreets = {
+		/*var googleStreets = {
 			displayName : "Google Streets",
 			name : "googleStreets",
 			selected : false,
@@ -624,9 +643,9 @@ OpenGeoportal.MapController = function() {
 						"none");
 			},
 			initialRenderCallback : that.googleMapsRenderCallback
-		};
+		};*/
 		
-		var googleBlank = {
+		/*var googleBlank = {
 				displayName : "Blank Map",
 				name : "googleBlank",
 				selected : false,
@@ -677,9 +696,9 @@ OpenGeoportal.MapController = function() {
 					that.baseMapHide(this);
 				},
 				initialRenderCallback : that.initialRenderCallback
-			};
+			};*/
 
-		var osm = {
+		/*var osm = {
 			displayName : "OpenStreetMap",
 			name : "osm",
 			selected : false,
@@ -729,7 +748,7 @@ OpenGeoportal.MapController = function() {
 				that.baseMapHide(this);
 			},
 			initialRenderCallback : that.initialRenderCallback
-		};
+		};*/
 
 		/*
 		 * Bing Map Types: 1. Aerial - Aerial imagery. 2. AerialWithLabels -
@@ -791,9 +810,10 @@ OpenGeoportal.MapController = function() {
 		};
 
 		// Bing maps implementation isn't quite ready for prime time
-		var models = [ googlePhysical, googleHybrid,
-				googleStreets, googleSat, googleBlank, osm ];
+		/* var models = [ googleBlank, googlePhysical, googleHybrid,
+				googleStreets, googleSat, osm ];*/
 
+		var models = [ blankMap ];
 		// create an instance of the basemap collection
 		var collection = new OpenGeoportal.BasemapCollection(models);
 		return collection;
@@ -1839,12 +1859,10 @@ OpenGeoportal.MapController = function() {
 
 		}
 
-		jQuery("#featureInfoDiv").html(tableText);
-		
 		// create a new dialog instance, or just open the dialog if it already
 		// exists
 
-		/*if (typeof jQuery('#featureInfo')[0] === 'undefined') {
+		if (typeof jQuery('#featureInfo')[0] === 'undefined') {
 			var infoDiv = template.genericDialogShell({
 				elId : "featureInfo"
 			});
@@ -1873,7 +1891,7 @@ OpenGeoportal.MapController = function() {
 
 			jQuery("#featureInfo").dialog('open');
 			jQuery("#featureInfo").fadeIn(200);
-		});*/
+		});
 
 	};
 

@@ -14,7 +14,7 @@ body {
 	text-align: left;
 	margin: 0;
 	padding: 0;
-	background: #cccccc; /* url(../media/bg_tile.gif)  repeat;*/
+	background: #cccccc; /* url(../../media/bg_tile.gif)  repeat;*/
 	font-family: arial, sans-serif;
 	font-size: 12px;
 	color: black;
@@ -158,17 +158,17 @@ li.searchAttribution.ui-widget-content.ui-menu-divider {
 }
 
 .dropdown .ui-menu-item > a.ui-state-focus > div.sortArrows {
-		background: url("../media/sorting.png") no-repeat scroll 0px
+		background: url("../../media/sorting.png") no-repeat scroll 0px
 		0px transparent;
 }
 		
 .dropdown .ui-menu-item > a.selected > div.sortArrows.sortDown {
-	background: url("../media/sorting.png") no-repeat scroll -22px
+	background: url("../../media/sorting.png") no-repeat scroll -22px
 		0px transparent;
 }
 
 .dropdown .ui-menu-item > a.selected > div.sortArrows.sortUp {
-	background: url("../media/sorting.png") no-repeat scroll -11px
+	background: url("../../media/sorting.png") no-repeat scroll -11px
 		0px transparent;
 }
 
@@ -346,11 +346,11 @@ li.searchAttribution.ui-widget-content.ui-menu-divider {
 /* left column panel */
 #left_col {
 	height: 100%;
-	float: left;
+	float: right;
 	cursor: default;
 	display: none;
 	z-index: 1200;
-	position: relative;
+	position: inherit;
 	background-color: #ffffff;
 }
 
@@ -422,14 +422,14 @@ zoom: 1;
 }
 
 .arrow_buttons {
-	float: right;
+	float: left;
 	margin-top: 3px;
 	position: relative;
 	z-index: 1002;
 }
 
 .shoppingCartIcon {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -127px -61px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -127px -61px
 		transparent;
 	width: 31px;
 	height: 22px;
@@ -438,7 +438,7 @@ zoom: 1;
 }
 
 .arrow_left {
-	background: url("../media/ogp-sprite.png") no-repeat scroll 0 -58px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll 0 -58px
 		transparent;
 	width: 30px;
 	height: 26px;
@@ -449,7 +449,7 @@ zoom: 1;
 }
 
 .arrow_separator {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -29px -58px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -29px -58px
 		transparent;
 	width: 10px;
 	height: 26px;
@@ -457,7 +457,7 @@ zoom: 1;
 }
 
 .arrow_right {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -39px -58px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -39px -58px
 		transparent;
 	width: 27px;
 	height: 26px;
@@ -930,7 +930,7 @@ div.colorCell:hover {
 }
 
 #toMetadataTop:hover {
-	background: url("../media/arrow_up_white.png") no-repeat scroll 5px 50%
+	background: url("../../media/arrow_up_white.png") no-repeat scroll 5px 50%
 		black;
 }
 
@@ -961,14 +961,14 @@ td div.button {
 }
 
 .viewLibraryRecordControl {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -131px -35px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -131px -35px
 		transparent;
 	height: 17px;
 	width: 17px;
 }
 
 .viewMetadataControl {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -131px -35px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -131px -35px
 		transparent;
 	height: 17px;
 	width: 17px;
@@ -988,12 +988,12 @@ td div.repositoryIcon {
 }
 
 .notInCart {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -102px -13px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -102px -13px
 		transparent;
 }
 
 .inCart {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -130px -13px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -130px -13px
 		transparent;
 }
 
@@ -1133,15 +1133,15 @@ td.attributeName:hover {
 }
 
 .columnSort_unsorted {
-	background: url("../media/sort_both.png") no-repeat right transparent;
+	background: url("../../media/sort_both.png") no-repeat right transparent;
 }
 
 .columnSort_sortedAsc {
-	background: url("../media/sort_asc.png") no-repeat right transparent;
+	background: url("../../media/sort_asc.png") no-repeat right transparent;
 }
 
 .columnSort_sortedDesc {
-	background: url("../media/sort_desc.png") no-repeat right transparent;
+	background: url("../../media/sort_desc.png") no-repeat right transparent;
 }
 
 .columnValue {
@@ -1259,28 +1259,28 @@ iframe.download {
 Preview controls
 *********/
 .checkOff {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -61px -89px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -61px -89px
 		transparent;
 	width: 25px;
 	height: 17px;
 }
 
 .checkOn {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -84px -89px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -84px -89px
 		transparent;
 	width: 25px;
 	height: 17px;
 }
 
 .loginButton {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -67px -12px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -67px -12px
 		transparent;
 	width: 25px;
 	height: 17px;
 }
 
 .previewLink {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -110px -89px rgba(0, 0, 0, 0);
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -110px -89px rgba(0, 0, 0, 0);
     height: 17px;
     width: 25px;
 }
@@ -1289,35 +1289,35 @@ Preview controls
 DataTypes
 ********/
 .polygonIcon {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -101px -36px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -101px -36px
 		transparent;
 	width: 17px;
 	height: 17px;
 }
 
 .pointIcon {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -80px -36px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -80px -36px
 		transparent;
 	width: 17px;
 	height: 17px;
 }
 
 .lineIcon {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -10px -36px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -10px -36px
 		transparent;
 	width: 17px;
 	height: 17px;
 }
 
 .rasterIcon {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -35px -36px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -35px -36px
 		transparent;
 	width: 17px;
 	height: 17px;
 }
 
 .mapIcon {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -58px -36px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -58px -36px
 		transparent;
 	width: 17px;
 	height: 17px;
@@ -1327,52 +1327,52 @@ DataTypes
 Repositories
 *************/
 .tuftsIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -33px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -33px
 		-10px transparent;
 }
 
 .mitIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -129px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -129px
 		-10px transparent;
 }
 
 .harvardIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -79px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -79px
 		-10px transparent;
 }
 
 .berkeleyIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -35px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -35px
 		-35px transparent;
 }
 
 .marylandIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -12px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -12px
 		-35px transparent;
 }
 
 .unIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -10px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -10px
 		-10px transparent;
 }
 
 .massgisIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -102px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -102px
 		-10px transparent;
 }
 
 .princetonIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -56px
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -56px
 		-10px transparent;
 }
 
 .uarizonaIcon {
-        background: url("../media/ogp-institutions.png") no-repeat scroll -57px
+        background: url("../../media/ogp-institutions.png") no-repeat scroll -57px
                 -36px transparent;
 }
 
 .polimiIcon {
-	background: url("../media/ogp-institutions.png") no-repeat scroll -78px -35px transparent;
+	background: url("../../media/ogp-institutions.png") no-repeat scroll -78px -35px transparent;
 }
 
 
@@ -1530,7 +1530,7 @@ preview controls
 }
 
 .sliderArrow {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -65px -64px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -65px -64px
 		transparent;
 	border-bottom: 1px solid #aaaaaa;
 	border-radius: 0 3px 3px 0;
@@ -1612,18 +1612,18 @@ icons
 }
 
 .expanded {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -92px -115px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -92px -115px
 		transparent;
 }
 
 .notExpanded {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -83px -63px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -83px -63px
 		transparent;
 }
 
 .zoomToLayerControl {
 	left: 104px;
-	background: url("../media/ogp-sprite.png") no-repeat scroll -9px -90px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -9px -90px
 		transparent;
 	height: 17px;
 	width: 17px;
@@ -1638,17 +1638,17 @@ icons
 }
 
 .attributeInfoControlOn {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -115px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -115px
 		-115px transparent;
 }
 
 .attributeInfoControlOff {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -36px -90px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -36px -90px
 		transparent;
 }
 
 .cartIconTable {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -102px -62px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -102px -62px
 		transparent;
 	height: 17px;
 	width: 17px;
@@ -1671,7 +1671,7 @@ icons
 Info Bubble
 *************/
 .closeBubble {
-	background: url("../media/ogp-sprite.png") no-repeat scroll -66px -114px
+	background: url("../../media/ogp-sprite.png") no-repeat scroll -66px -114px
 		transparent;
 	width: 20px;
 	height: 20px;
