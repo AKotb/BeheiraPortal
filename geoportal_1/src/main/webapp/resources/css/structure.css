@@ -327,15 +327,41 @@ li.searchAttribution.ui-widget-content.ui-menu-divider {
 	position: relative;
 }
 
+#leftDivContainer {
+	border-style: none;
+	border-color: #555555;
+	height: 100%;
+	width: 300px;
+	float: left;
+	cursor: default;
+	position: inherit;
+	background-color: #ffffff;
+}
+
 #featureInfoDiv {
-	background-color: #FFF;
-	overflow: hidden;
-	height: 256px;
-	width: 100%;
-	position: relative;
 	overflow-y: scroll;
 	border-style:solid;
 	border-color: #555555;
+	height: 50%;
+	width: 300px;
+	float: left;
+	cursor: default;
+	z-index: 1200;
+	position: relative;
+	background-color: #ffffff;
+}
+
+#dataBaseInfoDiv {
+	overflow-y: scroll;
+	border-style:solid;
+	border-color: #555555;
+	height: 50%;
+	width: 300px;
+	float: left;
+	cursor: default;
+	z-index: 1200;
+	position: relative;
+	background-color: #ffffff;
 }
 
 #map {

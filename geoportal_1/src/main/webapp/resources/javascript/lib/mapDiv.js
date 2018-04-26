@@ -1830,10 +1830,10 @@ OpenGeoportal.MapController = function() {
 		var responseTable$ = jQuery(data).filter(function() {
 			return jQuery(this).is('table');
 		});
-
+		var rows = [];
 		var template = this.template;
 		var tableText = "";
-
+		var fid = "";
 		if ((responseTable$.length === 0)
 				|| (jQuery(data).find("tr").length === 0)) {
 			// what should happen here? returned content is empty or otherwise
@@ -1843,7 +1843,7 @@ OpenGeoportal.MapController = function() {
 		} else {
 			responseTable$ = responseTable$.first();
 			// process the html table returned from wms getfeature request
-			var rows = this.processAttributeTable(responseTable$);
+			rows = this.processAttributeTable(responseTable$);
 
 			tableText = template.attributeTable({
 				layerId : layerId,
@@ -1858,11 +1858,17 @@ OpenGeoportal.MapController = function() {
 			this.registerAttributes(layerId, attrNames);
 
 		}
-
+		
+		jQuery("#featureInfoDiv").html(tableText);
+		
+		fid = rows[0].values;
+		
+		jQuery("#dataBaseInfoDiv").html(""+fid);
+		
 		// create a new dialog instance, or just open the dialog if it already
 		// exists
 
-		if (typeof jQuery('#featureInfo')[0] === 'undefined') {
+		/*if (typeof jQuery('#featureInfo')[0] === 'undefined') {
 			var infoDiv = template.genericDialogShell({
 				elId : "featureInfo"
 			});
@@ -1891,7 +1897,7 @@ OpenGeoportal.MapController = function() {
 
 			jQuery("#featureInfo").dialog('open');
 			jQuery("#featureInfo").fadeIn(200);
-		});
+		});*/
 
 	};
 
