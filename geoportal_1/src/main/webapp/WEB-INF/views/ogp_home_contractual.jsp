@@ -33,7 +33,7 @@
 			<a href="#"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
-			<a href="#"><img
+			<a href="<c:url value='view_qalyoubia'/>"><img
 				src="resources/css/css/css/css/images/OTHER HOLDINGS.png"
 				alt="OTHER HOLDINGS"></a>
 			<a href="<c:url value='view_fayoum'/>"><img

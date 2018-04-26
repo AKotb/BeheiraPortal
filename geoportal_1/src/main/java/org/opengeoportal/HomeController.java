@@ -39,10 +39,24 @@ public class HomeController {
 			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
+		OgpConfig conf = ogpConfigRetriever.getConfig();
+		String beheiraLayers = conf.getBeheiraLayers();
+		try {
+			String splittedLayers[]= beheiraLayers.split(",");
+		    for (String layer: splittedLayers){
+		    	layers.add(layer);
+		    }
+		}catch (Exception e) {
+			layers.add(beheiraLayers);
+		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
+			minx = "30.188732288889003";
+			miny = "30.18885086111111";
+			maxx = "30.239087725000033";
+			maxy = "30.232443611111094";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
@@ -65,7 +79,16 @@ public class HomeController {
 			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
-		layers.add("NARSS.FAYOUM");
+		OgpConfig conf = ogpConfigRetriever.getConfig();
+		String fayoumLayers = conf.getFayoumLayers();
+	    try {
+	    	String splittedLayers[]= fayoumLayers.split(",");
+		    for (String layer: splittedLayers){
+		    	layers.add(layer);
+		    }
+		}catch (Exception e) {
+			layers.add(fayoumLayers);
+		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
@@ -95,6 +118,53 @@ public class HomeController {
 			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
+		OgpConfig conf = ogpConfigRetriever.getConfig();
+		String wadigedeedLayers = conf.getWadigedeedLayers();
+	    try {
+	    	String splittedLayers[]= wadigedeedLayers.split(",");
+		    for (String layer: splittedLayers){
+		    	layers.add(layer);
+		    }
+		}catch (Exception e) {
+			layers.add(wadigedeedLayers);
+		}
+		if (!layerIds.isEmpty()) {
+			mav.addObject("shareIds", getQuotedSet(layerIds));
+			mav.addObject("shareBbox", bbox);
+		} else if (!layers.isEmpty()) {
+			mav.addObject("shareIds", getQuotedSet(layers));
+			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
+		} else {
+			mav.addObject("shareIds", layerIds);
+			mav.addObject("shareBbox", bbox);
+		}
+		addConfig(mav);
+		return mav;
+
+	}
+	
+	
+	@RequestMapping(value = "/view_qalyoubia", method = RequestMethod.GET)
+	public ModelAndView getQalyoubiaLayers(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
+			@RequestParam(value = "bbox", defaultValue = "-180,-90,180,90") String bbox,
+			@RequestParam(value = "layer[]", defaultValue = "") Set<String> layers,
+			@RequestParam(value = "minX", defaultValue = "-180") String minx,
+			@RequestParam(value = "maxX", defaultValue = "180") String maxx,
+			@RequestParam(value = "minY", defaultValue = "-90") String miny,
+			@RequestParam(value = "maxY", defaultValue = "90") String maxy,
+			@RequestParam(value = "dev", defaultValue = "false") Boolean isDev) throws Exception {
+		ModelAndView mav = new ModelAndView("ogp_home");
+		mav.addObject("dev", isDev);
+		OgpConfig conf = ogpConfigRetriever.getConfig();
+		String qalyoubiaLayers = conf.getQalyoubiaLayers();
+	    try {
+	    	String splittedLayers[]= qalyoubiaLayers.split(",");
+		    for (String layer: splittedLayers){
+		    	layers.add(layer);
+		    }
+		}catch (Exception e) {
+			layers.add(qalyoubiaLayers);
+		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);

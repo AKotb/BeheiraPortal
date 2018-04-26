@@ -251,14 +251,14 @@ OpenGeoportal.Views.Query = Backbone.View
 			},
 
 			fireSearch : function() {
-				try{
+				/*try{
 					var layerID='NARSS.FAYOUM';
 					jQuery(document).trigger("previewLayerOn", {
 						LayerId : layerID
 					});
 				}catch(e){
 					console.log(e)
-				}
+				}*/
 				jQuery(document).trigger("fireSearch");
 			},
 

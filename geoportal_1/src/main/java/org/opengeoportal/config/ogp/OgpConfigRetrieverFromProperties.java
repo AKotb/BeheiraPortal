@@ -23,6 +23,10 @@ public class OgpConfigRetrieverFromProperties implements OgpConfigRetriever {
 	private static final String LOGIN_TYPE = "login.type";
 	private static final String LOGIN_URL = "login.url";
 	private static final String SECURE_DOMAIN = "login.secureDomain";
+	private static final String FAYOUM_LAYERS = "ogp.fayoum.layers";
+	private static final String BEHEIRA_LAYERS = "ogp.beheira.layers";
+	private static final String WADIGEDEED_LAYERS = "ogp.wadigedeed.layers";
+	private static final String QALYOUBIA_LAYERS = "ogp.qalyoubia.layers";
 
 	//default values
 	private static final String TITLE_PRIMARY_DEFAULT = "Open";
@@ -100,6 +104,17 @@ public class OgpConfigRetrieverFromProperties implements OgpConfigRetriever {
 		String extraCss = getPropertyWithDefault(EXTRA_CSS, "");
 		ogpConfig.setCssLocalized(extraCss);
 		
+		String fayoumLayers=getPropertyWithDefault(FAYOUM_LAYERS, "");
+		ogpConfig.setFayoumLayers(fayoumLayers);
+		
+		String beheiraLayers=getPropertyWithDefault(BEHEIRA_LAYERS, "");
+		ogpConfig.setBeheiraLayers(beheiraLayers);
+		
+		String wadigedeedLayers=getPropertyWithDefault(WADIGEDEED_LAYERS, "");
+		ogpConfig.setWadigedeedLayers(wadigedeedLayers);
+		
+		String qalyoubiaLayers=getPropertyWithDefault(QALYOUBIA_LAYERS, "");
+		ogpConfig.setQalyoubiaLayers(qalyoubiaLayers);
 		
 		LoginConfig logConf = ogpConfig.getLoginConfig();
 		
