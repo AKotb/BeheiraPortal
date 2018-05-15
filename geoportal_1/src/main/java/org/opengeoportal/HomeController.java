@@ -28,7 +28,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/view_beheira", method = RequestMethod.GET)
+	@RequestMapping(value = "/ownership", method = RequestMethod.GET)
 	public ModelAndView getBeheiraLayers(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
 			@RequestParam(value = "bbox", defaultValue = "-180,-90,180,90") String bbox,
 			@RequestParam(value = "layer[]", defaultValue = "") Set<String> layers,
@@ -40,23 +40,23 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
 		OgpConfig conf = ogpConfigRetriever.getConfig();
-		String beheiraLayers = conf.getBeheiraLayers();
+		String ownershipLayers = conf.getOwnershipLayers();
 		try {
-			String splittedLayers[]= beheiraLayers.split(",");
+			String splittedLayers[]= ownershipLayers.split(",");
 		    for (String layer: splittedLayers){
 		    	layers.add(layer);
 		    }
 		}catch (Exception e) {
-			layers.add(beheiraLayers);
+			layers.add(ownershipLayers);
 		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
-			minx = "30.188732288889003";
-			miny = "30.18885086111111";
-			maxx = "30.239087725000033";
-			maxy = "30.232443611111094";
+			minx = "30.1880640858";
+			miny = "30.1877615905";
+			maxx = "30.2394800807";
+			maxy = "30.2331778966";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
@@ -68,7 +68,7 @@ public class HomeController {
 
 	}
 
-	@RequestMapping(value = "/view_fayoum", method = RequestMethod.GET)
+	@RequestMapping(value = "/rent", method = RequestMethod.GET)
 	public ModelAndView getFayoumLayers(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
 			@RequestParam(value = "bbox", defaultValue = "-180,-90,180,90") String bbox,
 			@RequestParam(value = "layer[]", defaultValue = "") Set<String> layers,
@@ -80,23 +80,23 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
 		OgpConfig conf = ogpConfigRetriever.getConfig();
-		String fayoumLayers = conf.getFayoumLayers();
+		String rentLayers = conf.getRentLayers();
 	    try {
-	    	String splittedLayers[]= fayoumLayers.split(",");
+	    	String splittedLayers[]= rentLayers.split(",");
 		    for (String layer: splittedLayers){
 		    	layers.add(layer);
 		    }
 		}catch (Exception e) {
-			layers.add(fayoumLayers);
+			layers.add(rentLayers);
 		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
-			minx = "29.75863298227907";
-			miny = "28.879101324538016";
-			maxx = "31.197188957612415";
-			maxy = "29.77685641304137";
+			minx = "30.1880640858";
+			miny = "30.1877615905";
+			maxx = "30.2394800807";
+			maxy = "30.2331778966";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
@@ -107,7 +107,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/view_wadigedeed", method = RequestMethod.GET)
+	@RequestMapping(value = "/byforce", method = RequestMethod.GET)
 	public ModelAndView getWadiGedeedLayers(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
 			@RequestParam(value = "bbox", defaultValue = "-180,-90,180,90") String bbox,
 			@RequestParam(value = "layer[]", defaultValue = "") Set<String> layers,
@@ -119,19 +119,23 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
 		OgpConfig conf = ogpConfigRetriever.getConfig();
-		String wadigedeedLayers = conf.getWadigedeedLayers();
+		String byforceLayers = conf.getByforceLayers();
 	    try {
-	    	String splittedLayers[]= wadigedeedLayers.split(",");
+	    	String splittedLayers[]= byforceLayers.split(",");
 		    for (String layer: splittedLayers){
 		    	layers.add(layer);
 		    }
 		}catch (Exception e) {
-			layers.add(wadigedeedLayers);
+			layers.add(byforceLayers);
 		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
+			minx = "30.1880640858";
+			miny = "30.1877615905";
+			maxx = "30.2394800807";
+			maxy = "30.2331778966";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
@@ -144,7 +148,7 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/view_qalyoubia", method = RequestMethod.GET)
+	@RequestMapping(value = "/otherholdings", method = RequestMethod.GET)
 	public ModelAndView getQalyoubiaLayers(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
 			@RequestParam(value = "bbox", defaultValue = "-180,-90,180,90") String bbox,
 			@RequestParam(value = "layer[]", defaultValue = "") Set<String> layers,
@@ -156,19 +160,23 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("ogp_home");
 		mav.addObject("dev", isDev);
 		OgpConfig conf = ogpConfigRetriever.getConfig();
-		String qalyoubiaLayers = conf.getQalyoubiaLayers();
+		String otherholdingsLayers = conf.getOtherholdingsLayers();
 	    try {
-	    	String splittedLayers[]= qalyoubiaLayers.split(",");
+	    	String splittedLayers[]= otherholdingsLayers.split(",");
 		    for (String layer: splittedLayers){
 		    	layers.add(layer);
 		    }
 		}catch (Exception e) {
-			layers.add(qalyoubiaLayers);
+			layers.add(otherholdingsLayers);
 		}
 		if (!layerIds.isEmpty()) {
 			mav.addObject("shareIds", getQuotedSet(layerIds));
 			mav.addObject("shareBbox", bbox);
 		} else if (!layers.isEmpty()) {
+			minx = "30.1880640858";
+			miny = "30.1877615905";
+			maxx = "30.2394800807";
+			maxy = "30.2331778966";
 			mav.addObject("shareIds", getQuotedSet(layers));
 			mav.addObject("shareBbox", minx + "," + miny + "," + maxx + "," + maxy);
 		} else {
