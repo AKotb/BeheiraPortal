@@ -15,10 +15,10 @@ public class OgpConfig {
 	String cssLocalized;
 	URL searchUrl;
 	String analyticsId;
-	String fayoumLayers;
-	String beheiraLayers;
-	String wadigedeedLayers;
-	String qalyoubiaLayers;
+	String rentLayers;
+	String ownershipLayers;
+	String byforceLayers;
+	String otherholdingsLayers;
 	LoginConfig loginConfig = new LoginConfig();
 	
 	public String getPageTitlePrimary() {
@@ -76,39 +76,39 @@ public class OgpConfig {
 	public void setLoginConfig(LoginConfig loginConfig) {
 		this.loginConfig = loginConfig;
 	}
-	
 
-	public String getFayoumLayers() {
-		return fayoumLayers;
+	public String getRentLayers() {
+		return rentLayers;
 	}
 
-	public void setFayoumLayers(String fayoumLayers) {
-		this.fayoumLayers = fayoumLayers;
+	public void setRentLayers(String rentLayers) {
+		this.rentLayers = rentLayers;
 	}
 
-	public String getBeheiraLayers() {
-		return beheiraLayers;
+	public String getOwnershipLayers() {
+		return ownershipLayers;
 	}
 
-	public void setBeheiraLayers(String beheiraLayers) {
-		this.beheiraLayers = beheiraLayers;
+	public void setOwnershipLayers(String ownershipLayers) {
+		this.ownershipLayers = ownershipLayers;
 	}
 
-	public String getWadigedeedLayers() {
-		return wadigedeedLayers;
+	public String getByforceLayers() {
+		return byforceLayers;
 	}
 
-	public void setWadigedeedLayers(String wadigedeedLayers) {
-		this.wadigedeedLayers = wadigedeedLayers;
+	public void setByforceLayers(String byforceLayers) {
+		this.byforceLayers = byforceLayers;
 	}
 
-	public String getQalyoubiaLayers() {
-		return qalyoubiaLayers;
+	public String getOtherholdingsLayers() {
+		return otherholdingsLayers;
 	}
 
-	public void setQalyoubiaLayers(String qalyoubiaLayers) {
-		this.qalyoubiaLayers = qalyoubiaLayers;
+	public void setOtherholdingsLayers(String otherholdingsLayers) {
+		this.otherholdingsLayers = otherholdingsLayers;
 	}
+
 
 	public class LoginConfig {
 		String repositoryId;

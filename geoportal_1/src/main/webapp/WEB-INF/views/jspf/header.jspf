@@ -9,15 +9,15 @@
 			<a href="#"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
-			<a href="#"><img
+			<%-- <a href="<c:url value='otherholdings'/>"><img
 				src="resources/css/css/css/css/images/OTHER HOLDINGS.png"
 				alt="OTHER HOLDINGS"></a>
-			<a href="<c:url value='view_fayoum'/>"><img
+			<a href="<c:url value='byforce'/>"><img
 				src="resources/css/css/css/css/images/BY FORCE.png" alt="BY FORCE"></a>
-			<a href="<c:url value='view_wadigedeed'/>"><img
+			<a href="<c:url value='rent'/>"><img
 				src="resources/css/css/css/css/images/RENT.png" alt="RENT"></a>
-			<a href="<c:url value='view_beheira'/>"><img
-				src="resources/css/css/css/css/images/OWNERSHIP.png" alt="OWNERSHIP"></a>
+			<a href="<c:url value='ownership'/>"><img
+				src="resources/css/css/css/css/images/OWNERSHIP.png" alt="OWNERSHIP"></a> --%>
 			<a href="http://localhost:8080/beheiraportal/"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
