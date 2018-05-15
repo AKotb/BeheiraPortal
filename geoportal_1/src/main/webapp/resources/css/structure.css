@@ -327,7 +327,7 @@ li.searchAttribution.ui-widget-content.ui-menu-divider {
 	position: relative;
 }
 
-#leftDivContainer {
+/*#leftDivContainer {
 	border-style: none;
 	border-color: #555555;
 	height: 100%;
@@ -362,7 +362,7 @@ li.searchAttribution.ui-widget-content.ui-menu-divider {
 	z-index: 1200;
 	position: relative;
 	background-color: #ffffff;
-}
+}*/
 
 #map {
 	opacity: 0;
