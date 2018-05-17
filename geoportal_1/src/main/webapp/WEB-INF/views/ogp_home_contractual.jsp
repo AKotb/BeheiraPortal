@@ -67,10 +67,10 @@ table, th, td {
 					center : Egypt,
 					mapTypeId : 'hybrid'
 				});
-				var dbLayer = new google.maps.KmlLayer({
+				/* var dbLayer = new google.maps.KmlLayer({
 			          url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.kml',
 			          map: map
-			     });  
+			     });   */
 				/* var layer165kml = new google.maps.KmlLayer({
 			          url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.kml',
 			          map: map
@@ -80,6 +80,9 @@ table, th, td {
 			          map: map
 			     }); 
 			  	// Load GeoJSON.
+			    map.data.loadGeoJson(
+			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
+			 	// Load GeoJSON.
 			    map.data.loadGeoJson(
 			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
 				infowindow = new google.maps.InfoWindow();
