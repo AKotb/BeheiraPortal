@@ -84,7 +84,7 @@ table, th, td {
 			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
 			 	// Load GeoJSON.
 			    map.data.loadGeoJson(
-			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
+			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json');
 				infowindow = new google.maps.InfoWindow();
 				map.data.setStyle(function(feature) {
 			          var color = 'blue';
@@ -127,19 +127,41 @@ table, th, td {
 			        map.data.overrideStyle(event.feature, {strokeWeight: 4, fillColor: 'yellow'});
 			        
 			        
-					/* var name = event.feature.getProperty('Name');
-					var desc = event.feature.getProperty('description');
-			        var content = "<div><table><tr><td>اسم المزرعة</td></tr><tr><td>"+name+"</td></tr></table></div>";
+					var owner = event.feature.getProperty('OWNER');
+					var farm_name = event.feature.getProperty('Farm_Name');
+					var sid = event.feature.getProperty('Owner_ID');
+					var phone = event.feature.getProperty('Mang_Tel');
+					var ownership = event.feature.getProperty('Ownership');
+					
+					var area_feddan = event.feature.getProperty('area_fadda');
+					var area = area_feddan.toString();
+				    var fedarr = area.split(".");
+				    var feddan = fedarr[0];
+				    var frac_fed = area - fedarr[0];
+				    var qiratstr = (frac_fed*24).toString();
+				    var qiratarr = qiratstr.split(".");
+				    var qirat = qiratarr[0];
+				    var frac_qirat = qiratstr-qirat;
+				    var sahmstr = (frac_qirat*24).toString();
+				    var sahmarr = sahmstr.split(".");
+				    var sahm = sahmarr[0];
+				    
+				    //var link1 = "<a href=\'#\'><img src=\'resources/css/css/css/css/images/BY FORCE.png\' alt=\'Icon\'></a>";
+				    var link1 = "<a href=\'#\'>"+"خرائط استخدامات الأراضى"+"</a>";
+				    var link2 = "<a href=\'#\'>"+"مرئيات فضائية"+"</a>";
+				    var link3 = "<a href=\'#\'>"+"طلب إجراءات التقنين ( المعاينة/ الفحص)"+"</a>";
+					
+			        var content = "<div><h1>"+"بيانات قطعة الأرض"+"</h1><br><table dir=\'rtl\'><tr><td>"+farm_name+"</td><td>اسم المزرعة / الشركة</td></tr><tr><td>"+" س "+sahm+"  ط "+qirat+" ف "+feddan+"</td><td>المساحة</td></tr><tr><td>"+ownership+"</td><td>نوع الحيازة</td></tr><tr><td>"+owner+"</td><td>اسم المالك / واضع اليد</td></tr><tr><td>"+sid+"</td><td>الرقم القومى</td></tr><tr><td>"+phone+"</td><td>التليفون</td></tr></table><br>"+link1+"<br>"+link2+"<br>"+link3+"</div>";
 			        
 			        infowindow.setContent(content);
 			        infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
 			        infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
-			        infowindow.open(map); */
+			        infowindow.open(map); 
 			    });
 
 			    map.data.addListener('mouseout', function(event) {
-			       map.data.revertStyle();
-			       infowindow.close();
+			       //map.data.revertStyle();
+			       //infowindow.close();
 			    });
 			}
 		</script>
