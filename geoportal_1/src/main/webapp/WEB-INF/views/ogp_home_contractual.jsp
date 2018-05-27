@@ -69,24 +69,26 @@ table, th, td {
 				});
 				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json');
 				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
-				var km2bufferLayer = new google.maps.KmlLayer({
-			          url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/2km_buffer.kml',
-			          map: map
-			     });
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/2km_buffer.json');
 				infowindow = new google.maps.InfoWindow();
 				map.data.setStyle(function(feature) {
 					var folderpath = feature.getProperty('FolderPath');
+					var roads = feature.getProperty('Name');
 					if(folderpath =='areea2/areea2' || folderpath =='areea1/areea1'){
 				          return ({
 				            fillColor: 'transparent',
 				            strokeColor: 'blue',
 				            strokeWeight: 2
 				          });
-					}else{
+					}
+					else if(roads =='roadone' || folderpath =='roadtwo'){
+						return ({
+				            strokeColor: 'black',
+				            strokeWeight: 2
+				          });
+					}
+					else{
 						var color = 'blue';
-				          if (feature.getProperty('isColorful')) {
-				            color = 'red';
-				          }
 				          return ({
 				            fillColor: color,
 				            strokeColor: color,
@@ -121,10 +123,12 @@ table, th, td {
 				
 				map.data.addListener('mouseover', function(event) {
 					var folderpath = event.feature.getProperty('FolderPath');
+					var roads = event.feature.getProperty('Name');
 					if(folderpath =='areea2/areea2' || folderpath =='areea1/areea1'){
+					}else if(roads =='roadone' || folderpath =='roadtwo'){
 					}else{
-			        map.data.revertStyle();
-			        map.data.overrideStyle(event.feature, {strokeWeight: 4, fillColor: 'yellow'});
+			        	map.data.revertStyle();
+			        	map.data.overrideStyle(event.feature, {strokeWeight: 4, fillColor: 'yellow'});
 					}
 			        
 					var owner = event.feature.getProperty('OWNER');
