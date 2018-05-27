@@ -67,35 +67,32 @@ table, th, td {
 					center : Egypt,
 					mapTypeId : 'hybrid'
 				});
-				/* var dbLayer = new google.maps.KmlLayer({
-			          url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.kml',
-			          map: map
-			     });   */
-				/* var layer165kml = new google.maps.KmlLayer({
-			          url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.kml',
-			          map: map
-				 }); */
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
 				var km2bufferLayer = new google.maps.KmlLayer({
 			          url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/2km_buffer.kml',
 			          map: map
-			     }); 
-			  	// Load GeoJSON.
-			    map.data.loadGeoJson(
-			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
-			 	// Load GeoJSON.
-			    map.data.loadGeoJson(
-			            'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json');
+			     });
 				infowindow = new google.maps.InfoWindow();
 				map.data.setStyle(function(feature) {
-			          var color = 'blue';
-			          if (feature.getProperty('isColorful')) {
-			            color = 'red';
-			          }
-			          return ({
-			            fillColor: color,
-			            strokeColor: color,
-			            strokeWeight: 2
-			          });
+					var folderpath = feature.getProperty('FolderPath');
+					if(folderpath =='areea2/areea2' || folderpath =='areea1/areea1'){
+				          return ({
+				            fillColor: 'transparent',
+				            strokeColor: 'blue',
+				            strokeWeight: 2
+				          });
+					}else{
+						var color = 'blue';
+				          if (feature.getProperty('isColorful')) {
+				            color = 'red';
+				          }
+				          return ({
+				            fillColor: color,
+				            strokeColor: color,
+				            strokeWeight: 2
+				          });
+					}
 			        });
 				
 				// When the user clicks, set 'isColorful', changing the color of the letters.
@@ -123,16 +120,19 @@ table, th, td {
 				});
 				
 				map.data.addListener('mouseover', function(event) {
+					var folderpath = event.feature.getProperty('FolderPath');
+					if(folderpath =='areea2/areea2' || folderpath =='areea1/areea1'){
+					}else{
 			        map.data.revertStyle();
 			        map.data.overrideStyle(event.feature, {strokeWeight: 4, fillColor: 'yellow'});
-			        
+					}
 			        
 					var owner = event.feature.getProperty('OWNER');
 					var farm_name = event.feature.getProperty('Farm_Name');
 					var sid = event.feature.getProperty('Owner_ID');
 					var phone = event.feature.getProperty('Mang_Tel');
 					var ownership = event.feature.getProperty('Ownership');
-					
+					var area_id = event.feature.getProperty('id');
 					var area_feddan = event.feature.getProperty('area_fadda');
 					var area = area_feddan.toString();
 				    var fedarr = area.split(".");
@@ -146,12 +146,38 @@ table, th, td {
 				    var sahmarr = sahmstr.split(".");
 				    var sahm = sahmarr[0];
 				    
-				    //var link1 = "<a href=\'#\'><img src=\'resources/css/css/css/css/images/BY FORCE.png\' alt=\'Icon\'></a>";
 				    var link1 = "<a href=\'#\'>"+"خرائط استخدامات الأراضى"+"</a>";
 				    var link2 = "<a href=\'#\'>"+"مرئيات فضائية"+"</a>";
 				    var link3 = "<a href=\'#\'>"+"طلب إجراءات التقنين ( المعاينة/ الفحص)"+"</a>";
-					
-			        var content = "<div><h1>"+"بيانات قطعة الأرض"+"</h1><br><table dir=\'rtl\'><tr><td>"+farm_name+"</td><td>اسم المزرعة / الشركة</td></tr><tr><td>"+" س "+sahm+"  ط "+qirat+" ف "+feddan+"</td><td>المساحة</td></tr><tr><td>"+ownership+"</td><td>نوع الحيازة</td></tr><tr><td>"+owner+"</td><td>اسم المالك / واضع اليد</td></tr><tr><td>"+sid+"</td><td>الرقم القومى</td></tr><tr><td>"+phone+"</td><td>التليفون</td></tr></table><br>"+link1+"<br>"+link2+"<br>"+link3+"</div>";
+				    if (area_id == 0){
+				    	var link4 = "<a href=\'#\'><img src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+				    }
+					if (area_id == 1){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+				    }
+					if (area_id == 2){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+					}
+					if (area_id == 3){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+					}
+					if (area_id == 4){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+					}
+					if (area_id == 5){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>"; 	
+					}
+					if (area_id == 6){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";	
+					}
+					if (area_id == 7){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+					}
+					if (area_id == 8){
+						var link4 = "<a href=\'#\'><img src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+					}
+				    
+			        var content = "<div><h1>"+"بيانات قطعة الأرض"+"</h1><br><table style=\"dir: rtl; display: block; \"><tr><td>"+farm_name+"</td><td>اسم المزرعة / الشركة</td></tr><tr><td>"+" س "+sahm+"  ط "+qirat+" ف "+feddan+"</td><td>المساحة</td></tr><tr><td>"+ownership+"</td><td>نوع الحيازة</td></tr><tr><td>"+owner+"</td><td>اسم المالك / واضع اليد</td></tr><tr><td>"+sid+"</td><td>الرقم القومى</td></tr><tr><td>"+phone+"</td><td>التليفون</td></tr></table><br>"+link1+"<br>"+link2+"<br>"+link3+"<br>"+link4+"</div>";
 			        
 			        infowindow.setContent(content);
 			        infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
