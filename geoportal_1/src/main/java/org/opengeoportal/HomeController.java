@@ -27,6 +27,61 @@ public class HomeController {
 		addConfig(mav);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/area0layers", method = RequestMethod.GET)
+	public ModelAndView getArea0Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area0layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area1layers", method = RequestMethod.GET)
+	public ModelAndView getArea1Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area1layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area2layers", method = RequestMethod.GET)
+	public ModelAndView getArea2Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area2layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area3layers", method = RequestMethod.GET)
+	public ModelAndView getArea3Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area3layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area4layers", method = RequestMethod.GET)
+	public ModelAndView getArea4Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area4layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area5layers", method = RequestMethod.GET)
+	public ModelAndView getArea5Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area5layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area6layers", method = RequestMethod.GET)
+	public ModelAndView getArea6Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area6layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area7layers", method = RequestMethod.GET)
+	public ModelAndView getArea7Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area7layers");
+		addConfig(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/area8layers", method = RequestMethod.GET)
+	public ModelAndView getArea8Layers() throws Exception {
+		ModelAndView mav = new ModelAndView("area8layers");
+		addConfig(mav);
+		return mav;
+	}
 
 	@RequestMapping(value = "/ownership", method = RequestMethod.GET)
 	public ModelAndView getBeheiraLayers(@RequestParam(value = "ogpids", defaultValue = "") Set<String> layerIds,
