@@ -67,7 +67,11 @@ table, th, td {
 					center : Egypt,
 					mapTypeId : 'hybrid'
 				});
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Building.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Crops.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/FieldCrops.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Reclaimed.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Reclaimed_Notplanted.json');
 				infowindow = new google.maps.InfoWindow();
 				map.data.setStyle(function(feature) {
 					var color = 'blue';
