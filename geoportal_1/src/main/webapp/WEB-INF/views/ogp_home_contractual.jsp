@@ -65,6 +65,12 @@ table, th, td {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
 </style>
 </head>
 
@@ -193,62 +199,62 @@ table, th, td {
 								var sahm = sahmarr[0];
 
 								var link2 = "<a href=\'#\' class=\'button\'>"
-										+ "مرئيات فضائية" + "</a>";
+										+ " مرئيات فضائية " + "</a>";
 								var link3 = "<a href=\'#\' class=\'button\'>"
-										+ "طلب إجراءات التقنين ( المعاينة/ الفحص)"
+										+ " طلب إجراءات التقنين ( المعاينة/ الفحص) "
 										+ "</a>";
 								if (area_id == 0) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 1) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 2) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 3) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 4) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 5) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 6) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 7) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 8) {
 									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
-											+ "خرائط استخدامات الأراضى"
+											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								
@@ -256,7 +262,7 @@ table, th, td {
 										+ "بيانات قطعة الأرض" + "</h1><br>"
 										+ link4
 										+ "<br>"
-										+ "<table style=\"dir: rtl; display: block; \"><tr><td>"
+										+ "<table style=\"dir: rtl;\"><tr><td>"
 										+ farm_name
 										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td>"
 										+ " س "
@@ -276,7 +282,9 @@ table, th, td {
 										+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
 										+ "<br>"
 										+ link1
+										+"<div class=\"divider\"/>"
 										+ link2
+										+"<div class=\"divider\"/>"
 										+ link3
 										+ "</div>";
 
