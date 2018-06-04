@@ -67,11 +67,10 @@ table, th, td {
 					center : Egypt,
 					mapTypeId : 'hybrid'
 				});
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Building.json');
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Crops.json');
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/roads.json');
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Reclaimed.json');
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Reclaimed_Notplanted.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Building_projected.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Crops_projected.json');
+				map.data.loadGeoJson('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/3/FieldCrops_projected.json');
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Roads_projected.json');
 				infowindow = new google.maps.InfoWindow();
 				map.data.setStyle(function(feature) {
 					var color = 'blue';
