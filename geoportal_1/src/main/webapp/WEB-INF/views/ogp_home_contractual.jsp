@@ -32,12 +32,17 @@
 	width: 20%;
 }
 
-table {
+table, th, td {
 	border-collapse: collapse;
-	width: 100%;
+	width: 500px;
+	text-align: right;
+	padding: 8px;
+	border: 1px solid black;
 }
 
-table, th, td {
+.innertable{
+	border-collapse: collapse;
+	width: 100%;
 	text-align: right;
 	padding: 8px;
 	border: 1px solid black;
@@ -46,6 +51,7 @@ table, th, td {
 .rightcolumn {
 	background-color: #396266;
 	color: white;
+	width: 30%
 }
 
 .infowindowimg {
@@ -76,25 +82,15 @@ table, th, td {
 }
 
 .button {
-
 	font: bold 11px Arial;
+	text-decoration: none;
+	background-color: #396266;
+	color: white;
 	padding: 2px 6px 2px 6px;
 	border-top: 1px solid #CCCCCC;
 	border-right: 1px solid #333333;
 	border-bottom: 1px solid #333333;
 	border-left: 1px solid #CCCCCC;
-    background-color: #fcbb5b; /* #396266; */
-    border: none;
-    color: #3d6266; /* white; */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    margin: 2px;
-    cursor: pointer;
-    width: 120px;
-    height: 60px;
-    font-weight:bold;
 }
 
 .button:hover,
@@ -121,7 +117,7 @@ input.input-box, textarea {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
+    width: 60%;
 }
 
 /* The Close Button */
@@ -161,23 +157,23 @@ input.input-box, textarea {
 					    
 					    <table border="0" style="dir:rtl;">
 					    	<tr>
-					    		<td align="right"><input class="input-box" type="text" name="farm_name" value=""></td>
+					    		<td align="right"><input class="input-box" type="text" id="farm_name" value=""></td>
 					    		<td align="right" style="color:#3d6266;">اسم المزرعة / الشركة</td>
 					    	</tr>
 					    	<tr>
-					    		<td align="right"><input class="input-box" type="text" name="ownership" value=""></td>
+					    		<td align="right"><input class="input-box" type="text" id="ownership" value=""></td>
 					    		<td align="right" style="color:#3d6266;">نوع الحيازة</td>
 					    	</tr>
 					    	<tr>
-					    		<td align="right"><input class="input-box" type="text" name="owner" value=""></td>
+					    		<td align="right"><input class="input-box" type="text" id="owner" value=""></td>
 					    		<td align="right" style="color:#3d6266;">اسم المالك / واضع اليد</td>
 					    	</tr>
 					    	<tr>
-					    		<td align="right"><input class="input-box" type="text" name="sid" value=""></td>
+					    		<td align="right"><input class="input-box" type="text" id="sid" value=""></td>
 					    		<td align="right" style="color:#3d6266;">الرقم القومى</td>
 					    	</tr>
 					    	<tr>
-					    		<td align="right"><input class="input-box" type="text" name="phone" value=""></td>
+					    		<td align="right"><input class="input-box" type="text" id="phone" value=""></td>
 					    		<td align="right" style="color:#3d6266;">التليفون</td>
 					    	</tr>
 					    </table>
@@ -185,7 +181,7 @@ input.input-box, textarea {
 				    </div>
 				    
 				    <h2 align="center">  <button onclick="searchAction()" class="button btnsearch" id="searchBtn">بحث</button></h2>
-				    
+				    <div id="searchResults"></div>
 				  </div>
 				
 				</div>
@@ -220,7 +216,84 @@ input.input-box, textarea {
 				}
 				
 				function searchAction() {
-				    alert(document.getElementById("sid").value);
+					readTextFile('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json', function(text){});
+				}
+				
+				function readTextFile(file, callback) {
+					
+					var rawFile = new XMLHttpRequest();
+					rawFile.overrideMimeType("application/json");
+					rawFile.open("GET", file, true);
+					rawFile.onreadystatechange = function() {
+						
+						if (rawFile.readyState === 4 && rawFile.status == "200") {
+							
+							var mydata = JSON.parse(rawFile.responseText);
+							var results = "";		
+							var num_of_items = 0;
+							var search_owner = document.getElementById('owner').value;
+							var search_ownership = document.getElementById('ownership').value;
+							var search_farm_name = document.getElementById('farm_name').value;
+							var search_sid = document.getElementById('sid').value;
+							var search_phone = document.getElementById('phone').value;
+							var cond1, cond2, cond3, cond4, cond5;
+							
+							for (var val in mydata.features) {
+							
+								cond1 = false;
+								cond2 = false;
+								cond3 = false;
+								cond4 = false;
+								cond5 = false;
+								
+								if(mydata.features[val].properties.OWNER && search_owner.length > 0) 
+									cond1 = mydata.features[val].properties.OWNER.includes(search_owner);
+								if(mydata.features[val].properties.Ownership && search_ownership.length > 0)
+									cond2 = mydata.features[val].properties.Ownership.includes(search_ownership);
+								if(mydata.features[val].properties.Farm_Name && search_farm_name.length > 0) 
+									cond3 = mydata.features[val].properties.Farm_Name.includes(search_farm_name);
+								if(mydata.features[val].properties.Owner_ID && search_sid.length > 0) 
+									cond4 = mydata.features[val].properties.Owner_ID.toString().includes(search_sid);
+								if(mydata.features[val].properties.owner_tele && search_phone.length > 0) 
+									cond5 = mydata.features[val].properties.owner_tele.toString().includes(search_phone);
+								
+								if (cond1 || cond2 || cond3 || cond4 || cond5) {	
+									
+									num_of_items = num_of_items + 1;
+									results = results +'<tr>'	
+												+'<td align=\"right\">'
+												+'<button onclick=\"showSearchResults('
+												+val+')\" class=\"button btnsearch\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'+'</td>'
+												+'<td align=\"right\">'+mydata.features[val].properties.OWNER+'</td>'
+												+'<td align=\"right\">'+mydata.features[val].properties.Ownership+'</td>'
+												+'<td align=\"right\">'+mydata.features[val].properties.Farm_Name+'</td>'
+												+'<td align=\"right\">'+val+'</td>'
+												+'</tr>';
+								}
+							}
+							
+							if(num_of_items > 0){
+								var search_header	= '<h3>تم إيجاد '+num_of_items+' من نتائج البحث </h3><br><table border=\"0\" style=\"dir:rtl;\">'
+											+'<tr>'
+											+'<th align=\"right\">إعدادات</th>'
+											+'<th align=\"right\">اسم المالك / واضع اليد</th>'
+											+'<th align=\"right\">نوع الحيازة</th>'
+											+'<th align=\"right\">اسم المزرعة / الشركة</th>'
+											+'<th align=\"right\">م</th>'
+											+'</tr>';
+								results = search_header + results + '</table><br><br><br><br><br><br><br><br>';
+								document.getElementById('searchResults').innerHTML = results;
+							}
+							else
+								document.getElementById('searchResults').innerHTML = '<h3>عفوا ، لا توجد نتائج</h3>';
+							
+						}
+					}
+					rawFile.send(null);
+				}
+				
+				function showSearchResults(val) {
+					alert("shown on the map [ id = "+val+" ]");
 				}
 				
 	        	</script>
@@ -346,76 +419,70 @@ input.input-box, textarea {
 								var link2 = "<a href=\'#\' class=\'button\'>"
 										+ " مرئيات فضائية " + "</a>";
 								var link3 = "<a href=\'#\' class=\'button\'>"
-										+ " طلب إجراءات التقنين ( المعاينة/ الفحص) "
+									+ " طلب إجراءات التقنين_المعاينة/الفحص "
 										+ "</a>";
 								if (area_id == 0) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 1) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 2) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 3) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 4) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 5) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 6) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 7) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 8) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								
-								var content = "<div style=\"text-align:center\"><h1>"
+								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 										+ "بيانات قطعة الأرض" + "</h1><br>"
 										+ link4
 										+ "<br>"
 										+ "<table style=\"dir: rtl;\"><tr><td>"
 										+ farm_name
-										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td>"
-										+ " س "
-										+ sahm
-										+ "  ط "
-										+ qirat
-										+ " ف "
-										+ feddan
+										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td><table class=\"innertable\"><tr><td>س</td><td>ط</td><td>ف</td></tr><tr><td>"+sahm+"</td><td>"+qirat+"</td><td>"+feddan+"</td></tr></table>"
 										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td>"
 										+ ownership
 										+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td>"
@@ -427,9 +494,9 @@ input.input-box, textarea {
 										+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
 										+ "<br>"
 										+ link1
-										+"<div class=\"divider\"/>"
+										+ "&nbsp;&nbsp;&nbsp;"
 										+ link2
-										+"<div class=\"divider\"/>"
+										+ "&nbsp;&nbsp;&nbsp;"
 										+ link3
 										+ "</div>";
 
