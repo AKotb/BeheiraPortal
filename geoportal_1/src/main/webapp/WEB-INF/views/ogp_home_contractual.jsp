@@ -32,12 +32,17 @@
 	width: 20%;
 }
 
-table {
+table, th, td {
 	border-collapse: collapse;
-	width: 100%;
+	width: 500px;
+	text-align: right;
+	padding: 8px;
+	border: 1px solid black;
 }
 
-table, th, td {
+.innertable{
+	border-collapse: collapse;
+	width: 100%;
 	text-align: right;
 	padding: 8px;
 	border: 1px solid black;
@@ -46,6 +51,7 @@ table, th, td {
 .rightcolumn {
 	background-color: #396266;
 	color: white;
+	width: 30%
 }
 
 .infowindowimg {
@@ -76,25 +82,15 @@ table, th, td {
 }
 
 .button {
-
 	font: bold 11px Arial;
+	text-decoration: none;
+	background-color: #396266;
+	color: white;
 	padding: 2px 6px 2px 6px;
 	border-top: 1px solid #CCCCCC;
 	border-right: 1px solid #333333;
 	border-bottom: 1px solid #333333;
 	border-left: 1px solid #CCCCCC;
-    background-color: #fcbb5b; /* #396266; */
-    border: none;
-    color: #3d6266; /* white; */
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    margin: 2px;
-    cursor: pointer;
-    width: 120px;
-    height: 60px;
-    font-weight:bold;
 }
 
 .button:hover,
@@ -346,76 +342,70 @@ input.input-box, textarea {
 								var link2 = "<a href=\'#\' class=\'button\'>"
 										+ " مرئيات فضائية " + "</a>";
 								var link3 = "<a href=\'#\' class=\'button\'>"
-										+ " طلب إجراءات التقنين ( المعاينة/ الفحص) "
+									+ " طلب إجراءات التقنين_المعاينة/الفحص "
 										+ "</a>";
 								if (area_id == 0) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 1) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 2) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 3) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 4) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 5) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 6) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 7) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 8) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								
-								var content = "<div style=\"text-align:center\"><h1>"
+								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 										+ "بيانات قطعة الأرض" + "</h1><br>"
 										+ link4
 										+ "<br>"
 										+ "<table style=\"dir: rtl;\"><tr><td>"
 										+ farm_name
-										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td>"
-										+ " س "
-										+ sahm
-										+ "  ط "
-										+ qirat
-										+ " ف "
-										+ feddan
+										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td><table class=\"innertable\"><tr><td>س</td><td>ط</td><td>ف</td></tr><tr><td>"+sahm+"</td><td>"+qirat+"</td><td>"+feddan+"</td></tr></table>"
 										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td>"
 										+ ownership
 										+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td>"
@@ -427,9 +417,9 @@ input.input-box, textarea {
 										+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
 										+ "<br>"
 										+ link1
-										+"<div class=\"divider\"/>"
+										+ "&nbsp;&nbsp;&nbsp;"
 										+ link2
-										+"<div class=\"divider\"/>"
+										+ "&nbsp;&nbsp;&nbsp;"
 										+ link3
 										+ "</div>";
 
