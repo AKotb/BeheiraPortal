@@ -23,17 +23,21 @@
 	width: 100%;
 }
 
-table, th, td {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
+#infowindow {
+	background-color: #f6f6f6;
+	right: 0px;
+	position: absolute;
+	top: 144px;
+	height: 550px;
+	width: 20%;
 }
 
-.innertable{
+table {
 	border-collapse: collapse;
 	width: 100%;
+}
+
+table, th, td {
 	text-align: right;
 	padding: 8px;
 	border: 1px solid black;
@@ -42,19 +46,6 @@ table, th, td {
 .rightcolumn {
 	background-color: #396266;
 	color: white;
-	width: 30%
-}
-
-.button {
-	font: bold 11px Arial;
-	text-decoration: none;
-	background-color: #396266;
-	color: white;
-	padding: 2px 6px 2px 6px;
-	border-top: 1px solid #CCCCCC;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	border-left: 1px solid #CCCCCC;
 }
 
 .infowindowimg {
@@ -62,14 +53,177 @@ table, th, td {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.button {
+
+	font: bold 11px Arial;
+	padding: 2px 6px 2px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
+    background-color: #fcbb5b; /* #396266; */
+    border: none;
+    color: #3d6266; /* white; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 2px;
+    cursor: pointer;
+    width: 120px;
+    height: 60px;
+    font-weight:bold;
+}
+
+.button:hover,
+.button:focus {
+	background-color: #3d6266;
+    color: #fcbb5b;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input.input-box, textarea {
+    background-color: #fdddad; /* Green */
+    color: #3d6266;
+    padding: 2px;
+    text-align: right;
+    text-decoration: none;
+}
+
+.btnsearch {border-radius: 12%;}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 </style>
 </head>
 
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a href="#"><img
+			<a href="#" id="mysearch" onclick="searchBox('Hello')"><img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+				
+				  <!-- Modal content -->
+				  <div class="modal-content">
+				    <span class="close">&times;</span>
+				    
+				    <h1 style="color:#3d6266;" align="center">بحث عن قطعة أرض</h1>
+				    
+				    <div align="center">	
+					    
+					    <table border="0" style="dir:rtl;">
+					    	<tr>
+					    		<td align="right"><input class="input-box" type="text" name="farm_name" value=""></td>
+					    		<td align="right" style="color:#3d6266;">اسم المزرعة / الشركة</td>
+					    	</tr>
+					    	<tr>
+					    		<td align="right"><input class="input-box" type="text" name="ownership" value=""></td>
+					    		<td align="right" style="color:#3d6266;">نوع الحيازة</td>
+					    	</tr>
+					    	<tr>
+					    		<td align="right"><input class="input-box" type="text" name="owner" value=""></td>
+					    		<td align="right" style="color:#3d6266;">اسم المالك / واضع اليد</td>
+					    	</tr>
+					    	<tr>
+					    		<td align="right"><input class="input-box" type="text" name="sid" value=""></td>
+					    		<td align="right" style="color:#3d6266;">الرقم القومى</td>
+					    	</tr>
+					    	<tr>
+					    		<td align="right"><input class="input-box" type="text" name="phone" value=""></td>
+					    		<td align="right" style="color:#3d6266;">التليفون</td>
+					    	</tr>
+					    </table>
+					        
+				    </div>
+				    
+				    <h2 align="center">  <button onclick="searchAction()" class="button btnsearch" id="searchBtn">بحث</button></h2>
+				    
+				  </div>
+				
+				</div>
+				
+				<script type="application/javascript">
+				function searchBox(item) {
+					// Get the modal
+					var modal = document.getElementById('myModal');
+	
+					// Get the button that opens the modal
+					var btn = document.getElementById("mysearch");
+	
+					// Get the <span> element that closes the modal
+					var span = document.getElementsByClassName("close")[0];
+	
+					// When the user clicks the button, open the modal 
+					btn.onclick = function() {
+					    modal.style.display = "block";
+					}
+	
+					// When the user clicks on <span> (x), close the modal
+					span.onclick = function() {
+					    modal.style.display = "none";
+					}
+	
+					// When the user clicks anywhere outside of the modal, close it
+					window.onclick = function(event) {
+					    if (event.target == modal) {
+					        modal.style.display = "none";
+					    }
+					}
+				}
+				
+				function searchAction() {
+				    alert(document.getElementById("sid").value);
+				}
+				
+	        	</script>
 			<a href="#"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
@@ -192,73 +346,77 @@ table, th, td {
 								var link2 = "<a href=\'#\' class=\'button\'>"
 										+ " مرئيات فضائية " + "</a>";
 								var link3 = "<a href=\'#\' class=\'button\'>"
-										+ " طلب إجراءات التقنين_المعاينة/الفحص "
+										+ " طلب إجراءات التقنين ( المعاينة/ الفحص) "
 										+ "</a>";
 								if (area_id == 0) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 1) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 2) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 3) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 4) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 5) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 6) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 7) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								if (area_id == 8) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:150px;height:120px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
 											+ " خرائط استخدامات الأراضى "
 											+ "</a>";
 								}
 								
-								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
+								var content = "<div style=\"text-align:center\"><h1>"
 										+ "بيانات قطعة الأرض" + "</h1><br>"
 										+ link4
 										+ "<br>"
 										+ "<table style=\"dir: rtl;\"><tr><td>"
 										+ farm_name
-										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr>"	
-										+"<tr><td><table class=\"innertable\"><tr><td>s</td><td>ط</td><td>ف</td></tr><tr><td>"+sahm+"</td><td>"+qirat+"</td><td>"+feddan+"</td></tr></table>"
-										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr>"
-										+"<tr><td>"
+										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td>"
+										+ " س "
+										+ sahm
+										+ "  ط "
+										+ qirat
+										+ " ف "
+										+ feddan
+										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td>"
 										+ ownership
 										+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td>"
 										+ owner
@@ -269,9 +427,9 @@ table, th, td {
 										+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
 										+ "<br>"
 										+ link1
-										+ "&nbsp;&nbsp;&nbsp;"
+										+"<div class=\"divider\"/>"
 										+ link2
-										+ "&nbsp;&nbsp;&nbsp;"
+										+"<div class=\"divider\"/>"
 										+ link3
 										+ "</div>";
 
