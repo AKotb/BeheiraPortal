@@ -438,33 +438,7 @@ input.input-box, textarea {
 		}
 
 		function move(id) {
-			if (id == 0) {
-				window.location.href = "<c:url value='area0layers'/>";
-			}
-			if (id == 1) {
-				window.location.href = "<c:url value='area1layers'/>";
-			}
-			if (id == 2) {
-				window.location.href = "<c:url value='area2layers'/>";
-			}
-			if (id == 3) {
-				window.location.href = "<c:url value='area3layers'/>";
-			}
-			if (id == 4) {
-				window.location.href = "<c:url value='area4layers'/>";
-			}
-			if (id == 5) {
-				window.location.href = "<c:url value='area5layers'/>";
-			}
-			if (id == 6) {
-				window.location.href = "<c:url value='area6layers'/>";
-			}
-			if (id == 7) {
-				window.location.href = "<c:url value='area7layers'/>";
-			}
-			if (id == 8) {
-				window.location.href = "<c:url value='area8layers'/>";
-			}
+			window.location.href = "<c:url value='arealayers'><c:param name='id' value='idvalue'/></c:url>".replace("idvalue",id);
 		}
 	</script>
 	<script async defer
