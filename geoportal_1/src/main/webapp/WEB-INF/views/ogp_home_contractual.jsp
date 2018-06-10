@@ -313,6 +313,8 @@ input.input-box, textarea {
 	<script>
 		var map;
 		var infowindow;
+		var lat;
+		var lng;
 		function initMap() {
 			var Egypt = {
 				lat : 30.2519715,
@@ -327,7 +329,6 @@ input.input-box, textarea {
 					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json');
 			map.data
 					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/165.json');
-			//map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/2km_buffer.json');
 			var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
 						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/2km_buffer.kml',
@@ -391,131 +392,168 @@ input.input-box, textarea {
 										strokeWeight : 4,
 										fillColor : 'yellow'
 									});
-								}
+									var coord0 = event.feature.getGeometry().getAt(0).getAt(0);
+									coord0 = String(coord0);
+									coord0 = coord0.slice(1, -1);
+									var coord0arr = coord0.split(",");
+									var coord1 = event.feature.getGeometry().getAt(0).getAt(1);
+									coord1 = String(coord1);
+									coord1 = coord1.slice(1, -1);
+									var coord1arr = coord1.split(",");
+									var coord2 = event.feature.getGeometry().getAt(0).getAt(2);
+									coord2 = String(coord2);
+									coord2 = coord2.slice(1, -1);
+									var coord2arr = coord2.split(",");
+									var coord3 = event.feature.getGeometry().getAt(0).getAt(3);
+									coord3 = String(coord3);
+									coord3 = coord3.slice(1, -1);
+									var coord3arr = coord3.split(",");
+									var coordinates = [];
+									coordinates.push([coord0arr[0], coord0arr[1]]);
+									coordinates.push([coord1arr[0], coord1arr[1]]);
+									coordinates.push([coord2arr[0], coord2arr[1]]);
+									coordinates.push([coord3arr[0], coord3arr[1]]);
+									var bounds = new google.maps.LatLngBounds();
+									for (var i = 0; i<coordinates.length; i++) {
+									   bounds.extend(new google.maps.LatLng(coordinates[i][0], coordinates[i][1]));
+									}
+									mapcenter = bounds.getCenter();
+									lat = mapcenter.lat();
+									lng = mapcenter.lng();
+									//map.setZoom(15);
+									//map.setCenter(new google.maps.LatLng(lat, lng));
+									
+									var owner = event.feature.getProperty('OWNER');
+									var farm_name = event.feature
+											.getProperty('Farm_Name');
+									var sid = event.feature.getProperty('Owner_ID');
+									var phone = event.feature
+											.getProperty('Mang_Tel');
+									var ownership = event.feature
+											.getProperty('Ownership');
+									var area_id = event.feature.getProperty('id');
+									var area_feddan = event.feature.getProperty('area_fadda');
+									var area = area_feddan.toString();
+									var fedarr = area.split(".");
+									var feddan = fedarr[0];
+									var frac_fed = area - fedarr[0];
+									var qiratstr = (frac_fed * 24).toString();
+									var qiratarr = qiratstr.split(".");
+									var qirat = qiratarr[0];
+									var frac_qirat = qiratstr - qirat;
+									var sahmstr = (frac_qirat * 24).toString();
+									var sahmarr = sahmstr.split(".");
+									var sahm = sahmarr[0];
 
-								var owner = event.feature.getProperty('OWNER');
-								var farm_name = event.feature
-										.getProperty('Farm_Name');
-								var sid = event.feature.getProperty('Owner_ID');
-								var phone = event.feature
-										.getProperty('Mang_Tel');
-								var ownership = event.feature
-										.getProperty('Ownership');
-								var area_id = event.feature.getProperty('id');
-								var area_feddan = event.feature
-										.getProperty('area_fadda');
-								var area = area_feddan.toString();
-								var fedarr = area.split(".");
-								var feddan = fedarr[0];
-								var frac_fed = area - fedarr[0];
-								var qiratstr = (frac_fed * 24).toString();
-								var qiratarr = qiratstr.split(".");
-								var qirat = qiratarr[0];
-								var frac_qirat = qiratstr - qirat;
-								var sahmstr = (frac_qirat * 24).toString();
-								var sahmarr = sahmstr.split(".");
-								var sahm = sahmarr[0];
+									var link2 = "<a href=\'#\' class=\'button\'>"
+											+ " مرئيات فضائية " + "</a>";
+									var link3 = "<a href=\'#\' class=\'button\'>"
+										+ " طلب إجراءات التقنين_المعاينة/الفحص "
+											+ "</a>";
+									if (area_id == 0) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 1) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 2) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 3) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 4) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 5) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 6) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 7) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									if (area_id == 8) {
+										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
+												+ " خرائط استخدامات الأراضى "
+												+ "</a>";
+									}
+									
+									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
+											+ "بيانات قطعة الأرض" + "</h1><br>"
+											+ link4
+											+ "<br>"
+											+ "<table style=\"dir: rtl;\"><tr><td>"
+											+ farm_name
+											+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td><table class=\"innertable\"><tr><td>س</td><td>ط</td><td>ف</td></tr><tr><td>"+sahm+"</td><td>"+qirat+"</td><td>"+feddan+"</td></tr></table>"
+											+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td>"
+											+ ownership
+											+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td>"
+											+ owner
+											+ "</td><td class=\'rightcolumn\'>اسم المالك / واضع اليد</td></tr><tr><td>"
+											+ sid
+											+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td>"
+											+ phone
+											+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
+											+ "<br>"
+											+ link1
+											+ "&nbsp;&nbsp;&nbsp;"
+											+ link2
+											+ "&nbsp;&nbsp;&nbsp;"
+											+ link3
+											+ "</div>";
 
-								var link2 = "<a href=\'#\' class=\'button\'>"
-										+ " مرئيات فضائية " + "</a>";
-								var link3 = "<a href=\'#\' class=\'button\'>"
-									+ " طلب إجراءات التقنين_المعاينة/الفحص "
-										+ "</a>";
-								if (area_id == 0) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
+									infowindow.setContent(content);
+									infowindow.setPosition(event.feature
+											.getGeometry().getAt(0).getAt(0));
+									infowindow.setOptions({
+										pixelOffset : new google.maps.Size(0, -30)
+									});
+									infowindow.open(map);
 								}
-								if (area_id == 1) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 2) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 3) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 4) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 5) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 6) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 7) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								if (area_id == 8) {
-									var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
-											+ " خرائط استخدامات الأراضى "
-											+ "</a>";
-								}
-								
-								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
-										+ "بيانات قطعة الأرض" + "</h1><br>"
-										+ link4
-										+ "<br>"
-										+ "<table style=\"dir: rtl;\"><tr><td>"
-										+ farm_name
-										+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td><table class=\"innertable\"><tr><td>س</td><td>ط</td><td>ف</td></tr><tr><td>"+sahm+"</td><td>"+qirat+"</td><td>"+feddan+"</td></tr></table>"
-										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td>"
-										+ ownership
-										+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td>"
-										+ owner
-										+ "</td><td class=\'rightcolumn\'>اسم المالك / واضع اليد</td></tr><tr><td>"
-										+ sid
-										+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td>"
-										+ phone
-										+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
-										+ "<br>"
-										+ link1
-										+ "&nbsp;&nbsp;&nbsp;"
-										+ link2
-										+ "&nbsp;&nbsp;&nbsp;"
-										+ link3
-										+ "</div>";
-
-								infowindow.setContent(content);
-								infowindow.setPosition(event.feature
-										.getGeometry().getAt(0).getAt(0));
-								infowindow.setOptions({
-									pixelOffset : new google.maps.Size(0, -30)
-								});
-								infowindow.open(map);
 							});
+			
 			map.data.addListener('mouseout', function(event) {
-				//map.data.revertStyle();
-				//infowindow.close();
+				map.data.revertStyle();
+				infowindow.close();
 			});
 		}
-
+		
 		function move(id) {
-			window.location.href = "<c:url value='arealayers'><c:param name='id' value='idvalue'/></c:url>".replace("idvalue",id);
+			var params = [id, lat, lng];
+			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues",params);
+			/* var location = "<c:url value='arealayers'><c:param name='id' value='idvalue'/><c:param name='lat' value='latvalue'/><c:param name='lng' value='lngvalue'/></c:url>";
+			location = location.replace("idvalue",id);
+			location = location.replace("latvalue",lat);
+			location = location.replace("lngvalue",lng); */
+			window.location.href = location;
 		}
 	</script>
 	<script async defer

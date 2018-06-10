@@ -58,6 +58,8 @@ table, th, td {
 	<div id="extra"></div>
 	<script>
 		id = "${polygonID}";
+		lat = "${lat}";
+		lng = "${lng}";
 		var map;
 		var infowindow;
 		function initMap() {
@@ -70,7 +72,7 @@ table, th, td {
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
-
+		
 			if (id == 0) {
 				map.data
 						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/0/Building_project.json');
@@ -171,6 +173,8 @@ table, th, td {
 				map.data
 						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/8/FieldCrops_Projected.json');
 			}
+			map.setZoom(15);
+			map.setCenter(new google.maps.LatLng(lat, lng));
 			infowindow = new google.maps.InfoWindow();
 			map.data.setStyle(function(feature) {
 				var color = 'blue';
@@ -191,6 +195,7 @@ table, th, td {
 
 			});
 		}
+		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap">
