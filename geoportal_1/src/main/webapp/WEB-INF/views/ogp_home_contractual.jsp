@@ -273,7 +273,7 @@ input.input-box, textarea {
 							}
 							
 							if(num_of_items > 0){
-								var search_header	= '<h3>تم إيجاد '+num_of_items+' من نتائج البحث </h3><br><table border=\"0\" style=\"dir:rtl;\">'
+								var search_header	= '<div style=\"dir:rtl;\"><h3>تم إيجاد '+num_of_items+' من نتائج البحث </h3></div><br><table border=\"0\" style=\"dir:rtl;\">'
 											+'<tr>'
 											+'<th align=\"right\">إعدادات</th>'
 											+'<th align=\"right\">اسم المالك / واضع اليد</th>'
@@ -285,15 +285,29 @@ input.input-box, textarea {
 								document.getElementById('searchResults').innerHTML = results;
 							}
 							else
-								document.getElementById('searchResults').innerHTML = '<h3>عفوا ، لا توجد نتائج</h3>';
+								document.getElementById('searchResults').innerHTML = '<div style=\"dir:rtl;\"><h3>عفوا ، لا توجد نتائج</h3></div>';
 							
 						}
 					}
 					rawFile.send(null);
 				}
 				
-				function showSearchResults(val) {
-					alert("shown on the map [ id = "+val+" ]");
+				function showSearchResults(id) {
+					//alert("shown on the map [ id = "+id+" ]");
+					var modal = document.getElementById('myModal');
+					modal.style.display = "none";
+					map.setZoom(13);
+					map.setCenter(new google.maps.LatLng(30.22, 30.22));
+					map.data.setStyle(function(event) {
+						if(event.getProperty('id') === id){
+	                      var color = 'green';
+	                      return ({
+	                          fillColor : color,
+	                          strokeColor : color,
+	                          strokeWeight : 3
+	                      });
+	                    }
+					});	
 				}
 				
 	        	</script>
