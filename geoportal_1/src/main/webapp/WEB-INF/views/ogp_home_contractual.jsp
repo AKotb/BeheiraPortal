@@ -541,7 +541,7 @@ input.input-box, textarea {
 			
 			map.data.addListener('mouseout', function(event) {
 				map.data.revertStyle();
-				infowindow.close();
+				//infowindow.close();
 			});
 		}
 		

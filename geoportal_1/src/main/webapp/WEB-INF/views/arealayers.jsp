@@ -72,7 +72,7 @@ table, th, td {
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
-		
+
 			if (id == 0) {
 				map.data
 						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/0/Building_project.json');
@@ -184,18 +184,47 @@ table, th, td {
 					strokeWeight : 2
 				});
 			});
-			// When the user clicks, set 'isColorful', changing the color of the letters.
 			map.data.addListener('click', function(event) {
 			});
 
-			map.data.addListener('mouseover', function(event) {
+			map.data
+					.addListener(
+							'mouseover',
+							function(event) {
+								map.data.revertStyle();
+								map.data.overrideStyle(event.feature, {
+									strokeWeight : 4,
+									fillColor : 'yellow'
+								});
+								
+								var arname = event.feature.getProperty('Ar_Name');
+								var enname = event.feature.getProperty('EN_Name');
+								var area = event.feature.getProperty('Area');
+								
+								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
+										+ "بيانات قطعة الأرض" + "</h1><br>"
+										+ "<table style=\"dir: rtl;\"><tr><td>"
+										+ arname
+										+ "</td><td class=\'rightcolumn\'>الاسم باللغة العربية</td></tr><tr><td>"
+										+ enname
+										+ "</td><td class=\'rightcolumn\'>الاسم باللغة الانجليزية</td></tr><tr><td>"
+										+ area
+										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr></table><br>"
+										+ "</div>";
 
-			});
+								infowindow.setContent(content);
+								infowindow.setPosition(event.feature
+										.getGeometry().getAt(0).getAt(0));
+								infowindow.setOptions({
+									pixelOffset : new google.maps.Size(0, -30)
+								});
+								infowindow.open(map);
+							});
 			map.data.addListener('mouseout', function(event) {
-
+				map.data.revertStyle();
+				infowindow.close();
 			});
 		}
-		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap">
