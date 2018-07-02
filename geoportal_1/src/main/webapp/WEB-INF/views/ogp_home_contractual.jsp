@@ -67,7 +67,8 @@
 .rightcolumn {
 	background-color: #396266;
 	color: white;
-	width: 30%; border-collapse : collapse;
+	width: 30%;
+	border-collapse: collapse;
 	text-align: right;
 	padding: 8px;
 	border: 1px solid black;

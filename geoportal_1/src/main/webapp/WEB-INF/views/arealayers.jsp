@@ -196,13 +196,16 @@ table, th, td {
 									strokeWeight : 4,
 									fillColor : 'yellow'
 								});
-								
-								var arname = event.feature.getProperty('Ar_Name');
-								var enname = event.feature.getProperty('EN_Name');
+
+								var arname = event.feature
+										.getProperty('Ar_Name');
+								var enname = event.feature
+										.getProperty('EN_Name');
 								var area = event.feature.getProperty('Area');
-								
+
 								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
-										+ "بيانات قطعة الأرض" + "</h1><br>"
+										+ "بيانات قطعة الأرض"
+										+ "</h1><br>"
 										+ "<table style=\"dir: rtl;\"><tr><td>"
 										+ arname
 										+ "</td><td class=\'rightcolumn\'>الاسم باللغة العربية</td></tr><tr><td>"
