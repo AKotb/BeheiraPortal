@@ -161,8 +161,8 @@ input.input-box, textarea {
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a href="javascript:searchBox()" id="mysearch"><img
-				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
+			<a id="mysearch" href="javascript:searchBox()">
+			<img src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"/></a>
 			<!-- The Modal -->
 			<div id="myModal" class="modal">
 
@@ -382,55 +382,55 @@ input.input-box, textarea {
 											+ " طلب إجراءات التقنين_المعاينة/الفحص "
 											+ "</a>";
 									if (area_id == 0) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/0.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 1) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/1.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 2) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/2.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 3) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/3.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 4) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/4.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 5) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/5.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 6) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/6.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 7) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/7.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
 									if (area_id == 8) {
-										var link4 = "<a href=\'#\'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+										var link4 = "<a href=\'resources/datafiles/8.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
@@ -495,6 +495,7 @@ input.input-box, textarea {
 		}
 
 		function searchBox() {
+			Page_BlockSubmit = false;
 			// Get the modal
 			var modal = document.getElementById('myModal');
 

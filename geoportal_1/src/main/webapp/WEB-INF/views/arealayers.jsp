@@ -72,107 +72,79 @@ table, th, td {
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
-
-			if (id == 0) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/0/Building_project.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/0/Reclaimed_Notplanted_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/0/crops_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/0/roads_Project.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Building_project.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Building_project.json');
 			}
-			if (id == 1) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/1/Building_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/1/Crops_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/1/Reclaimed_Notplanted_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/1/Reclaimed_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/1/Roads_projected.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_Notplanted_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_Notplanted_projected.json');
 			}
-			if (id == 2) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Building_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Crops_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Field_Crops_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Land_notused_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Reclaimed_Notplanted_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Reclaimed_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/2/Roads_projcted.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/crops_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/crops_projected.json');
 			}
-			if (id == 3) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Building_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Crops_projected.json');
-				map.data
-						.loadGeoJson('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/3/FieldCrops_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/3/Roads_projected.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/roads_Project.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/roads_Project.json');
 			}
-			if (id == 4) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/4/Building_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/4/FieldCrops_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/4/Reclaimed_Notplanted_projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/4/Roads_projected.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Building_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Building_projected.json');
+			}			
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Crops_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Crops_projected.json');
+			}	
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_projected.json');
+			}		
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Roads_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Roads_projected.json');
 			}
-			if (id == 5) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/5/Building_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/5/Crops_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/5/FieldCrops_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/5/Reclaimed_Notplanted_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/5/Reclaimed_Projected.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Field_Crops_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Field_Crops_projected.json');
 			}
-			if (id == 6) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Building_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Crops_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Reclaimed_Notplanted_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Reclaimed_Project.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/6/Roads_Projected.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Land_notused_projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Land_notused_projected.json');
 			}
-			if (id == 7) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/7/Building_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/7/Crops_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/7/FieldCrops_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/7/Reclaimed_Notplanted_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/7/Roads_Projected.json');
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Roads_projcted.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Roads_projcted.json');
 			}
-			if (id == 8) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/8/Building_Projected.json');
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/8/FieldCrops_Projected.json');
+			if (200 == urlExists('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/'+id+'/FieldCrops_projected.json'))
+			{
+				map.data.loadGeoJson('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/'+id+'/FieldCrops_projected.json');
 			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Building_Projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Building_Projected.json');
+			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/FieldCrops_Projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/FieldCrops_Projected.json');
+			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Crops_Projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Crops_Projected.json');
+			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_Projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_Projected.json');
+			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_Project.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Reclaimed_Project.json');
+			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Roads_Projected.json'))
+			{
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'+id+'/Roads_Projected.json');
+			}
+			
 			map.setZoom(15);
 			map.setCenter(new google.maps.LatLng(lat, lng));
 			infowindow = new google.maps.InfoWindow();
@@ -227,6 +199,16 @@ table, th, td {
 				map.data.revertStyle();
 				infowindow.close();
 			});
+		}
+		
+		function urlExists(checkedurl) {
+		    var http = $.ajax({
+		        type:"HEAD",
+		        url: checkedurl,
+		        async: false
+		    })
+		    return http.status;
+		    // this will return 200 on success, and 0 or negative value on error
 		}
 	</script>
 	<script async defer
