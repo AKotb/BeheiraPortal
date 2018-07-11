@@ -242,6 +242,7 @@ input.input-box, textarea {
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
+			//map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
 			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db1.json');
 			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db2.json');
 			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db3.json');
@@ -254,12 +255,11 @@ input.input-box, textarea {
 					{
 						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
 						map : map
-					}); 
+					});
 			infowindow = new google.maps.InfoWindow();
 			map.data.setStyle(function(feature) {
 				var folderpath = feature.getProperty('FolderPath');
-				if (folderpath == 'areea2/areea2'
-						|| folderpath == 'areea1/areea1') {
+				if (folderpath) {
 					return ({
 						fillColor : 'transparent',
 						strokeColor : 'blue',
@@ -303,11 +303,10 @@ input.input-box, textarea {
 					.addListener(
 							'mouseover',
 							function(event) {
-								var folderpath = event.feature
-										.getProperty('FolderPath');
-								if (folderpath == 'areea2/areea2'
-										|| folderpath == 'areea1/areea1') {
-								} else {
+								var folderpath = event.feature.getProperty('FolderPath');
+								if (folderpath){
+									folderpath = folderpath;
+								}else{
 									map.data.revertStyle();
 									map.data.overrideStyle(event.feature, {
 										strokeWeight : 4,
@@ -355,37 +354,78 @@ input.input-box, textarea {
 									//map.setCenter(new google.maps.LatLng(lat, lng));
 
 									var owner = event.feature
-											.getProperty('OWNER');
+											.getProperty('Farm_Owner');
+									if (owner){
+										owner = owner;
+									}else{
+										owner ="غير متوفر";
+									}
 									var farm_name = event.feature
 											.getProperty('Farm_Name');
+									if (farm_name){
+										farm_name = farm_name;
+									}else{
+										farm_name ="غير متوفر";
+									}
 									var sid = event.feature
 											.getProperty('Owner_ID');
+									if (sid){
+										sid = sid;
+									}else{
+										sid ="غير متوفر";
+									}
 									var phone = event.feature
-											.getProperty('Mang_Tel');
+											.getProperty('Tel');
+									if (phone){
+										phone = phone;
+									}else{
+										phone ="غير متوفر";
+									}
 									var ownership = event.feature
 											.getProperty('Ownership');
-									var area_id = event.feature
-											.getProperty('id');
-									var area_feddan = event.feature
-											.getProperty('area_fadda');
-									var area = area_feddan.toString();
-									var fedarr = area.split(".");
-									var feddan = fedarr[0];
-									var frac_fed = area - fedarr[0];
-									var qiratstr = (frac_fed * 24).toString();
-									var qiratarr = qiratstr.split(".");
-									var qirat = qiratarr[0];
-									var frac_qirat = qiratstr - qirat;
-									var sahmstr = (frac_qirat * 24).toString();
-									var sahmarr = sahmstr.split(".");
-									var sahm = sahmarr[0];
+									if (ownership){
+										ownership = ownership;
+									}else{
+										ownership ="غير متوفر";
+									}
+									var area_id = event.feature.getProperty('id');
+									alert(area_id);
+									if (area_id){
+										area_id = area_id;
+									}else{
+										area_id ="0";
+									}
+									var farm_area = event.feature.getProperty('Farm_Area');
+									var feddan;
+									var qirat;
+									var sahm;
+									if (farm_area){
+										var area = farm_area.toString();
+										var fedarr = area.split("-");
+										feddan = fedarr[0];
+										qirat = fedarr[1];
+										sahm = fedarr[2];
+									}else{
+										feddan = "غير متوفر";
+										qirat = "غير متوفر";
+										sahm = "غير متوفر";
+									}
+									//var area = farm_area.toString();
+									//var fedarr = area.split(".");
+									//var frac_fed = area - fedarr[0];
+									//var qiratstr = (frac_fed * 24).toString();
+									//var qiratarr = qiratstr.split(".");
+									//var qirat = qiratarr[0];
+									//var frac_qirat = qiratstr - qirat;
+									//var sahmstr = (frac_qirat * 24).toString();
+									//var sahmarr = sahmstr.split(".");
+									//var sahm = sahmarr[0];
 
-									var link2 = "<a href=\'#\' class=\'button\'>"
-											+ " مرئيات فضائية " + "</a>";
-									var link3 = "<a href=\'#\' class=\'button\'>"
-											+ " طلب إجراءات التقنين_المعاينة/الفحص "
-											+ "</a>";
-									if (area_id == 0) {
+									var link2 = "<a href=\'#\' class=\'button\'>"+ " مرئيات فضائية " + "</a>";
+									var link3 = "<a href=\'#\' class=\'button\'>"+ " طلب إجراءات التقنين_المعاينة/الفحص "+ "</a>";
+									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("+area_id+");\' class=\'button\'> خرائط استخدامات الأراضى </a>"; 
+									/* if (area_id == 0) {
 										var link4 = "<a href=\'resources/datafiles/0.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
 												+ " خرائط استخدامات الأراضى "
@@ -439,7 +479,7 @@ input.input-box, textarea {
 												+ " خرائط استخدامات الأراضى "
 												+ "</a>";
 									}
-
+ */
 									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 											+ "بيانات قطعة الأرض" + "</h1><br>"
 											+ link4
@@ -479,6 +519,11 @@ input.input-box, textarea {
 									});
 									infowindow.open(map);
 								}
+								/* if (folderpath == 'areea2/areea2' || folderpath == 'areea1/areea1') {
+									
+								} else {
+									
+								} */
 							});
 
 			map.data.addListener('mouseout', function(event) {
