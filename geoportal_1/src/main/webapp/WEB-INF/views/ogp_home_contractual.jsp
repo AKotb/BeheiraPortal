@@ -277,28 +277,10 @@ input.input-box, textarea {
 
 			// When the user clicks, set 'isColorful', changing the color of the letters.
 			map.data.addListener('click', function(event) {
-				/* var govcode = event.feature.getProperty('GOVS_CODE');
-				// Beheira Governorate clicked
-				if(govcode =='18'){
-					window.location.href = "<c:url value='view_beheira'/>";
-				}
-				// Fayoum Governorate clicked
-				if(govcode =='23'){
-					window.location.href = "<c:url value='view_fayoum'/>";
-				}
 				
-				// Elwadi Elgedeed Governorate clicked
-				if(govcode =='32'){
-					window.location.href = "<c:url value='view_wadigedeed'/>";
-				}
-				
-				// Qalyoubia Governorate clicked
-				if(govcode =='14'){
-					window.location.href = "<c:url value='view_qalyoubia'/>";
-				} */
-
 			});
 
+			// when the user moves the mouse over the polygons
 			map.data
 					.addListener(
 							'mouseover',
@@ -350,8 +332,6 @@ input.input-box, textarea {
 									mapcenter = bounds.getCenter();
 									lat = mapcenter.lat();
 									lng = mapcenter.lng();
-									//map.setZoom(15);
-									//map.setCenter(new google.maps.LatLng(lat, lng));
 
 									var owner = event.feature
 											.getProperty('Farm_Owner');
@@ -389,7 +369,6 @@ input.input-box, textarea {
 										ownership ="غير متوفر";
 									}
 									var area_id = event.feature.getProperty('id');
-									alert(area_id);
 									if (area_id){
 										area_id = area_id;
 									}else{
@@ -410,76 +389,11 @@ input.input-box, textarea {
 										qirat = "غير متوفر";
 										sahm = "غير متوفر";
 									}
-									//var area = farm_area.toString();
-									//var fedarr = area.split(".");
-									//var frac_fed = area - fedarr[0];
-									//var qiratstr = (frac_fed * 24).toString();
-									//var qiratarr = qiratstr.split(".");
-									//var qirat = qiratarr[0];
-									//var frac_qirat = qiratstr - qirat;
-									//var sahmstr = (frac_qirat * 24).toString();
-									//var sahmarr = sahmstr.split(".");
-									//var sahm = sahmarr[0];
 
 									var link2 = "<a href=\'#\' class=\'button\'>"+ " مرئيات فضائية " + "</a>";
 									var link3 = "<a href=\'#\' class=\'button\'>"+ " طلب إجراءات التقنين_المعاينة/الفحص "+ "</a>";
 									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("+area_id+");\' class=\'button\'> خرائط استخدامات الأراضى </a>"; 
-									/* if (area_id == 0) {
-										var link4 = "<a href=\'resources/datafiles/0.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/0.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(0);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 1) {
-										var link4 = "<a href=\'resources/datafiles/1.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/1.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(1);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 2) {
-										var link4 = "<a href=\'resources/datafiles/2.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/2.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(2);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 3) {
-										var link4 = "<a href=\'resources/datafiles/3.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/3.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(3);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 4) {
-										var link4 = "<a href=\'resources/datafiles/4.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/4.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(4);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 5) {
-										var link4 = "<a href=\'resources/datafiles/5.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/5.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(5);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 6) {
-										var link4 = "<a href=\'resources/datafiles/6.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/6.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(6);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 7) {
-										var link4 = "<a href=\'resources/datafiles/7.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/7.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(7);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
-									if (area_id == 8) {
-										var link4 = "<a href=\'resources/datafiles/8.jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/8.jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-										var link1 = "<a href=\'javascript:void(0);\' onclick=\'move(8);\' class=\'button\'>"
-												+ " خرائط استخدامات الأراضى "
-												+ "</a>";
-									}
- */
 									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 											+ "بيانات قطعة الأرض" + "</h1><br>"
 											+ link4
@@ -519,11 +433,6 @@ input.input-box, textarea {
 									});
 									infowindow.open(map);
 								}
-								/* if (folderpath == 'areea2/areea2' || folderpath == 'areea1/areea1') {
-									
-								} else {
-									
-								} */
 							});
 
 			map.data.addListener('mouseout', function(event) {
@@ -536,10 +445,6 @@ input.input-box, textarea {
 			var params = [ id, lat, lng ];
 			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
-			/* var location = "<c:url value='arealayers'><c:param name='id' value='idvalue'/><c:param name='lat' value='latvalue'/><c:param name='lng' value='lngvalue'/></c:url>";
-			location = location.replace("idvalue",id);
-			location = location.replace("latvalue",lat);
-			location = location.replace("lngvalue",lng); */
 			window.location.href = location;
 		}
 

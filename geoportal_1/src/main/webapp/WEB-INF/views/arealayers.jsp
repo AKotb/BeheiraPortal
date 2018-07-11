@@ -32,8 +32,53 @@
 	width: 20%;
 }
 
-table, th, td {
+.outertable {
+	border-collapse: collapse;
+	width: 500px;
+	text-align: right;
+	padding: 8px;
 	border: 1px solid black;
+}
+
+.th {
+	border-collapse: collapse;
+	width: 500px;
+	text-align: right;
+	padding: 8px;
+	border: 1px solid black;
+}
+
+.td {
+	border-collapse: collapse;
+	width: 500px;
+	text-align: right;
+	padding: 8px;
+	border: 1px solid black;
+}
+
+.innertable {
+	border-collapse: collapse;
+	width: 100%;
+	text-align: right;
+	padding: 8px;
+	border: 1px solid black;
+}
+
+.rightcolumn {
+	background-color: #396266;
+	color: white;
+	width: 30%;
+	border-collapse: collapse;
+	text-align: right;
+	padding: 8px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.infowindowimg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 </style>
 </head>
@@ -171,19 +216,53 @@ table, th, td {
 
 								var arname = event.feature
 										.getProperty('Ar_Name');
+								if (arname){
+									arname = arname;
+								}else{
+									arname ="غير متوفر";
+								}
 								var enname = event.feature
 										.getProperty('EN_Name');
+								if (enname){
+									enname = enname;
+								}else{
+									enname ="غير متوفر";
+								}
 								var area = event.feature.getProperty('Area');
+								var feddan;
+								var qirat;
+								var sahm ;
+								if (area){
+									area = area;
+									var areaspace = area.toString();
+									var fedarr = areaspace.split(".");
+									feddan = fedarr[0];
+									var frac_fed = areaspace - fedarr[0];
+									var qiratstr = (frac_fed * 24).toString();
+									var qiratarr = qiratstr.split(".");
+									qirat = qiratarr[0];
+									var frac_qirat = qiratstr - qirat;
+									var sahmstr = (frac_qirat * 24).toString();
+									var sahmarr = sahmstr.split(".");
+									sahm = sahmarr[0];
+								}else{
+									area ="0";
+								}
 
 								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 										+ "بيانات قطعة الأرض"
 										+ "</h1><br>"
-										+ "<table style=\"dir: rtl;\"><tr><td>"
+										+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
 										+ arname
-										+ "</td><td class=\'rightcolumn\'>الاسم باللغة العربية</td></tr><tr><td>"
+										+ "</td><td class=\'rightcolumn\'>الاسم باللغة العربية</td></tr><tr><td class=\'td\'>"
 										+ enname
-										+ "</td><td class=\'rightcolumn\'>الاسم باللغة الانجليزية</td></tr><tr><td>"
-										+ area
+										+ "</td><td class=\'rightcolumn\'>الاسم باللغة الانجليزية</td></tr><tr><td class=\'td\'><table class=\"innertable\"><tr><td class=\'td\'>س</td><td class=\'td\'>ط</td><td class=\'td\'>ف</td></tr><tr><td class=\'td\'>"
+										+ sahm
+										+ "</td><td class=\'td\'>"
+										+ qirat
+										+ "</td><td class=\'td\'>"
+										+ feddan
+										+ "</td></tr></table>"
 										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr></table><br>"
 										+ "</div>";
 

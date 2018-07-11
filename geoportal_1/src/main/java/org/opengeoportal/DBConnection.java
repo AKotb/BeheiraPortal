@@ -39,7 +39,7 @@ public class DBConnection {
 
 	public void establishDBConn(String dbDriverName, String dbName, String dbUserName, String dbPassword) {
 		try {
-			String jdbcUrl = "jdbc:mysql://192.168.2.102:33060/"+dbName+"?user="+dbUserName+"&password="+dbPassword;
+			String jdbcUrl = "jdbc:mysql://192.168.2.102:3306/"+dbName+"?user="+dbUserName+"&password="+dbPassword;
 			Class.forName(dbDriverName);
 			con = DriverManager.getConnection(jdbcUrl);
 		} catch (Exception ex) {
@@ -79,7 +79,7 @@ public class DBConnection {
 	
 	
 	public static void main(String args[]) {
-		DBConnection dbConnection=new DBConnection("vouchers", "root", "root1234");
+		DBConnection dbConnection=new DBConnection("vouchers", "test", "test1234");
 		Voucher voucher = dbConnection.getByVoucherID("");
 		System.out.println("Voucher ID: "+voucher.getVoucherID());
 		System.out.println("Gov: "+voucher.getGov());
