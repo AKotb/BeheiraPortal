@@ -121,7 +121,16 @@
 	cursor: pointer;
 }
 
-input.input-box, textarea {
+input.input-box {
+	background-color: #fdddad; /* Green */
+	color: #3d6266;
+	padding: 2px;
+	text-align: right;
+	text-decoration: none;
+}
+
+.voucherTA {
+	width: 250px;
 	background-color: #fdddad; /* Green */
 	color: #3d6266;
 	padding: 2px;
@@ -130,7 +139,23 @@ input.input-box, textarea {
 }
 
 .btnsearch {
+	font: bold 24px Arial;
+	text-decoration: none;
+	background-color: #396266;
+	color: white;
+	padding: 2px 6px 2px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
 	border-radius: 12%;
+}
+
+.btnsearch:hover, .btnsearch:focus {
+	background-color: #3d6266;
+	color: #fcbb5b;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /* Modal Content */
@@ -143,18 +168,35 @@ input.input-box, textarea {
 }
 
 /* The Close Button */
-.close {
+.searchClose, .voucherClose {
 	color: #aaaaaa;
 	float: left;
 	font-size: 28px;
 	font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.searchClose:hover, .searchClose:focus, .voucherClose:hover, .voucherClose:focus {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
 }
+
+.resultth {
+    padding: 12px;
+    background-color: #3d6266;
+    color: #fdddad;
+	text-align:center;
+	font-size: 20px;
+}
+.resulttr {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #3d6266;
+	text-align:center;
+	font-size: 18px;
+}
+.resulttr:nth-child(odd) {background-color: #cfdcdd;}
+
 </style>
 </head>
 
@@ -168,7 +210,7 @@ input.input-box, textarea {
 
 				<!-- Modal content -->
 				<div class="modal-content">
-					<span class="close">&times;</span>
+					<span class="searchClose">&times;</span>
 
 					<h1 style="color: #3d6266;" align="center">بحث عن قطعة أرض</h1>
 
@@ -214,9 +256,104 @@ input.input-box, textarea {
 				</div>
 
 			</div>
-			<a href="#"><img
+			<a href="javascript:voucherBox()" id="myvoucher"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
+			<div id="voucherModal" class="modal">
+
+				<!-- Modal content -->
+				<div class="modal-content">
+					<span class="voucherClose">&times;</span>
+
+					<h1 style="color: #3d6266;" align="center">طلب تحصيل</h1>
+
+					<div align="center">
+
+						<table border="0" style="dir: rtl;">
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="voucher_ID" value=""></td>
+								<td align="right" style="color: #3d6266;">رقم الطلب</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="gov" value=""></td>
+								<td align="right" style="color: #3d6266;">المحافظة</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="site" value=""></td>
+								<td align="right" style="color: #3d6266;">الموقع</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="person_ID" value=""></td>
+								<td align="right" style="color: #3d6266;">الرقم القومى</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="Person_Name" value=""></td>
+								<td align="right" style="color: #3d6266;">مقدم الطلب</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="date"
+									id="voucher_Date" value=""></td>
+								<td align="right" style="color: #3d6266;">تاريخ الطلب</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="Fees_Status" value=""></td>
+								<td align="right" style="color: #3d6266;">نوع الرسوم</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="Amount" value=""></td>
+								<td align="right" style="color: #3d6266;">المبلغ</td>
+							</tr>
+							<tr>
+								<td align="right"><input type="checkbox"
+									id="Payment_Status" value="no"></td>
+								<td align="right" style="color: #3d6266;">تم الدفع</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="Issuing_document" value=""></td>
+								<td align="right" style="color: #3d6266;">جهة إصدار الوثيقة</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="Issuing_document_section" value=""></td>
+								<td align="right" style="color: #3d6266;">الفرع</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="date"
+									id="Issuing_Date" value=""></td>
+								<td align="right" style="color: #3d6266;">تاريخ الإصدار</td>
+							</tr>
+							<tr>
+								<td align="right"><input class="input-box" type="text"
+									id="Issuing_document_No" value=""></td>
+								<td align="right" style="color: #3d6266;">رقم الوثيقة</td>
+							</tr>
+							<tr>
+								<td align="right"><textarea class="voucherTA" rows="5" id="Notes" value=""></textarea></td>
+								<td align="right" style="color: #3d6266;">ملاحظات</td>
+							</tr>
+						</table>
+
+					</div>
+
+					<h2 align="center">
+						<button onclick="voucherAction()" class="btnsearch"
+							id="voucherBtn">تحصيل</button>
+						<button onclick="voucherPrint()" class="btnsearch"
+							id="voucherBtn">طباعة</button>
+					</h2>
+					<div id="voucherResults"></div>
+					<br><br><br><br><br>
+				</div>
+
+			</div>
 			<a href="#"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
@@ -449,7 +586,6 @@ input.input-box, textarea {
 		}
 
 		function searchBox() {
-			Page_BlockSubmit = false;
 			// Get the modal
 			var modal = document.getElementById('myModal');
 
@@ -457,7 +593,7 @@ input.input-box, textarea {
 			var btn = document.getElementById("mysearch");
 
 			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("close")[0];
+			var span = document.getElementsByClassName("searchClose")[0];
 
 			// When the user clicks the button, open the modal 
 			btn.onclick = function() {
@@ -479,7 +615,7 @@ input.input-box, textarea {
 
 		function searchAction() {
 			readTextFile(
-					'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/db.json',
+					'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db5.json',
 					function(text) {
 					});
 		}
@@ -511,9 +647,9 @@ input.input-box, textarea {
 						cond4 = false;
 						cond5 = false;
 
-						if (mydata.features[val].properties.OWNER
+						if (mydata.features[val].properties.Farm_Owner/*OWNER*/
 								&& search_owner.length > 0)
-							cond1 = mydata.features[val].properties.OWNER
+							cond1 = mydata.features[val].properties.Farm_Owner/*OWNER*/
 									.includes(search_owner);
 						if (mydata.features[val].properties.Ownership
 								&& search_ownership.length > 0)
@@ -527,46 +663,46 @@ input.input-box, textarea {
 								&& search_sid.length > 0)
 							cond4 = mydata.features[val].properties.Owner_ID
 									.toString().includes(search_sid);
-						if (mydata.features[val].properties.owner_tele
+						if (mydata.features[val].properties.Tel/*owner_tele*/
 								&& search_phone.length > 0)
-							cond5 = mydata.features[val].properties.owner_tele
+							cond5 = mydata.features[val].properties.Tel/*owner_tele*/
 									.toString().includes(search_phone);
 
 						if (cond1 || cond2 || cond3 || cond4 || cond5) {
 
 							num_of_items = num_of_items + 1;
 							results = results
-									+ '<tr>'
+									+ '<tr class=\"resulttr\">'
 									+ '<td align=\"right\">'
 									+ '<button onclick=\"showSearchResults('
 									+ val
-									+ ')\" class=\"button btnsearch\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
+									+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
 									+ '</td>' + '<td align=\"right\">'
-									+ mydata.features[val].properties.OWNER
+									+ mydata.features[val].properties.Farm_Owner/*OWNER*/
 									+ '</td>' + '<td align=\"right\">'
 									+ mydata.features[val].properties.Ownership
 									+ '</td>' + '<td align=\"right\">'
 									+ mydata.features[val].properties.Farm_Name
-									+ '</td>' + '<td align=\"right\">' + val
+									+ '</td>' + '<td>' + val
 									+ '</td>' + '</tr>';
 						}
 					}
 
 					if (num_of_items > 0) {
-						var search_header = '<div style=\"dir:rtl;\"><h3>تم إيجاد '
+						var search_header = '<div align=\"center\"><h3 align=\"center\">تم إيجاد '
 								+ num_of_items
-								+ ' من نتائج البحث </h3></div><br><table border=\"0\" style=\"dir:rtl;\">'
+								+ ' من نتائج البحث </h3><br><table border=\"0\" align=\"center\">'
 								+ '<tr>'
-								+ '<th align=\"right\">إعدادات</th>'
-								+ '<th align=\"right\">اسم المالك / واضع اليد</th>'
-								+ '<th align=\"right\">نوع الحيازة</th>'
-								+ '<th align=\"right\">اسم المزرعة / الشركة</th>'
-								+ '<th align=\"right\">م</th>' + '</tr>';
+								+ '<th class=\"resultth\">إعدادات</th>'
+								+ '<th class=\"resultth\">اسم المالك / واضع اليد</th>'
+								+ '<th class=\"resultth\">نوع الحيازة</th>'
+								+ '<th class=\"resultth\">اسم المزرعة / الشركة</th>'
+								+ '<th class=\"resultth\"> رقم </th>' + '</tr>';
 						results = search_header + results
-								+ '</table><br><br><br><br><br><br><br><br>';
+								+ '</table></div><br><br><br><br><br><br><br><br>';
 						document.getElementById('searchResults').innerHTML = results;
 					} else
-						document.getElementById('searchResults').innerHTML = '<div style=\"dir:rtl;\"><h3>عفوا ، لا توجد نتائج</h3></div>';
+						document.getElementById('searchResults').innerHTML = '<div align=\"center\"><h3>عفوا ، لا توجد نتائج</h3></div>';
 
 				}
 			}
@@ -588,7 +724,67 @@ input.input-box, textarea {
 						strokeWeight : 3
 					});
 				}
+				else
+				{
+					return ({
+						fillColor : 'transparent',
+						strokeColor : 'blue',
+						strokeWeight : 2
+					});
+				}
 			});
+		}
+		
+		function voucherBox() {
+			// Get the modal
+			var modal = document.getElementById('voucherModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("myvoucher");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("voucherClose")[0];
+
+			// When the user clicks the button, open the modal 
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		}
+		
+		function voucherAction() {
+			
+			var voucher_ID = document.getElementById('voucher_ID').value;
+			var gov = document.getElementById('gov').value;
+			var site = document.getElementById('site').value;
+			var person_ID = document.getElementById('person_ID').value;
+			var Person_Name = document.getElementById('Person_Name').value;
+			var voucher_Date = document.getElementById('voucher_Date').value;
+			var Fees_Status = document.getElementById('Fees_Status').value;
+			var Amount = document.getElementById('Amount').value;
+			var Payment_Status = document.getElementById('Payment_Status').value;
+			var Issuing_document = document.getElementById('Issuing_document').value;
+			var Issuing_document_section = document.getElementById('Issuing_document_section').value;
+			var Issuing_Date = document.getElementById('Issuing_Date').value;
+			var Issuing_document_No = document.getElementById('Issuing_document_No').value;
+			var Notes = document.getElementById('Notes').value;
+			
+			alert("[voucher_ID:"+voucher_ID+", gov:"+gov+", site:"+site+", person_ID:"+person_ID+", Person_Name:"+Person_Name+", voucher_Date:"+voucher_Date+", Fees_Status:"+Fees_Status+", Amount:"+Amount+", Payment_Status:"+Payment_Status+", Issuing_document:"+Issuing_document+", Issuing_document_section:"+Issuing_document_section+", Issuing_Date:"+Issuing_Date+", Issuing_document_No:"+Issuing_document_No+", Notes:"+Notes+"]");
+		}
+		
+		function voucherPrint() {
+			window.print();
 		}
 	</script>
 	<script async defer
