@@ -13,7 +13,7 @@ import java.sql.Statement;
  * @author ahmed.kotb
  *
  */
-public class DBConnection {
+public class DBConPgSQL {
 
 	private Connection con;
 	private String dbDriverName;
@@ -28,9 +28,9 @@ public class DBConnection {
 	 * @param dbUserName
 	 * @param dbPassword
 	 */
-	public DBConnection(String dbName, String dbUserName, String dbPassword) {
+	public DBConPgSQL(String dbName, String dbUserName, String dbPassword) {
 		super();
-		this.dbDriverName = "com.mysql.jdbc.Driver";
+		this.dbDriverName = "org.postgresql.Driver";
 		this.dbName = dbName;
 		this.dbUserName = dbUserName;
 		this.dbPassword = dbPassword;
@@ -39,9 +39,8 @@ public class DBConnection {
 
 	public void establishDBConn(String dbDriverName, String dbName, String dbUserName, String dbPassword) {
 		try {
-			String jdbcUrl = "jdbc:mysql://192.168.2.102:3306/"+dbName+"?user="+dbUserName+"&password="+dbPassword;
 			Class.forName(dbDriverName);
-			con = DriverManager.getConnection(jdbcUrl);
+			con = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/"+dbName, dbUserName, dbPassword);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -50,7 +49,7 @@ public class DBConnection {
 	public Voucher getByVoucherID(String id) {
 		Voucher voucher = new Voucher();
 		try {
-			String queryString = "select * from voucher where voucher_ID='" + id + "'";
+			String queryString = "select * from vouchers.voucher where \"voucher_ID\"='" + id + "'";
 			Statement stmt = con.createStatement();
 			ResultSet rset = stmt.executeQuery(queryString);
 			while (rset.next()) {
@@ -79,8 +78,8 @@ public class DBConnection {
 	
 	
 	public static void main(String args[]) {
-		DBConnection dbConnection=new DBConnection("vouchers", "test", "test1234");
-		Voucher voucher = dbConnection.getByVoucherID("");
+		DBConPgSQL dbConnection=new DBConPgSQL("vouchers", "postgres", "postgres");
+		Voucher voucher = dbConnection.getByVoucherID("9");
 		System.out.println("Voucher ID: "+voucher.getVoucherID());
 		System.out.println("Gov: "+voucher.getGov());
 		System.out.println("Site: "+voucher.getSite());
