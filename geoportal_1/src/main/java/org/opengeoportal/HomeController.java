@@ -40,4 +40,29 @@ public class HomeController {
 		mav.addObject("lng", params[2]);
 		return mav;
 	}
+
+	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
+	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
+		ModelAndView mav = new ModelAndView("ogp_home_contractual");
+		System.out.println("ID: " + param);
+		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
+		Voucher voucher = dbConnection.getByVoucherID(param);
+
+		System.out.println("Voucher ID: " + voucher.getVoucherID());
+		System.out.println("Gov: " + voucher.getGov());
+		System.out.println("Site: " + voucher.getSite());
+		System.out.println("Farm ID: " + voucher.getFarmID());
+		System.out.println("Person Name: " + voucher.getPersonName());
+		System.out.println("Person ID: " + voucher.getPersonID());
+		System.out.println("Voucher Date: " + voucher.getVoucherDate());
+		System.out.println("Amount: " + voucher.getAmount());
+		System.out.println("Fees Status: " + voucher.getFeesStatus());
+		System.out.println("Notes: " + voucher.getNotes());
+		System.out.println("Payment Status: " + voucher.getPaymentStatus());
+		System.out.println("Issuing Document: " + voucher.getIssuingDocument());
+		System.out.println("Issuing Document Section: " + voucher.getIssuingDocumentSection());
+		System.out.println("Issuing Document No: " + voucher.getIssuingDocumentNo());
+		mav.addObject("voucher", voucher);
+		return mav;
+	}
 }

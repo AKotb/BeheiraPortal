@@ -40,7 +40,7 @@ public class DBConPgSQL {
 	public void establishDBConn(String dbDriverName, String dbName, String dbUserName, String dbPassword) {
 		try {
 			Class.forName(dbDriverName);
-			con = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/"+dbName, dbUserName, dbPassword);
+			con = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/" + dbName, dbUserName, dbPassword);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -75,25 +75,24 @@ public class DBConPgSQL {
 		return voucher;
 
 	}
-	
-	
+
 	public static void main(String args[]) {
-		DBConPgSQL dbConnection=new DBConPgSQL("vouchers", "postgres", "postgres");
+		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
 		Voucher voucher = dbConnection.getByVoucherID("9");
-		System.out.println("Voucher ID: "+voucher.getVoucherID());
-		System.out.println("Gov: "+voucher.getGov());
-		System.out.println("Site: "+voucher.getSite());
-		System.out.println("Farm ID: "+voucher.getFarmID());
-		System.out.println("Person Name: "+voucher.getPersonName());
-		System.out.println("Person ID: "+voucher.getPersonID());
-		System.out.println("Voucher Date: "+voucher.getVoucherDate());
-		System.out.println("Amount: "+voucher.getAmount());
-		System.out.println("Fees Status: "+voucher.getFeesStatus());
-		System.out.println("Notes: "+voucher.getNotes());
-		System.out.println("Payment Status: "+voucher.getPaymentStatus());
-		System.out.println("Issuing Document: "+voucher.getIssuingDocument());
-		System.out.println("Issuing Document Section: "+voucher.getIssuingDocumentSection());
-		System.out.println("Issuing Document No: "+voucher.getIssuingDocumentNo());
+		System.out.println("Voucher ID: " + voucher.getVoucherID());
+		System.out.println("Gov: " + voucher.getGov());
+		System.out.println("Site: " + voucher.getSite());
+		System.out.println("Farm ID: " + voucher.getFarmID());
+		System.out.println("Person Name: " + voucher.getPersonName());
+		System.out.println("Person ID: " + voucher.getPersonID());
+		System.out.println("Voucher Date: " + voucher.getVoucherDate());
+		System.out.println("Amount: " + voucher.getAmount());
+		System.out.println("Fees Status: " + voucher.getFeesStatus());
+		System.out.println("Notes: " + voucher.getNotes());
+		System.out.println("Payment Status: " + voucher.getPaymentStatus());
+		System.out.println("Issuing Document: " + voucher.getIssuingDocument());
+		System.out.println("Issuing Document Section: " + voucher.getIssuingDocumentSection());
+		System.out.println("Issuing Document No: " + voucher.getIssuingDocumentNo());
 	}
 
 }

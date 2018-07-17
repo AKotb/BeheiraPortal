@@ -175,36 +175,40 @@ input.input-box {
 	font-weight: bold;
 }
 
-.searchClose:hover, .searchClose:focus, .voucherClose:hover, .voucherClose:focus {
+.searchClose:hover, .searchClose:focus, .voucherClose:hover,
+	.voucherClose:focus {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
 }
 
 .resultth {
-    padding: 12px;
-    background-color: #3d6266;
-    color: #fdddad;
-	text-align:center;
+	padding: 12px;
+	background-color: #3d6266;
+	color: #fdddad;
+	text-align: center;
 	font-size: 20px;
 }
+
 .resulttr {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: #3d6266;
-	text-align:center;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #3d6266;
+	text-align: center;
 	font-size: 18px;
 }
-.resulttr:nth-child(odd) {background-color: #cfdcdd;}
 
+.resulttr:nth-child(odd) {
+	background-color: #cfdcdd;
+}
 </style>
 </head>
 
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a id="mysearch" href="javascript:searchBox()">
-			<img src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"/></a>
+			<a id="mysearch" href="javascript:searchBox()"> <img
+				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
 			<!-- The Modal -->
 			<div id="myModal" class="modal">
 
@@ -336,7 +340,8 @@ input.input-box {
 								<td align="right" style="color: #3d6266;">رقم الوثيقة</td>
 							</tr>
 							<tr>
-								<td align="right"><textarea class="voucherTA" rows="5" id="Notes" value=""></textarea></td>
+								<td align="right"><textarea class="voucherTA" rows="5"
+										id="Notes" value=""></textarea></td>
 								<td align="right" style="color: #3d6266;">ملاحظات</td>
 							</tr>
 						</table>
@@ -346,11 +351,14 @@ input.input-box {
 					<h2 align="center">
 						<button onclick="voucherAction()" class="btnsearch"
 							id="voucherBtn">تحصيل</button>
-						<button onclick="voucherPrint()" class="btnsearch"
-							id="voucherBtn">طباعة</button>
+						<button onclick="voucherPrint()" class="btnsearch" id="voucherBtn">طباعة</button>
 					</h2>
 					<div id="voucherResults"></div>
-					<br><br><br><br><br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 				</div>
 
 			</div>
@@ -380,13 +388,20 @@ input.input-box {
 				mapTypeId : 'hybrid'
 			});
 			//map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db1.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db2.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db3.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db4.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db5.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db6.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db1.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db2.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db3.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db4.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db5.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db6.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
 			//map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.json');
 			var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
@@ -414,7 +429,7 @@ input.input-box {
 
 			// When the user clicks, set 'isColorful', changing the color of the letters.
 			map.data.addListener('click', function(event) {
-				
+
 			});
 
 			// when the user moves the mouse over the polygons
@@ -422,10 +437,11 @@ input.input-box {
 					.addListener(
 							'mouseover',
 							function(event) {
-								var folderpath = event.feature.getProperty('FolderPath');
-								if (folderpath){
+								var folderpath = event.feature
+										.getProperty('FolderPath');
+								if (folderpath) {
 									folderpath = folderpath;
-								}else{
+								} else {
 									map.data.revertStyle();
 									map.data.overrideStyle(event.feature, {
 										strokeWeight : 4,
@@ -472,65 +488,74 @@ input.input-box {
 
 									var owner = event.feature
 											.getProperty('Farm_Owner');
-									if (owner){
+									if (owner) {
 										owner = owner;
-									}else{
-										owner ="غير متوفر";
+									} else {
+										owner = "غير متوفر";
 									}
 									var farm_name = event.feature
 											.getProperty('Farm_Name');
-									if (farm_name){
+									if (farm_name) {
 										farm_name = farm_name;
-									}else{
-										farm_name ="غير متوفر";
+									} else {
+										farm_name = "غير متوفر";
 									}
 									var sid = event.feature
 											.getProperty('Owner_ID');
-									if (sid){
+									if (sid) {
 										sid = sid;
-									}else{
-										sid ="غير متوفر";
+									} else {
+										sid = "غير متوفر";
 									}
 									var phone = event.feature
 											.getProperty('Tel');
-									if (phone){
+									if (phone) {
 										phone = phone;
-									}else{
-										phone ="غير متوفر";
+									} else {
+										phone = "غير متوفر";
 									}
 									var ownership = event.feature
 											.getProperty('Ownership');
-									if (ownership){
+									if (ownership) {
 										ownership = ownership;
-									}else{
-										ownership ="غير متوفر";
+									} else {
+										ownership = "غير متوفر";
 									}
-									var area_id = event.feature.getProperty('id');
-									if (area_id){
+									var area_id = event.feature
+											.getProperty('id');
+									if (area_id) {
 										area_id = area_id;
-									}else{
-										area_id ="0";
+									} else {
+										area_id = "0";
 									}
-									var farm_area = event.feature.getProperty('Farm_Area');
+									var farm_area = event.feature
+											.getProperty('Farm_Area');
 									var feddan;
 									var qirat;
 									var sahm;
-									if (farm_area){
+									if (farm_area) {
 										var area = farm_area.toString();
 										var fedarr = area.split("-");
 										feddan = fedarr[0];
 										qirat = fedarr[1];
 										sahm = fedarr[2];
-									}else{
+									} else {
 										feddan = "غير متوفر";
 										qirat = "غير متوفر";
 										sahm = "غير متوفر";
 									}
 
-									var link2 = "<a href=\'#\' class=\'button\'>"+ " مرئيات فضائية " + "</a>";
-									var link3 = "<a href=\'#\' class=\'button\'>"+ " طلب إجراءات التقنين_المعاينة/الفحص "+ "</a>";
+									var link2 = "<a href=\'#\' class=\'button\'>"
+											+ " مرئيات فضائية " + "</a>";
+									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
+											+ area_id
+											+ ");\' class=\'button\' id=\'myvoucher\'>"
+											+ " طلب إجراءات التقنين_المعاينة/الفحص "
+											+ "</a>";
 									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
-									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("+area_id+");\' class=\'button\'> خرائط استخدامات الأراضى </a>"; 
+									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
+											+ area_id
+											+ ");\' class=\'button\'> خرائط استخدامات الأراضى </a>";
 									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 											+ "بيانات قطعة الأرض" + "</h1><br>"
 											+ link4
@@ -582,6 +607,12 @@ input.input-box {
 			var params = [ id, lat, lng ];
 			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+
+		function vouchers(id) {
+			var location = "<c:url value='vouchers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", id);
 			window.location.href = location;
 		}
 
@@ -650,7 +681,7 @@ input.input-box {
 						if (mydata.features[val].properties.Farm_Owner/*OWNER*/
 								&& search_owner.length > 0)
 							cond1 = mydata.features[val].properties.Farm_Owner/*OWNER*/
-									.includes(search_owner);
+							.includes(search_owner);
 						if (mydata.features[val].properties.Ownership
 								&& search_ownership.length > 0)
 							cond2 = mydata.features[val].properties.Ownership
@@ -666,7 +697,7 @@ input.input-box {
 						if (mydata.features[val].properties.Tel/*owner_tele*/
 								&& search_phone.length > 0)
 							cond5 = mydata.features[val].properties.Tel/*owner_tele*/
-									.toString().includes(search_phone);
+							.toString().includes(search_phone);
 
 						if (cond1 || cond2 || cond3 || cond4 || cond5) {
 
@@ -677,14 +708,15 @@ input.input-box {
 									+ '<button onclick=\"showSearchResults('
 									+ val
 									+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
-									+ '</td>' + '<td align=\"right\">'
+									+ '</td>'
+									+ '<td align=\"right\">'
 									+ mydata.features[val].properties.Farm_Owner/*OWNER*/
 									+ '</td>' + '<td align=\"right\">'
 									+ mydata.features[val].properties.Ownership
 									+ '</td>' + '<td align=\"right\">'
 									+ mydata.features[val].properties.Farm_Name
-									+ '</td>' + '<td>' + val
-									+ '</td>' + '</tr>';
+									+ '</td>' + '<td>' + val + '</td>'
+									+ '</tr>';
 						}
 					}
 
@@ -698,7 +730,8 @@ input.input-box {
 								+ '<th class=\"resultth\">نوع الحيازة</th>'
 								+ '<th class=\"resultth\">اسم المزرعة / الشركة</th>'
 								+ '<th class=\"resultth\"> رقم </th>' + '</tr>';
-						results = search_header + results
+						results = search_header
+								+ results
 								+ '</table></div><br><br><br><br><br><br><br><br>';
 						document.getElementById('searchResults').innerHTML = results;
 					} else
@@ -723,9 +756,7 @@ input.input-box {
 						strokeColor : color,
 						strokeWeight : 3
 					});
-				}
-				else
-				{
+				} else {
 					return ({
 						fillColor : 'transparent',
 						strokeColor : 'blue',
@@ -734,8 +765,22 @@ input.input-box {
 				}
 			});
 		}
-		
+
+		window.onload = function() {
+			var voucher = "${voucher}";
+			if (voucher) {
+				alert('I am in window.onload function');
+				alert("VoucherID: " + voucher.voucherID);
+				alert("Gov: " + voucher.gov);
+				alert("Site: " + voucher.site);
+				this.voucherBox();
+			} else {
+				alert(voucher);
+			}
+		};
+
 		function voucherBox() {
+			alert("I am in voucherBox function");
 			// Get the modal
 			var modal = document.getElementById('voucherModal');
 
@@ -762,9 +807,9 @@ input.input-box {
 				}
 			}
 		}
-		
+
 		function voucherAction() {
-			
+
 			var voucher_ID = document.getElementById('voucher_ID').value;
 			var gov = document.getElementById('gov').value;
 			var site = document.getElementById('site').value;
@@ -775,14 +820,25 @@ input.input-box {
 			var Amount = document.getElementById('Amount').value;
 			var Payment_Status = document.getElementById('Payment_Status').value;
 			var Issuing_document = document.getElementById('Issuing_document').value;
-			var Issuing_document_section = document.getElementById('Issuing_document_section').value;
+			var Issuing_document_section = document
+					.getElementById('Issuing_document_section').value;
 			var Issuing_Date = document.getElementById('Issuing_Date').value;
-			var Issuing_document_No = document.getElementById('Issuing_document_No').value;
+			var Issuing_document_No = document
+					.getElementById('Issuing_document_No').value;
 			var Notes = document.getElementById('Notes').value;
-			
-			alert("[voucher_ID:"+voucher_ID+", gov:"+gov+", site:"+site+", person_ID:"+person_ID+", Person_Name:"+Person_Name+", voucher_Date:"+voucher_Date+", Fees_Status:"+Fees_Status+", Amount:"+Amount+", Payment_Status:"+Payment_Status+", Issuing_document:"+Issuing_document+", Issuing_document_section:"+Issuing_document_section+", Issuing_Date:"+Issuing_Date+", Issuing_document_No:"+Issuing_document_No+", Notes:"+Notes+"]");
+
+			alert("[voucher_ID:" + voucher_ID + ", gov:" + gov + ", site:"
+					+ site + ", person_ID:" + person_ID + ", Person_Name:"
+					+ Person_Name + ", voucher_Date:" + voucher_Date
+					+ ", Fees_Status:" + Fees_Status + ", Amount:" + Amount
+					+ ", Payment_Status:" + Payment_Status
+					+ ", Issuing_document:" + Issuing_document
+					+ ", Issuing_document_section:" + Issuing_document_section
+					+ ", Issuing_Date:" + Issuing_Date
+					+ ", Issuing_document_No:" + Issuing_document_No
+					+ ", Notes:" + Notes + "]");
 		}
-		
+
 		function voucherPrint() {
 			window.print();
 		}
