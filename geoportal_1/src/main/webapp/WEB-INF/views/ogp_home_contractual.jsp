@@ -615,7 +615,17 @@ input.input-box {
 			location = location.replace("paramsvalues", id);
 			window.location.href = location;
 		}
-
+		
+		window.onload = function() {
+			voucherjson = '${voucher}';
+			if (voucherjson) {
+				var voucher = JSON.parse(voucherjson);
+				alert("Voucher ID: " + voucher.voucherID);
+				alert("Gov: " + voucher.gov);
+				alert("Site: " + voucher.site);
+			}
+		}
+		
 		function searchBox() {
 			// Get the modal
 			var modal = document.getElementById('myModal');
@@ -766,18 +776,6 @@ input.input-box {
 			});
 		}
 
-		window.onload = function() {
-			var voucher = "${voucher}";
-			if (voucher) {
-				alert('I am in window.onload function');
-				alert("VoucherID: " + voucher.voucherID);
-				alert("Gov: " + voucher.gov);
-				alert("Site: " + voucher.site);
-				this.voucherBox();
-			} else {
-				alert(voucher);
-			}
-		};
 
 		function voucherBox() {
 			alert("I am in voucherBox function");

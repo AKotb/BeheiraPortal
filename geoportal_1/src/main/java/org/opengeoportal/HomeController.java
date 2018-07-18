@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Controller
 public class HomeController {
 
@@ -47,22 +49,10 @@ public class HomeController {
 		System.out.println("ID: " + param);
 		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
 		Voucher voucher = dbConnection.getByVoucherID(param);
-
-		System.out.println("Voucher ID: " + voucher.getVoucherID());
-		System.out.println("Gov: " + voucher.getGov());
-		System.out.println("Site: " + voucher.getSite());
-		System.out.println("Farm ID: " + voucher.getFarmID());
-		System.out.println("Person Name: " + voucher.getPersonName());
-		System.out.println("Person ID: " + voucher.getPersonID());
-		System.out.println("Voucher Date: " + voucher.getVoucherDate());
-		System.out.println("Amount: " + voucher.getAmount());
-		System.out.println("Fees Status: " + voucher.getFeesStatus());
-		System.out.println("Notes: " + voucher.getNotes());
-		System.out.println("Payment Status: " + voucher.getPaymentStatus());
-		System.out.println("Issuing Document: " + voucher.getIssuingDocument());
-		System.out.println("Issuing Document Section: " + voucher.getIssuingDocumentSection());
-		System.out.println("Issuing Document No: " + voucher.getIssuingDocumentNo());
-		mav.addObject("voucher", voucher);
+		ObjectMapper mapper = new ObjectMapper();
+		String voucherInjson = mapper.writeValueAsString(voucher);
+		System.out.println("voucher in JSON: "+voucherInjson);
+		mav.addObject("voucher", voucherInjson);
 		return mav;
 	}
 }
