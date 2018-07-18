@@ -45,7 +45,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
-		ModelAndView mav = new ModelAndView("ogp_home_contractual");
+		ModelAndView mav = new ModelAndView("voucher_manager");
 		System.out.println("ID: " + param);
 		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
 		Voucher voucher = dbConnection.getByVoucherID(param);
