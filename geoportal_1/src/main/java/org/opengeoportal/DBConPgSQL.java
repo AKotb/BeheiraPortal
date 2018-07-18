@@ -40,7 +40,7 @@ public class DBConPgSQL {
 	public void establishDBConn(String dbDriverName, String dbName, String dbUserName, String dbPassword) {
 		try {
 			Class.forName(dbDriverName);
-			con = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/" + dbName, dbUserName, dbPassword);
+			con = DriverManager.getConnection("jdbc:postgresql://192.168.2.236:5432/" + dbName, dbUserName, dbPassword);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
