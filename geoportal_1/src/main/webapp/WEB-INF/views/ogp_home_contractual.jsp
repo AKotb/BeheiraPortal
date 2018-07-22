@@ -201,6 +201,13 @@ input.input-box {
 .resulttr:nth-child(odd) {
 	background-color: #cfdcdd;
 }
+
+.formheader{
+	background-color: #3d6266; 
+	color: #fcbb5b; 
+	font: bold 40px Arial;
+}
+
 </style>
 </head>
 
@@ -216,7 +223,7 @@ input.input-box {
 				<div class="modal-content">
 					<span class="searchClose">&times;</span>
 
-					<h1 style="color: #3d6266;" align="center">بحث عن قطعة أرض</h1>
+					<h1 class="formheader" align="center">بحث عن قطعة أرض</h1>
 
 					<div align="center">
 
