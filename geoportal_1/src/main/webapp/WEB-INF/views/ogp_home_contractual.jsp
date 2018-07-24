@@ -267,7 +267,7 @@ input.input-box {
 				</div>
 
 			</div>
-			<a href="javascript:voucherBox()" id="myvoucher"><img
+			<a href="#" ><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
 			<div id="voucherModal" class="modal">
@@ -556,7 +556,7 @@ input.input-box {
 											+ " مرئيات فضائية " + "</a>";
 									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
 											+ area_id
-											+ ");\' class=\'button\' id=\'myvoucher\'>"
+											+ ");\' class=\'button\'>"
 											+ " طلب إجراءات التقنين_المعاينة/الفحص "
 											+ "</a>";
 									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
@@ -663,7 +663,7 @@ input.input-box {
 
 		function searchAction() {
 			readTextFile(
-					'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db5.json',
+					'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json',
 					function(text) {
 					});
 		}
@@ -686,7 +686,11 @@ input.input-box {
 					var search_sid = document.getElementById('sid').value;
 					var search_phone = document.getElementById('phone').value;
 					var cond1, cond2, cond3, cond4, cond5;
-
+					
+					var My_Farm_Owner = "";
+					var My_Ownership = "";
+					var My_Farm_Name = "";
+					
 					for ( var val in mydata.features) {
 
 						cond1 = false;
@@ -717,7 +721,25 @@ input.input-box {
 							.toString().includes(search_phone);
 
 						if (cond1 || cond2 || cond3 || cond4 || cond5) {
-
+							
+							if (mydata.features[val].properties.Farm_Owner) {
+								My_Farm_Owner = mydata.features[val].properties.Farm_Owner;
+							} else {
+								My_Farm_Owner = "غير متوفر";
+							}
+							
+							if (mydata.features[val].properties.Ownership) {
+								My_Ownership = mydata.features[val].properties.Ownership;
+							} else {
+								My_Ownership = "غير متوفر";
+							}
+							
+							if (mydata.features[val].properties.Farm_Name) {
+								My_Farm_Name = mydata.features[val].properties.Farm_Name;
+							} else {
+								My_Farm_Name = "غير متوفر";
+							}
+							
 							num_of_items = num_of_items + 1;
 							results = results
 									+ '<tr class=\"resulttr\">'
@@ -727,11 +749,11 @@ input.input-box {
 									+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
 									+ '</td>'
 									+ '<td align=\"right\">'
-									+ mydata.features[val].properties.Farm_Owner/*OWNER*/
+									+ My_Farm_Owner/*OWNER*/
 									+ '</td>' + '<td align=\"right\">'
-									+ mydata.features[val].properties.Ownership
+									+ My_Ownership
 									+ '</td>' + '<td align=\"right\">'
-									+ mydata.features[val].properties.Farm_Name
+									+ My_Farm_Name
 									+ '</td>' + '<td>' + val + '</td>'
 									+ '</tr>';
 						}
@@ -783,35 +805,6 @@ input.input-box {
 			});
 		}
 
-
-		function voucherBox() {
-			alert("I am in voucherBox function");
-			// Get the modal
-			var modal = document.getElementById('voucherModal');
-
-			// Get the button that opens the modal
-			var btn = document.getElementById("myvoucher");
-
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("voucherClose")[0];
-
-			// When the user clicks the button, open the modal 
-			btn.onclick = function() {
-				modal.style.display = "block";
-			}
-
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() {
-				modal.style.display = "none";
-			}
-
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
-				}
-			}
-		}
 
 		function voucherAction() {
 

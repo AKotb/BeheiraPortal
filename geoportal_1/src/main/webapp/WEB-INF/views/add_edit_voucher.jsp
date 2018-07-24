@@ -236,83 +236,86 @@ input.readonly-box {
 	<div id="extra">
 		<div class="modal-content">
 
-			<h1 class="formheader" align="center">طلب إجراءات
-				التقنين_المعاينة/الفحص</h1>
 			<div align="center">
+				<h1 class="formheader" align="center">طلب تحصيل</h1>
 
-				<table border="0" align="center">
+				<table border="0" style="dir: rtl;">
 					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_gov" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">المحافظة</td>
-
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_voucher_ID" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">رقم الطلب</td>
-
+						<td align="right"><input class="input-box" type="text"
+							id="voucher_ID" value=""></td>
+						<td align="right" style="color: #3d6266;">رقم الطلب</td>
 					</tr>
 					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_person_ID" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">الرقم القومى</td>
-
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_site" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">الموقع</td>
+						<td align="right"><input class="input-box" type="text"
+							id="gov" value=""></td>
+						<td align="right" style="color: #3d6266;">المحافظة</td>
 					</tr>
 					<tr>
-						<td align="right"><p></p></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;"><p></p></td>
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_Person_Name" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">مقدم الطلب</td>
-
+						<td align="right"><input class="input-box" type="text"
+							id="site" value=""></td>
+						<td align="right" style="color: #3d6266;">الموقع</td>
 					</tr>
-
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="person_ID" value=""></td>
+						<td align="right" style="color: #3d6266;">الرقم القومى</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="Person_Name" value=""></td>
+						<td align="right" style="color: #3d6266;">مقدم الطلب</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="date"
+							id="voucher_Date" value=""></td>
+						<td align="right" style="color: #3d6266;">تاريخ الطلب</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="Fees_Status" value=""></td>
+						<td align="right" style="color: #3d6266;">نوع الرسوم</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="Amount" value=""></td>
+						<td align="right" style="color: #3d6266;">المبلغ</td>
+					</tr>
+					<tr>
+						<td align="right"><input type="checkbox" id="Payment_Status"
+							value="no"></td>
+						<td align="right" style="color: #3d6266;">تم الدفع</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="Issuing_document" value=""></td>
+						<td align="right" style="color: #3d6266;">جهة إصدار الوثيقة</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="Issuing_document_section" value=""></td>
+						<td align="right" style="color: #3d6266;">الفرع</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="date"
+							id="Issuing_Date" value=""></td>
+						<td align="right" style="color: #3d6266;">تاريخ الإصدار</td>
+					</tr>
+					<tr>
+						<td align="right"><input class="input-box" type="text"
+							id="Issuing_document_No" value=""></td>
+						<td align="right" style="color: #3d6266;">رقم الوثيقة</td>
+					</tr>
+					<tr>
+						<td align="right"><textarea class="voucherTA" rows="5"
+								id="Notes" value=""></textarea></td>
+						<td align="right" style="color: #3d6266;">ملاحظات</td>
+					</tr>
 				</table>
-				<br>
-				<br>
-				<a href='javascript:void(0);' onclick='voucher_add(id);' class='button' id='myvoucher'>إضافة
-					إيصال</a>
-				<br>
-				<br>
 
-				<div align="center">
-					<table border="0" align="center">
-						<tr>
-							<th class="resultth">إعدادات</th>
-							<th class="resultth">ملاحظات</th>
-							<th class="resultth">المبلغ</th>
-							<th class="resultth">الرسوم</th>
-							<th class="resultth">التاريخ</th>
-						</tr>
-						<tr class="resulttr">
-							<td align="right">
-								<button onclick="voucher_delete(id)" class="btnsearch"
-									id="voucher_remove">حذف</button>
-								<button onclick="voucher_edit(id)" class="btnsearch"
-									id="voucher_modify">تعديل</button>
-							</td>
-							<td align="right">Notes</td>
-							<td align="right">Fees Value</td>
-							<td align="right">Fees Type</td>
-							<td>Date</td>
-						</tr>
-						<tr class="resulttr">
-							<td align="right">
-								<button onclick="voucher_delete(id)" class="btnsearch"
-									id="voucher_remove">حذف</button>
-								<button onclick="voucher_edit(id)" class="btnsearch"
-									id="voucher_modify">تعديل</button>
-							</td>
-							<td align="right">Notes2</td>
-							<td align="right">Fees Value2</td>
-							<td align="right">Fees Type2</td>
-							<td>Date2</td>
-						</tr>
-					</table>
-					<br><br>
-				</div>
+				<h2 align="center">
+					<button onclick="voucherPrint()" class="btnsearch" id="voucherBtn">طباعة</button>
+					<button onclick="voucherAction()" class="btnsearch" id="voucherBtn">تحصيل</button>
+				</h2>
 
 			</div>
 
@@ -324,41 +327,95 @@ input.readonly-box {
 			voucherjson = '${voucher}';
 			if (voucherjson) {
 				var voucher = JSON.parse(voucherjson);
-				//alert("Voucher ID: " + voucher.voucherID);
-				//alert("Gov: " + voucher.gov);
 
 				if (voucher.voucherID) {
-					document.getElementById("vm_voucher_ID").value = voucher.voucherID;
+					document.getElementById("voucher_ID").value = voucher.voucherID;
 				} else {
-					document.getElementById("vm_voucher_ID").value = "غير متوفر";
+					document.getElementById("voucher_ID").value = "غير متوفر";
 				}
 
 				if (voucher.gov) {
-					document.getElementById("vm_gov").value = voucher.gov;
+					document.getElementById("gov").value = voucher.gov;
 				} else {
-					document.getElementById("vm_gov").value = "غير متوفر";
+					document.getElementById("gov").value = "غير متوفر";
 				}
 
 				if (voucher.site) {
-					document.getElementById("vm_site").value = voucher.site;
+					document.getElementById("site").value = voucher.site;
 				} else {
-					document.getElementById("vm_site").value = "غير متوفر";
+					document.getElementById("site").value = "غير متوفر";
 				}
 
 				if (voucher.personID) {
-					document.getElementById("vm_person_ID").value = voucher.personID;
+					document.getElementById("person_ID").value = voucher.personID;
 				} else {
-					document.getElementById("vm_person_ID").value = "غير متوفر";
+					document.getElementById("person_ID").value = "غير متوفر";
 				}
 
 				if (voucher.personName) {
-					document.getElementById("vm_person_Name").value = voucher.personName;
+					document.getElementById("person_Name").value = voucher.personName;
 				} else {
-					document.getElementById("vm_person_Name").value = "غير متوفر";
+					document.getElementById("person_Name").value = "غير متوفر";
+				}
+				
+				if (voucher.voucherID) {
+					document.getElementById("voucher_Date").value = voucher.voucherID;
+				} else {
+					document.getElementById("voucher_Date").value = "غير متوفر";
+				}
+
+				if (voucher.personID) {
+					document.getElementById("Fees_Status").value = voucher.personID;
+				} else {
+					document.getElementById("Fees_Status").value = "غير متوفر";
+				}
+				
+				if (voucher.gov) {
+					document.getElementById("Amount").value = voucher.gov;
+				} else {
+					document.getElementById("Amount").value = "غير متوفر";
+				}
+
+				if (voucher.site) {
+					document.getElementById("Payment_Status").value = voucher.site;
+				} else {
+					document.getElementById("Payment_Status").value = "غير متوفر";
+				}
+
+				if (voucher.personID) {
+					document.getElementById("Issuing_document").value = voucher.personID;
+				} else {
+					document.getElementById("Issuing_document").value = "غير متوفر";
+				}
+
+				if (voucher.personName) {
+					document.getElementById("Issuing_document_section").value = voucher.personName;
+				} else {
+					document.getElementById("Issuing_document_section").value = "غير متوفر";
+				}
+				
+				if (voucher.voucherID) {
+					document.getElementById("Issuing_Date").value = voucher.voucherID;
+				} else {
+					document.getElementById("Issuing_Date").value = "غير متوفر";
+				}
+
+				if (voucher.gov) {
+					document.getElementById("Issuing_document_No").value = voucher.gov;
+				} else {
+					document.getElementById("Issuing_document_No").value = "غير متوفر";
+				}
+
+				if (voucher.site) {
+					document.getElementById("Notes").value = voucher.site;
+				} else {
+					document.getElementById("Notes").value = "غير متوفر";
 				}
 
 			}
 		}
+
+		
 
 		function voucherAction() {
 
@@ -395,20 +452,6 @@ input.readonly-box {
 			window.print();
 		}
 
-		function voucher_delete(id) {
-			//voucher.voucherID;
-			alert("inside voucher delete process");
-		}
-
-		function voucher_edit(id) {
-			//voucher.voucherID;
-			alert("inside voucher edit process");
-		}
-
-		function voucher_add(id) {
-			//voucher.voucherID;
-			alert("inside voucher add process");
-		}
 	</script>
 
 	<!-- SCRIPTS -->
