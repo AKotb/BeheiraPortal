@@ -230,12 +230,59 @@
 			map.setCenter(new google.maps.LatLng(lat, lng));
 			infowindow = new google.maps.InfoWindow();
 			map.data.setStyle(function(feature) {
-				var color = 'blue';
-				return ({
-					fillColor : color,
-					strokeColor : color,
-					strokeWeight : 2
-				});
+				var color = 'green';
+				var enname = feature.getProperty('EN_Name');
+				var type = feature.getGeometry('type');
+				//alert("type: "+type);
+				if(type === 'LineString'){
+					return ({
+						fillColor : 'red',
+						strokeColor : 'red',
+						strokeWeight : 2
+					});
+				}
+				if(enname === 'Urban Area' || enname === 'Urban'){
+					return ({
+						fillColor : 'brown',
+						strokeColor : 'brown',
+						strokeWeight : 2
+					});
+				}
+				if(enname === 'Reclaimed Land'){
+					return ({
+						fillColor : 'yellow',
+						strokeColor : 'yellow',
+						strokeWeight : 2
+					});
+				}
+				if(enname === 'Reclaimed Land Non Vegetated'){
+					return ({
+						fillColor : 'gray',
+						strokeColor : 'gray',
+						strokeWeight : 2
+					});
+				}
+				if(enname === 'Crops Under Tunel' || enname === 'Crop land' || enname === 'Crops Under Chaneel'){
+					return ({
+						fillColor : 'blue',
+						strokeColor : 'blue',
+						strokeWeight : 2
+					});
+				}
+				if(enname === 'Non Cultivated'){
+					return ({
+						fillColor : 'black',
+						strokeColor : 'black',
+						strokeWeight : 2
+					});
+				}
+				else{
+					return ({
+						fillColor : color,
+						strokeColor : color,
+						strokeWeight : 2
+					});
+				}
 			});
 			map.data.addListener('click', function(event) {
 			});
