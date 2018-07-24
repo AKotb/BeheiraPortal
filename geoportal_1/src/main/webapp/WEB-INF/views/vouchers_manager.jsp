@@ -272,47 +272,12 @@ input.readonly-box {
 				</table>
 				<br>
 				<br>
-				<a href='javascript:void(0);' onclick='voucher_add(id);' class='button' id='myvoucher'>إضافة
+				<a href='javascript:void(0);' onclick='voucher_add(id);' class='btnsearch' id='myvoucher'>إضافة
 					إيصال</a>
 				<br>
 				<br>
 
-				<div align="center">
-					<table border="0" align="center">
-						<tr>
-							<th class="resultth">إعدادات</th>
-							<th class="resultth">ملاحظات</th>
-							<th class="resultth">المبلغ</th>
-							<th class="resultth">الرسوم</th>
-							<th class="resultth">التاريخ</th>
-						</tr>
-						<tr class="resulttr">
-							<td align="right">
-								<button onclick="voucher_delete(id)" class="btnsearch"
-									id="voucher_remove">حذف</button>
-								<button onclick="voucher_edit(id)" class="btnsearch"
-									id="voucher_modify">تعديل</button>
-							</td>
-							<td align="right">Notes</td>
-							<td align="right">Fees Value</td>
-							<td align="right">Fees Type</td>
-							<td>Date</td>
-						</tr>
-						<tr class="resulttr">
-							<td align="right">
-								<button onclick="voucher_delete(id)" class="btnsearch"
-									id="voucher_remove">حذف</button>
-								<button onclick="voucher_edit(id)" class="btnsearch"
-									id="voucher_modify">تعديل</button>
-							</td>
-							<td align="right">Notes2</td>
-							<td align="right">Fees Value2</td>
-							<td align="right">Fees Type2</td>
-							<td>Date2</td>
-						</tr>
-					</table>
-					<br><br>
-				</div>
+				<div align="center" id='voucher_list'></div>
 
 			</div>
 
@@ -322,42 +287,147 @@ input.readonly-box {
 	<script>
 		window.onload = function() {
 			voucherjson = '${vouchers}';
+			var num_of_voucher = 0;
 			if (voucherjson) {
-				var voucher = JSON.parse(voucherjson);
+				var vouchers = JSON.parse(voucherjson);
+				var voucher_notes = "";
+				var voucher_amount = "";
+				var voucher_feesStatus = "";
+				var voucher_voucherDate = "";
+				var voucher_paymentStatus = "";
+				var voucher_issuingDocument = "";
+				var voucher_issuingDocumentSection = "";
+				var voucher_issuingDocumentNo = "";
+				
+				
+				var voucher_header = '<table border=\"0\" align=\"center\"><tr>'
+					+'<th class=\"resultth\">إعدادات</th>'
+					+'<th class=\"resultth\">رقم الوثيقة</th>'
+					+'<th class=\"resultth\">الفرع</th>'
+					+'<th class=\"resultth\">جهة إصدار الوثيقة</th>'
+					+'<th class=\"resultth\">تم الدفع</th>'
+					+'<th class=\"resultth\">ملاحظات</th>'
+					+'<th class=\"resultth\">المبلغ</th>'
+					+'<th class=\"resultth\">الرسوم</th>'
+					+'<th class=\"resultth\">التاريخ</th>'
+					+'</tr>';
+				var voucher_list_html = "";
 				//alert("Voucher ID: " + voucher.voucherID);
 				//alert("Gov: " + voucher.gov);
+				
+				for ( var i in vouchers) {
 
-				if (voucher.voucherID) {
-					document.getElementById("vm_voucher_ID").value = voucher.voucherID;
-				} else {
-					document.getElementById("vm_voucher_ID").value = "غير متوفر";
+					num_of_voucher = num_of_voucher + 1;
+					
+					if (vouchers[i].voucherID) {
+						document.getElementById("vm_voucher_ID").value = vouchers[i].voucherID;
+					} else {
+						document.getElementById("vm_voucher_ID").value = "غير متوفر";
+					}
+	
+					if (vouchers[i].gov) {
+						document.getElementById("vm_gov").value = vouchers[i].gov;
+					} else {
+						document.getElementById("vm_gov").value = "غير متوفر";
+					}
+	
+					if (vouchers[i].site) {
+						document.getElementById("vm_site").value = vouchers[i].site;
+					} else {
+						document.getElementById("vm_site").value = "غير متوفر";
+					}
+	
+					if (vouchers[i].personID) {
+						document.getElementById("vm_person_ID").value = vouchers[i].personID;
+					} else {
+						document.getElementById("vm_person_ID").value = "غير متوفر";
+					}
+	
+					if (vouchers[i].personName) {
+						document.getElementById("vm_Person_Name").value = vouchers[i].personName;
+					} else {
+						document.getElementById("vm_Person_Name").value = "غير متوفر";
+					}
+					
+					if (vouchers[i].notes) {
+						voucher_notes = vouchers[i].notes;
+					} else {
+						voucher_notes = "غير متوفر";
+					}
+					
+					if (vouchers[i].amount) {
+						voucher_amount = vouchers[i].amount;
+					} else {
+						voucher_amount = "غير متوفر";
+					}
+					
+					if (vouchers[i].feesStatus) {
+						voucher_feesStatus = vouchers[i].feesStatus;
+					} else {
+						voucher_feesStatus = "غير متوفر";
+					}
+					
+					if (vouchers[i].voucherDate) {
+						voucher_voucherDate = vouchers[i].voucherDate;
+					} else {
+						voucher_voucherDate = "غير متوفر";
+					}
+					
+					if (vouchers[i].paymentStatus) {
+						voucher_paymentStatus = vouchers[i].paymentStatus;
+					} else {
+						voucher_paymentStatus = "غير متوفر";
+					}
+					
+					if (vouchers[i].issuingDocument) {
+						voucher_issuingDocument = vouchers[i].issuingDocument;
+					} else {
+						voucher_issuingDocument = "غير متوفر";
+					}
+					
+					if (vouchers[i].issuingDocumentSection) {
+						voucher_issuingDocumentSection = vouchers[i].issuingDocumentSection;
+					} else {
+						voucher_issuingDocumentSection = "غير متوفر";
+					}
+					
+					if (vouchers[i].issuingDocumentNo) {
+						voucher_issuingDocumentNo = vouchers[i].issuingDocumentNo;
+					} else {
+						voucher_issuingDocumentNo = "غير متوفر";
+					}
+									
+					voucher_list_html = voucher_list_html + '<tr class=\"resulttr\">'
+						+ '<td align=\"right\">'
+						+ '<button onclick=\"voucher_delete('
+						+ vouchers[i].voucherID
+						+ ')\" class=\"btnsearch\" id=\"voucher_delete\">حذف</button>'
+						+ '<button onclick=\"voucher_edit('
+						+ vouchers[i].voucherID
+						+ ')\" class=\"btnsearch\" id=\"voucher_edit\">تعديل</button>'
+						+ '</td>'
+						+ '<td>' + voucher_issuingDocumentNo + '</td>'
+						+ '<td>' + voucher_issuingDocumentSection + '</td>'
+						+ '<td>' + voucher_issuingDocument + '</td>'
+						+ '<td>' + voucher_paymentStatus + '</td>'
+						+ '<td align=\"right\">' + voucher_notes + '</td>' 
+						+ '<td align=\"right\">' + voucher_amount + '</td>' 
+						+ '<td align=\"right\">' + voucher_feesStatus + '</td>' 
+						+ '<td>' + voucher_voucherDate + '</td>'
+						+ '</tr>';
+					   
 				}
-
-				if (voucher.gov) {
-					document.getElementById("vm_gov").value = voucher.gov;
-				} else {
-					document.getElementById("vm_gov").value = "غير متوفر";
-				}
-
-				if (voucher.site) {
-					document.getElementById("vm_site").value = voucher.site;
-				} else {
-					document.getElementById("vm_site").value = "غير متوفر";
-				}
-
-				if (voucher.personID) {
-					document.getElementById("vm_person_ID").value = voucher.personID;
-				} else {
-					document.getElementById("vm_person_ID").value = "غير متوفر";
-				}
-
-				if (voucher.personName) {
-					document.getElementById("vm_person_Name").value = voucher.personName;
-				} else {
-					document.getElementById("vm_person_Name").value = "غير متوفر";
-				}
-
+				voucher_list_html = voucher_header + voucher_list_html + "</table>";
+				
 			}
+			if(num_of_voucher > 0)
+				{
+					document.getElementById('voucher_list').innerHTML = voucher_list_html;
+				}
+			else
+				{
+					document.getElementById('voucher_list').innerHTML = '<div align=\"center\"><h3>عفوا ، لا توجد ايصالات</h3></div>';
+				}
 		}
 
 		function voucherAction() {
