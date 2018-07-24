@@ -1,5 +1,7 @@
 package org.opengeoportal;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -46,13 +48,13 @@ public class HomeController {
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
-		System.out.println("ID: " + param);
+		System.out.println("Area ID: " + param);
 		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
-		Voucher voucher = dbConnection.getByVoucherID(param);
+		List<Voucher> vouchers = dbConnection.getVouchersByFarmID(param);
 		ObjectMapper mapper = new ObjectMapper();
-		String voucherInjson = mapper.writeValueAsString(voucher);
-		System.out.println("voucher in JSON: "+voucherInjson);
-		mav.addObject("voucher", voucherInjson);
+		String vouchersInjson = mapper.writeValueAsString(vouchers);
+		System.out.println("vouchers in JSON: "+vouchersInjson);
+		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}
 }

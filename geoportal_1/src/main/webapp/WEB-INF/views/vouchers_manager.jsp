@@ -321,7 +321,7 @@ input.readonly-box {
 	</div>
 	<script>
 		window.onload = function() {
-			voucherjson = '${voucher}';
+			voucherjson = '${vouchers}';
 			if (voucherjson) {
 				var voucher = JSON.parse(voucherjson);
 				//alert("Voucher ID: " + voucher.voucherID);
