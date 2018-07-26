@@ -151,12 +151,10 @@
 			    "opacity": 0.65
 		};
 		
-		var infowindow;
-		
+		var kyObject;
+		var map = L.map('map').setView([lat, lng], 15);
+		var basemap = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] }).addTo(map);
 		function initMap() {
-			var map = L.map('map').setView([lat, lng], 15);
-			var basemap = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] }).addTo(map);
-			
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Building_project.json')) {
 				var Building_project = $.ajax({
@@ -169,7 +167,8 @@
 		            }
 		        })
 		        $.when(Building_project).done(function() {
-		            var kyBuilding_project = L.geoJSON(Building_project.responseJSON, { style: buildingprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	var kyBuilding_project = L.geoJSON(Building_project.responseJSON, { style: buildingprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyBuilding_project;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -184,7 +183,8 @@
 		            }
 		        })
 		        $.when(Reclaimed_Notplanted_projected).done(function() {
-		            var kyReclaimed_Notplanted_projected = L.geoJSON(Reclaimed_Notplanted_projected.responseJSON, { style: reclaimednotplantedprojectedstyle }).addTo(map);
+		        	var kyReclaimed_Notplanted_projected = L.geoJSON(Reclaimed_Notplanted_projected.responseJSON, { style: reclaimednotplantedprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyReclaimed_Notplanted_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -199,7 +199,8 @@
 		            }
 		        })
 		        $.when(crops_projected).done(function() {
-		            var kycrops_projected = L.geoJSON(crops_projected.responseJSON, { style: cropsprojectedstyle }).addTo(map);
+		        	var kycrops_projected = L.geoJSON(crops_projected.responseJSON, { style: cropsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kycrops_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -214,7 +215,8 @@
 		            }
 		        })
 		        $.when(roads_Project).done(function() {
-		            var kyroads_Project = L.geoJSON(roads_Project.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        	var kyroads_Project = L.geoJSON(roads_Project.responseJSON, { style: roadsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyroads_Project;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -229,7 +231,8 @@
 		            }
 		        })
 		        $.when(Building_projected).done(function() {
-		            var kyBuilding_projected = L.geoJSON(Building_projected.responseJSON, { style: buildingprojectedstyle }).addTo(map);
+		        	var kyBuilding_projected = L.geoJSON(Building_projected.responseJSON, { style: buildingprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyBuilding_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -244,7 +247,8 @@
 		            }
 		        })
 		        $.when(Crops_projected).done(function() {
-		            var kyCrops_projected = L.geoJSON(Crops_projected.responseJSON, { style: cropsprojectedstyle }).addTo(map);
+		        	var kyCrops_projected = L.geoJSON(Crops_projected.responseJSON, { style: cropsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyCrops_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -259,7 +263,8 @@
 		            }
 		        })
 		        $.when(Reclaimed_projected).done(function() {
-		            var kyReclaimed_projected = L.geoJSON(Reclaimed_projected.responseJSON, { style: reclaimedprojectedstyle }).addTo(map);
+		        	var kyReclaimed_projected = L.geoJSON(Reclaimed_projected.responseJSON, { style: reclaimedprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyReclaimed_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -274,7 +279,8 @@
 		            }
 		        })
 		        $.when(Roads_projected).done(function() {
-		            var kyRoads_projected = L.geoJSON(Roads_projected.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        	var kyRoads_projected = L.geoJSON(Roads_projected.responseJSON, { style: roadsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyRoads_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -289,7 +295,8 @@
 		            }
 		        })
 		        $.when(Field_Crops_projected).done(function() {
-		            var kyField_Crops_projected = L.geoJSON(Field_Crops_projected.responseJSON, { style: fieldcropsprojectedstyle }).addTo(map);
+		        	var kyField_Crops_projected = L.geoJSON(Field_Crops_projected.responseJSON, { style: fieldcropsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyField_Crops_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -304,7 +311,8 @@
 		            }
 		        })
 		        $.when(Land_notused_projected).done(function() {
-		            var kyLand_notused_projected = L.geoJSON(Land_notused_projected.responseJSON, { style: landnotusedprojectedstyle }).addTo(map);
+		        	var kyLand_notused_projected = L.geoJSON(Land_notused_projected.responseJSON, { style: landnotusedprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyLand_notused_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -319,7 +327,8 @@
 		            }
 		        })
 		        $.when(Roads_projcted).done(function() {
-		            var kyRoads_projcted = L.geoJSON(Roads_projcted.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        	var kyRoads_projcted = L.geoJSON(Roads_projcted.responseJSON, { style: roadsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyRoads_projcted;
 		        });
 			}
 			if (200 == urlExists('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/'
@@ -334,7 +343,8 @@
 		            }
 		        })
 		        $.when(FieldCrops_projected).done(function() {
-		            var kyFieldCrops_projected = L.geoJSON(FieldCrops_projected.responseJSON, { style: fieldcropsprojectedstyle }).addTo(map);
+		        	var kyFieldCrops_projected = L.geoJSON(FieldCrops_projected.responseJSON, { style: fieldcropsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyFieldCrops_projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -349,7 +359,8 @@
 		            }
 		        })
 		        $.when(Building_Projected).done(function() {
-		            var kyBuilding_Projected = L.geoJSON(Building_Projected.responseJSON, { style: buildingprojectedstyle }).addTo(map);
+		        	var kyBuilding_Projected = L.geoJSON(Building_Projected.responseJSON, { style: buildingprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyBuilding_Projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -364,7 +375,8 @@
 		            }
 		        })
 		        $.when(FieldCrops_Projected).done(function() {
-		            var kyFieldCrops_Projected = L.geoJSON(FieldCrops_Projected.responseJSON, { style: fieldcropsprojectedstyle }).addTo(map);
+		        	var kyFieldCrops_Projected = L.geoJSON(FieldCrops_Projected.responseJSON, { style: fieldcropsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyFieldCrops_Projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -379,7 +391,8 @@
 		            }
 		        })
 		        $.when(Crops_Projected).done(function() {
-		            var kyCrops_Projected = L.geoJSON(Crops_Projected.responseJSON, { style: cropsprojectedstyle }).addTo(map);
+		        	var kyCrops_Projected = L.geoJSON(Crops_Projected.responseJSON, { style: cropsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyCrops_Projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -394,7 +407,8 @@
 		            }
 		        })
 		        $.when(Reclaimed_Projected).done(function() {
-		            var kyReclaimed_Projected = L.geoJSON(Reclaimed_Projected.responseJSON, { style: reclaimedprojectedstyle }).addTo(map);
+		        	var kyReclaimed_Projected = L.geoJSON(Reclaimed_Projected.responseJSON, { style: reclaimedprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyReclaimed_Projected;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -409,7 +423,8 @@
 		            }
 		        })
 		        $.when(Reclaimed_Project).done(function() {
-		            var kyReclaimed_Project = L.geoJSON(Reclaimed_Project.responseJSON, { style: reclaimedprojectedstyle }).addTo(map);
+		        	var kyReclaimed_Project = L.geoJSON(Reclaimed_Project.responseJSON, { style: reclaimedprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyReclaimed_Project;
 		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
@@ -424,77 +439,10 @@
 		            }
 		        })
 		        $.when(Roads_Projected).done(function() {
-		            var kyRoads_Projected = L.geoJSON(Roads_Projected.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        	var kyRoads_Projected = L.geoJSON(Roads_Projected.responseJSON, { style: roadsprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        	kyObject = kyRoads_Projected;
 		        });
 			}
-			infowindow = new google.maps.InfoWindow();
-			/* map.data.addListener('mouseover',
-							function(event) {
-								map.data.revertStyle();
-								map.data.overrideStyle(event.feature, {
-									strokeWeight : 4,
-									fillColor : 'yellow'
-								});
-
-								var arname = event.feature
-										.getProperty('Ar_Name');
-								if (arname) {
-									arname = arname;
-								} else {
-									arname = "غير متوفر";
-								}
-								var enname = event.feature
-										.getProperty('EN_Name');
-								if (enname) {
-									enname = enname;
-								} else {
-									enname = "غير متوفر";
-								}
-								var area = event.feature.getProperty('Area');
-								var feddan;
-								var qirat;
-								var sahm;
-								if (area) {
-									area = area;
-									var areaspace = area.toString();
-									var fedarr = areaspace.split(".");
-									feddan = fedarr[0];
-									var frac_fed = areaspace - fedarr[0];
-									var qiratstr = (frac_fed * 24).toString();
-									var qiratarr = qiratstr.split(".");
-									qirat = qiratarr[0];
-									var frac_qirat = qiratstr - qirat;
-									var sahmstr = (frac_qirat * 24).toString();
-									var sahmarr = sahmstr.split(".");
-									sahm = sahmarr[0];
-								} else {
-									area = "0";
-								}
-
-								var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
-										+ "بيانات قطعة الأرض"
-										+ "</h1><br>"
-										+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
-										+ arname
-										+ "</td><td class=\'rightcolumn\'>الاسم باللغة العربية</td></tr><tr><td class=\'td\'>"
-										+ enname
-										+ "</td><td class=\'rightcolumn\'>الاسم باللغة الانجليزية</td></tr><tr><td class=\'td\'><table class=\"innertable\"><tr><td class=\'td\'>س</td><td class=\'td\'>ط</td><td class=\'td\'>ف</td></tr><tr><td class=\'td\'>"
-										+ sahm
-										+ "</td><td class=\'td\'>"
-										+ qirat
-										+ "</td><td class=\'td\'>"
-										+ feddan
-										+ "</td></tr></table>"
-										+ "</td><td class=\'rightcolumn\'>المساحة</td></tr></table><br>"
-										+ "</div>";
-
-								infowindow.setContent(content);
-								infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
-								infowindow.setOptions({
-									pixelOffset : new google.maps.Size(0, -30)
-								});
-								infowindow.open(map);
-							}); */
 		}
 
 		function urlExists(checkedurl) {
@@ -505,6 +453,82 @@
 			})
 			return http.status;
 			// this will return 200 on success, and 0 or negative value on error
+		}
+		
+		function highlightFeature(e) {
+			var layer = e.target;
+			layer.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+				layer.bringToFront();
+			}
+			var arname = layer.feature.properties.Ar_Name;
+			if (arname) {
+				arname = arname;
+			} else {
+				arname = "غير متوفر";
+			}
+			var enname = layer.feature.properties.EN_Name;
+			if (enname) {
+				enname = enname;
+			} else {
+				enname = "غير متوفر";
+			}
+			var area = layer.feature.properties.Area;
+			var feddan;
+			var qirat;
+			var sahm;
+			if (area) {
+				area = area;
+				var areaspace = area.toString();
+				var fedarr = areaspace.split(".");
+				feddan = fedarr[0];
+				var frac_fed = areaspace - fedarr[0];
+				var qiratstr = (frac_fed * 24).toString();
+				var qiratarr = qiratstr.split(".");
+				qirat = qiratarr[0];
+				var frac_qirat = qiratstr - qirat;
+				var sahmstr = (frac_qirat * 24).toString();
+				var sahmarr = sahmstr.split(".");
+				sahm = sahmarr[0];
+			} else {
+				area = "0";
+			}
+			var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
+				+ "بيانات قطعة الأرض"
+				+ "</h1><br>"
+				+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
+				+ arname
+				+ "</td><td class=\'rightcolumn\'>الاسم باللغة العربية</td></tr><tr><td class=\'td\'>"
+				+ enname
+				+ "</td><td class=\'rightcolumn\'>الاسم باللغة الانجليزية</td></tr><tr><td class=\'td\'><table class=\"innertable\"><tr><td class=\'td\'>س</td><td class=\'td\'>ط</td><td class=\'td\'>ف</td></tr><tr><td class=\'td\'>"
+				+ sahm
+				+ "</td><td class=\'td\'>"
+				+ qirat
+				+ "</td><td class=\'td\'>"
+				+ feddan
+				+ "</td></tr></table>"
+				+ "</td><td class=\'rightcolumn\'>المساحة</td></tr></table><br>"
+				+ "</div>";
+			var currlat = e.latlng.lat;
+			var currlng = e.latlng.lng;
+			var latlng = L.latLng(currlat, currlng);
+	        var popup = L.popup({maxWidth : 550, maxHeight: 300}).setLatLng(latlng).setContent(content).openOn(map);
+		}
+		
+		function resetHighlight(e) {
+			kyObject.resetStyle(e.target);
+		}
+		
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight
+			});
 		}
 	</script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
