@@ -1,24 +1,29 @@
 <!DOCTYPE HTML>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
+
 <title>EL-BEHIRA GOVERNORATE</title>
+
+<!-- meta tags -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="Tooplate">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <!-- CSS -->
-<link rel="stylesheet"
-	href="resources/css/css/css/css/tooplate-style.css">
+<link rel="stylesheet"	href="resources/css/css/css/css/tooplate-style.css">
+
+<!-- CSS for Leaflet library -->
+<link rel="stylesheet" href="resources/leaflet/leaflet.css" />
+
+<!-- inline styles -->
 <style>
-#extra {
+#map {
 	height: 550px;
 	width: 100%;
 }
@@ -100,196 +105,330 @@
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
-	<div id="extra"></div>
+	<div id="map"></div>
+	<!-- Leaflet library -->
+<script src="resources/jquery/jquery-3.1.1.min.js"></script>
+<script src="resources/leaflet/leaflet.js"></script>
 	<script>
+	
 		id = "${polygonID}";
 		lat = "${lat}";
 		lng = "${lng}";
-		var map;
+		
+		var buildingprojectedstyle = {
+			    "color": "#A52A2A",		//brown
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		var reclaimednotplantedprojectedstyle = {
+			    "color": "#000000",		//black
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		var cropsprojectedstyle = {
+			    "color": "#008000",		//green
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		var roadsprojectedstyle = {
+			    "color": "#FF0000",		//red
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		var reclaimedprojectedstyle = {
+			    "color": "#FFFF00",		//yellow
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		var fieldcropsprojectedstyle = {
+			    "color": "#0000ff",		//blue
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		var landnotusedprojectedstyle = {
+			    "color": "#A9A9A9",		//grey
+			    "weight": 5,
+			    "opacity": 0.65
+		};
+		
 		var infowindow;
+		
 		function initMap() {
-			var Egypt = {
-				lat : 30.2519715,
-				lng : 30.2761235
-			};
-			map = new google.maps.Map(document.getElementById('extra'), {
-				zoom : 11,
-				center : Egypt,
-				mapTypeId : 'hybrid'
-			});
+			var map = L.map('map').setView([lat, lng], 15);
+			var basemap = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] }).addTo(map);
+			
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Building_project.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Building_project.json');
+				var Building_project = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Building_project.json',
+		            dataType: "json",
+		            success: console.log("Building_project data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Building_project).done(function() {
+		            var kyBuilding_project = L.geoJSON(Building_project.responseJSON, { style: buildingprojectedstyle, onEachFeature: onEachFeature }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Reclaimed_Notplanted_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Reclaimed_Notplanted_projected.json');
+				var Reclaimed_Notplanted_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Reclaimed_Notplanted_projected.json',
+		            dataType: "json",
+		            success: console.log("Reclaimed_Notplanted_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Reclaimed_Notplanted_projected).done(function() {
+		            var kyReclaimed_Notplanted_projected = L.geoJSON(Reclaimed_Notplanted_projected.responseJSON, { style: reclaimednotplantedprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/crops_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/crops_projected.json');
+				var crops_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/crops_projected.json',
+		            dataType: "json",
+		            success: console.log("crops_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(crops_projected).done(function() {
+		            var kycrops_projected = L.geoJSON(crops_projected.responseJSON, { style: cropsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/roads_Project.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/roads_Project.json');
+				var roads_Project = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/roads_Project.json',
+		            dataType: "json",
+		            success: console.log("roads_Project data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(roads_Project).done(function() {
+		            var kyroads_Project = L.geoJSON(roads_Project.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Building_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Building_projected.json');
+				var Building_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Building_projected.json',
+		            dataType: "json",
+		            success: console.log("Building_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Building_projected).done(function() {
+		            var kyBuilding_projected = L.geoJSON(Building_projected.responseJSON, { style: buildingprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Crops_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Crops_projected.json');
+				var Crops_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Crops_projected.json',
+		            dataType: "json",
+		            success: console.log("Crops_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Crops_projected).done(function() {
+		            var kyCrops_projected = L.geoJSON(Crops_projected.responseJSON, { style: cropsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Reclaimed_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Reclaimed_projected.json');
+				var Reclaimed_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Reclaimed_projected.json',
+		            dataType: "json",
+		            success: console.log("Reclaimed_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Reclaimed_projected).done(function() {
+		            var kyReclaimed_projected = L.geoJSON(Reclaimed_projected.responseJSON, { style: reclaimedprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Roads_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Roads_projected.json');
+				var Roads_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Roads_projected.json',
+		            dataType: "json",
+		            success: console.log("Roads_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Roads_projected).done(function() {
+		            var kyRoads_projected = L.geoJSON(Roads_projected.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Field_Crops_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Field_Crops_projected.json');
+				var Field_Crops_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Field_Crops_projected.json',
+		            dataType: "json",
+		            success: console.log("Field_Crops_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Field_Crops_projected).done(function() {
+		            var kyField_Crops_projected = L.geoJSON(Field_Crops_projected.responseJSON, { style: fieldcropsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Land_notused_projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Land_notused_projected.json');
+				var Land_notused_projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Land_notused_projected.json',
+		            dataType: "json",
+		            success: console.log("Land_notused_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Land_notused_projected).done(function() {
+		            var kyLand_notused_projected = L.geoJSON(Land_notused_projected.responseJSON, { style: landnotusedprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Roads_projcted.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Roads_projcted.json');
+				var Roads_projcted = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Roads_projcted.json',
+		            dataType: "json",
+		            success: console.log("Roads_projcted data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Roads_projcted).done(function() {
+		            var kyRoads_projcted = L.geoJSON(Roads_projcted.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/'
 					+ id + '/FieldCrops_projected.json')) {
-				map.data
-						.loadGeoJson('https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/'
-								+ id + '/FieldCrops_projected.json');
+				var FieldCrops_projected = $.ajax({
+		            url: 'https://github.com/AKotb/BeheiraPortal/blame/master/geoportal_1/src/main/resources/json/'
+						+ id + '/FieldCrops_projected.json',
+		            dataType: "json",
+		            success: console.log("FieldCrops_projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(FieldCrops_projected).done(function() {
+		            var kyFieldCrops_projected = L.geoJSON(FieldCrops_projected.responseJSON, { style: fieldcropsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Building_Projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Building_Projected.json');
+				var Building_Projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Building_Projected.json',
+		            dataType: "json",
+		            success: console.log("Building_Projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Building_Projected).done(function() {
+		            var kyBuilding_Projected = L.geoJSON(Building_Projected.responseJSON, { style: buildingprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/FieldCrops_Projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/FieldCrops_Projected.json');
+				var FieldCrops_Projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/FieldCrops_Projected.json',
+		            dataType: "json",
+		            success: console.log("FieldCrops_Projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(FieldCrops_Projected).done(function() {
+		            var kyFieldCrops_Projected = L.geoJSON(FieldCrops_Projected.responseJSON, { style: fieldcropsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Crops_Projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Crops_Projected.json');
+				var Crops_Projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Crops_Projected.json',
+		            dataType: "json",
+		            success: console.log("Crops_Projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Crops_Projected).done(function() {
+		            var kyCrops_Projected = L.geoJSON(Crops_Projected.responseJSON, { style: cropsprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Reclaimed_Projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Reclaimed_Projected.json');
+				var Reclaimed_Projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Reclaimed_Projected.json',
+		            dataType: "json",
+		            success: console.log("Reclaimed_Projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Reclaimed_Projected).done(function() {
+		            var kyReclaimed_Projected = L.geoJSON(Reclaimed_Projected.responseJSON, { style: reclaimedprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Reclaimed_Project.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Reclaimed_Project.json');
+				var Reclaimed_Project = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Reclaimed_Project.json',
+		            dataType: "json",
+		            success: console.log("Reclaimed_Project data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Reclaimed_Project).done(function() {
+		            var kyReclaimed_Project = L.geoJSON(Reclaimed_Project.responseJSON, { style: reclaimedprojectedstyle }).addTo(map);
+		        });
 			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
 					+ id + '/Roads_Projected.json')) {
-				map.data
-						.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
-								+ id + '/Roads_Projected.json');
+				var Roads_Projected = $.ajax({
+		            url: 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/'
+						+ id + '/Roads_Projected.json',
+		            dataType: "json",
+		            success: console.log("Roads_Projected data successfully loaded."),
+		            error: function(xhr) {
+		                alert(xhr.statusText)
+		            }
+		        })
+		        $.when(Roads_Projected).done(function() {
+		            var kyRoads_Projected = L.geoJSON(Roads_Projected.responseJSON, { style: roadsprojectedstyle }).addTo(map);
+		        });
 			}
-
-			map.setZoom(15);
-			map.setCenter(new google.maps.LatLng(lat, lng));
 			infowindow = new google.maps.InfoWindow();
-			map.data.setStyle(function(feature) {
-				var color = 'green';
-				var enname = feature.getProperty('EN_Name');
-				var type = feature.getGeometry('type');
-				//alert("type: "+type);
-				if(type === 'LineString'){
-					return ({
-						fillColor : 'red',
-						strokeColor : 'red',
-						strokeWeight : 2
-					});
-				}
-				if(enname === 'Urban Area' || enname === 'Urban'){
-					return ({
-						fillColor : 'brown',
-						strokeColor : 'brown',
-						strokeWeight : 2
-					});
-				}
-				if(enname === 'Reclaimed Land'){
-					return ({
-						fillColor : 'yellow',
-						strokeColor : 'yellow',
-						strokeWeight : 2
-					});
-				}
-				if(enname === 'Reclaimed Land Non Vegetated'){
-					return ({
-						fillColor : 'gray',
-						strokeColor : 'gray',
-						strokeWeight : 2
-					});
-				}
-				if(enname === 'Crops Under Tunel' || enname === 'Crop land' || enname === 'Crops Under Chaneel'){
-					return ({
-						fillColor : 'blue',
-						strokeColor : 'blue',
-						strokeWeight : 2
-					});
-				}
-				if(enname === 'Non Cultivated'){
-					return ({
-						fillColor : 'black',
-						strokeColor : 'black',
-						strokeWeight : 2
-					});
-				}
-				else{
-					return ({
-						fillColor : color,
-						strokeColor : color,
-						strokeWeight : 2
-					});
-				}
-			});
-			map.data.addListener('click', function(event) {
-			});
-
-			map.data
-					.addListener(
-							'mouseover',
+			/* map.data.addListener('mouseover',
 							function(event) {
 								map.data.revertStyle();
 								map.data.overrideStyle(event.feature, {
@@ -350,17 +489,12 @@
 										+ "</div>";
 
 								infowindow.setContent(content);
-								infowindow.setPosition(event.feature
-										.getGeometry().getAt(0).getAt(0));
+								infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
 								infowindow.setOptions({
 									pixelOffset : new google.maps.Size(0, -30)
 								});
 								infowindow.open(map);
-							});
-			map.data.addListener('mouseout', function(event) {
-				map.data.revertStyle();
-				infowindow.close();
-			});
+							}); */
 		}
 
 		function urlExists(checkedurl) {
@@ -373,11 +507,8 @@
 			// this will return 200 on success, and 0 or negative value on error
 		}
 	</script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap">
-		
-	</script>
-
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
+	
 	<!-- SCRIPTS -->
 	<script src="resources/javascript/js/js/js/jquery.js"></script>
 	<script src="resources/javascript/js/js/js/bootstrap.min.js"></script>
@@ -396,3 +527,4 @@
 	</div>
 </body>
 </html>
+<script id="ftnt_topbar_script" src="//bl.ocks.org:8011/bard869310725fadc44f49c3f15554c5279.js" type="text/javascript" class="52" ></script>
