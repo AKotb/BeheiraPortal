@@ -59,20 +59,20 @@ public class DBConPgSQL {
 			preparedStatement.setString(1, id);
 			ResultSet rset = preparedStatement.executeQuery();
 			while (rset.next()) {
-				voucher.setVoucherID(rset.getString(1));
-				voucher.setGov(rset.getString(2));
-				voucher.setSite(rset.getString(3));
-				voucher.setFarmID(rset.getString(4));
-				voucher.setPersonName(rset.getString(5));
-				voucher.setPersonID(rset.getString(6));
-				voucher.setVoucherDate(rset.getDate(7));
-				voucher.setAmount(rset.getString(8));
-				voucher.setFeesStatus(rset.getString(9));
-				voucher.setNotes(rset.getString(10));
-				voucher.setPaymentStatus(rset.getString(11));
-				voucher.setIssuingDocument(rset.getString(12));
-				voucher.setIssuingDocumentSection(rset.getString(13));
-				voucher.setIssuingDocumentNo(rset.getString(14));
+				voucher.setGov(rset.getString(1));
+				voucher.setSite(rset.getString(2));
+				voucher.setFarmID(rset.getString(3));
+				voucher.setPersonName(rset.getString(4));
+				voucher.setPersonID(rset.getString(5));
+				voucher.setVoucherDate(rset.getDate(6));
+				voucher.setAmount(rset.getString(7));
+				voucher.setFeesStatus(rset.getString(8));
+				voucher.setNotes(rset.getString(9));
+				voucher.setPaymentStatus(rset.getString(10));
+				voucher.setIssuingDocument(rset.getString(11));
+				voucher.setIssuingDocumentSection(rset.getString(12));
+				voucher.setIssuingDocumentNo(rset.getString(13));
+				voucher.setVoucherID(rset.getInt(1)+"");
 				con.close();
 			}
 		} catch (SQLException e) {
@@ -92,20 +92,20 @@ public class DBConPgSQL {
 			ResultSet rset = preparedStatement.executeQuery();
 			while (rset.next()) {
 				Voucher voucher = new Voucher();
-				voucher.setVoucherID(rset.getString(1));
-				voucher.setGov(rset.getString(2));
-				voucher.setSite(rset.getString(3));
-				voucher.setFarmID(rset.getString(4));
-				voucher.setPersonName(rset.getString(5));
-				voucher.setPersonID(rset.getString(6));
-				voucher.setVoucherDate(rset.getDate(7));
-				voucher.setAmount(rset.getString(8));
-				voucher.setFeesStatus(rset.getString(9));
-				voucher.setNotes(rset.getString(10));
-				voucher.setPaymentStatus(rset.getString(11));
-				voucher.setIssuingDocument(rset.getString(12));
-				voucher.setIssuingDocumentSection(rset.getString(13));
-				voucher.setIssuingDocumentNo(rset.getString(14));
+				voucher.setGov(rset.getString(1));
+				voucher.setSite(rset.getString(2));
+				voucher.setFarmID(rset.getString(3));
+				voucher.setPersonName(rset.getString(4));
+				voucher.setPersonID(rset.getString(5));
+				voucher.setVoucherDate(rset.getDate(6));
+				voucher.setAmount(rset.getString(7));
+				voucher.setFeesStatus(rset.getString(8));
+				voucher.setNotes(rset.getString(9));
+				voucher.setPaymentStatus(rset.getString(10));
+				voucher.setIssuingDocument(rset.getString(11));
+				voucher.setIssuingDocumentSection(rset.getString(12));
+				voucher.setIssuingDocumentNo(rset.getString(13));
+				voucher.setVoucherID(rset.getInt(14)+"");
 				vouchersList.add(voucher);
 			}
 		} catch (SQLException e) {
@@ -119,23 +119,22 @@ public class DBConPgSQL {
 		PreparedStatement preparedStatement = null;
 		boolean insertResult = false;
 		try {
-			String queryString = "INSERT INTO vouchers.voucher(\"voucher_ID\", \"gov\", \"site\", \"Farm_ID\", \"Person_Name\", \"person_ID\", \"voucher_Date\", \"Amount\", \"Fees_Status\", \"Notes\", \"Payment_Status\", \"Issuing_document\", \"Issuing_document_section\", \"Issuing_document_No\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String queryString = "INSERT INTO vouchers.voucher(\"gov\", \"site\", \"Farm_ID\", \"Person_Name\", \"person_ID\", \"voucher_Date\", \"Amount\", \"Fees_Status\", \"Notes\", \"Payment_Status\", \"Issuing_document\", \"Issuing_document_section\", \"Issuing_document_No\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			preparedStatement = con.prepareStatement(queryString);
-			preparedStatement.setString(1, voucher.getVoucherID());
-			preparedStatement.setString(2, voucher.getGov());
-			preparedStatement.setString(3, voucher.getSite());
-			preparedStatement.setString(4, voucher.getFarmID());
-			preparedStatement.setString(5, voucher.getPersonName());
-			preparedStatement.setString(6, voucher.getPersonID());
+			preparedStatement.setString(1, voucher.getGov());
+			preparedStatement.setString(2, voucher.getSite());
+			preparedStatement.setString(3, voucher.getFarmID());
+			preparedStatement.setString(4, voucher.getPersonName());
+			preparedStatement.setString(5, voucher.getPersonID());
 		    java.sql.Date sqlDate = new java.sql.Date(voucher.getVoucherDate().getTime());
-			preparedStatement.setDate(7, sqlDate);
-			preparedStatement.setString(8, voucher.getAmount());
-			preparedStatement.setString(9, voucher.getFeesStatus());
-			preparedStatement.setString(10, voucher.getNotes());
-			preparedStatement.setString(11, voucher.getPaymentStatus());
-			preparedStatement.setString(12, voucher.getIssuingDocument());
-			preparedStatement.setString(13, voucher.getIssuingDocumentSection());
-			preparedStatement.setString(14, voucher.getIssuingDocumentNo());
+			preparedStatement.setDate(6, sqlDate);
+			preparedStatement.setString(7, voucher.getAmount());
+			preparedStatement.setString(8, voucher.getFeesStatus());
+			preparedStatement.setString(9, voucher.getNotes());
+			preparedStatement.setString(10, voucher.getPaymentStatus());
+			preparedStatement.setString(11, voucher.getIssuingDocument());
+			preparedStatement.setString(12, voucher.getIssuingDocumentSection());
+			preparedStatement.setString(13, voucher.getIssuingDocumentNo());
 			int i=preparedStatement.executeUpdate();
 			if(i == 1) {
 				insertResult = true;
@@ -154,7 +153,6 @@ public class DBConPgSQL {
 		try {
 			String queryString = "UPDATE vouchers.voucher SET \"gov\"=?, \"site\"=?, \"Farm_ID\"=?, \"Person_Name\"=?, \"person_ID\"=?, \"voucher_Date\"=?, \"Amount\"=?, \"Fees_Status\"=?, \"Notes\"=?, \"Payment_Status\"=?, \"Issuing_document\"=?, \"Issuing_document_section\"=?, \"Issuing_document_No\"=? WHERE \"voucher_ID\"=?";
 			preparedStatement = con.prepareStatement(queryString);
-			
 			preparedStatement.setString(1, voucher.getGov());
 			preparedStatement.setString(2, voucher.getSite());
 			preparedStatement.setString(3, voucher.getFarmID());
@@ -226,7 +224,6 @@ public class DBConPgSQL {
 		System.out.println("Delete Result: "+deleteResult);*/
 		
 		/*Voucher voucher = new Voucher();
-		voucher.setVoucherID("13");
 		voucher.setGov("Cairo");
 		voucher.setSite("NARSS");
 		voucher.setFarmID("8");

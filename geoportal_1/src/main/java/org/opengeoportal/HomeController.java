@@ -1,5 +1,8 @@
 package org.opengeoportal;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -45,6 +48,7 @@ public class HomeController {
 		return mav;
 	}
 
+	
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
@@ -54,6 +58,36 @@ public class HomeController {
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
 		System.out.println("vouchers in JSON: "+vouchersInjson);
+		mav.addObject("vouchers", vouchersInjson);
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/addnewvoucher", method = RequestMethod.GET)
+	public ModelAndView addNewVoucher(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("vouchers_manager");
+		Voucher voucher = new Voucher();
+		voucher.setGov(params[0]);
+		voucher.setSite(params[1]);
+		voucher.setFarmID(params[2]);
+		voucher.setPersonID(params[3]);
+		voucher.setPersonName(params[4]);
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(params[5]);
+		voucher.setVoucherDate(date);
+		voucher.setFeesStatus(params[6]);
+		voucher.setAmount(params[7]);
+		voucher.setPaymentStatus(params[8]);
+		voucher.setIssuingDocument(params[9]);
+		voucher.setIssuingDocumentSection(params[10]);
+		voucher.setIssuingDocumentNo(params[11]);
+		voucher.setNotes(params[12]);
+		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
+		boolean addresult = dbConnection.addVoucher(voucher);
+		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
+		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(params[2]);
+		ObjectMapper mapper = new ObjectMapper();
+		String vouchersInjson = mapper.writeValueAsString(vouchers);
 		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}

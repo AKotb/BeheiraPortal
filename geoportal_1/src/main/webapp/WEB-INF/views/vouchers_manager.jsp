@@ -247,9 +247,9 @@ input.readonly-box {
 						<td align="right" style="color: #396266; font: bold 24px Arial;">المحافظة</td>
 
 						<td align="right"><input class="readonly-box" type="text"
-							id="vm_voucher_ID" value="" readonly></td>
+							id="vm_farm_ID" value="" readonly></td>
 						<td align="right" style="color: #396266; font: bold 24px Arial;">رقم
-							الطلب</td>
+							المزرعة</td>
 					</tr>
 					<tr>
 						<td align="right"><input class="readonly-box" type="text"
@@ -268,9 +268,7 @@ input.readonly-box {
 							id="vm_Person_Name" value="" readonly></td>
 						<td align="right" style="color: #396266; font: bold 24px Arial;">مقدم
 							الطلب</td>
-
 					</tr>
-
 				</table>
 				<br> <br> <a href='javascript:void(0);'
 					onclick='voucher_add(id);' class='btnsearch' id='myvoucher'>إضافة
@@ -390,6 +388,7 @@ input.readonly-box {
 	<script>
 		window.onload = function() {
 			voucherjson = '${vouchers}';
+			var farmID;
 			var num_of_voucher = 0;
 			if (voucherjson) {
 				var vouchers = JSON.parse(voucherjson);
@@ -413,17 +412,16 @@ input.readonly-box {
 						+ '<th class=\"resultth\">الرسوم</th>'
 						+ '<th class=\"resultth\">التاريخ</th>' + '</tr>';
 				var voucher_list_html = "";
-				//alert("Voucher ID: " + voucher.voucherID);
-				//alert("Gov: " + voucher.gov);
 
 				for ( var i in vouchers) {
 
 					num_of_voucher = num_of_voucher + 1;
-
-					if (vouchers[i].voucherID) {
-						document.getElementById("vm_voucher_ID").value = vouchers[i].voucherID;
+					farmID = vouchers[i].farmID;
+					
+					if (vouchers[i].farmID) {
+						document.getElementById("vm_farm_ID").value = vouchers[i].farmID;
 					} else {
-						document.getElementById("vm_voucher_ID").value = "غير متوفر";
+						document.getElementById("vm_farm_ID").value = "غير متوفر";
 					}
 
 					if (vouchers[i].gov) {
@@ -535,41 +533,30 @@ input.readonly-box {
 		}
 
 		function voucherAction(event) {
-
-			/*var voucher_ID = document.getElementById('voucher_ID').value;
-			var gov = document.getElementById('gov').value;
-			var site = document.getElementById('site').value;
-			var person_ID = document.getElementById('person_ID').value;
-			var Person_Name = document.getElementById('Person_Name').value;
-			var voucher_Date = document.getElementById('voucher_Date').value;
-			var Fees_Status = document.getElementById('Fees_Status').value;
-			var Amount = document.getElementById('Amount').value;
-			var Payment_Status = document.getElementById('Payment_Status').value;
-			var Issuing_document = document.getElementById('Issuing_document').value;
-			var Issuing_document_section = document
-					.getElementById('Issuing_document_section').value;
-			var Issuing_Date = document.getElementById('Issuing_Date').value;
-			var Issuing_document_No = document
-					.getElementById('Issuing_document_No').value;
-			var Notes = document.getElementById('Notes').value;
-			
-			alert("[voucher_ID:" + voucher_ID + ", gov:" + gov + ", site:"
-			+ site + ", person_ID:" + person_ID + ", Person_Name:"
-			+ Person_Name + ", voucher_Date:" + voucher_Date
-			+ ", Fees_Status:" + Fees_Status + ", Amount:" + Amount
-			+ ", Payment_Status:" + Payment_Status
-			+ ", Issuing_document:" + Issuing_document
-			+ ", Issuing_document_section:" + Issuing_document_section
-			+ ", Issuing_Date:" + Issuing_Date
-			+ ", Issuing_document_No:" + Issuing_document_No
-			+ ", Notes:" + Notes + "]");*/
-			
 			if(event == 1){
 				alert("apply Edit Process");
 			}
 			
 			if(event == 2){
-				alert("apply Add Process");
+				var gov = document.getElementById('vm_gov').value;
+				var site = document.getElementById('vm_site').value;
+				var farm_ID = document.getElementById("vm_farm_ID").value;
+				var person_ID = document.getElementById('vm_person_ID').value;
+				var Person_Name = document.getElementById('vm_Person_Name').value;
+				var voucher_Date = document.getElementById('add_voucher_Date').value;
+				var Fees_Status = document.getElementById('add_Fees_Status').value;
+				var Amount = document.getElementById('add_Amount').value;
+				var Payment_Status = document.getElementById('add_Payment_Status').value;
+				var Issuing_document = document.getElementById('add_Issuing_document').value;
+				var Issuing_document_section = document
+						.getElementById('add_Issuing_document_section').value;
+				var Issuing_document_No = document
+						.getElementById('add_Issuing_document_No').value;
+				var Notes = document.getElementById('add_Notes').value;
+				var params = [ gov, site, farm_ID, person_ID, Person_Name, voucher_Date, Fees_Status, Amount, Payment_Status, Issuing_document, Issuing_document_section, Issuing_document_No, Notes ];
+				var location = "<c:url value='addnewvoucher'><c:param name='params' value='paramsvalues'/></c:url>";
+				location = location.replace("paramsvalues", params);
+				window.location.href = location;
 			}
 		}
 
@@ -650,8 +637,6 @@ input.readonly-box {
 		}
 
 		function voucher_add(id) {
-			//voucher.voucherID;
-			//alert("inside voucher add process");
 			document.getElementById ("voucher_add_form").style.visibility = "visible" ;
 			document.getElementById ("voucher_edit_form").style.visibility = "collapse";
 			
