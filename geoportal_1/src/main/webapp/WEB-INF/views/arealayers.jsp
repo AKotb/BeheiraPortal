@@ -6,9 +6,7 @@
 <html>
 <head>
 
-<title>EL-BEHIRA GOVERNORATE</title>
-
-<!-- meta tags -->
+<title>تنمية أراضي محافظة البحيرة</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="description" content="">
@@ -666,7 +664,7 @@
 
 		function onEachFeature(feature, layer) {
 			layer.on({
-				mouseover : highlightFeature,
+				click : highlightFeature,
 				mouseout : resetHighlight
 			});
 		}

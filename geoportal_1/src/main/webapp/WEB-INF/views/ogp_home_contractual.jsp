@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
-<title>EL-BEHIRA GOVERNORATE</title>
+<title>تنمية أراضي محافظة البحيرة</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="description" content="">
@@ -417,7 +417,6 @@ input.input-box {
 				}
 			});
 
-			// When the user clicks, set 'isColorful', changing the color of the letters.
 			map.data
 					.addListener(
 							'click',
@@ -582,7 +581,7 @@ input.input-box {
 
 							});
 
-			// when the user moves the mouse over the polygons
+			
 			map.data.addListener('mouseover', function(event) {
 				var folderpath = event.feature.getProperty('FolderPath');
 				if (folderpath) {
@@ -598,7 +597,6 @@ input.input-box {
 
 			map.data.addListener('mouseout', function(event) {
 				map.data.revertStyle();
-				//infowindow.close();
 			});
 		}
 
@@ -619,9 +617,6 @@ input.input-box {
 			voucherjson = '${voucher}';
 			if (voucherjson) {
 				var voucher = JSON.parse(voucherjson);
-				alert("Voucher ID: " + voucher.voucherID);
-				alert("Gov: " + voucher.gov);
-				alert("Site: " + voucher.site);
 			}
 		}
 
