@@ -48,7 +48,6 @@ public class HomeController {
 		return mav;
 	}
 
-	
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
@@ -57,12 +56,11 @@ public class HomeController {
 		List<Voucher> vouchers = dbConnection.getVouchersByFarmID(param);
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
-		System.out.println("vouchers in JSON: "+vouchersInjson);
+		System.out.println("vouchers in JSON: " + vouchersInjson);
 		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}
-	
-	
+
 	@RequestMapping(value = "/addnewvoucher", method = RequestMethod.GET)
 	public ModelAndView addNewVoucher(@RequestParam(value = "params") String[] params) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
@@ -86,6 +84,51 @@ public class HomeController {
 		boolean addresult = dbConnection.addVoucher(voucher);
 		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
 		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(params[2]);
+		ObjectMapper mapper = new ObjectMapper();
+		String vouchersInjson = mapper.writeValueAsString(vouchers);
+		mav.addObject("vouchers", vouchersInjson);
+		return mav;
+	}
+
+	@RequestMapping(value = "/editvoucher", method = RequestMethod.GET)
+	public ModelAndView editVoucher(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("vouchers_manager");
+		Voucher voucher = new Voucher();
+		voucher.setGov(params[0]);
+		voucher.setSite(params[1]);
+		voucher.setFarmID(params[2]);
+		voucher.setPersonID(params[3]);
+		voucher.setPersonName(params[4]);
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(params[5]);
+		voucher.setVoucherDate(date);
+		voucher.setFeesStatus(params[6]);
+		voucher.setAmount(params[7]);
+		voucher.setPaymentStatus(params[8]);
+		voucher.setIssuingDocument(params[9]);
+		voucher.setIssuingDocumentSection(params[10]);
+		voucher.setIssuingDocumentNo(params[11]);
+		voucher.setNotes(params[12]);
+		voucher.setVoucherID(Integer.parseInt(params[13]));
+		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
+		boolean updateResult = dbConnection.updateVoucher(voucher);
+		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
+		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(params[2]);
+		ObjectMapper mapper = new ObjectMapper();
+		String vouchersInjson = mapper.writeValueAsString(vouchers);
+		mav.addObject("vouchers", vouchersInjson);
+		return mav;
+	}
+
+	@RequestMapping(value = "/deletevoucher", method = RequestMethod.GET)
+	public ModelAndView deleteVoucher(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("vouchers_manager");
+		int voucherID = Integer.parseInt(params[0]);
+		String farmID = params[1];
+		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
+		boolean deleteResult = dbConnection.deleteByVoucherID(voucherID);
+		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
+		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(farmID);
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
 		mav.addObject("vouchers", vouchersInjson);

@@ -202,12 +202,11 @@ input.input-box {
 	background-color: #cfdcdd;
 }
 
-.formheader{
-	background-color: #3d6266; 
-	color: #fcbb5b; 
+.formheader {
+	background-color: #3d6266;
+	color: #fcbb5b;
 	font: bold 40px Arial;
 }
-
 </style>
 </head>
 
@@ -267,7 +266,7 @@ input.input-box {
 				</div>
 
 			</div>
-			<a href="#" ><img
+			<a href="#"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
 			<div id="voucherModal" class="modal">
@@ -361,11 +360,7 @@ input.input-box {
 						<button onclick="voucherPrint()" class="btnsearch" id="voucherBtn">طباعة</button>
 					</h2>
 					<div id="voucherResults"></div>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> <br> <br> <br> <br>
 				</div>
 
 			</div>
@@ -394,8 +389,10 @@ input.input-box {
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
-			map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
+			map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
 			var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
 						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
@@ -421,24 +418,18 @@ input.input-box {
 			});
 
 			// When the user clicks, set 'isColorful', changing the color of the letters.
-			map.data.addListener('click', function(event) {
-
-			});
-
-			// when the user moves the mouse over the polygons
 			map.data
 					.addListener(
-							'mouseover',
+							'click',
 							function(event) {
 								var folderpath = event.feature
 										.getProperty('FolderPath');
 								if (folderpath) {
 									folderpath = folderpath;
 								} else {
-									map.data.revertStyle();
 									map.data.overrideStyle(event.feature, {
 										strokeWeight : 4,
-										fillColor : 'yellow'
+										fillColor : 'green'
 									});
 									var coord0 = event.feature.getGeometry()
 											.getAt(0).getAt(0);
@@ -588,7 +579,22 @@ input.input-box {
 									});
 									infowindow.open(map);
 								}
+
 							});
+
+			// when the user moves the mouse over the polygons
+			map.data.addListener('mouseover', function(event) {
+				var folderpath = event.feature.getProperty('FolderPath');
+				if (folderpath) {
+					folderpath = folderpath;
+				} else {
+					map.data.revertStyle();
+					map.data.overrideStyle(event.feature, {
+						strokeWeight : 4,
+						fillColor : 'yellow'
+					});
+				}
+			});
 
 			map.data.addListener('mouseout', function(event) {
 				map.data.revertStyle();
@@ -608,7 +614,7 @@ input.input-box {
 			location = location.replace("paramsvalues", id);
 			window.location.href = location;
 		}
-		
+
 		window.onload = function() {
 			voucherjson = '${voucher}';
 			if (voucherjson) {
@@ -618,7 +624,7 @@ input.input-box {
 				alert("Site: " + voucher.site);
 			}
 		}
-		
+
 		function searchBox() {
 			// Get the modal
 			var modal = document.getElementById('myModal');
@@ -655,7 +661,6 @@ input.input-box {
 		}
 
 		function readTextFile(file, callback) {
-
 			var rawFile = new XMLHttpRequest();
 			rawFile.overrideMimeType("application/json");
 			rawFile.open("GET", file, true);
@@ -672,11 +677,11 @@ input.input-box {
 					var search_sid = document.getElementById('sid').value;
 					var search_phone = document.getElementById('phone').value;
 					var cond1, cond2, cond3, cond4, cond5;
-					
+
 					var My_Farm_Owner = "";
 					var My_Ownership = "";
 					var My_Farm_Name = "";
-					
+
 					for ( var val in mydata.features) {
 
 						cond1 = false;
@@ -707,25 +712,25 @@ input.input-box {
 							.toString().includes(search_phone);
 
 						if (cond1 || cond2 || cond3 || cond4 || cond5) {
-							
+
 							if (mydata.features[val].properties.Farm_Owner) {
 								My_Farm_Owner = mydata.features[val].properties.Farm_Owner;
 							} else {
 								My_Farm_Owner = "غير متوفر";
 							}
-							
+
 							if (mydata.features[val].properties.Ownership) {
 								My_Ownership = mydata.features[val].properties.Ownership;
 							} else {
 								My_Ownership = "غير متوفر";
 							}
-							
+
 							if (mydata.features[val].properties.Farm_Name) {
 								My_Farm_Name = mydata.features[val].properties.Farm_Name;
 							} else {
 								My_Farm_Name = "غير متوفر";
 							}
-							
+
 							num_of_items = num_of_items + 1;
 							results = results
 									+ '<tr class=\"resulttr\">'
@@ -733,13 +738,11 @@ input.input-box {
 									+ '<button onclick=\"showSearchResults('
 									+ val
 									+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
-									+ '</td>'
-									+ '<td align=\"right\">'
+									+ '</td>' + '<td align=\"right\">'
 									+ My_Farm_Owner/*OWNER*/
 									+ '</td>' + '<td align=\"right\">'
-									+ My_Ownership
-									+ '</td>' + '<td align=\"right\">'
-									+ My_Farm_Name
+									+ My_Ownership + '</td>'
+									+ '<td align=\"right\">' + My_Farm_Name
 									+ '</td>' + '<td>' + val + '</td>'
 									+ '</tr>';
 						}
@@ -768,7 +771,6 @@ input.input-box {
 		}
 
 		function showSearchResults(id) {
-			//alert("shown on the map [ id = "+id+" ]");
 			var modal = document.getElementById('myModal');
 			modal.style.display = "none";
 			map.setZoom(13);
@@ -791,9 +793,7 @@ input.input-box {
 			});
 		}
 
-
 		function voucherAction() {
-
 			var voucher_ID = document.getElementById('voucher_ID').value;
 			var gov = document.getElementById('gov').value;
 			var site = document.getElementById('site').value;

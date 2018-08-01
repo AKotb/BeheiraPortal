@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class Voucher {
 
-	private String voucherID;
+	private int voucherID;
 	private String gov;
 	private String site;
 	private String farmID;
@@ -50,7 +50,7 @@ public class Voucher {
 	 * @param issuingDocumentSection
 	 * @param issuingDocumentNo
 	 */
-	public Voucher(String voucherID, String gov, String site, String farmID, String personName, String personID,
+	public Voucher(int voucherID, String gov, String site, String farmID, String personName, String personID,
 			Date voucherDate, String amount, String feesStatus, String notes, String paymentStatus,
 			String issuingDocument, String issuingDocumentSection, String issuingDocumentNo) {
 		super();
@@ -73,7 +73,7 @@ public class Voucher {
 	/**
 	 * @return the voucherID
 	 */
-	public String getVoucherID() {
+	public int getVoucherID() {
 		return voucherID;
 	}
 
@@ -81,7 +81,7 @@ public class Voucher {
 	 * @param voucherID
 	 *            the voucherID to set
 	 */
-	public void setVoucherID(String voucherID) {
+	public void setVoucherID(int voucherID) {
 		this.voucherID = voucherID;
 	}
 

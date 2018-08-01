@@ -72,7 +72,7 @@ public class DBConPgSQL {
 				voucher.setIssuingDocument(rset.getString(11));
 				voucher.setIssuingDocumentSection(rset.getString(12));
 				voucher.setIssuingDocumentNo(rset.getString(13));
-				voucher.setVoucherID(rset.getInt(1)+"");
+				voucher.setVoucherID(rset.getInt(1));
 				con.close();
 			}
 		} catch (SQLException e) {
@@ -81,7 +81,7 @@ public class DBConPgSQL {
 		return voucher;
 
 	}
-	
+
 	public List<Voucher> getVouchersByFarmID(String farmid) {
 		List<Voucher> vouchersList = new ArrayList<Voucher>();
 		PreparedStatement preparedStatement = null;
@@ -105,7 +105,7 @@ public class DBConPgSQL {
 				voucher.setIssuingDocument(rset.getString(11));
 				voucher.setIssuingDocumentSection(rset.getString(12));
 				voucher.setIssuingDocumentNo(rset.getString(13));
-				voucher.setVoucherID(rset.getInt(14)+"");
+				voucher.setVoucherID(rset.getInt(14));
 				vouchersList.add(voucher);
 			}
 		} catch (SQLException e) {
@@ -114,7 +114,7 @@ public class DBConPgSQL {
 		return vouchersList;
 
 	}
-	
+
 	public boolean addVoucher(Voucher voucher) {
 		PreparedStatement preparedStatement = null;
 		boolean insertResult = false;
@@ -126,7 +126,7 @@ public class DBConPgSQL {
 			preparedStatement.setString(3, voucher.getFarmID());
 			preparedStatement.setString(4, voucher.getPersonName());
 			preparedStatement.setString(5, voucher.getPersonID());
-		    java.sql.Date sqlDate = new java.sql.Date(voucher.getVoucherDate().getTime());
+			java.sql.Date sqlDate = new java.sql.Date(voucher.getVoucherDate().getTime());
 			preparedStatement.setDate(6, sqlDate);
 			preparedStatement.setString(7, voucher.getAmount());
 			preparedStatement.setString(8, voucher.getFeesStatus());
@@ -135,18 +135,17 @@ public class DBConPgSQL {
 			preparedStatement.setString(11, voucher.getIssuingDocument());
 			preparedStatement.setString(12, voucher.getIssuingDocumentSection());
 			preparedStatement.setString(13, voucher.getIssuingDocumentNo());
-			int i=preparedStatement.executeUpdate();
-			if(i == 1) {
+			int i = preparedStatement.executeUpdate();
+			if (i == 1) {
 				insertResult = true;
-			} 
-			con.close();  
+			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return insertResult;
 	}
-	
-	
+
 	public boolean updateVoucher(Voucher voucher) {
 		PreparedStatement preparedStatement = null;
 		boolean updateResult = false;
@@ -167,97 +166,93 @@ public class DBConPgSQL {
 			preparedStatement.setString(11, voucher.getIssuingDocument());
 			preparedStatement.setString(12, voucher.getIssuingDocumentSection());
 			preparedStatement.setString(13, voucher.getIssuingDocumentNo());
-			preparedStatement.setString(14, voucher.getVoucherID());
-			int i=preparedStatement.executeUpdate();
-			if(i == 1) {
+			preparedStatement.setInt(14, voucher.getVoucherID());
+			int i = preparedStatement.executeUpdate();
+			if (i == 1) {
 				updateResult = true;
-			} 
-			con.close();  
+			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return updateResult;
 	}
-	
-	
-	public boolean deleteByVoucherID(String voucherID) {
+
+	public boolean deleteByVoucherID(int voucherID) {
 		PreparedStatement preparedStatement = null;
 		boolean deleteResult = false;
 		try {
 			String queryString = "DELETE FROM vouchers.voucher WHERE \"voucher_ID\"=?";
 			preparedStatement = con.prepareStatement(queryString);
-			preparedStatement.setString(1, voucherID);
-			int i=preparedStatement.executeUpdate();
-			if(i == 1) {
+			preparedStatement.setInt(1, voucherID);
+			int i = preparedStatement.executeUpdate();
+			if (i == 1) {
 				deleteResult = true;
-			} 
-			con.close();  
+			}
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return deleteResult;
 	}
-	
+
 	public static void main(String args[]) {
 		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
-		
-		/*Voucher voucher = dbConnection.getByVoucherID("9");
-		System.out.println("Voucher ID: " + voucher.getVoucherID());
-		System.out.println("Gov: " + voucher.getGov());
-		System.out.println("Site: " + voucher.getSite());
-		System.out.println("Farm ID: " + voucher.getFarmID());
-		System.out.println("Person Name: " + voucher.getPersonName());
-		System.out.println("Person ID: " + voucher.getPersonID());
-		System.out.println("Voucher Date: " + voucher.getVoucherDate());
-		System.out.println("Amount: " + voucher.getAmount());
-		System.out.println("Fees Status: " + voucher.getFeesStatus());
-		System.out.println("Notes: " + voucher.getNotes());
-		System.out.println("Payment Status: " + voucher.getPaymentStatus());
-		System.out.println("Issuing Document: " + voucher.getIssuingDocument());
-		System.out.println("Issuing Document Section: " + voucher.getIssuingDocumentSection());
-		System.out.println("Issuing Document No: " + voucher.getIssuingDocumentNo());*/
-		
-		/*List<Voucher> vouchersList = dbConnection.getVouchersByFarmID("12");
-		System.out.println("Vochers List Size: "+vouchersList.size());*/
-		
-		/*boolean deleteResult = dbConnection.deleteByVoucherID("12");
-		System.out.println("Delete Result: "+deleteResult);*/
-		
-		/*Voucher voucher = new Voucher();
-		voucher.setGov("Cairo");
-		voucher.setSite("NARSS");
-		voucher.setFarmID("8");
-		voucher.setPersonName("AhmedKotb");
-		voucher.setPersonID("102030405060");
-		voucher.setVoucherDate(new java.util.Date());
-		voucher.setAmount("2000");
-		voucher.setFeesStatus("Done");
-		voucher.setNotes("Notes");
-		voucher.setPaymentStatus("Paid");
-		voucher.setIssuingDocument("10");
-		voucher.setIssuingDocumentSection("Cairo");
-		voucher.setIssuingDocumentNo("10");
-		boolean addResult = dbConnection.addVoucher(voucher);
-		System.out.println("Add Result: "+addResult);*/
-		
-		/*Voucher voucher = new Voucher();
-		voucher.setVoucherID("13");
-		voucher.setGov("Cairo");
-		voucher.setSite("NARSS");
-		voucher.setFarmID("12");
-		voucher.setPersonName("AhmedKotb");
-		voucher.setPersonID("102030405060");
-		voucher.setVoucherDate(new java.util.Date());
-		voucher.setAmount("2000");
-		voucher.setFeesStatus("Done");
-		voucher.setNotes("Notes");
-		voucher.setPaymentStatus("Paid");
-		voucher.setIssuingDocument("10");
-		voucher.setIssuingDocumentSection("Cairo");
-		voucher.setIssuingDocumentNo("10");
-		boolean updateResult = dbConnection.updateVoucher(voucher);
-		System.out.println("Update Result: "+updateResult);*/
-		
+
+		/*
+		 * Voucher voucher = dbConnection.getByVoucherID("9");
+		 * System.out.println("Voucher ID: " + voucher.getVoucherID());
+		 * System.out.println("Gov: " + voucher.getGov()); System.out.println("Site: " +
+		 * voucher.getSite()); System.out.println("Farm ID: " + voucher.getFarmID());
+		 * System.out.println("Person Name: " + voucher.getPersonName());
+		 * System.out.println("Person ID: " + voucher.getPersonID());
+		 * System.out.println("Voucher Date: " + voucher.getVoucherDate());
+		 * System.out.println("Amount: " + voucher.getAmount());
+		 * System.out.println("Fees Status: " + voucher.getFeesStatus());
+		 * System.out.println("Notes: " + voucher.getNotes());
+		 * System.out.println("Payment Status: " + voucher.getPaymentStatus());
+		 * System.out.println("Issuing Document: " + voucher.getIssuingDocument());
+		 * System.out.println("Issuing Document Section: " +
+		 * voucher.getIssuingDocumentSection());
+		 * System.out.println("Issuing Document No: " + voucher.getIssuingDocumentNo());
+		 */
+
+		/*
+		 * List<Voucher> vouchersList = dbConnection.getVouchersByFarmID("12");
+		 * System.out.println("Vochers List Size: "+vouchersList.size());
+		 */
+
+		/*
+		 * boolean deleteResult = dbConnection.deleteByVoucherID("12");
+		 * System.out.println("Delete Result: "+deleteResult);
+		 */
+
+		/*
+		 * Voucher voucher = new Voucher(); voucher.setGov("Cairo");
+		 * voucher.setSite("NARSS"); voucher.setFarmID("8");
+		 * voucher.setPersonName("AhmedKotb"); voucher.setPersonID("102030405060");
+		 * voucher.setVoucherDate(new java.util.Date()); voucher.setAmount("2000");
+		 * voucher.setFeesStatus("Done"); voucher.setNotes("Notes");
+		 * voucher.setPaymentStatus("Paid"); voucher.setIssuingDocument("10");
+		 * voucher.setIssuingDocumentSection("Cairo");
+		 * voucher.setIssuingDocumentNo("10"); boolean addResult =
+		 * dbConnection.addVoucher(voucher);
+		 * System.out.println("Add Result: "+addResult);
+		 */
+
+		/*
+		 * Voucher voucher = new Voucher(); voucher.setVoucherID("13");
+		 * voucher.setGov("Cairo"); voucher.setSite("NARSS"); voucher.setFarmID("12");
+		 * voucher.setPersonName("AhmedKotb"); voucher.setPersonID("102030405060");
+		 * voucher.setVoucherDate(new java.util.Date()); voucher.setAmount("2000");
+		 * voucher.setFeesStatus("Done"); voucher.setNotes("Notes");
+		 * voucher.setPaymentStatus("Paid"); voucher.setIssuingDocument("10");
+		 * voucher.setIssuingDocumentSection("Cairo");
+		 * voucher.setIssuingDocumentNo("10"); boolean updateResult =
+		 * dbConnection.updateVoucher(voucher);
+		 * System.out.println("Update Result: "+updateResult);
+		 */
+
 	}
 
 }

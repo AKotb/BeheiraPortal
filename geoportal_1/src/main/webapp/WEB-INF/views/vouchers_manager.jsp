@@ -275,10 +275,12 @@ input.readonly-box {
 					إيصال</a> <br> <br>
 
 				<div align="center" id='voucher_list'></div>
-				
-				<div align="center" id="voucher_edit_form">
-					<h1 id='form_header_edit' class="formheader" align="center">تعديل إيصال</h1>
 
+				<div align="center" id="voucher_edit_form">
+					<h1 id='form_header_edit' class="formheader" align="center">تعديل
+						إيصال</h1>
+					<input type="hidden" id="selectedvoucherid"
+						name="selectedvoucherid">
 					<table border="0" style="dir: rtl;">
 						<tr>
 							<td align="right"><input class="input-box" type="date"
@@ -296,8 +298,8 @@ input.readonly-box {
 							<td align="right" style="color: #3d6266;">المبلغ</td>
 						</tr>
 						<tr>
-							<td align="right"><input type="checkbox" id="edit_Payment_Status"
-								value="no"></td>
+							<td align="right"><input type="checkbox"
+								id="edit_Payment_Status" value="no"></td>
 							<td align="right" style="color: #3d6266;">تم الدفع</td>
 						</tr>
 						<tr>
@@ -329,9 +331,10 @@ input.readonly-box {
 					</h2>
 
 				</div>
-				
+
 				<div align="center" id="voucher_add_form">
-					<h1 id='form_header_add' class="formheader" align="center">إضافة إيصال جديد</h1>
+					<h1 id='form_header_add' class="formheader" align="center">إضافة
+						إيصال جديد</h1>
 
 					<table border="0" style="dir: rtl;">
 						<tr>
@@ -350,8 +353,8 @@ input.readonly-box {
 							<td align="right" style="color: #3d6266;">المبلغ</td>
 						</tr>
 						<tr>
-							<td align="right"><input type="checkbox" id="add_Payment_Status"
-								value="no"></td>
+							<td align="right"><input type="checkbox"
+								id="add_Payment_Status" value="no"></td>
 							<td align="right" style="color: #3d6266;">تم الدفع</td>
 						</tr>
 						<tr>
@@ -417,7 +420,7 @@ input.readonly-box {
 
 					num_of_voucher = num_of_voucher + 1;
 					farmID = vouchers[i].farmID;
-					
+
 					if (vouchers[i].farmID) {
 						document.getElementById("vm_farm_ID").value = vouchers[i].farmID;
 					} else {
@@ -525,19 +528,42 @@ input.readonly-box {
 			} else {
 				document.getElementById('voucher_list').innerHTML = '<div align=\"center\"><h3>عفوا ، لا توجد ايصالات</h3></div>';
 			}
-			
+
 			//set visibility options
-			document.getElementById ( "voucher_edit_form" ).style.visibility = "collapse" ;
-			document.getElementById ( "voucher_add_form" ).style.visibility = "collapse" ;
-			
+			document.getElementById("voucher_edit_form").style.visibility = "collapse";
+			document.getElementById("voucher_add_form").style.visibility = "collapse";
+
 		}
 
 		function voucherAction(event) {
-			if(event == 1){
-				alert("apply Edit Process");
+			if (event == 1) {
+				var gov = document.getElementById('vm_gov').value;
+				var site = document.getElementById('vm_site').value;
+				var farm_ID = document.getElementById("vm_farm_ID").value;
+				var person_ID = document.getElementById('vm_person_ID').value;
+				var Person_Name = document.getElementById('vm_Person_Name').value;
+				var voucher_Date = document.getElementById('edit_voucher_Date').value;
+				var Fees_Status = document.getElementById('edit_Fees_Status').value;
+				var Amount = document.getElementById('edit_Amount').value;
+				var Payment_Status = document
+						.getElementById('edit_Payment_Status').value;
+				var Issuing_document = document
+						.getElementById('edit_Issuing_document').value;
+				var Issuing_document_section = document
+						.getElementById('edit_Issuing_document_section').value;
+				var Issuing_document_No = document
+						.getElementById('edit_Issuing_document_No').value;
+				var Notes = document.getElementById('edit_Notes').value;
+				var voucherID = document.getElementById('selectedvoucherid').value;
+				var params = [ gov, site, farm_ID, person_ID, Person_Name,
+						voucher_Date, Fees_Status, Amount, Payment_Status,
+						Issuing_document, Issuing_document_section,
+						Issuing_document_No, Notes, voucherID ];
+				var location = "<c:url value='editvoucher'><c:param name='params' value='paramsvalues'/></c:url>";
+				location = location.replace("paramsvalues", params);
+				window.location.href = location;
 			}
-			
-			if(event == 2){
+			if (event == 2) {
 				var gov = document.getElementById('vm_gov').value;
 				var site = document.getElementById('vm_site').value;
 				var farm_ID = document.getElementById("vm_farm_ID").value;
@@ -546,14 +572,19 @@ input.readonly-box {
 				var voucher_Date = document.getElementById('add_voucher_Date').value;
 				var Fees_Status = document.getElementById('add_Fees_Status').value;
 				var Amount = document.getElementById('add_Amount').value;
-				var Payment_Status = document.getElementById('add_Payment_Status').value;
-				var Issuing_document = document.getElementById('add_Issuing_document').value;
+				var Payment_Status = document
+						.getElementById('add_Payment_Status').value;
+				var Issuing_document = document
+						.getElementById('add_Issuing_document').value;
 				var Issuing_document_section = document
 						.getElementById('add_Issuing_document_section').value;
 				var Issuing_document_No = document
 						.getElementById('add_Issuing_document_No').value;
 				var Notes = document.getElementById('add_Notes').value;
-				var params = [ gov, site, farm_ID, person_ID, Person_Name, voucher_Date, Fees_Status, Amount, Payment_Status, Issuing_document, Issuing_document_section, Issuing_document_No, Notes ];
+				var params = [ gov, site, farm_ID, person_ID, Person_Name,
+						voucher_Date, Fees_Status, Amount, Payment_Status,
+						Issuing_document, Issuing_document_section,
+						Issuing_document_No, Notes ];
 				var location = "<c:url value='addnewvoucher'><c:param name='params' value='paramsvalues'/></c:url>";
 				location = location.replace("paramsvalues", params);
 				window.location.href = location;
@@ -565,83 +596,73 @@ input.readonly-box {
 		}
 
 		function voucher_delete(id) {
-			alert("inside voucher delete process");
+			var farm_ID = document.getElementById("vm_farm_ID").value;
+			var params = [ id, farm_ID ];
+			var location = "<c:url value='deletevoucher'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
 		}
 
 		function voucher_edit(id) {
-			
+			document.getElementById("selectedvoucherid").value = id;
 			voucherjson = '${vouchers}';
-			
 			if (voucherjson) {
 				var vouchers = JSON.parse(voucherjson);
 				for ( var i in vouchers) {
-					
-					if(vouchers[i].voucherID == id){
-						
+					if (vouchers[i].voucherID == id) {
 						var selected_voucher = vouchers[i];
-						
 						if (selected_voucher.voucherDate) {
 							document.getElementById("edit_voucher_Date").value = selected_voucher.voucherDate;
 						} else {
 							document.getElementById("edit_voucher_Date").value = "";
 						}
-						
 						if (selected_voucher.amount) {
 							document.getElementById("edit_Amount").value = selected_voucher.amount;
 						} else {
 							document.getElementById("edit_Amount").value = "";
 						}
-						
 						if (selected_voucher.feesStatus) {
 							document.getElementById("edit_Fees_Status").value = selected_voucher.feesStatus;
 						} else {
 							document.getElementById("edit_Fees_Status").value = "";
 						}
-						
 						if (selected_voucher.notes) {
 							document.getElementById("edit_Notes").value = selected_voucher.notes;
 						} else {
 							document.getElementById("edit_Notes").value = "";
 						}
-						
 						if (selected_voucher.paymentStatus) {
 							document.getElementById("edit_Payment_Status").value = selected_voucher.paymentStatus;
 						} else {
 							document.getElementById("edit_Payment_Status").value = "";
 						}
-						
 						if (selected_voucher.issuingDocument) {
 							document.getElementById("edit_Issuing_document").value = selected_voucher.issuingDocument;
 						} else {
 							document.getElementById("edit_Issuing_document").value = "";
 						}
-						
 						if (selected_voucher.issuingDocumentSection) {
-							document.getElementById("edit_Issuing_document_section").value = selected_voucher.issuingDocumentSection;
+							document
+									.getElementById("edit_Issuing_document_section").value = selected_voucher.issuingDocumentSection;
 						} else {
-							document.getElementById("edit_Issuing_document_section").value = "";
+							document
+									.getElementById("edit_Issuing_document_section").value = "";
 						}
-						
 						if (selected_voucher.issuingDocumentNo) {
 							document.getElementById("edit_Issuing_document_No").value = selected_voucher.issuingDocumentNo;
 						} else {
 							document.getElementById("edit_Issuing_document_No").value = "";
 						}
-						
-						document.getElementById ("voucher_edit_form").style.visibility = "visible";
-						document.getElementById ("voucher_add_form").style.visibility = "collapse";
+						document.getElementById("voucher_edit_form").style.visibility = "visible";
+						document.getElementById("voucher_add_form").style.visibility = "collapse";
 					}
 				}
-
 			}
 		}
 
 		function voucher_add(id) {
-			document.getElementById ("voucher_add_form").style.visibility = "visible" ;
-			document.getElementById ("voucher_edit_form").style.visibility = "collapse";
-			
-			
-
+			document.getElementById("voucher_add_form").style.visibility = "visible";
+			document.getElementById("voucher_edit_form").style.visibility = "collapse";
 		}
 	</script>
 
