@@ -217,7 +217,6 @@ input.input-box {
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
 			<!-- The Modal -->
 			<div id="myModal" class="modal">
-
 				<!-- Modal content -->
 				<div class="modal-content">
 					<span class="searchClose">&times;</span>
@@ -730,6 +729,9 @@ input.input-box {
 							results = results
 									+ '<tr class=\"resulttr\">'
 									+ '<td align=\"right\">'
+									+ '<button onclick=\"editfarmdata('
+									+ val
+									+ ')\" class=\"button\" id=\"editselectedfarmBtn\">تعديل</button>'
 									+ '<button onclick=\"showSearchResults('
 									+ val
 									+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
@@ -786,6 +788,10 @@ input.input-box {
 					});
 				}
 			});
+		}
+		
+		function editfarmdata(id) {
+			alert("FarmID: "+id);
 		}
 
 		function voucherAction() {
