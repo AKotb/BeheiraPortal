@@ -26,22 +26,9 @@ public class HomeController {
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping(value = "/arealayers", method = RequestMethod.GET) public
-	 * ModelAndView getAreaLayers(@RequestParam(value = "id") int
-	 * id, @RequestParam(value = "lat") int lat, @RequestParam(value = "lng") int
-	 * lng) throws Exception { ModelAndView mav = new ModelAndView("arealayers");
-	 * mav.addObject("polygonID", id); mav.addObject("lat", lat);
-	 * mav.addObject("lng", lng); return mav; }
-	 */
-
 	@RequestMapping(value = "/arealayers", method = RequestMethod.GET)
 	public ModelAndView getAreaLayers(@RequestParam(value = "params") String[] params) throws Exception {
 		ModelAndView mav = new ModelAndView("arealayers");
-		System.out.println("Array Length: " + params.length);
-		System.out.println("ID: " + params[0]);
-		System.out.println("Lat: " + params[1]);
-		System.out.println("Lng: " + params[2]);
 		mav.addObject("polygonID", params[0]);
 		mav.addObject("lat", params[1]);
 		mav.addObject("lng", params[2]);
@@ -51,12 +38,16 @@ public class HomeController {
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
-		System.out.println("Area ID: " + param);
-		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
-		List<Voucher> vouchers = dbConnection.getVouchersByFarmID(param);
+		List<Voucher> vouchers = null;
+		try {
+			VoucherDAO voucherdao = new VoucherDAO();
+			vouchers = voucherdao.getVouchersByFarmID(param);
+			voucherdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
-		System.out.println("vouchers in JSON: " + vouchersInjson);
 		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}
@@ -80,10 +71,15 @@ public class HomeController {
 		voucher.setIssuingDocumentSection(params[10]);
 		voucher.setIssuingDocumentNo(params[11]);
 		voucher.setNotes(params[12]);
-		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
-		boolean addresult = dbConnection.addVoucher(voucher);
-		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
-		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(params[2]);
+		List<Voucher> vouchers = null;
+		try {
+			VoucherDAO voucherdao = new VoucherDAO();
+			boolean addresult = voucherdao.addVoucher(voucher);
+			vouchers = voucherdao.getVouchersByFarmID(params[2]);
+			voucherdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
 		mav.addObject("vouchers", vouchersInjson);
@@ -110,10 +106,15 @@ public class HomeController {
 		voucher.setIssuingDocumentNo(params[11]);
 		voucher.setNotes(params[12]);
 		voucher.setVoucherID(Integer.parseInt(params[13]));
-		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
-		boolean updateResult = dbConnection.updateVoucher(voucher);
-		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
-		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(params[2]);
+		List<Voucher> vouchers = null;
+		try {
+			VoucherDAO voucherdao = new VoucherDAO();
+			boolean updateResult = voucherdao.updateVoucher(voucher);
+			vouchers = voucherdao.getVouchersByFarmID(params[2]);
+			voucherdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
 		mav.addObject("vouchers", vouchersInjson);
@@ -125,10 +126,15 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
 		int voucherID = Integer.parseInt(params[0]);
 		String farmID = params[1];
-		DBConPgSQL dbConnection = new DBConPgSQL("vouchers", "postgres", "postgres");
-		boolean deleteResult = dbConnection.deleteByVoucherID(voucherID);
-		DBConPgSQL dbConnection1 = new DBConPgSQL("vouchers", "postgres", "postgres");
-		List<Voucher> vouchers = dbConnection1.getVouchersByFarmID(farmID);
+		List<Voucher> vouchers = null;
+		try {
+			VoucherDAO voucherdao = new VoucherDAO();
+			boolean deleteResult = voucherdao.deleteByVoucherID(voucherID);
+			vouchers = voucherdao.getVouchersByFarmID(farmID);
+			voucherdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
 		mav.addObject("vouchers", vouchersInjson);
