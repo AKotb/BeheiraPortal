@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document id="root_doc">
-<Schema name="2km_buffer" id="2km_buffer">
+<Schema name="2km_buffer_polygon" id="2km_buffer_polygon">
 	<SimpleField name="descriptio" type="string"></SimpleField>
 	<SimpleField name="SHAPE_Leng" type="string"></SimpleField>
 	<SimpleField name="FID_1" type="string"></SimpleField>
 	<SimpleField name="Field_1" type="string"></SimpleField>
 	<SimpleField name="BUFF_DIST" type="float"></SimpleField>
 </Schema>
-<Folder><name>2km_buffer</name>
+<Folder><name>2km_buffer_polygon</name>
   <Placemark>
 	<name>12</name>
 	<Style><LineStyle><color>000000ff</color></LineStyle><PolyStyle><fill>1</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#2km_buffer">
+	<ExtendedData><SchemaData schemaUrl="#2km_buffer_polygon">
 		<SimpleData name="SHAPE_Leng">4.522845</SimpleData>
 		<SimpleData name="FID_1">0</SimpleData>
 		<SimpleData name="Field_1">12</SimpleData>
