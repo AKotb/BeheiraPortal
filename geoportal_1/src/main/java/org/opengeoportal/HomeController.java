@@ -35,6 +35,15 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/rasterlayers", method = RequestMethod.GET)
+	public ModelAndView getRasterLayers(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("rasterlayers");
+		mav.addObject("polygonID", params[0]);
+		mav.addObject("lat", params[1]);
+		mav.addObject("lng", params[2]);
+		return mav;
+	}
+
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");

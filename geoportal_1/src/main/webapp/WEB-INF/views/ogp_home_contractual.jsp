@@ -394,7 +394,7 @@ input.input-box {
 					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
 			var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
-						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer_polygon.kml',
+						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
 						map : map
 					});
 			infowindow = new google.maps.InfoWindow();
@@ -527,8 +527,9 @@ input.input-box {
 										sahm = "غير متوفر";
 									}
 
-									var link2 = "<a href=\'#\' class=\'button\'>"
-											+ " مرئيات فضائية " + "</a>";
+									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
+										+ area_id
+										+ ");\' class=\'button\'> مرئيات فضائية </a>";
 									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
 											+ area_id
 											+ ");\' class=\'button\'>"
@@ -602,6 +603,13 @@ input.input-box {
 		function move(id) {
 			var params = [ id, lat, lng ];
 			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+		
+		function move_raster(id) {
+			var params = [ id, lat, lng ];
+			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
