@@ -378,6 +378,7 @@ input.input-box {
 		var infowindow;
 		var lat;
 		var lng;
+		var selectedRecordArray;
 		function initMap() {
 			var Egypt = {
 				lat : 30.2519715,
@@ -732,8 +733,18 @@ input.input-box {
 							} else {
 								My_Farm_Name = "غير متوفر";
 							}
-
+							if (mydata.features[val].properties.Tel) {
+								My_Farm_OwnerTel = mydata.features[val].properties.Tel;
+							} else {
+								My_Farm_OwnerTel = "غير متوفر";
+							}
+							if (mydata.features[val].properties.Owner_ID) {
+								My_Farm_OwnerID = mydata.features[val].properties.Owner_ID;
+							} else {
+								My_Farm_OwnerID = "غير متوفر";
+							}
 							num_of_items = num_of_items + 1;
+							//selectedRecordArray = [val, My_Farm_Owner, My_Ownership, My_Farm_Name, My_Farm_OwnerID, My_Farm_OwnerTel];
 							results = results
 									+ '<tr class=\"resulttr\">'
 									+ '<td align=\"right\">'
@@ -799,7 +810,9 @@ input.input-box {
 		}
 		
 		function editfarmdata(id) {
-			alert("FarmID: "+id);
+			var location = "<c:url value='editfarminfo'><c:param name='param' value='paramvalue'/></c:url>";
+			location = location.replace("paramvalue", id);
+			window.location.href = location;
 		}
 
 		function voucherAction() {

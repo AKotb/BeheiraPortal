@@ -149,4 +149,24 @@ public class HomeController {
 		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/editfarminfo", method = RequestMethod.GET)
+	public ModelAndView editFarmInfo(@RequestParam(value = "param") String param) throws Exception {
+		ModelAndView mav = new ModelAndView("farm_manager");
+		int farmID = Integer.parseInt(param);
+		System.out.println("=============Farm ID: "+farmID);
+		Farm farm = null;
+		try {
+			FarmDAO farmdao = new FarmDAO();
+			farm = farmdao.getByFarmID(farmID);
+			farmdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String farmInjson = mapper.writeValueAsString(farm);
+		System.out.println("==============Farm Object: "+farmInjson);
+		mav.addObject("farm", farmInjson);
+		return mav;
+	}
 }

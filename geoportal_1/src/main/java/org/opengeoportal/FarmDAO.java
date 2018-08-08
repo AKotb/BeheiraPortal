@@ -23,12 +23,20 @@ public class FarmDAO {
 		super();
 		con = DBConPgSQL.establishDBConn();
 	}
+	
+	public void closeDBConn() {
+		try {
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public Farm getByFarmID(int farmID) {
 		Farm farm = new Farm();
 		PreparedStatement preparedStatement = null;
 		try {
-			String queryString = "select * from vouchers.farms where \"farm_id\"=?";
+			String queryString = "select * from beheiraschema.farms where \"farm_id\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setInt(1, farmID);
 			ResultSet rset = preparedStatement.executeQuery();
@@ -36,7 +44,7 @@ public class FarmDAO {
 				farm.setId(rset.getInt(1));
 				farm.setFarmID(rset.getInt(2));
 				farm.setFarmName(rset.getString(3));
-				farm.setOwnerID(rset.getInt(4));
+				farm.setOwnerID(rset.getString(4));
 				farm.setOwnerName(rset.getString(5));
 				farm.setTelephone(rset.getString(6));
 			}
@@ -50,10 +58,10 @@ public class FarmDAO {
 		PreparedStatement preparedStatement = null;
 		boolean updateResult = false;
 		try {
-			String queryString = "UPDATE vouchers.farms SET \"farm_name\"=?, \"owner_id\"=?, \"owner_name\"=?, \"telephone\"=? WHERE \"farm_id\"=?";
+			String queryString = "UPDATE beheiraschema.farms SET \"farm_name\"=?, \"owner_id\"=?, \"owner_name\"=?, \"telephone\"=? WHERE \"farm_id\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, farm.getFarmName());
-			preparedStatement.setInt(2, farm.getOwnerID());
+			preparedStatement.setString(2, farm.getOwnerID());
 			preparedStatement.setString(3, farm.getOwnerName());
 			preparedStatement.setString(4, farm.getTelephone());
 			preparedStatement.setInt(5, farm.getFarmID());
