@@ -26,14 +26,14 @@
 }
 
 .slidecontainer {
-    width: 80%;
+    width: 20%;
 }
 
 .slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 20px;
-    background: #fcbb5b;
+    height: 25px;
+    background: #d3d3d3;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -49,14 +49,14 @@
     appearance: none;
     width: 10px;
     height: 25px;
-    background: #396266;
+    background: #4CAF50;
     cursor: e-resize;
 }
 
 .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: #396266;
+    background: #4CAF50;
     cursor: pointer;
 }
 
@@ -65,19 +65,20 @@
 }
 
 #floating-panel {
-        position: relative;
-        top: 2px;
-        z-index: 5;
+        position: absolute;
+        top: 137px;
+        left: 8%;
+        z-index: 7;
         background-color: #fff;
         padding: 5px;
-        border: 0px solid #999;
+        border: 1px solid #999;
         text-align: center;
         font-family: 'Roboto','sans-serif';
-        line-height: 30px;
+        line-height: 0px;
         padding-left: 10px;
       }
 </style>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
 <script>
 		var overlay;
 	    USGSOverlay.prototype = new google.maps.OverlayView();
@@ -96,8 +97,8 @@
 		            new google.maps.LatLng(22.377222, 35.534444),
 		            new google.maps.LatLng(22.708888, 35.875833));
 
-		    var srcImage2 = 'https://github.com/AKotb/BeheiraPortal/blob/master/geoportal_1/src/main/resources/raster/LC817244_rgb_15m.png';
-		    var srcImage = 'https://github.com/AKotb/BeheiraPortal/blob/master/geoportal_1/src/main/resources/raster/LC817244_rgb_30m.png';
+		    var srcImage2 = 'resources/rasterimages/photo2.png';
+		    var srcImage = 'resources/rasterimages/photo1.png';
 		    overlay = new USGSOverlay(bounds, srcImage, map, "clip1");
 		    overlay2 = new USGSOverlay(bounds2, srcImage2, map, "clip2");
 		}
@@ -167,15 +168,11 @@
 	</div>
 	<div class="slidecontainer" id="floating-panel">
   		<input type="range" min="0" max="100" value="0" class="slider" id="myRange">
-  		<p>Value: <span id="demo"></span></p>
 	</div>
 	<div id="map"></div>
 	<script>
 		var slider = document.getElementById("myRange");
-		var output = document.getElementById("demo");
-		output.innerHTML = slider.value;
 		slider.oninput = function() {
-		  output.innerHTML = this.value;
 		  new_width = document.getElementById("clip2").width;
 		  document.getElementById("clip2").style.clip = "rect(0,"+new_width+"px, "+new_width+"px, " + 0.01* new_width * this.value + "px)";
 		  
