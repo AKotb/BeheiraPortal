@@ -151,9 +151,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/editfarminfo", method = RequestMethod.GET)
-	public ModelAndView editFarmInfo(@RequestParam(value = "param") String param) throws Exception {
+	public ModelAndView editFarmInfo() throws Exception {
 		ModelAndView mav = new ModelAndView("farm_manager");
-		int farmID = Integer.parseInt(param);
+		/*int farmID = Integer.parseInt(param);
 		System.out.println("=============Farm ID: "+farmID);
 		Farm farm = null;
 		try {
@@ -166,7 +166,7 @@ public class HomeController {
 		ObjectMapper mapper = new ObjectMapper();
 		String farmInjson = mapper.writeValueAsString(farm);
 		System.out.println("==============Farm Object: "+farmInjson);
-		mav.addObject("farm", farmInjson);
+		mav.addObject("farm", farmInjson);*/
 		return mav;
 	}
 }

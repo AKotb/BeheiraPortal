@@ -235,44 +235,91 @@ input.readonly-box {
 			alt="project name" class="projectname">
 	</div>
 	<div id="extra">
-		<div class="modal-content">
+		<div id="searchForm" class="modal-content" align="center">
 
-			<h1 class="formheader" align="center"> تعديل بيانات المزرعة </h1>
-			<div align="center">
-				<table border="0" align="center">
-					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="farmname" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">اسم المزرعة</td>
-					</tr>
-					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="ownername" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">اسم المالك</td>
-					</tr>
-					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="ownerid" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">الرقم القومي</td>
-					</tr>
-					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="ownertel" value="" readonly></td>
-						<td align="right" style="color: #396266; font: bold 24px Arial;">التليفون</td>
-					</tr>
-				</table>
-				<br><br> 
-					<h2 align="center">
-						<button onclick="cancel()" class="btnsearch" id="cancelBtn">الغاء</button>
-						<button onclick="editFarmAction()" class="btnsearch" id="saveBtn">حفظ</button>
-					</h2>
-			</div>
+			<h1 class="formheader" align="center">بحث عن قطعة أرض</h1>
+
+			<table border="0" style="dir: rtl;">
+				<tr>
+					<td align="right"><input class="input-box" type="text"
+						id="farm_name" value=""></td>
+					<td align="right" style="color: #3d6266;">اسم المزرعة / الشركة</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="input-box" type="text"
+						id="ownership" value=""></td>
+					<td align="right" style="color: #3d6266;">نوع الحيازة</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="input-box" type="text"
+						id="owner" value=""></td>
+					<td align="right" style="color: #3d6266;">اسم المالك / واضع
+						اليد</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="input-box" type="text"
+						id="sid" value=""></td>
+					<td align="right" style="color: #3d6266;">الرقم القومى</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="input-box" type="text"
+						id="phone" value=""></td>
+					<td align="right" style="color: #3d6266;">التليفون</td>
+				</tr>
+			</table>
+
+			<h2 align="center">
+				<button onclick="searchAction()" class="button btnsearch"
+					id="searchBtn">بحث</button>
+			</h2>
+
 		</div>
+
+		<div id="editFarm" class="modal-content" align="center">
+
+			<h1 class="formheader" align="center">تعديل بيانات المزرعة</h1>
+			<table border="0" align="center">
+				<tr>
+					<td align="right"><input class="readonly-box" type="text"
+						id="farmname" value="" readonly></td>
+					<td align="right" style="color: #396266; font: bold 24px Arial;">اسم
+						المزرعة</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="readonly-box" type="text"
+						id="ownername" value="" readonly></td>
+					<td align="right" style="color: #396266; font: bold 24px Arial;">اسم
+						المالك</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="readonly-box" type="text"
+						id="ownerid" value="" readonly></td>
+					<td align="right" style="color: #396266; font: bold 24px Arial;">الرقم
+						القومي</td>
+				</tr>
+				<tr>
+					<td align="right"><input class="readonly-box" type="text"
+						id="ownertel" value="" readonly></td>
+					<td align="right" style="color: #396266; font: bold 24px Arial;">التليفون</td>
+				</tr>
+			</table>
+			<br> <br>
+			<h2 align="center">
+				<button onclick="cancel()" class="btnsearch" id="cancelBtn">الغاء</button>
+				<button onclick="editFarmAction()" class="btnsearch" id="saveBtn">حفظ</button>
+			</h2>
+		</div>
+
+		<div id="searchResults"></div>
 	</div>
 	<script>
-		farmjson = '${farm}';
+		farmjson = '';
+		//farmjson = '${farm}';
 		window.onload = function() {
-			alert("Farm JSON: "+farmjson);
+			
+			document.getElementById("searchResults").style.visibility = "visible";
+			document.getElementById("editFarm").style.visibility = "collapse";
+			
 			if (farmjson) {
 					farmname=farmjson.farmName;
 					if (farmname) {
@@ -288,7 +335,7 @@ input.readonly-box {
 					}
 					ownerid = farmjson.ownerID;
 					if (ownerid) {
-						document.getElementById("ownerid").value = fownerid;
+						document.getElementById("ownerid").value = ownerid;
 					} else {
 						document.getElementById("ownerid").value = "غير متوفر";
 					}
@@ -301,8 +348,161 @@ input.readonly-box {
 			}
 		}
 		
+		function searchAction() {
+			readTextFile(
+					'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json',
+					function(text) {
+					});
+		}
+
+		function readTextFile(file, callback) {
+			var rawFile = new XMLHttpRequest();
+			rawFile.overrideMimeType("application/json");
+			rawFile.open("GET", file, true);
+			rawFile.onreadystatechange = function() {
+
+				if (rawFile.readyState === 4 && rawFile.status == "200") {
+
+					var mydata = JSON.parse(rawFile.responseText);
+					var results = "";
+					var num_of_items = 0;
+					var search_owner = document.getElementById('owner').value;
+					var search_ownership = document.getElementById('ownership').value;
+					var search_farm_name = document.getElementById('farm_name').value;
+					var search_sid = document.getElementById('sid').value;
+					var search_phone = document.getElementById('phone').value;
+					var cond1, cond2, cond3, cond4, cond5;
+
+					var My_Farm_Owner = "";
+					var My_Ownership = "";
+					var My_Farm_Name = "";
+
+					for ( var val in mydata.features) {
+
+						cond1 = false;
+						cond2 = false;
+						cond3 = false;
+						cond4 = false;
+						cond5 = false;
+
+						if (mydata.features[val].properties.Farm_Owner/*OWNER*/
+								&& search_owner.length > 0)
+							cond1 = mydata.features[val].properties.Farm_Owner/*OWNER*/
+							.includes(search_owner);
+						if (mydata.features[val].properties.Ownership
+								&& search_ownership.length > 0)
+							cond2 = mydata.features[val].properties.Ownership
+									.includes(search_ownership);
+						if (mydata.features[val].properties.Farm_Name
+								&& search_farm_name.length > 0)
+							cond3 = mydata.features[val].properties.Farm_Name
+									.includes(search_farm_name);
+						if (mydata.features[val].properties.Owner_ID
+								&& search_sid.length > 0)
+							cond4 = mydata.features[val].properties.Owner_ID
+									.toString().includes(search_sid);
+						if (mydata.features[val].properties.Tel/*owner_tele*/
+								&& search_phone.length > 0)
+							cond5 = mydata.features[val].properties.Tel/*owner_tele*/
+							.toString().includes(search_phone);
+
+						if (cond1 || cond2 || cond3 || cond4 || cond5) {
+
+							if (mydata.features[val].properties.Farm_Owner) {
+								My_Farm_Owner = mydata.features[val].properties.Farm_Owner;
+							} else {
+								My_Farm_Owner = "غير متوفر";
+							}
+
+							if (mydata.features[val].properties.Ownership) {
+								My_Ownership = mydata.features[val].properties.Ownership;
+							} else {
+								My_Ownership = "غير متوفر";
+							}
+
+							if (mydata.features[val].properties.Farm_Name) {
+								My_Farm_Name = mydata.features[val].properties.Farm_Name;
+							} else {
+								My_Farm_Name = "غير متوفر";
+							}
+
+							num_of_items = num_of_items + 1;
+							results = results
+									+ '<tr class=\"resulttr\">'
+									+ '<td align=\"right\">'
+									+ '<button onclick=\"editfarmdata('
+									+ val
+									+ ')\" class=\"button\" id=\"editselectedfarmBtn\">تعديل</button>'
+									+ '<button onclick=\"showSearchResults('
+									+ val
+									+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
+									+ '</td>' + '<td align=\"right\">'
+									+ My_Farm_Owner/*OWNER*/
+									+ '</td>' + '<td align=\"right\">'
+									+ My_Ownership + '</td>'
+									+ '<td align=\"right\">' + My_Farm_Name
+									+ '</td>' + '<td>' + val + '</td>'
+									+ '</tr>';
+						}
+					}
+
+					if (num_of_items > 0) {
+						var search_header = '<div align=\"center\"><h3 align=\"center\">تم إيجاد '
+								+ num_of_items
+								+ ' من نتائج البحث </h3><br><table border=\"0\" align=\"center\">'
+								+ '<tr>'
+								+ '<th class=\"resultth\">إعدادات</th>'
+								+ '<th class=\"resultth\">اسم المالك / واضع اليد</th>'
+								+ '<th class=\"resultth\">نوع الحيازة</th>'
+								+ '<th class=\"resultth\">اسم المزرعة / الشركة</th>'
+								+ '<th class=\"resultth\"> رقم </th>' + '</tr>';
+						results = search_header
+								+ results
+								+ '</table></div><br><br><br><br><br><br><br><br>';
+						document.getElementById('searchResults').innerHTML = results;
+					} else
+						document.getElementById('searchResults').innerHTML = '<div align=\"center\"><h3>عفوا ، لا توجد نتائج</h3></div>';
+
+				}
+			}
+			rawFile.send(null);
+		}
+
+		function showSearchResults(id) {
+			var modal = document.getElementById('myModal');
+			modal.style.display = "none";
+			map.setZoom(13);
+			map.setCenter(new google.maps.LatLng(30.22, 30.22));
+			map.data.setStyle(function(event) {
+				if (event.getProperty('id') === id) {
+					var color = 'green';
+					return ({
+						fillColor : color,
+						strokeColor : color,
+						strokeWeight : 3
+					});
+				} else {
+					return ({
+						fillColor : 'transparent',
+						strokeColor : 'blue',
+						strokeWeight : 2
+					});
+				}
+			});
+		}
+		
+		function editfarmdata(id) {
+			alert("FarmID: "+id);
+			document.getElementById("editFarm").style.visibility = "visible";
+			document.getElementById("searchResults").style.visibility = "collapse";
+		}
+		
 		function editFarmAction() {
 			alert("Save Button Pressed");
+			
+			document.getElementById("searchResults").style.visibility = "visible";
+			document.getElementById("editFarm").style.visibility = "collapse";
+			
 			//var location = "<c:url value='addnewvoucher'><c:param name='params' value='paramsvalues'/></c:url>";
 			//location = location.replace("paramsvalues", params);
 			//window.location.href = location;
@@ -310,6 +510,9 @@ input.readonly-box {
 		
 		function cancel() {
 			alert("Cancel Button Pressed");
+			
+			document.getElementById("searchResults").style.visibility = "visible";
+			document.getElementById("editFarm").style.visibility = "collapse";
 		}
 	</script>
 

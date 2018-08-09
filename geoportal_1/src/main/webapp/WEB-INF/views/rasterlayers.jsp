@@ -32,8 +32,8 @@
 .slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 25px;
-    background: #d3d3d3;
+    height: 20px;
+    background: #fcbb5b;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -49,14 +49,14 @@
     appearance: none;
     width: 10px;
     height: 25px;
-    background: #4CAF50;
+    background: #396266;
     cursor: e-resize;
 }
 
 .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: #396266;
     cursor: pointer;
 }
 
@@ -65,13 +65,12 @@
 }
 
 #floating-panel {
-        position: absolute;
-        top: 20px;
-        left: 45%;
-        z-index: 7;
+        position: relative;
+        top: 2px;
+        z-index: 5;
         background-color: #fff;
         padding: 5px;
-        border: 1px solid #999;
+        border: 0px solid #999;
         text-align: center;
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
