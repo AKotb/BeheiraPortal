@@ -90,8 +90,8 @@
 .slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 25px;
-    background: #d3d3d3;
+    height: 20px;
+    background: #fcbb5b;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -107,14 +107,14 @@
     appearance: none;
     width: 10px;
     height: 25px;
-    background: #4CAF50;
+    background: #396266;
     cursor: e-resize;
 }
 
 .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: #396266;
     cursor: pointer;
 }
 
@@ -125,13 +125,12 @@
 }
 
 #floating-panel {
-        position: absolute;
-        top: 20px;
-        left: 45%;
-        z-index: 7;
+        position: relative;
+        top: 2px;
+        z-index: 5;
         background-color: #fff;
         padding: 5px;
-        border: 1px solid #999;
+        border: 0px solid #999;
         text-align: center;
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
@@ -160,7 +159,7 @@
 	</div>
 	<div class="slidecontainer" id="floating-panel">
   		<input type="range" min="0" max="100" value="0" class="slider" id="myRange">
-  		<p>Value: <span id="demo"></span></p>
+  		<!-- <p>Value: <span id="demo"></span></p> -->
 	</div>
 	<div id="map"></div>
 	<!-- Leaflet library -->
@@ -177,14 +176,14 @@
 	    USGSOverlay.prototype = new google.maps.OverlayView();
 	      
 		function initMap() {
-			/*var map = new google.maps.Map(document.getElementById('map'), {
+			var map = new google.maps.Map(document.getElementById('map'), {
 		          zoom: 11,
 		          center: {lat: 22.543055, lng: 35.705139},
 		          mapTypeId: 'satellite'
-		        });*/
+		        });
 		        
 		        
-		       /**/
+		       /*
 		        var lat = 22.543055;
 				var lng = 35.705139;
 				var map = L.map('map').setView([ lat, lng ], 11);
@@ -194,7 +193,7 @@
 							subdomains : [ 'mt0', 'mt1', 'mt2', 'mt3' ]
 						}).addTo(map);
 		        
-		        /**/
+		        */
 
 		        var bounds = new google.maps.LatLngBounds(
 		            new google.maps.LatLng(22.377222, 35.534444),
@@ -301,7 +300,8 @@
 				
 	</script>
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap&v=3.exp&sensor=false"></script>
+		
 	
 	<script>
 		var slider = document.getElementById("myRange");
@@ -317,6 +317,7 @@
 	</script>
 
 	<!-- SCRIPTS -->
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> -->
 	<script src="resources/javascript/js/js/js/jquery.js"></script>
 	<script src="resources/javascript/js/js/js/bootstrap.min.js"></script>
 	<script src="resources/javascript/js/js/js/jquery.sticky.js"></script>
