@@ -249,7 +249,7 @@ input.input-box {
 					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
 			var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
-						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer_road.kml',
+						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
 						map : map
 					});
 			infowindow = new google.maps.InfoWindow();
