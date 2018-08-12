@@ -168,10 +168,10 @@ input.readonly-box {
 
 /* Modal Content */
 .modal-content {
-	background-color: #fefefe;
+	//background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
-	border: 1px solid #888;
+	//border: 1px solid #888;
 }
 
 /* The Close Button */
@@ -317,8 +317,10 @@ input.readonly-box {
 		//farmjson = '${farm}';
 		window.onload = function() {
 			
-			document.getElementById("searchResults").style.visibility = "visible";
-			document.getElementById("editFarm").style.visibility = "collapse";
+			document.getElementById("searchResults").style.display = "block";
+			document.getElementById("searchForm").style.display = "block";
+			document.getElementById("editFarm").style.display = "none";
+			
 			
 			if (farmjson) {
 					farmname=farmjson.farmName;
@@ -493,15 +495,17 @@ input.readonly-box {
 		
 		function editfarmdata(id) {
 			alert("FarmID: "+id);
-			document.getElementById("editFarm").style.visibility = "visible";
-			document.getElementById("searchResults").style.visibility = "collapse";
+			document.getElementById("editFarm").style.display = "block";
+			document.getElementById("searchResults").style.display = "none";
+			document.getElementById("searchForm").style.display = "none";
 		}
 		
 		function editFarmAction() {
 			alert("Save Button Pressed");
 			
-			document.getElementById("searchResults").style.visibility = "visible";
-			document.getElementById("editFarm").style.visibility = "collapse";
+			document.getElementById("searchResults").style.display = "block";
+			document.getElementById("searchForm").style.display = "block";
+			document.getElementById("editFarm").style.display = "none";
 			
 			//var location = "<c:url value='addnewvoucher'><c:param name='params' value='paramsvalues'/></c:url>";
 			//location = location.replace("paramsvalues", params);
@@ -511,8 +515,9 @@ input.readonly-box {
 		function cancel() {
 			alert("Cancel Button Pressed");
 			
-			document.getElementById("searchResults").style.visibility = "visible";
-			document.getElementById("editFarm").style.visibility = "collapse";
+			document.getElementById("searchResults").style.display = "block";
+			document.getElementById("searchForm").style.display = "block";
+			document.getElementById("editFarm").style.display = "none";
 		}
 	</script>
 
