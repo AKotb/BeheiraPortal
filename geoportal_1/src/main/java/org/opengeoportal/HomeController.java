@@ -153,20 +153,18 @@ public class HomeController {
 	@RequestMapping(value = "/editfarminfo", method = RequestMethod.GET)
 	public ModelAndView editFarmInfo() throws Exception {
 		ModelAndView mav = new ModelAndView("farm_manager");
-		/*int farmID = Integer.parseInt(param);
-		System.out.println("=============Farm ID: "+farmID);
-		Farm farm = null;
-		try {
-			FarmDAO farmdao = new FarmDAO();
-			farm = farmdao.getByFarmID(farmID);
-			farmdao.closeDBConn();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		ObjectMapper mapper = new ObjectMapper();
-		String farmInjson = mapper.writeValueAsString(farm);
-		System.out.println("==============Farm Object: "+farmInjson);
-		mav.addObject("farm", farmInjson);*/
+		return mav;
+	}
+	
+	@RequestMapping(value = "/who_we_are", method = RequestMethod.GET)
+	public ModelAndView whoWeAre() throws Exception {
+		ModelAndView mav = new ModelAndView("who_we_are");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/regulations_and_laws", method = RequestMethod.GET)
+	public ModelAndView regulationsAndLaws() throws Exception {
+		ModelAndView mav = new ModelAndView("regulations_and_laws");
 		return mav;
 	}
 }

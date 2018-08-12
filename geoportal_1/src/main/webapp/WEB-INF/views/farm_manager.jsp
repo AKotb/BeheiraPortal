@@ -211,6 +211,7 @@ input.readonly-box {
 
 .formheader {
 	background-color: #3d6266;
+	border-radius: 20px 20px 0 0;
 	color: #fcbb5b;
 	font: bold 40px Arial;
 }
@@ -220,12 +221,12 @@ input.readonly-box {
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a id="mysearch" href="#"> <img
+			<a href="#"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
-			<a href="#" id="myvoucher"><img
+			<a href="who_we_are" id="myvoucher"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
-			<a href="#"><img
+			<a href="regulations_and_laws"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
 			<a href="http://localhost:8080/beheiraportal/"><img

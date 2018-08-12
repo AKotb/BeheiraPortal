@@ -92,12 +92,12 @@
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a href="#"><img
+			<a href="editfarminfo"><img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
-			<a href="#"><img
+			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
-			<a href="#"><img
+			<a href="regulations_and_laws"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
 			<a href="http://localhost:8080/beheiraportal/"><img
@@ -150,7 +150,45 @@
 			"weight" : 5,
 			"opacity" : 0.65
 		};
-
+		
+		
+		/*
+		*different styles for different types in map
+		* ready for new datasets
+		
+		
+		//1- مبانى قائمة
+		var style01_ = {
+				"color" : "rgb(255,0,0)", //red
+				"weight" : 5,
+				"opacity" : 0.65
+		};
+		// 2- أراضى منزرعة - محاصيل بستانية
+		var style02_ = {
+				"color" : "rgb(85,255,0)", //light green
+				"weight" : 5,
+				"opacity" : 0.65
+		};
+		// 3- أراضى منزرعة - محاصيل حقلية
+		var style03_ = {
+				"color" : "rgb(38,115,0)", //dark green
+				"weight" : 5,
+				"opacity" : 0.65
+		};
+		// 4- أراضى مستصلحة
+		var style04_ = {
+				"color" : "rgb(230,152,0)", //orange
+				"weight" : 5,
+				"opacity" : 0.65
+		};
+		// 5- أراضى غير مستغلة
+		var style05_ = {
+				"color" : "rgb(190,190,190)", //light gray
+				"weight" : 5,
+				"opacity" : 0.65
+		};
+		*/
+		
 		var kyObject;
 		var map = L.map('map').setView([ lat, lng ], 15);
 		var basemap = L.tileLayer(

@@ -204,6 +204,7 @@ input.input-box {
 
 .formheader {
 	background-color: #3d6266;
+	border-radius: 20px 20px 0 0;
 	color: #fcbb5b;
 	font: bold 40px Arial;
 }
@@ -213,12 +214,12 @@ input.input-box {
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a id="mysearch" href="javascript:searchBox()"> <img
+			<a href="editfarminfo"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
-			<a href="#"><img
+			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
-			<a href="#"><img
+			<a href="regulations_and_laws"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
 			<a href="http://localhost:8080/beheiraportal/"><img
@@ -482,10 +483,10 @@ input.input-box {
 			}
 		}
 
-		function searchBox() {
+		/*function searchBox() {
 			var location = "<c:url value='editfarminfo'></c:url>";
 			window.location.href = location;
-		}
+		}*/
 
 		function voucherAction() {
 			var voucher_ID = document.getElementById('voucher_ID').value;
