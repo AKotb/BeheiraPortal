@@ -150,9 +150,51 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/editfarminfo", method = RequestMethod.GET)
-	public ModelAndView editFarmInfo() throws Exception {
+	@RequestMapping(value = "/searchforfarms", method = RequestMethod.GET)
+	public ModelAndView searchForFarms() throws Exception {
 		ModelAndView mav = new ModelAndView("farm_manager");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/editfarmdata", method = RequestMethod.GET)
+	public ModelAndView updateFarmData(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("farm_manager");
+		Farm farm = new Farm();
+		farm.setFarmID(Integer.parseInt(params[0]));
+		farm.setFarmName(params[1]);
+		farm.setOwnerName(params[2]);
+		farm.setOwnerID(params[3]);
+		farm.setTelephone(params[4]);
+		farm.setOwnership(params[5]);
+		List<Farm> farmsList = null;
+		try {
+			FarmDAO farmdao = new FarmDAO();
+			boolean updateResult = farmdao.updateFarm(farm);
+			farmsList = farmdao.getAllFarms(params[1], params[3], params[2], params[4], params[5]);
+			farmdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String farmsInjson = mapper.writeValueAsString(farmsList);
+		mav.addObject("farms", farmsInjson);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/getallfarms", method = RequestMethod.GET)
+	public ModelAndView getAllFarms(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("farm_manager");
+		List<Farm> farmsList = null;
+		try {
+			FarmDAO farmdao = new FarmDAO();
+			farmsList= farmdao.getAllFarms(params[0], params[1], params[2], params[3], params[4]);
+			farmdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String farmsInjson = mapper.writeValueAsString(farmsList);
+		mav.addObject("farms", farmsInjson);
 		return mav;
 	}
 	

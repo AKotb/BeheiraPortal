@@ -14,6 +14,7 @@ public class Farm {
 	private String ownerID;
 	private String ownerName;
 	private String telephone;
+	private String ownership;
 
 	/**
 	 * 
@@ -30,7 +31,7 @@ public class Farm {
 	 * @param ownerName
 	 * @param telephone
 	 */
-	public Farm(int id, int farmID, String farmName, String ownerID, String ownerName, String telephone) {
+	public Farm(int id, int farmID, String farmName, String ownerID, String ownerName, String telephone, String ownership) {
 		super();
 		this.id = id;
 		this.farmID = farmID;
@@ -38,6 +39,7 @@ public class Farm {
 		this.ownerID = ownerID;
 		this.ownerName = ownerName;
 		this.telephone = telephone;
+		this.ownership = ownership;
 	}
 
 	/**
@@ -128,6 +130,20 @@ public class Farm {
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	/**
+	 * @return the ownership
+	 */
+	public String getOwnership() {
+		return ownership;
+	}
+
+	/**
+	 * @param ownership the ownership to set
+	 */
+	public void setOwnership(String ownership) {
+		this.ownership = ownership;
 	}
 
 }

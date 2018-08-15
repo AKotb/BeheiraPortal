@@ -19,7 +19,7 @@
 	href="resources/css/css/css/css/tooplate-style.css">
 <style>
 #extra {
-	height: 550px;
+	height: 618px;
 	width: 100%;
 }
 
@@ -214,7 +214,7 @@ input.input-box {
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a href="editfarminfo"> <img
+			<a href="searchforfarms"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
 			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
@@ -482,11 +482,6 @@ input.input-box {
 				var voucher = JSON.parse(voucherjson);
 			}
 		}
-
-		/*function searchBox() {
-			var location = "<c:url value='editfarminfo'></c:url>";
-			window.location.href = location;
-		}*/
 
 		function voucherAction() {
 			var voucher_ID = document.getElementById('voucher_ID').value;

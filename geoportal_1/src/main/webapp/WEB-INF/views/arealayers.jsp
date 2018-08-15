@@ -25,7 +25,7 @@
 <!-- inline styles -->
 <style>
 #map {
-	height: 550px;
+	height: 618px;
 	width: 100%;
 }
 
