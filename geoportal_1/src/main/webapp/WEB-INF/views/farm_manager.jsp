@@ -346,6 +346,7 @@ input.readonly-box {
 				var ownername = "";
 				var ownertel = "";
 				var ownership = "";
+				var displayedownership = "";
 				for ( var i in farms) {
 					num_of_items = num_of_items + 1;
 					if (farms[i].farmID) {
@@ -379,6 +380,18 @@ input.readonly-box {
 
 					if (farms[i].ownership) {
 						ownership = farms[i].ownership;
+						if(ownership === '1'){
+							displayedownership = "تمليك";
+						}
+						if(ownership === '2'){
+							displayedownership = "إيجار";
+						}
+						if(ownership === '3'){
+							displayedownership = "وضع اليد";
+						}
+						if(ownership === ''){
+							displayedownership = "غير متوفر";
+						}
 					} else {
 						ownership = "غير متوفر";
 					}
@@ -402,7 +415,7 @@ input.readonly-box {
 							+ '<button onclick=\"showSearchResults('
 							+ farmid
 							+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
-							+ '</td>' + '<td align=\"right\">' + ownerid
+							+ '</td>' + '<td align=\"right\">' + displayedownership
 							+ '</td>' + '<td align=\"right\">' + ownername
 							+ '</td>' + '<td align=\"right\">' + farmname
 							+ '</td>' + '<td>' + farmid + '</td>' + '</tr>';
@@ -415,7 +428,7 @@ input.readonly-box {
 						+ ' من نتائج البحث </h3><br><table border=\"0\" align=\"center\">'
 						+ '<tr>'
 						+ '<th class=\"resultth\">إعدادات</th>'
-						+ '<th class=\"resultth\"> الرقم القومي </th>'
+						+ '<th class=\"resultth\"> نوع الحيازة </th>'
 						+ '<th class=\"resultth\">اسم المالك / واضع اليد</th>'
 						+ '<th class=\"resultth\">اسم المزرعة / الشركة</th>'
 						+ '<th class=\"resultth\"> كود المزرعة </th>' + '</tr>';
