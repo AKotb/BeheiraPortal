@@ -94,7 +94,7 @@
 <script src="resources/leaflet/leaflet.js"></script>
 	<div class="container">
 		<ul class="nav">
-			<a href="#"><img
+			<a href="searchforfarms"><img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
 			<a href="#"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"

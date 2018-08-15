@@ -222,7 +222,7 @@ input.readonly-box {
 	<div class="container">
 		<ul class="nav">
 
-			<a href="editfarminfo"><img
+			<a href="searchforfarms"><img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
 			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
