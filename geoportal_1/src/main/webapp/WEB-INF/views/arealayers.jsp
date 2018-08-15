@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>تنمية أراضي محافظة البحيرة</title>
+<title>استخدامات الأراضي</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="description" content="">
