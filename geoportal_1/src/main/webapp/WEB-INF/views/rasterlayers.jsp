@@ -162,7 +162,7 @@
 			<a href="searchforfarms"><img src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
 			<a href="who_we_are"><img src="resources/css/css/css/css/images/WHO ARE WE.png" alt="WHO ARE WE"></a>
 			<a href="regulations_and_laws"><img src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png" alt="REGULATIONS AND LAWS"></a>
-			<a href="http://localhost:8080/beheiraportal/"><img src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
+			<a href="index"><img src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
 		<img src="resources/css/css/css/css/images/projectname.png" alt="project name" class="projectname">
 	</div>

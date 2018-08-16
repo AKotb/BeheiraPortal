@@ -230,7 +230,7 @@ input.readonly-box {
 			<a href="regulations_and_laws"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
-			<a href="http://localhost:8080/beheiraportal/"><img
+			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
 		<img src="resources/css/css/css/css/images/projectname.png"
