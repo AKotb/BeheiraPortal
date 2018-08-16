@@ -107,4 +107,28 @@ public class FarmDAO {
 		}
 		return farmsList;
 	}
+
+	public List<Farm> getAllAvailableFarms() {
+		PreparedStatement preparedStatement = null;
+		List<Farm> farmsList = new ArrayList<Farm>();
+		try {
+			String queryString = "select * from beheiraschema.farms";
+			preparedStatement = con.prepareStatement(queryString);
+			ResultSet rset = preparedStatement.executeQuery();
+			while (rset.next()) {
+				Farm farm = new Farm();
+				farm.setId(rset.getInt(1));
+				farm.setFarmID(rset.getInt(2));
+				farm.setFarmName(rset.getString(3));
+				farm.setOwnerID(rset.getString(4));
+				farm.setOwnerName(rset.getString(5));
+				farm.setTelephone(rset.getString(6));
+				farm.setOwnership(rset.getString(7));
+				farmsList.add(farm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return farmsList;
+	}
 }

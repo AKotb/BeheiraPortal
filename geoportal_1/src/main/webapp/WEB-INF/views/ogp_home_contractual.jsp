@@ -234,6 +234,7 @@ input.input-box {
 		var infowindow;
 		var lat;
 		var lng;
+		var farms;
 		function initMap() {
 			var Egypt = {
 				lat : 30.2519715,
@@ -323,7 +324,6 @@ input.input-box {
 									mapcenter = bounds.getCenter();
 									lat = mapcenter.lat();
 									lng = mapcenter.lng();
-
 									var owner = event.feature
 											.getProperty('Farm_Owner');
 									if (owner) {
@@ -382,6 +382,64 @@ input.input-box {
 										qirat = "غير متوفر";
 										sahm = "غير متوفر";
 									}
+									var db_farmname = "";
+									var db_ownerid = "";
+									var db_ownername = "";
+									var db_ownertel = "";
+									var db_ownership = "";
+									var db_displayedownership = "";
+									for ( var i in farms) {
+										if (farms[i].farmID === area_id) {
+											if (farms[i].farmName) {
+												db_farmname = farms[i].farmName;
+											} else {
+												db_farmname = "غير متوفر";
+											}
+
+											if (farms[i].ownerID) {
+												db_ownerid = farms[i].ownerID;
+											} else {
+												db_ownerid = "غير متوفر";
+											}
+
+											if (farms[i].ownerName) {
+												db_ownername = farms[i].ownerName;
+											} else {
+												db_ownername = "غير متوفر";
+											}
+
+											if (farms[i].telephone) {
+												db_ownertel = farms[i].telephone;
+											} else {
+												db_ownertel = "غير متوفر";
+											}
+
+											if (farms[i].ownership) {
+												db_ownership = farms[i].ownership;
+												if(db_ownership === '1'){
+													db_displayedownership = "تمليك";
+												}
+												if(db_ownership === '2'){
+													db_displayedownership = "إيجار";
+												}
+												if(db_ownership === '3'){
+													db_displayedownership = "وضع اليد";
+												}
+												if(db_ownership === ''){
+													db_displayedownership = "غير متوفر";
+												}
+											} else {
+												db_ownership = "غير متوفر";
+											}
+										}else{
+											db_farmname=farm_name;
+											db_ownerid=sid;
+											db_ownername=owner;
+											db_ownertel=phone;
+											db_displayedownership=ownership;
+										}
+									}
+
 
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
 										+ area_id
@@ -400,7 +458,9 @@ input.input-box {
 											+ link4
 											+ "<br>"
 											+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
-											+ farm_name
+											+ area_id
+											+ "</td><td class=\'rightcolumn\'>كود المزرعة / الشركة</td></tr><tr><td class=\'td\'>"
+											+ db_farmname
 											+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td class=\'td\'><table class=\"innertable\"><tr><td class=\'td\'>س</td><td class=\'td\'>ط</td><td class=\'td\'>ف</td></tr><tr><td class=\'td\'>"
 											+ sahm
 											+ "</td><td class=\'td\'>"
@@ -409,13 +469,13 @@ input.input-box {
 											+ feddan
 											+ "</td></tr></table>"
 											+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td class=\'td\'>"
-											+ ownership
+											+ db_displayedownership
 											+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td class=\'td\'>"
-											+ owner
+											+ db_ownername
 											+ "</td><td class=\'rightcolumn\'>اسم المالك / واضع اليد</td></tr><tr><td class=\'td\'>"
-											+ sid
+											+ db_ownerid
 											+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td class=\'td\'>"
-											+ phone
+											+ db_ownertel
 											+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
 											+ "<br>"
 											+ link1
@@ -477,10 +537,17 @@ input.input-box {
 		}
 
 		window.onload = function() {
-			voucherjson = '${voucher}';
+			farmsjson = '${farms}';
+			if (farmsjson) {
+				farms = JSON.parse(farmsjson);
+			}else{
+				var location = "<c:url value='getallavailablefarms'></c:url>";
+				window.location.href = location;
+			}
+			/* voucherjson = '${voucher}';
 			if (voucherjson) {
 				var voucher = JSON.parse(voucherjson);
-			}
+			} */
 		}
 
 		function voucherAction() {

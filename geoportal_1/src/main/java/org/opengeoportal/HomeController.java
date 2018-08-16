@@ -198,6 +198,23 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/getallavailablefarms", method = RequestMethod.GET)
+	public ModelAndView getAllAvailableFarms() throws Exception {
+		ModelAndView mav = new ModelAndView("ogp_home_contractual");
+		List<Farm> farmsList = null;
+		try {
+			FarmDAO farmdao = new FarmDAO();
+			farmsList= farmdao.getAllAvailableFarms();
+			farmdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String farmsInjson = mapper.writeValueAsString(farmsList);
+		mav.addObject("farms", farmsInjson);
+		return mav;
+	}
+	
 	@RequestMapping(value = "/who_we_are", method = RequestMethod.GET)
 	public ModelAndView whoWeAre() throws Exception {
 		ModelAndView mav = new ModelAndView("who_we_are");
