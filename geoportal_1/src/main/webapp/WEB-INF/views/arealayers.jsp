@@ -5,7 +5,7 @@
 <html>
 <head>
 
-<title>EL-BEHIRA GOVERNORATE</title>
+<title>استخدامات الاراضى</title>
 
 <!-- meta tags -->
 <meta charset="UTF-8">
@@ -17,9 +17,6 @@
 
 <!-- CSS -->
 <link rel="stylesheet"	href="resources/css/css/css/css/tooplate-style.css">
-
-<!-- CSS for Leaflet library -->
-<link rel="stylesheet" href="resources/leaflet/leaflet.css" />
 
 <!-- inline styles -->
 <style>
@@ -96,10 +93,10 @@
 		<ul class="nav">
 			<a href="searchforfarms"><img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
-			<a href="#"><img
+			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
-			<a href="#"><img
+			<a href="regulations_and_laws"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
 			<a href="index"><img
@@ -136,7 +133,6 @@
 			infowindow = new google.maps.InfoWindow();
 			map.data.setStyle(function(feature) {
 				var landusecode = feature.getProperty('LanduseCod');
-				//alert("LandUse Code: "+landusecode);
 				if(landusecode == '1'){
 					return ({
 						fillColor : 'red',
