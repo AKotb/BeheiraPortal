@@ -579,7 +579,13 @@ input.readonly-box {
 		} */
 
 		function showSearchResults(id) {
-			var modal = document.getElementById('myModal');
+			
+			var params = [ id, "lat", "lng" ];
+			var location = "<c:url value='showonmap'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+			
+			/*var modal = document.getElementById('myModal');
 			modal.style.display = "none";
 			map.setZoom(13);
 			map.setCenter(new google.maps.LatLng(30.22, 30.22));
@@ -598,7 +604,7 @@ input.readonly-box {
 						strokeWeight : 2
 					});
 				}
-			});
+			});*/
 		}
 
 		function editfarmdata(selectedfarmdata) {

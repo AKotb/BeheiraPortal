@@ -265,13 +265,41 @@ input.input-box {
 					});
 				} else {
 					var color = 'blue';
-					return ({
-						fillColor : color,
-						strokeColor : color,
-						strokeWeight : 2
-					});
+					var color_selected = 'green';
+					var showfarm_id = "${showfarm_id}";
+					
+					if (feature.getProperty('M_ID') == showfarm_id) {
+						//alert("farm id: " + showfarm_id);
+						return ({
+							fillColor : color_selected,
+							strokeColor : color_selected,
+							strokeWeight : 4
+						});
+					} else {
+						//alert("get property: " + feature.getProperty('M_ID'));
+						return ({
+							fillColor : color,
+							strokeColor : color,
+							strokeWeight : 2
+						});
+					}
 				}
 			});
+			
+
+			/*map.data.setStyle(function(feature) {
+				var showfarm_id = "${showfarm_id}";
+				if (showfarm_id || true){
+						if(feature.getProperty('id') == 8){
+						var color = 'green';
+						return ({
+							fillColor : color,
+							strokeColor : color,
+							strokeWeight : 5
+						});
+					}
+				}
+			});*/
 
 			map.data
 					.addListener(
@@ -416,34 +444,33 @@ input.input-box {
 
 											if (farms[i].ownership) {
 												db_ownership = farms[i].ownership;
-												if(db_ownership === '1'){
+												if (db_ownership === '1') {
 													db_displayedownership = "تمليك";
 												}
-												if(db_ownership === '2'){
+												if (db_ownership === '2') {
 													db_displayedownership = "إيجار";
 												}
-												if(db_ownership === '3'){
+												if (db_ownership === '3') {
 													db_displayedownership = "وضع اليد";
 												}
-												if(db_ownership === ''){
+												if (db_ownership === '') {
 													db_displayedownership = "غير متوفر";
 												}
 											} else {
 												db_ownership = "غير متوفر";
 											}
-										}else{
-											db_farmname=farm_name;
-											db_ownerid=sid;
-											db_ownername=owner;
-											db_ownertel=phone;
-											db_displayedownership=ownership;
+										} else {
+											db_farmname = farm_name;
+											db_ownerid = sid;
+											db_ownername = owner;
+											db_ownertel = phone;
+											db_displayedownership = ownership;
 										}
 									}
 
-
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
-										+ area_id
-										+ ");\' class=\'button\'> مرئيات فضائية </a>";
+											+ area_id
+											+ ");\' class=\'button\'> مرئيات فضائية </a>";
 									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
 											+ area_id
 											+ ");\' class=\'button\'>"
@@ -497,7 +524,6 @@ input.input-box {
 
 							});
 
-			
 			map.data.addListener('mouseover', function(event) {
 				var folderpath = event.feature.getProperty('FolderPath');
 				if (folderpath) {
@@ -522,7 +548,7 @@ input.input-box {
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
-		
+
 		function move_raster(id) {
 			var params = [ id, lat, lng ];
 			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
@@ -540,7 +566,8 @@ input.input-box {
 			farmsjson = '${farms}';
 			if (farmsjson) {
 				farms = JSON.parse(farmsjson);
-			}else{
+
+			} else {
 				var location = "<c:url value='getallavailablefarms'></c:url>";
 				window.location.href = location;
 			}

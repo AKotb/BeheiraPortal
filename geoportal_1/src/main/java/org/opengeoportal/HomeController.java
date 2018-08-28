@@ -215,6 +215,15 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/showonmap", method = RequestMethod.GET)
+	public ModelAndView showFarmOnMap(@RequestParam(value = "params") String[] params) throws Exception {
+		ModelAndView mav = new ModelAndView("ogp_home_contractual");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mav.addObject("showfarm_id", params[0]);
+		return mav;
+	}
+	
 	@RequestMapping(value = "/who_we_are", method = RequestMethod.GET)
 	public ModelAndView whoWeAre() throws Exception {
 		ModelAndView mav = new ModelAndView("who_we_are");
