@@ -207,6 +207,9 @@
 					sahm = sahmarr[0];
 				} else {
 					area = "0";
+					feddan = "غير متوفر";
+					qirat = "غير متوفر";
+					sahm = "غير متوفر";
 				}
 
 				var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
