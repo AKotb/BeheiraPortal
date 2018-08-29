@@ -584,27 +584,6 @@ input.readonly-box {
 			var location = "<c:url value='showonmap'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
-			
-			/*var modal = document.getElementById('myModal');
-			modal.style.display = "none";
-			map.setZoom(13);
-			map.setCenter(new google.maps.LatLng(30.22, 30.22));
-			map.data.setStyle(function(event) {
-				if (event.getProperty('id') === id) {
-					var color = 'green';
-					return ({
-						fillColor : color,
-						strokeColor : color,
-						strokeWeight : 3
-					});
-				} else {
-					return ({
-						fillColor : 'transparent',
-						strokeColor : 'blue',
-						strokeWeight : 2
-					});
-				}
-			});*/
 		}
 
 		function editfarmdata(selectedfarmdata) {

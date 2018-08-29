@@ -276,7 +276,6 @@ input.input-box {
 							strokeWeight : 4
 						});
 					} else {
-						//alert("get property: " + feature.getProperty('M_ID'));
 						return ({
 							fillColor : color,
 							strokeColor : color,
@@ -285,21 +284,6 @@ input.input-box {
 					}
 				}
 			});
-			
-
-			/*map.data.setStyle(function(feature) {
-				var showfarm_id = "${showfarm_id}";
-				if (showfarm_id || true){
-						if(feature.getProperty('id') == 8){
-						var color = 'green';
-						return ({
-							fillColor : color,
-							strokeColor : color,
-							strokeWeight : 5
-						});
-					}
-				}
-			});*/
 
 			map.data
 					.addListener(
@@ -568,7 +552,9 @@ input.input-box {
 				farms = JSON.parse(farmsjson);
 
 			} else {
-				var location = "<c:url value='getallavailablefarms'></c:url>";
+				var location = "<c:url value='getallavailablefarms'><c:param name='params' value='paramsvalues'/></c:url>";
+				var params = ["${showfarm_id}", "lat", "lng"];
+				location = location.replace("paramsvalues", params);
 				window.location.href = location;
 			}
 			/* voucherjson = '${voucher}';

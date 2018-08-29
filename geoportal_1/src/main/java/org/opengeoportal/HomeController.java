@@ -199,7 +199,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/getallavailablefarms", method = RequestMethod.GET)
-	public ModelAndView getAllAvailableFarms() throws Exception {
+	public ModelAndView getAllAvailableFarms(@RequestParam(value = "params") String[] params) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home_contractual");
 		List<Farm> farmsList = null;
 		try {
@@ -212,6 +212,7 @@ public class HomeController {
 		ObjectMapper mapper = new ObjectMapper();
 		String farmsInjson = mapper.writeValueAsString(farmsList);
 		mav.addObject("farms", farmsInjson);
+		mav.addObject("showfarm_id", params[0]);
 		return mav;
 	}
 	
