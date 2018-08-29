@@ -269,7 +269,6 @@ input.input-box {
 					var showfarm_id = "${showfarm_id}";
 					
 					if (feature.getProperty('M_ID') == showfarm_id) {
-						//alert("farm id: " + showfarm_id);
 						return ({
 							fillColor : color_selected,
 							strokeColor : color_selected,
@@ -442,14 +441,16 @@ input.input-box {
 												}
 											} else {
 												db_ownership = "غير متوفر";
+												db_displayedownership = "غير متوفر";
 											}
-										} else {
+										} 
+										/* else {
 											db_farmname = farm_name;
 											db_ownerid = sid;
 											db_ownername = owner;
 											db_ownertel = phone;
 											db_displayedownership = ownership;
-										}
+										} */
 									}
 
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
@@ -550,17 +551,12 @@ input.input-box {
 			farmsjson = '${farms}';
 			if (farmsjson) {
 				farms = JSON.parse(farmsjson);
-
 			} else {
 				var location = "<c:url value='getallavailablefarms'><c:param name='params' value='paramsvalues'/></c:url>";
 				var params = ["${showfarm_id}", "lat", "lng"];
 				location = location.replace("paramsvalues", params);
 				window.location.href = location;
 			}
-			/* voucherjson = '${voucher}';
-			if (voucherjson) {
-				var voucher = JSON.parse(voucherjson);
-			} */
 		}
 
 		function voucherAction() {
