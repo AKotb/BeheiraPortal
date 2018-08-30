@@ -392,8 +392,12 @@ input.readonly-box {
 						if(ownership === ''){
 							displayedownership = "غير متوفر";
 						}
+						if(ownership === 'غير متوفر'){
+							displayedownership = "غير متوفر";
+						}
 					} else {
 						ownership = "غير متوفر";
+						displayedownership = "غير متوفر";
 					}
 
 					results = results

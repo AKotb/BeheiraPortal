@@ -165,6 +165,9 @@ public class HomeController {
 		farm.setOwnerName(params[2]);
 		farm.setOwnerID(params[3]);
 		farm.setTelephone(params[4]);
+		if(params[5].equals("")) {
+			params[5]="غير متوفر";
+		}
 		farm.setOwnership(params[5]);
 		List<Farm> farmsList = null;
 		try {

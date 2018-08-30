@@ -439,6 +439,9 @@ input.input-box {
 												if (db_ownership === '') {
 													db_displayedownership = "غير متوفر";
 												}
+												if (db_ownership === 'غير متوفر') {
+													db_displayedownership = "غير متوفر";
+												}
 											} else {
 												db_ownership = "غير متوفر";
 												db_displayedownership = "غير متوفر";
