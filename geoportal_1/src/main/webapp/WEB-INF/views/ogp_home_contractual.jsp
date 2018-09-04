@@ -17,198 +17,8 @@
 <!-- CSS -->
 <link rel="stylesheet"
 	href="resources/css/css/css/css/tooplate-style.css">
-<style>
-#extra {
-	height: 618px;
-	width: 100%;
-}
-
-#infowindow {
-	background-color: #f6f6f6;
-	right: 0px;
-	position: absolute;
-	top: 144px;
-	height: 550px;
-	width: 20%;
-}
-
-.outertable {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.th {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.td {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.innertable {
-	border-collapse: collapse;
-	width: 100%;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.rightcolumn {
-	background-color: #396266;
-	color: white;
-	width: 30%;
-	border-collapse: collapse;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-.infowindowimg {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.divider {
-	width: 5px;
-	height: auto;
-	display: inline-block;
-}
-
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-.button {
-	font: bold 11px Arial;
-	text-decoration: none;
-	background-color: #396266;
-	color: white;
-	padding: 2px 6px 2px 6px;
-	border-top: 1px solid #CCCCCC;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	border-left: 1px solid #CCCCCC;
-}
-
-.button:hover, .button:focus {
-	background-color: #3d6266;
-	color: #fcbb5b;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-input.input-box {
-	background-color: #fdddad; /* Green */
-	color: #3d6266;
-	padding: 2px;
-	text-align: right;
-	text-decoration: none;
-}
-
-.voucherTA {
-	width: 250px;
-	background-color: #fdddad; /* Green */
-	color: #3d6266;
-	padding: 2px;
-	text-align: right;
-	text-decoration: none;
-}
-
-.btnsearch {
-	font: bold 24px Arial;
-	text-decoration: none;
-	background-color: #396266;
-	color: white;
-	padding: 2px 6px 2px 6px;
-	border-top: 1px solid #CCCCCC;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	border-left: 1px solid #CCCCCC;
-	border-radius: 12%;
-}
-
-.btnsearch:hover, .btnsearch:focus {
-	background-color: #3d6266;
-	color: #fcbb5b;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-/* Modal Content */
-.modal-content {
-	background-color: #fefefe;
-	margin: auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 60%;
-}
-
-/* The Close Button */
-.searchClose, .voucherClose {
-	color: #aaaaaa;
-	float: left;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.searchClose:hover, .searchClose:focus, .voucherClose:hover,
-	.voucherClose:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.resultth {
-	padding: 12px;
-	background-color: #3d6266;
-	color: #fdddad;
-	text-align: center;
-	font-size: 20px;
-}
-
-.resulttr {
-	padding-top: 8px;
-	padding-bottom: 8px;
-	color: #3d6266;
-	text-align: center;
-	font-size: 18px;
-}
-
-.resulttr:nth-child(odd) {
-	background-color: #cfdcdd;
-}
-
-.formheader {
-	background-color: #3d6266;
-	border-radius: 20px 20px 0 0;
-	color: #fcbb5b;
-	font: bold 40px Arial;
-}
-</style>
+<link rel="stylesheet"
+	href="resources/css/beheira.css">
 </head>
 
 <body>
@@ -498,7 +308,7 @@ input.input-box {
 											+ link2
 											+ "&nbsp;&nbsp;&nbsp;"
 											+ link3
-											+ "</div>";
+											+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
 
 									infowindow.setContent(content);
 									infowindow.setPosition(event.feature
@@ -548,6 +358,11 @@ input.input-box {
 			var location = "<c:url value='vouchers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", id);
 			window.location.href = location;
+		}
+		
+		function colse_infowindow() {
+			//alert("Closing info window");
+			infowindow.close();
 		}
 
 		window.onload = function() {

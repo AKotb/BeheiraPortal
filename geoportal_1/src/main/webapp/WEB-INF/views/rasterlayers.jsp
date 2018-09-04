@@ -16,68 +16,8 @@
 
 <!-- CSS -->
 <link rel="stylesheet" href="resources/css/css/css/css/tooplate-style.css">
+<link rel="stylesheet" href="resources/css/beheira.css">
 
-
-<!-- inline styles -->
-<style>
-#map {
-	height: 618px;
-	width: 100%;
-}
-
-.slidecontainer {
-    width: 20%;
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 25px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: e-resize;
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-}
-
-#clip {
-  position: absolute;
-}
-
-#floating-panel {
-        position: absolute;
-        top: 137px;
-        left: 8%;
-        z-index: 7;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 0px;
-        padding-left: 10px;
-      }
-</style>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
 <script>
 		var overlay;

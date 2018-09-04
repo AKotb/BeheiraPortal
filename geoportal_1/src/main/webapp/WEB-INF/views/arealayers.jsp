@@ -17,72 +17,7 @@
 
 <!-- CSS -->
 <link rel="stylesheet"	href="resources/css/css/css/css/tooplate-style.css">
-
-<!-- inline styles -->
-<style>
-#extra {
-	height: 618px;
-	width: 100%;
-}
-
-#infowindow {
-	background-color: #f6f6f6;
-	right: 0px;
-	position: absolute;
-	top: 144px;
-	height: 550px;
-	width: 20%;
-}
-
-.outertable {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.th {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.td {
-	border-collapse: collapse;
-	width: 500px;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.innertable {
-	border-collapse: collapse;
-	width: 100%;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-}
-
-.rightcolumn {
-	background-color: #396266;
-	color: white;
-	width: 30%;
-	border-collapse: collapse;
-	text-align: right;
-	padding: 8px;
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-.infowindowimg {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-</style>
+<link rel="stylesheet" href="resources/css/beheira.css">
 </head>
 
 <body>
