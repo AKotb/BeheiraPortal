@@ -55,10 +55,13 @@
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
+			
 			map.data
 					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
+			
 			map.data
-					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
+			.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
+			
 			/*var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
 						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
@@ -70,12 +73,12 @@
 				if (folderpath) {
 					return ({
 						fillColor : 'transparent',
-						strokeColor : 'blue',
+						strokeColor : 'black',
 						strokeWeight : 2
 					});
 				} else {
-					var color = 'blue';
-					var color_selected = 'green';
+					var color = '#088da5';
+					var color_selected = 'red';
 					var showfarm_id = "${showfarm_id}";
 					
 					if (feature.getProperty('M_ID') == showfarm_id) {
@@ -278,7 +281,7 @@
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
 											+ area_id
 											+ ");\' class=\'button\'> خرائط استخدامات الأراضى </a>";
-									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
+									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
 											+ "بيانات قطعة الأرض" + "</h1><br>"
 											+ link4
 											+ "<br>"

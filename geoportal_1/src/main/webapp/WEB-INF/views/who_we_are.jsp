@@ -17,27 +17,9 @@
 <!-- CSS -->
 <link rel="stylesheet"
 	href="resources/css/css/css/css/tooplate-style.css">
-<style>
-#extra {
-	width: 100%;
-}
-
-.formheader {
-	background-color: #3d6266;
-	border-radius: 20px 20px 0 0;
-	color: #fcbb5b;
-	font: bold 40px Arial;
-}
-
-/* Modal Content */
-.modal-content {
-	background-color: #fefefe;
-	margin: auto;
-	padding: 20px;
-	height: 550px;
-}
-
-</style>
+<link rel="stylesheet"
+	href="resources/css/beheira.css">
+	
 </head>
 
 <body>

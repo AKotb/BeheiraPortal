@@ -1,46 +1,124 @@
 /* All Views (5 JSP files) will be found in /BeheiraPortal/src/main/webapp/WEB-INF/views/ */
 
-/******************************************/
-/******************************************/
-/* 1] css from ogp_home_contractual*/
+#extra {
+	height: 618px;	
+	width: 100%;
+}
 
-#extra {height: 618px;	width: 100%;}
+#extra_noheight {
+	width: 100%;
+}
 
-#extra_noheight {width: 100%;}
+#infowindow {	
+	background-color: #f6f6f6;	
+	right: 0px;	
+	position: absolute; 	
+	top: 144px; 	
+	height: 550px; 	
+	width: 20%; 
+}
 
-#infowindow {	background-color: #f6f6f6;	right: 0px;	position: absolute; 	top: 144px; 	height: 550px; 	width: 20%; }
+#clip {
+	position: absolute;
+}
 
-.outertable {	border-collapse: collapse; 	width: 500px; 	text-align: right; 	padding: 8px; 	border: 1px solid black; }
+#floating-panel {        
+	position: absolute;        
+	top: 137px;        
+	left: 8%;        
+	z-index: 7;        
+	background-color: #fff;        
+	padding: 5px;        
+	border: 1px solid #999; 
+	text-align: center;
+	font-family: 'Roboto','sans-serif'; 
+	line-height: 0px;
+	padding-left: 10px;
+}
 
-.th { 	border-collapse: collapse; 	width: 500px; 	text-align: right; 	padding: 8px; 	border: 1px solid black; }
+#map {
+	height: 618px;
+	width: 100%;
+}
 
-.td { 	border-collapse: collapse; 	width: 500px;	text-align: right; 	padding: 8px; 	border: 1px solid black; }
+.outertable {	
+	border-collapse: collapse; 	
+	width: 500px; 	
+	text-align: right; 	
+	padding: 8px; 	
+	border: 1px solid black; 
+}
 
-.innertable {	border-collapse: collapse;	width: 100%;	text-align: right;	padding: 8px;	border: 1px solid black;}
+.th { 	
+	border-collapse: collapse; 	
+	width: 500px; 	
+	text-align: right; 	
+	padding: 8px; 	
+	border: 1px solid black; 
+}
 
-.rightcolumn {background-color: #396266; 	color: white; 	width: 30%; 	border-collapse: collapse; 	text-align: right; 	padding: 8px; border: 1px solid black; 	border-collapse: collapse;}
+.td { 
+	font: bold 12px Arial; 
+	border-collapse: collapse; 	
+	width: 500px;	
+	text-align: right; 	
+	padding: 8px; 	
+	border: 1px solid black; 
+}
 
-.infowindowimg {display: block; 	margin-left: auto; 	margin-right: auto;}
+.innertable {	
+	border-collapse: collapse;	
+	width: 100%;	
+	text-align: right;	
+	padding: 8px;	
+	border: 1px solid black;
+}
 
-.divider {width: 5px; 	height: auto; 	display: inline-block;}
+.rightcolumn {
+	font: bold 12px Arial; 
+	background-color: #44a959; 	
+	color: white; 	
+	width: 30%; 	
+	border-collapse: collapse; 	
+	text-align: right; 	
+	padding: 8px; 
+	border: 1px solid black; 	
+	border-collapse: collapse;
+}
+
+.infowindowimg {
+	display: block; 	
+	margin-left: auto; 	
+	margin-right: auto;
+}
+
+.divider {
+	width: 5px; 	
+	height: auto; 	
+	display: inline-block;
+}
 
 .button {
-	font: bold 11px Arial; 	text-decoration: none; 	background-color: #396266; 	color: white; 	padding: 2px 6px 2px 6px;
+	font: bold 14px Arial; 	
+	text-decoration: none; 	
+	background-color: #bbffbb; 	
+	color: black; 	
+	padding: 8px;
 	border-top: 1px solid #CCCCCC;
 	border-right: 1px solid #333333;
 	border-bottom: 1px solid #333333;
 	border-left: 1px solid #CCCCCC;
 }
 
-.button:hover, .button:focus {
-	background-color: #3d6266;
-	color: #fcbb5b;
+.button:hover, .button:focus, .btnsearch:hover, .btnsearch:focus {
+	background-color: #44a959;
+	color: #bbffbb;
 	text-decoration: none;
 	cursor: pointer;
 }
 
 input.input-box {
-	background-color: #fdddad; /* Green */
+	background-color: #fdddad;
 	color: #3d6266;
 	padding: 2px;
 	text-align: right;
@@ -49,7 +127,7 @@ input.input-box {
 
 .voucherTA {
 	width: 250px;
-	background-color: #fdddad; /* Green */
+	background-color: #fdddad;
 	color: #3d6266;
 	padding: 2px;
 	text-align: right;
@@ -59,7 +137,7 @@ input.input-box {
 .btnsearch {
 	font: bold 24px Arial;
 	text-decoration: none;
-	background-color: #396266;
+	background-color: #44a959;
 	color: white;
 	padding: 2px 6px 2px 6px;
 	border-top: 1px solid #CCCCCC;
@@ -69,16 +147,8 @@ input.input-box {
 	border-radius: 12%;
 }
 
-.btnsearch:hover, .btnsearch:focus {
-	background-color: #3d6266;
-	color: #fcbb5b;
-	text-decoration: none;
-	cursor: pointer;
-}
 
 
-
-/* The Close Button */
 .searchClose, .voucherClose {
 	color: #aaaaaa;
 	float: left;
@@ -98,41 +168,28 @@ input.input-box {
 }
 
 .formheader {
-	background-color: #3d6266;
-	border-radius: 20px 20px 0 0;
-	color: #fcbb5b;
+	background-color: #44a959;
+	border-radius: 10%;
+	color: white;
 	font: bold 40px Arial;
 }
 
-/******************************************/
-/******************************************/
-/* 2] css from vouchers_manager*/
-/******************************************/
-/******************************************/
-
-
-
-
-/* The Modal (background) */
 .modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 100px;
 	left: 0;
 	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
-
-
-
 input.readonly-box {
-	background-color: #dddddd; /* Green */
+	background-color: #dddddd;
 	color: #444444;
 	font: bold 14px Arial;
 	padding: 2px;
@@ -140,12 +197,10 @@ input.readonly-box {
 	text-decoration: none;
 }
 
-
-
 .btnsearch {
 	font: bold 24px Arial;
 	text-decoration: none;
-	background-color: #396266;
+	background-color: #44a959;
 	color: white;
 	padding: 2px 6px 2px 6px;
 	border-top: 1px solid #CCCCCC;
@@ -162,24 +217,19 @@ input.readonly-box {
 	cursor: pointer;
 }
 
-/* Modal Content */
 .modal-content {
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
-	border: 1px solid #888;
+	border: 0px solid #888;
 }
 
-/* The Close Button */
 .searchClose, .voucherClose {
 	color: #aaaaaa;
 	float: left;
 	font-size: 28px;
 	font-weight: bold;
 }
-
-
-
 
 .resultth {
 	padding: 12px;
@@ -189,30 +239,24 @@ input.readonly-box {
 	font-size: 20px;
 }
 
-/******************************************/
-/******************************************/
-/* 3] css from farm_manager*/
-/******************************************/
-/******************************************/
-
-
-input.readonly-box {
-	background-color: #dddddd; /* Green */
-	color: #444444;
-	font: bold 14px Arial;
-	padding: 2px;
+.text-block {
+	padding: 20px;
+	color: #004400;
 	text-align: right;
-	text-decoration: none;
+	font-size: 20px;
 }
 
 .resulttr {
 	padding-top: 8px;
-	padding-bottom: 8px;color: #3d6266;text-align: center;font-size: 18px;}
+	padding-bottom: 8px;
+	color: #3d6266;
+	text-align: center;
+	font-size: 18px;
+}
 
-
-#map {height: 618px;width: 100%;}
-
-.slidecontainer { width: 20%;}
+.slidecontainer { 
+	width: 20%;
+}
 
 .slider {
     -webkit-appearance: none;
@@ -225,12 +269,23 @@ input.readonly-box {
     transition: opacity .2s;
 }
 
-.slider:hover { opacity: 1;}
+.slider:hover { 
+	opacity: 1;
+}
 
-.slider::-webkit-slider-thumb {  -webkit-appearance: none; appearance: none;  width: 10px; height: 25px; background: #4CAF50; cursor: e-resize;}
+.slider::-webkit-slider-thumb {  
+	-webkit-appearance: none; 
+	appearance: none;  
+	width: 10px; 
+	height: 25px; 
+	background: #4CAF50; 
+	cursor: e-resize;
+}
 
-.slider::-moz-range-thumb {width: 25px; height: 25px; background: #4CAF50;cursor: pointer;}
+.slider::-moz-range-thumb {
+	width: 25px; 
+	height: 25px; 
+	background: #4CAF50;
+	cursor: pointer;
+}
 
-#clip {position: absolute;}
-
-#floating-panel {        position: absolute;        top: 137px;        left: 8%;        z-index: 7;        background-color: #fff;        padding: 5px;        border: 1px solid #999; text-align: center;font-family: 'Roboto','sans-serif'; line-height: 0px;padding-left: 10px;}
