@@ -1,16 +1,16 @@
 /* All Views (5 JSP files) will be found in /BeheiraPortal/src/main/webapp/WEB-INF/views/ */
 
 #extra {
-	height: 618px;	
+	height: 618px;
 	width: 100%;
 }
 
-#extra_noheight {
+.extra_noheight {
 	width: 100%;
 }
 
 #infowindow {	
-	background-color: #f6f6f6;	
+	background-color: #eee;	
 	right: 0px;	
 	position: absolute; 	
 	top: 144px; 	
@@ -118,8 +118,9 @@
 }
 
 input.input-box {
-	background-color: #fdddad;
-	color: #3d6266;
+	background-color: #bbffbb;/*#fdddad;*/
+	color: black;
+	font-weight:bold;
 	padding: 2px;
 	text-align: right;
 	text-decoration: none;
@@ -127,27 +128,12 @@ input.input-box {
 
 .voucherTA {
 	width: 250px;
-	background-color: #fdddad;
-	color: #3d6266;
+	background-color: #bbffbb;
+	color: #44a959;
 	padding: 2px;
 	text-align: right;
 	text-decoration: none;
 }
-
-.btnsearch {
-	font: bold 24px Arial;
-	text-decoration: none;
-	background-color: #44a959;
-	color: white;
-	padding: 2px 6px 2px 6px;
-	border-top: 1px solid #CCCCCC;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	border-left: 1px solid #CCCCCC;
-	border-radius: 12%;
-}
-
-
 
 .searchClose, .voucherClose {
 	color: #aaaaaa;
@@ -211,8 +197,8 @@ input.readonly-box {
 }
 
 .btnsearch:hover, .btnsearch:focus {
-	background-color: #3d6266;
-	color: #fcbb5b;
+	background-color: #bbffbb;
+	color: #44a959;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -233,23 +219,33 @@ input.readonly-box {
 
 .resultth {
 	padding: 12px;
-	background-color: #3d6266;
-	color: #fdddad;
+	background-color: #44a959;
+	color: white;
+	font-weight:bold;
 	text-align: center;
 	font-size: 20px;
 }
 
 .text-block {
-	padding: 20px;
+	padding: 20px 80px 20px 80px;
 	color: #004400;
-	text-align: right;
+	text-align: justify;
+	direction:rtl;
+	font-size: 24px;
+}
+
+.links {
+	padding: 20px 80px 20px 80px;
+	color: #800000;
+	text-align: justify;
+	direction:rtl;
 	font-size: 20px;
 }
 
 .resulttr {
 	padding-top: 8px;
 	padding-bottom: 8px;
-	color: #3d6266;
+	color: black;
 	text-align: center;
 	font-size: 18px;
 }
@@ -278,14 +274,14 @@ input.readonly-box {
 	appearance: none;  
 	width: 10px; 
 	height: 25px; 
-	background: #4CAF50; 
+	background: #44a959; 
 	cursor: e-resize;
 }
 
 .slider::-moz-range-thumb {
 	width: 25px; 
 	height: 25px; 
-	background: #4CAF50;
+	background: #44a959;
 	cursor: pointer;
 }
 

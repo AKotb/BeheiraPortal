@@ -39,7 +39,7 @@
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
-	<div id="extra">
+	<div class="extra_noheight">
 		<div class="modal-content">
 
 			<h1 class="formheader" align="center">طلب إجراءات
