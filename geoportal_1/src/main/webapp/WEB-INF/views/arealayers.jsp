@@ -45,6 +45,8 @@
 		id = "${polygonID}";
 		lat = "${lat}";
 		lng = "${lng}";
+		farmjson = '${farmdata}';
+		farmdata = JSON.parse(farmjson);
 		var map;
 		var infowindow;
 		function initMap() {
@@ -146,8 +148,68 @@
 					qirat = "غير متوفر";
 					sahm = "غير متوفر";
 				}
+				if (farmdata.farmID) {
+					db_farmid = farmdata.farmID;
+				} else {
+					db_farmid = "غير متوفر";
+				}
+				if (farmdata.farmName) {
+					db_farmname = farmdata.farmName;
+				} else {
+					db_farmname = "غير متوفر";
+				}
+				if (farmdata.reclamedArea) {
+					db_reclamedArea = farmdata.reclamedArea;
+				} else {
+					db_reclamedArea = "غير متوفر";
+				}
+				if (farmdata.urbanArea) {
+					db_urbanArea = farmdata.urbanArea;
+				} else {
+					db_urbanArea = "غير متوفر";
+				}
+				if (farmdata.unusedArea) {
+					db_unusedArea = farmdata.unusedArea;
+				} else {
+					db_unusedArea = "غير متوفر";
+				}
+				if (farmdata.fieldCropsArea) {
+					db_fieldCropsArea = farmdata.fieldCropsArea;
+				} else {
+					db_fieldCropsArea = "غير متوفر";
+				}
+				if (farmdata.cropsArea) {
+					db_cropsArea = farmdata.cropsArea;
+				} else {
+					db_cropsArea = "غير متوفر";
+				}
 
-				var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
+				var link4 = "<a href=\'resources/datafiles/landuse/"+db_farmid+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/landuse/"+db_farmid+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+				var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
+					+ "بيانات قطعة الأرض" + "</h1><br>"
+					+ link4
+					+ "<br>"
+					+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
+					+ db_farmid
+					+ "</td><td class=\'rightcolumn\'>كود المزرعة / الشركة</td></tr><tr><td class=\'td\'>"
+					+ db_farmname
+					+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td colspan='2' style=\"text-align:center; overflow:hidden; background-color: #44a959;\" >إجمالي المساحات المستخدمة</td></tr><tr><td class=\'td\'>"
+					+ db_fieldCropsArea
+					+ "</td><td class=\'rightcolumn\'>محاصيل حقلية</td></tr><tr><td class=\'td\'>"
+					+ db_cropsArea
+					+ "</td><td class=\'rightcolumn\'>محاصيل بستانية</td></tr><tr><td class=\'td\'>"
+					+ db_reclamedArea
+					+ "</td><td class=\'rightcolumn\'>مستصلحة</td></tr><tr><td class=\'td\'>"
+					+ db_urbanArea
+					+ "</td><td class=\'rightcolumn\'>مباني</td></tr><tr><td class=\'td\'>"
+					+ db_unusedArea
+					+ "</td><td class=\'rightcolumn\'>غير مستغلة</td></tr></table>"
+					+ "<br><h1 style=\"background-color: #44a959;\">"
+					+ arname
+					+ "</h1>"
+					+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
+				
+				/* var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 						+ "بيانات قطعة الأرض"
 						+ "</h1><br>"
 						+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
@@ -162,7 +224,7 @@
 						+ feddan
 						+ "</td></tr></table>"
 						+ "</td><td class=\'rightcolumn\'>المساحة</td></tr></table><br>"
-						+ "</div>";
+						+ "</div>"; */
 
 				infowindow.setContent(content);
 				infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
@@ -187,6 +249,11 @@
 			})
 			return http.status;
 			// this will return 200 on success, and 0 or negative value on error
+		}
+		
+		function colse_infowindow() {
+			//alert("Closing info window");
+			infowindow.close();
 		}
 	</script>
 	<script async defer

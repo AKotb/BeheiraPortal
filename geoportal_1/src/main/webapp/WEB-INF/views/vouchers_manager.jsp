@@ -58,8 +58,8 @@
 							المزرعة</td>
 					</tr>
 					<tr>
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_person_ID" value="" readonly></td>
+						<td align="right"><input class="input-box" type="text"
+							id="vm_person_ID"></td>
 						<td align="right" style="color: #396266; font: bold 24px Arial;">الرقم
 							القومى</td>
 
@@ -70,8 +70,8 @@
 					<tr>
 						<td align="right"><p></p></td>
 						<td align="right" style="color: #396266; font: bold 24px Arial;"><p></p></td>
-						<td align="right"><input class="readonly-box" type="text"
-							id="vm_Person_Name" value="" readonly></td>
+						<td align="right"><input class="input-box" type="text"
+							id="vm_Person_Name"></td>
 						<td align="right" style="color: #396266; font: bold 24px Arial;">مقدم
 							الطلب</td>
 					</tr>
@@ -197,9 +197,11 @@
 	<script>
 		window.onload = function() {
 			voucherjson = '${vouchers}';
+			selectedfarmid = '${selectedfarmid}';
+			parsedselectedfarmid = JSON.parse(selectedfarmid);
 			var farmID;
 			var num_of_voucher = 0;
-			if (voucherjson) {
+			if (voucherjson != 'null') {
 				var vouchers = JSON.parse(voucherjson);
 				var voucher_notes = "";
 				var voucher_amount = "";
@@ -328,6 +330,10 @@
 				voucher_list_html = voucher_header + voucher_list_html
 						+ "</table>";
 
+			}else{
+				document.getElementById("vm_farm_ID").value = parsedselectedfarmid;
+				document.getElementById("vm_gov").value = "البحيرة";
+				document.getElementById("vm_site").value = "وادي النطرون";
 			}
 			if (num_of_voucher > 0) {
 				document.getElementById('voucher_list').innerHTML = voucher_list_html;
@@ -353,6 +359,11 @@
 				var Amount = document.getElementById('edit_Amount').value;
 				var Payment_Status = document
 						.getElementById('edit_Payment_Status').value;
+				/* if(Payment_Status.checked){
+					Payment_Status = 'مدفوع'
+				}else{
+					Payment_Status = 'غير مدفوع'
+				} */
 				var Issuing_document = document
 						.getElementById('edit_Issuing_document').value;
 				var Issuing_document_section = document

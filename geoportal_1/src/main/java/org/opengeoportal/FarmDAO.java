@@ -25,11 +25,11 @@ public class FarmDAO {
 		super();
 		con = DBConPgSQL.establishDBConn();
 	}
-	
+
 	public void closeDBConn() {
 		try {
 			con.close();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -50,6 +50,11 @@ public class FarmDAO {
 				farm.setOwnerName(rset.getString(5));
 				farm.setTelephone(rset.getString(6));
 				farm.setOwnership(rset.getString(7));
+				farm.setReclamedArea(rset.getString(8));
+				farm.setUrbanArea(rset.getString(9));
+				farm.setUnusedArea(rset.getString(10));
+				farm.setFieldCropsArea(rset.getString(11));
+				farm.setCropsArea(rset.getString(12));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,18 +83,19 @@ public class FarmDAO {
 		}
 		return updateResult;
 	}
-	
-	public List<Farm> getAllFarms(String farmName, String ownerId, String ownerName, String telephone, String ownership) {
+
+	public List<Farm> getAllFarms(String farmName, String ownerId, String ownerName, String telephone,
+			String ownership) {
 		PreparedStatement preparedStatement = null;
 		List<Farm> farmsList = new ArrayList<Farm>();
 		try {
 			String queryString = "select * from beheiraschema.farms where \"farm_name\" like ? and \"owner_id\" like ? and \"owner_name\" like ? and \"telephone\" like ? and \"ownership\" like ?";
 			preparedStatement = con.prepareStatement(queryString);
-			preparedStatement.setString(1, "%"+farmName+"%");
-			preparedStatement.setString(2, "%"+ownerId+"%");
-			preparedStatement.setString(3, "%"+ownerName+"%");
-			preparedStatement.setString(4, "%"+telephone+"%");
-			preparedStatement.setString(5, "%"+ownership+"%");
+			preparedStatement.setString(1, "%" + farmName + "%");
+			preparedStatement.setString(2, "%" + ownerId + "%");
+			preparedStatement.setString(3, "%" + ownerName + "%");
+			preparedStatement.setString(4, "%" + telephone + "%");
+			preparedStatement.setString(5, "%" + ownership + "%");
 			ResultSet rset = preparedStatement.executeQuery();
 			while (rset.next()) {
 				Farm farm = new Farm();
@@ -100,6 +106,11 @@ public class FarmDAO {
 				farm.setOwnerName(rset.getString(5));
 				farm.setTelephone(rset.getString(6));
 				farm.setOwnership(rset.getString(7));
+				farm.setReclamedArea(rset.getString(8));
+				farm.setUrbanArea(rset.getString(9));
+				farm.setUnusedArea(rset.getString(10));
+				farm.setFieldCropsArea(rset.getString(11));
+				farm.setCropsArea(rset.getString(12));
 				farmsList.add(farm);
 			}
 		} catch (SQLException e) {
@@ -124,6 +135,11 @@ public class FarmDAO {
 				farm.setOwnerName(rset.getString(5));
 				farm.setTelephone(rset.getString(6));
 				farm.setOwnership(rset.getString(7));
+				farm.setReclamedArea(rset.getString(8));
+				farm.setUrbanArea(rset.getString(9));
+				farm.setUnusedArea(rset.getString(10));
+				farm.setFieldCropsArea(rset.getString(11));
+				farm.setCropsArea(rset.getString(12));
 				farmsList.add(farm);
 			}
 		} catch (SQLException e) {

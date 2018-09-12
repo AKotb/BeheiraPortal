@@ -15,6 +15,11 @@ public class Farm {
 	private String ownerName;
 	private String telephone;
 	private String ownership;
+	private String reclamedArea;
+	private String urbanArea;
+	private String unusedArea;
+	private String fieldCropsArea;
+	private String cropsArea;
 
 	/**
 	 * 
@@ -30,8 +35,16 @@ public class Farm {
 	 * @param ownerID
 	 * @param ownerName
 	 * @param telephone
+	 * @param ownership
+	 * @param reclamedArea
+	 * @param urbanArea
+	 * @param unusedArea
+	 * @param fieldCropsArea
+	 * @param cropsArea
 	 */
-	public Farm(int id, int farmID, String farmName, String ownerID, String ownerName, String telephone, String ownership) {
+	public Farm(int id, int farmID, String farmName, String ownerID, String ownerName, String telephone,
+			String ownership, String reclamedArea, String urbanArea, String unusedArea, String fieldCropsArea,
+			String cropsArea) {
 		super();
 		this.id = id;
 		this.farmID = farmID;
@@ -40,6 +53,11 @@ public class Farm {
 		this.ownerName = ownerName;
 		this.telephone = telephone;
 		this.ownership = ownership;
+		this.reclamedArea = reclamedArea;
+		this.urbanArea = urbanArea;
+		this.unusedArea = unusedArea;
+		this.fieldCropsArea = fieldCropsArea;
+		this.cropsArea = cropsArea;
 	}
 
 	/**
@@ -140,10 +158,86 @@ public class Farm {
 	}
 
 	/**
-	 * @param ownership the ownership to set
+	 * @param ownership
+	 *            the ownership to set
 	 */
 	public void setOwnership(String ownership) {
 		this.ownership = ownership;
+	}
+
+	/**
+	 * @return the reclamedArea
+	 */
+	public String getReclamedArea() {
+		return reclamedArea;
+	}
+
+	/**
+	 * @param reclamedArea
+	 *            the reclamedArea to set
+	 */
+	public void setReclamedArea(String reclamedArea) {
+		this.reclamedArea = reclamedArea;
+	}
+
+	/**
+	 * @return the urbanArea
+	 */
+	public String getUrbanArea() {
+		return urbanArea;
+	}
+
+	/**
+	 * @param urbanArea
+	 *            the urbanArea to set
+	 */
+	public void setUrbanArea(String urbanArea) {
+		this.urbanArea = urbanArea;
+	}
+
+	/**
+	 * @return the unusedArea
+	 */
+	public String getUnusedArea() {
+		return unusedArea;
+	}
+
+	/**
+	 * @param unusedArea
+	 *            the unusedArea to set
+	 */
+	public void setUnusedArea(String unusedArea) {
+		this.unusedArea = unusedArea;
+	}
+
+	/**
+	 * @return the fieldCropsArea
+	 */
+	public String getFieldCropsArea() {
+		return fieldCropsArea;
+	}
+
+	/**
+	 * @param fieldCropsArea
+	 *            the fieldCropsArea to set
+	 */
+	public void setFieldCropsArea(String fieldCropsArea) {
+		this.fieldCropsArea = fieldCropsArea;
+	}
+
+	/**
+	 * @return the cropsArea
+	 */
+	public String getCropsArea() {
+		return cropsArea;
+	}
+
+	/**
+	 * @param cropsArea
+	 *            the cropsArea to set
+	 */
+	public void setCropsArea(String cropsArea) {
+		this.cropsArea = cropsArea;
 	}
 
 }
