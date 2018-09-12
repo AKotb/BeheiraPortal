@@ -61,12 +61,13 @@
 			});
 			map.setZoom(15);
 			map.setCenter(new google.maps.LatLng(lat, lng));
-			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json')) {
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json'); 
-			}
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json')) {
 				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json');
 			}
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json')) {
+				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json'); 
+			}
+
 			infowindow = new google.maps.InfoWindow();
 			map.data.setStyle(function(feature) {
 				var landusecode = feature.getProperty('LanduseCod');
@@ -112,8 +113,24 @@
 					strokeWeight : 4,
 					fillColor : 'yellow'
 				});
-
-				var arname = event.feature.getProperty('Ar_Name');
+				var arname = 'غير متوفر';
+				var landusecode = event.feature.getProperty('LanduseCod');
+				if(landusecode == '1'){
+					arname = 'مباني';
+				}
+				if(landusecode == '2'){
+					arname = 'أراضي منزرعة-محاصيل حقلية';
+				}
+				if(landusecode == '3'){
+					arname = 'أراضي منزرعة-محاصيل بستانية';
+				}
+				if(landusecode == '4'){
+					arname = 'أراضي مستصلحة';
+				}
+				if(landusecode == '5'){
+					arname = 'أراضي غير مستغلة';
+				}
+				/* var arname = event.feature.getProperty('Ar_Name');
 				if (arname) {
 					arname = arname;
 				} else {
@@ -147,7 +164,7 @@
 					feddan = "غير متوفر";
 					qirat = "غير متوفر";
 					sahm = "غير متوفر";
-				}
+				} */
 				if (farmdata.farmID) {
 					db_farmid = farmdata.farmID;
 				} else {
