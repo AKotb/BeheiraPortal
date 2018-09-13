@@ -55,20 +55,61 @@
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
+			var distirct_layer = new google.maps.Data({map: map});
+			distirct_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json'); 
+			var db_layer = new google.maps.Data({map: map});
+			db_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
+			/* var db = (function() {
+		        var json = null;
+		        $.ajax({
+		            'async': false,
+		            'global': false,
+		            'url': "https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json",
+		            'dataType': "json",
+		            'success': function (data) {
+		                json = data;
+		            }
+		        });
+		        return json;
+		    })();
+			map.data.addGeoJson(db);
+			var distirct = (function() {
+		        var json = null;
+		        $.ajax({
+		            'async': false,
+		            'global': false,
+		            'url': "https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json",
+		            'dataType': "json",
+		            'success': function (data) {
+		                json = data;
+		            }
+		        });
+		        return json;
+		    })();
+			map.data.addGeoJson(distirct); */
 			
-			map.data
-					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
-			
-			map.data
-			.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
-			
+			/* map.data
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json'); */
+			/* map.data
+			.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json'); */
 			/*var kmbuffer2Layer = new google.maps.KmlLayer(
 					{
 						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
 						map : map
 					});*/
+					
 			infowindow = new google.maps.InfoWindow();
-			map.data.setStyle(function(feature) {
+			distirct_layer.setStyle(function(feature) {
+						var folderpath = feature.getProperty('FolderPath');
+						if (folderpath) {
+							return ({
+								fillColor : 'transparent',
+								strokeColor : 'black',
+								strokeWeight : 2
+							});
+						}
+					});
+			db_layer.setStyle(function(feature) {
 				var folderpath = feature.getProperty('FolderPath');
 				if (folderpath) {
 					return ({
@@ -97,7 +138,7 @@
 				}
 			});
 
-			map.data
+			db_layer
 					.addListener(
 							'click',
 							function(event) {
@@ -106,7 +147,7 @@
 								if (folderpath) {
 									folderpath = folderpath;
 								} else {
-									map.data.overrideStyle(event.feature, {
+									db_layer.overrideStyle(event.feature, {
 										strokeWeight : 4,
 										fillColor : 'green'
 									});
@@ -325,21 +366,21 @@
 
 							});
 
-			map.data.addListener('mouseover', function(event) {
+			db_layer.addListener('mouseover', function(event) {
 				var folderpath = event.feature.getProperty('FolderPath');
 				if (folderpath) {
 					folderpath = folderpath;
 				} else {
-					map.data.revertStyle();
-					map.data.overrideStyle(event.feature, {
+					db_layer.revertStyle();
+					db_layer.overrideStyle(event.feature, {
 						strokeWeight : 4,
 						fillColor : 'yellow'
 					});
 				}
 			});
 
-			map.data.addListener('mouseout', function(event) {
-				map.data.revertStyle();
+			db_layer.addListener('mouseout', function(event) {
+				db_layer.revertStyle();
 			});
 		}
 
