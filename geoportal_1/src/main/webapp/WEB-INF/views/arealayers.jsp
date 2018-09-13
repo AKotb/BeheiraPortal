@@ -61,15 +61,25 @@
 			});
 			map.setZoom(15);
 			map.setCenter(new google.maps.LatLng(lat, lng));
-			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json')) {
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json');
-			}
+			var admin_layer = new google.maps.Data({map: map});
+			var landuse_layer = new google.maps.Data({map: map});
 			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json')) {
-				map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json'); 
+				//map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json'); 
+				admin_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/admin_'+id+'.json');
 			}
-
+			if (200 == urlExists('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json')) {
+				//map.data.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json');
+				landuse_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/innerlayers/landuse_'+id+'.json');
+			}
 			infowindow = new google.maps.InfoWindow();
-			map.data.setStyle(function(feature) {
+			admin_layer.setStyle(function(feature) {
+					return ({
+						fillColor : 'transparent',
+						strokeColor : 'black',
+						strokeWeight : 2
+					});
+			});
+			landuse_layer.setStyle(function(feature) {
 				var landusecode = feature.getProperty('LanduseCod');
 				if(landusecode == '1'){
 					return ({
@@ -107,9 +117,9 @@
 					});
 				}
 			});
-			map.data.addListener('click', function(event) {
-				map.data.revertStyle();
-				map.data.overrideStyle(event.feature, {
+			landuse_layer.addListener('click', function(event) {
+				landuse_layer.revertStyle();
+				landuse_layer.overrideStyle(event.feature, {
 					strokeWeight : 4,
 					fillColor : 'yellow'
 				});
@@ -251,9 +261,9 @@
 				infowindow.open(map);
 			});
 
-			map.data.addListener('mouseover',function(event) {});
-			map.data.addListener('mouseout', function(event) {
-				map.data.revertStyle();
+			landuse_layer.addListener('mouseover',function(event) {});
+			landuse_layer.addListener('mouseout', function(event) {
+				landuse_layer.revertStyle();
 				//infowindow.close();
 			});
 		}
