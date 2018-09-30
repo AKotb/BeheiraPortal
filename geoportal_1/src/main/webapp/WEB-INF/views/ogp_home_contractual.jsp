@@ -309,20 +309,24 @@
 											db_displayedownership = ownership;
 										} */
 									}
+									var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+									if (200 == urlExists('resources/mahader/'+area_id+'.jpg')) {
+										link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
+									}
 
-									var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
+									//var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
 												+ area_id
 												+ ");\' class=\'button\'> مرئيات فضائية </a>";
 									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
 											+ area_id
 											+ ");\' class=\'button\'>"
-											+ " طلب إجراءات التقنين_المعاينة/الفحص "
+											+ "طلب إجراءات التقنين"
 											+ "</a>";
 									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
 											+ area_id
-											+ ");\' class=\'button\'> خرائط استخدامات الأراضى </a>";
+											+ ");\' class=\'button\'> استخدامات الأراضى </a>";
 									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
 											+ "بيانات قطعة الأرض" + "</h1><br>"
 											+ link4
@@ -351,11 +355,11 @@
 											+ "<table><tr><td class=\'td-button\'>"
 											+ link0
 											+ "</td><td class=\'td-button\'>"
-											+ link1
-											+ "</td></tr><tr><td class=\'td-button\'>"
+											+ link3
+											+ "</td><td class=\'td-button\'>"
 											+ link2
 											+ "</td><td class=\'td-button\'>"
-											+ link3
+											+ link1
 											+ "</td></tr></table>"
 											+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
 
@@ -459,6 +463,17 @@
 		function voucherPrint() {
 			window.print();
 		}
+		
+		function urlExists(checkedurl) {
+			var http = $.ajax({
+				type : "HEAD",
+				url : checkedurl,
+				async : false
+			})
+			return http.status;
+			// this will return 200 on success, and 0 or negative value on error
+		}
+		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap">

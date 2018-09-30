@@ -88,7 +88,14 @@
 						strokeWeight : 2
 					});
 				}
-				if(landusecode == '2'){
+				if(landusecode == '2' || landusecode == '3'){
+					return ({
+						fillColor : 'lightgreen',
+						strokeColor : 'lightgreen',
+						strokeWeight : 2
+					});
+				}
+				/* if(landusecode == '2'){
 					return ({
 						fillColor : 'lightgreen',
 						strokeColor : 'lightgreen',
@@ -101,7 +108,7 @@
 						strokeColor : 'darkgreen',
 						strokeWeight : 2
 					});
-				}
+				} */
 				if(landusecode == '4'){
 					return ({
 						fillColor : 'orange',
@@ -128,12 +135,15 @@
 				if(landusecode == '1'){
 					arname = 'مباني';
 				}
-				if(landusecode == '2'){
+				if(landusecode == '2' || landusecode == '3'){
+					arname = 'أراضي منزرعة';
+				}
+				/* if(landusecode == '2'){
 					arname = 'أراضي منزرعة-محاصيل حقلية';
 				}
 				if(landusecode == '3'){
 					arname = 'أراضي منزرعة-محاصيل بستانية';
-				}
+				} */
 				if(landusecode == '4'){
 					arname = 'أراضي مستصلحة';
 				}
