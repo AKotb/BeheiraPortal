@@ -234,7 +234,7 @@
 					+ "<br><h1 style=\"background-color: #44a959;\">"
 					+ arname
 					+ "</h1>"
-					+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
+					+ "<span onclick='close_infowindow()' class='searchClose'>[&times;]</span></div>";
 				
 				/* var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
 						+ "بيانات قطعة الأرض"
@@ -278,7 +278,7 @@
 			// this will return 200 on success, and 0 or negative value on error
 		}
 		
-		function colse_infowindow() {
+		function close_infowindow() {
 			//alert("Closing info window");
 			infowindow.close();
 		}

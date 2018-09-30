@@ -352,7 +352,7 @@
 											+ link2
 											+ "&nbsp;&nbsp;&nbsp;"
 											+ link3
-											+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
+											+ "<span onclick='close_infowindow()' class='searchClose'>[&times;]</span></div>";
 
 									infowindow.setContent(content);
 									infowindow.setPosition(event.feature
