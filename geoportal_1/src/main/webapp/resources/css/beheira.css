@@ -66,6 +66,14 @@
 	border: 1px solid black; 
 }
 
+.td-button { 
+	font: bold 12px Arial; 
+	border-collapse: collapse; 	
+	width: 200px;	
+	text-align: right; 	
+	padding: 12px; 	
+}
+
 .innertable {	
 	border-collapse: collapse;	
 	width: 100%;	

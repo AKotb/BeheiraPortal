@@ -310,9 +310,10 @@
 										} */
 									}
 
+									var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
-											+ area_id
-											+ ");\' class=\'button\'> مرئيات فضائية </a>";
+												+ area_id
+												+ ");\' class=\'button\'> مرئيات فضائية </a>";
 									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
 											+ area_id
 											+ ");\' class=\'button\'>"
@@ -347,12 +348,16 @@
 											+ db_ownertel
 											+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
 											+ "<br>"
+											+ "<table><tr><td class=\'td-button\'>"
+											+ link0
+											+ "</td><td class=\'td-button\'>"
 											+ link1
-											+ "&nbsp;&nbsp;&nbsp;"
+											+ "</td></tr><tr><td class=\'td-button\'>"
 											+ link2
-											+ "&nbsp;&nbsp;&nbsp;"
+											+ "</td><td class=\'td-button\'>"
 											+ link3
-											+ "<span onclick='close_infowindow()' class='searchClose'>[&times;]</span></div>";
+											+ "</td></tr></table>"
+											+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
 
 									infowindow.setContent(content);
 									infowindow.setPosition(event.feature
