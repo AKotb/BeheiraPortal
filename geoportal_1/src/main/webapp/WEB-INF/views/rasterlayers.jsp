@@ -6,95 +6,23 @@
 <html>
 <head>
 
-<title>المرئيات الفضائية</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="Tooplate">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-<!-- CSS -->
-<link rel="stylesheet" href="resources/css/css/css/css/tooplate-style.css">
-<link rel="stylesheet" href="resources/css/beheira.css">
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap"></script>
-<script>
-		var overlay;
-	    USGSOverlay.prototype = new google.maps.OverlayView();
-	      
-		function initMap() {
-			var map = new google.maps.Map(document.getElementById('map'), {
-		          zoom: 11,
-		          center: {lat: 22.543055, lng: 35.705139},
-		          mapTypeId: 'satellite'
-		        });
-			var bounds = new google.maps.LatLngBounds(
-					new google.maps.LatLng(22.377222, 35.534444),
-		            new google.maps.LatLng(22.708888, 35.875833));
-		            
-		    var bounds2 = new google.maps.LatLngBounds(
-		            new google.maps.LatLng(22.377222, 35.534444),
-		            new google.maps.LatLng(22.708888, 35.875833));
-
-		    var srcImage2 = 'resources/rasterimages/photo2.png';
-		    var srcImage = 'resources/rasterimages/photo1.png';
-		    overlay = new USGSOverlay(bounds, srcImage, map, "clip1");
-		    overlay2 = new USGSOverlay(bounds2, srcImage2, map, "clip2");
-		}
-		
-		function update_overlay() {
-	        var slider_value = document.getElementById("myRange").value;
-			new_width = document.getElementById("clip2").width;
-			document.getElementById("clip2").style.clip = "rect(0,"+new_width+"px, "+new_width+"px, " + 0.01* new_width * slider_value + "px)";
-	    }
-	    
-		function USGSOverlay(bounds, image, map, id) {
-			this.bounds_ = bounds;
-	        this.image_ = image;
-	        this.map_ = map;
-			this.id_ = id;
-	        this.div_ = null;
-	        this.setMap(map);
-	    }
-	    
-		USGSOverlay.prototype.onAdd = function() {
-	        var div = document.createElement('div');
-	        div.style.borderStyle = 'none';
-	        div.style.borderWidth = '0px';
-	        div.style.position = 'absolute';
-
-	        var img = document.createElement('img');
-	        img.id = this.id_;
-	        img.src = this.image_;
-	        img.style.width = '100%';
-	        img.style.height = '100%';
-	        img.style.position = 'absolute';
-	        div.appendChild(img);
-	        this.div_ = div;
-	        var panes = this.getPanes();
-	        panes.overlayLayer.appendChild(div);
-	    };
-
-	    USGSOverlay.prototype.draw = function() {
-	        var overlayProjection = this.getProjection();
-	        var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-	        var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
-	        var div = this.div_;
-	        div.style.left = sw.x + 'px';
-	        div.style.top = ne.y + 'px';
-	        div.style.width = (ne.x - sw.x) + 'px';
-	        div.style.height = (sw.y - ne.y) + 'px';
-	    };
-	    
-	    USGSOverlay.prototype.onRemove = function() {
-	        this.div_.parentNode.removeChild(this.div_);
-	        this.div_ = null;
-	    };
-	    
-	    google.maps.event.addDomListener(window, 'load', initMap);
-	    google.maps.event.addDomListener(window, 'zoom_changed', update_overlay);
-	</script>
+	<title>المرئيات الفضائية</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Tooplate">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="resources/css/css/css/css/tooplate-style.css">
+	<link rel="stylesheet" href="resources/css/beheira.css">
+	
+	
+	<style>
+		.img_slider{ position:absolute; }
+	</style>
+	
 </head>
 <body>
 	<div class="container">
@@ -106,23 +34,64 @@
 		</ul>
 		<img src="resources/css/css/css/css/images/projectname.png" alt="project name" class="projectname">
 	</div>
-	<div class="slidecontainer" id="floating-panel">
-  		<input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+	<div id="extra">
+		<div id="floating-panel"  align='center' ><!-- id="floating-panel" class="slidecontainer" -->
+	  		<input class="slider" type="range" min="0" max="100" value="0"  id="myRange"><!-- class="slider" -->
+		</div>
+		<div id="raster_view">
+			<img id='img1' class='img_slider' src='resources/rasterimages/0.png'>
+	        <img id='img2' class='img_slider'src='resources/rasterimages/0.png'>
+		</div>
 	</div>
-	<div id="map"></div>
 	<script>
+		var id = "${polygonID}";
+		document.getElementById('img1').src = 'resources/rasterimages/png_old/' + id + '.png';
+		document.getElementById('img2').src = 'resources/rasterimages/png_new/' + id + '.png';
+		var img_height = 500;
+		var img_width = 800;
+		window.onload = function() {
+			new_width = document.getElementById("img2").width;
+			new_height = document.getElementById("img2").height;
+			document.getElementById("img1").width = new_width;
+			document.getElementById("img1").height = new_height;
+			if(new_width > 800){
+				ratio = new_height / new_width;
+				img_height = ratio * 800;
+				img_width = 800;
+			}
+			if(new_height > 500){
+				ratio = new_width / new_height;
+				img_height = 500;
+				img_width = ratio * 500;
+			}
+			
+			document.getElementById("img2").width = img_width;
+			document.getElementById("img2").height = img_height;
+			document.getElementById("img1").width = img_width;
+			document.getElementById("img1").height = img_height;
+			//document.getElementById("myRange").style.width = img_width;
+			
+			shift = (document.getElementById("img2").parentElement.clientWidth - img_width) / 2;
+			document.getElementById("img1").style.left = shift + 'px';
+			document.getElementById("img2").style.left = shift + 'px';
+			//document.getElementById("myRange").style.left = shift + 'px';
+			
+		};
+		
+		
 		var slider = document.getElementById("myRange");
 		slider.oninput = function() {
-		  new_width = document.getElementById("clip2").width;
-		  document.getElementById("clip2").style.clip = "rect(0,"+new_width+"px, "+new_width+"px, " + 0.01* new_width * this.value + "px)";
+			document.getElementById("img1").style.clip = "rect(0," + img_width+"px, " + img_height+"px, " + "0px)";
+		  	document.getElementById("img2").style.clip = "rect(0," + img_width+"px, " + img_height+"px, " + 0.01* img_width * this.value + "px)";
+		  
 		  
 		}
 	</script>
 	<!-- Footer -->
-	<div class="copyright">
+	<!-- <div class="copyright">
 		<p class="copyrighttext">
 			Copyright © 2018, <a href="http://www.narss.sci.eg">NARSS</a>
 		</p>
-	</div>
+	</div> -->
 </body>
 </html>
