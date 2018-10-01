@@ -49,6 +49,8 @@
 		farmdata = JSON.parse(farmjson);
 		var map;
 		var infowindow;
+		var color;
+		var colorcode;
 		function initMap() {
 			var Egypt = {
 				lat : 30.2519715,
@@ -81,17 +83,20 @@
 			});
 			landuse_layer.setStyle(function(feature) {
 				var landusecode = feature.getProperty('LanduseCod');
+				
 				if(landusecode == '1'){
+					color = 'red';
 					return ({
-						fillColor : 'red',
-						strokeColor : 'red',
+						fillColor : color,
+						strokeColor : color,
 						strokeWeight : 2
 					});
 				}
 				if(landusecode == '2' || landusecode == '3'){
+					color='lightgreen';
 					return ({
-						fillColor : 'lightgreen',
-						strokeColor : 'lightgreen',
+						fillColor : color,
+						strokeColor : color,
 						strokeWeight : 2
 					});
 				}
@@ -110,16 +115,18 @@
 					});
 				} */
 				if(landusecode == '4'){
+					color='orange';
 					return ({
-						fillColor : 'orange',
-						strokeColor : 'orange',
+						fillColor : color,
+						strokeColor : color,
 						strokeWeight : 2
 					});
 				}
 				if(landusecode == '5'){
+					color='lightgray';
 					return ({
-						fillColor : 'lightgray',
-						strokeColor : 'lightgray',
+						fillColor : color,
+						strokeColor : color,
 						strokeWeight : 2
 					});
 				}
@@ -133,9 +140,11 @@
 				var arname = 'غير متوفر';
 				var landusecode = event.feature.getProperty('LanduseCod');
 				if(landusecode == '1'){
+					colorcode = '#FF0000';
 					arname = 'مباني';
 				}
 				if(landusecode == '2' || landusecode == '3'){
+					colorcode = '#90EE90';
 					arname = 'أراضي منزرعة';
 				}
 				/* if(landusecode == '2'){
@@ -145,9 +154,11 @@
 					arname = 'أراضي منزرعة-محاصيل بستانية';
 				} */
 				if(landusecode == '4'){
+					colorcode = '#FFA500';
 					arname = 'أراضي مستصلحة';
 				}
 				if(landusecode == '5'){
+					colorcode = '#D3D3D3';
 					arname = 'أراضي غير مستغلة';
 				}
 				/* var arname = event.feature.getProperty('Ar_Name');
@@ -198,29 +209,42 @@
 				if (farmdata.reclamedArea) {
 					db_reclamedArea = farmdata.reclamedArea;
 				} else {
-					db_reclamedArea = "غير متوفر";
+					db_reclamedArea = "لا يوجد";
 				}
 				if (farmdata.urbanArea) {
 					db_urbanArea = farmdata.urbanArea;
 				} else {
-					db_urbanArea = "غير متوفر";
+					db_urbanArea = "لا يوجد";
 				}
 				if (farmdata.unusedArea) {
 					db_unusedArea = farmdata.unusedArea;
 				} else {
-					db_unusedArea = "غير متوفر";
+					db_unusedArea = "لا يوجد";
 				}
 				if (farmdata.fieldCropsArea) {
 					db_fieldCropsArea = farmdata.fieldCropsArea;
 				} else {
-					db_fieldCropsArea = "غير متوفر";
+					db_fieldCropsArea = "لا يوجد";
 				}
 				if (farmdata.cropsArea) {
 					db_cropsArea = farmdata.cropsArea;
 				} else {
-					db_cropsArea = "غير متوفر";
+					db_cropsArea = "لا يوجد";
+				}
+				var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+				if (200 == urlExists('resources/mahader/'+db_farmid+'.png')) {
+					link0 = "<a href=\'resources/mahader/"+db_farmid+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 				}
 
+				//var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
+				var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
+							+ db_farmid
+							+ ");\' class=\'button\'> مرئيات فضائية </a>";
+				var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
+						+ db_farmid
+						+ ");\' class=\'button\'>"
+						+ "طلب إجراءات التقنين"
+						+ "</a>";
 				var link4 = "<a href=\'resources/datafiles/landuse/"+db_farmid+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/landuse/"+db_farmid+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 				var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
 					+ "بيانات قطعة الأرض" + "</h1><br>"
@@ -230,20 +254,29 @@
 					+ db_farmid
 					+ "</td><td class=\'rightcolumn\'>كود المزرعة / الشركة</td></tr><tr><td class=\'td\'>"
 					+ db_farmname
-					+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td colspan='2' style=\"text-align:center; overflow:hidden; background-color: #44a959;\" >إجمالي المساحات المستخدمة</td></tr><tr><td class=\'td\'>"
+					+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr></table>"
+					+"<h2 style=\"background-color: #44a959;\">استخدامات الأرض / فدان</h2>"
+					+"<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
 					+ db_fieldCropsArea
 					+ "</td><td class=\'rightcolumn\'>محاصيل حقلية</td></tr><tr><td class=\'td\'>"
 					+ db_cropsArea
 					+ "</td><td class=\'rightcolumn\'>محاصيل بستانية</td></tr><tr><td class=\'td\'>"
 					+ db_reclamedArea
-					+ "</td><td class=\'rightcolumn\'>مستصلحة</td></tr><tr><td class=\'td\'>"
+					+ "</td><td class=\'rightcolumn\'>أراضي مستصلحة ومعدة للزراعة</td></tr><tr><td class=\'td\'>"
 					+ db_urbanArea
-					+ "</td><td class=\'rightcolumn\'>مباني</td></tr><tr><td class=\'td\'>"
+					+ "</td><td class=\'rightcolumn\'> مباني قائمة</td></tr><tr><td class=\'td\'>"
 					+ db_unusedArea
-					+ "</td><td class=\'rightcolumn\'>غير مستغلة</td></tr></table>"
-					+ "<br><h1 style=\"background-color: #44a959;\">"
+					+ "</td><td class=\'rightcolumn\'>أراضي غير مستغلة</td></tr></table>"
+					+ "<br><h2 style=\"background-color: "+colorcode+";\">"
 					+ arname
-					+ "</h1>"
+					+ "</h2>"
+					+ "<table style= \"margin: auto;\"><tr><td class=\'td-button\'>"
+					+ link0
+					+ "</td><td class=\'td-button\'>"
+					+ link3
+					+ "</td><td class=\'td-button\'>"
+					+ link2
+					+ "</td></tr></table>"
 					+ "<span onclick='close_infowindow()' class='searchClose'>[&times;]</span></div>";
 				
 				/* var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #396266;\">"
@@ -286,6 +319,19 @@
 			})
 			return http.status;
 			// this will return 200 on success, and 0 or negative value on error
+		}
+		
+		function move_raster(id) {
+			var params = [ id, lat, lng ];
+			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+
+		function vouchers(id) {
+			var location = "<c:url value='vouchers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", id);
+			window.location.href = location;
 		}
 		
 		function close_infowindow() {

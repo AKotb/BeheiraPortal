@@ -310,8 +310,8 @@
 										} */
 									}
 									var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
-									if (200 == urlExists('resources/mahader/'+area_id+'.jpg')) {
-										link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
+									if (200 == urlExists('resources/mahader/'+area_id+'.png')) {
+										link0 = "<a href=\'resources/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									}
 
 									//var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
