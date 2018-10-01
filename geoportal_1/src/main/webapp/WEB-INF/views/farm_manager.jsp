@@ -205,7 +205,7 @@
 
 					results = results
 							+ '<tr class=\"resulttr\">'
-							+ '<td align=\"right\">'
+							+ '<td align=\"center\" style=\"width:20%;\">'
 							+ '<button onclick=\"editfarmdata(\''
 							+ farmid
 							+ '_'
@@ -222,10 +222,10 @@
 							+ '<button onclick=\"showSearchResults('
 							+ farmid
 							+ ')\" class=\"button\" id=\"showSearchResultsBtn\">عرض على الخريطة</button>'
-							+ '</td>' + '<td align=\"right\">' + displayedownership
-							+ '</td>' + '<td align=\"right\">' + ownername
-							+ '</td>' + '<td align=\"right\">' + farmname
-							+ '</td>' + '<td>' + farmid + '</td>' + '</tr>';
+							+ '</td>' + '<td align=\"right\" style=\"width:5%;\">' + displayedownership
+							+ '</td>' + '<td align=\"right\" style=\"width:40%;\"><div style=\"word-break:break-all;\">' + ownername
+							+ '</div></td>' + '<td align=\"right\" style=\"width:30%;\"><div style=\"word-break:break-all;\">' + farmname
+							+ '</div></td>' + '<td style=\"width:5%;\">' + farmid + '</td>' + '</tr>';
 				}
 
 			}
