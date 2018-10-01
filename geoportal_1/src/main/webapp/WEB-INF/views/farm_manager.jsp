@@ -232,7 +232,7 @@
 			if (num_of_items > 0) {
 				var search_header = '<div align=\"center\"><h3 align=\"center\">تم إيجاد '
 						+ num_of_items
-						+ ' من نتائج البحث </h3><br><table border=\"0\" align=\"center\">'
+						+ ' من نتائج البحث </h3><br><table border=\"0\" align=\"center\" style=\"width:90%;\">'
 						+ '<tr>'
 						+ '<th class=\"resultth\">إعدادات</th>'
 						+ '<th class=\"resultth\"> نوع الحيازة </th>'
