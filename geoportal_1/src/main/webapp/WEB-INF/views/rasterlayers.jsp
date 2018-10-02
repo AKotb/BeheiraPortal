@@ -88,10 +88,10 @@
 		}
 	</script>
 	<!-- Footer -->
-	<!-- <div class="copyright">
+	<div class="copyright">
 		<p class="copyrighttext">
 			Copyright © 2018, <a href="http://www.narss.sci.eg">NARSS</a>
 		</p>
-	</div> -->
+	</div>
 </body>
 </html>
