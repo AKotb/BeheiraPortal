@@ -35,9 +35,11 @@
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
+		<p class='cur_title'>تنمية أراضي محافظة البحيرة</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
+	<!--<jsp:include page="jspf/header.jspf" />-->
 	<div id="extra"></div>
 	<script>
 		var map;

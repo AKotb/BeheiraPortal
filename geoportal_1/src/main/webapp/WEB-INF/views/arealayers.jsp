@@ -26,8 +26,8 @@
 <script src="resources/leaflet/leaflet.js"></script>
 	<div class="container">
 		<ul class="nav">
-			<a href="searchforfarms"><img
-				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
+			<a href="searchforfarms"> <img
+				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
 			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
@@ -37,6 +37,7 @@
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
+		<p class='cur_title'>استخدامات الأراضى</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>

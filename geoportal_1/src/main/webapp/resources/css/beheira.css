@@ -1,5 +1,17 @@
 /* All Views (5 JSP files) will be found in /BeheiraPortal/src/main/webapp/WEB-INF/views/ */
 
+.cur_title {
+	float: left;
+	font-weight:bold;
+	padding: 0px 20px 0px 40px;
+	height: 25px;
+	width: 500px;
+	text-align:right;
+	font-size: 36px;
+	color:#afa;
+	text-shadow: -1px 2px #ff0;
+}
+
 #extra {
 	height: 614px;
 	width: 100%;
