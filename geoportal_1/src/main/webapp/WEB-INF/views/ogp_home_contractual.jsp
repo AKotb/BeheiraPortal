@@ -330,9 +330,8 @@
 											+ area_id
 											+ ");\' class=\'button\'> استخدامات الأراضى </a>";
 									var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
-											+ "بيانات قطعة الأرض" + "</h1><br>"
+											+ "بيانات قطعة الأرض" + "</h1>"
 											+ link4
-											+ "<br>"
 											+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
 											+ area_id
 											+ "</td><td class=\'rightcolumn\'>كود المزرعة / الشركة</td></tr><tr><td class=\'td\'>"
@@ -353,7 +352,6 @@
 											+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td class=\'td\'>"
 											+ db_ownertel
 											+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
-											+ "<br>"
 											+ "<table><tr><td class=\'td-button\'>"
 											+ link0
 											+ "</td><td class=\'td-button\'>"
@@ -363,7 +361,7 @@
 											+ "</td><td class=\'td-button\'>"
 											+ link1
 											+ "</td></tr></table>"
-											+ "<span onclick='colse_infowindow()' class='searchClose'>[&times;]</span></div>";
+											+ "<span onclick='colse_infowindow()' class='searchClose'>[Close]</span></div>";
 
 									infowindow.setContent(content);
 									infowindow.setPosition(event.feature

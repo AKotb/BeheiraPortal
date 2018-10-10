@@ -43,6 +43,13 @@
 			alt="project name" class="projectname">
 	</div>
 	<div id="extra">
+		<div class="floating-menu">
+		    <h3>Layers Information</h3>
+		    <h4>Top Layer:</h4>
+		    <h5>Sentinel 2 Septemper 2018</h5>
+		    <h4>Bottom Layer:</h4>
+		    <h5>Peleades March 2007</h5>
+	  	</div>
 		<div id="floating-panel"  align='center' ><!-- id="floating-panel" class="slidecontainer" -->
 	  		<input class="slider" type="range" min="0" max="100" value="0"  id="myRange"><!-- class="slider" -->
 		</div>
@@ -53,8 +60,8 @@
 	</div>
 	<script>
 		var id = "${polygonID}";
-		document.getElementById('img1').src = 'resources/rasterimages/png_old/' + id + '.png';
-		document.getElementById('img2').src = 'resources/rasterimages/png_new/' + id + '.png';
+		document.getElementById('img1').src = 'resources/rasterimages/png_new/' + id + '.png';
+		document.getElementById('img2').src = 'resources/rasterimages/png_old/' + id + '.png';
 		var img_height = 500;
 		var img_width = 800;
 		window.onload = function() {
