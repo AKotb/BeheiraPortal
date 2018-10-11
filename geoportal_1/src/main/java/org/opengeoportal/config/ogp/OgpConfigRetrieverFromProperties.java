@@ -27,6 +27,7 @@ public class OgpConfigRetrieverFromProperties implements OgpConfigRetriever {
 	private static final String OWNERSHIP_LAYERS = "ogp.ownership.layers";
 	private static final String BYFORCE_LAYERS = "ogp.byforce.layers";
 	private static final String OTHERHOLDINGS_LAYERS = "ogp.otherholdings.layers";
+	private static final String DATA_DIR = "ogp.data.dir";
 
 	//default values
 	private static final String TITLE_PRIMARY_DEFAULT = "Open";
@@ -115,6 +116,9 @@ public class OgpConfigRetrieverFromProperties implements OgpConfigRetriever {
 		
 		String otherholdingsLayers=getPropertyWithDefault(OTHERHOLDINGS_LAYERS, "");
 		ogpConfig.setOtherholdingsLayers(otherholdingsLayers);
+		
+		String dataDir=getPropertyWithDefault(DATA_DIR, "");
+		ogpConfig.setDataDir(dataDir);
 		
 		LoginConfig logConf = ogpConfig.getLoginConfig();
 		

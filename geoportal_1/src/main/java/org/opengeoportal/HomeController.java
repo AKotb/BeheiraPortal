@@ -5,8 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.opengeoportal.config.ogp.OgpConfig;
+import org.opengeoportal.config.ogp.OgpConfigRetriever;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,11 +21,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class HomeController {
 
+	@Autowired
+	private OgpConfigRetriever ogpConfigRetriever;
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = { "/index", "/" }, method = RequestMethod.GET)
 	public ModelAndView getHomePage() throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home_contractual");
+		OgpConfig conf = ogpConfigRetriever.getConfig();
+		String dataDir = conf.getDataDir();
+		ObjectMapper mapper = new ObjectMapper();
+		String dataDirInjson = mapper.writeValueAsString(dataDir);
+		mav.addObject("dataDir", dataDirInjson);
+		System.out.println("========= Data Dir: "+dataDirInjson);
 		return mav;
 	}
 
@@ -257,4 +268,5 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("regulations_and_laws");
 		return mav;
 	}
+	
 }

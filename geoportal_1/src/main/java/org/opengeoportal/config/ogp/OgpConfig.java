@@ -19,8 +19,23 @@ public class OgpConfig {
 	String ownershipLayers;
 	String byforceLayers;
 	String otherholdingsLayers;
+	String dataDir;
 	LoginConfig loginConfig = new LoginConfig();
 	
+	/**
+	 * @return the dataDir
+	 */
+	public String getDataDir() {
+		return dataDir;
+	}
+
+	/**
+	 * @param dataDir the dataDir to set
+	 */
+	public void setDataDir(String dataDir) {
+		this.dataDir = dataDir;
+	}
+
 	public String getPageTitlePrimary() {
 		return pageTitlePrimary;
 	}
