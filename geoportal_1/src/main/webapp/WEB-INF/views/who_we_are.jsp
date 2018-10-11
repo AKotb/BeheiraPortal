@@ -36,12 +36,13 @@
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
+		<p class='cur_title'>من نحن ؟</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
 	<div class="extra_noheight">
 		<div id="searchForm" class="modal-content" align="center">
-			<h1 class="formheader" align="center">من نحن ؟</h1>
+			<!-- <h1 class="formheader" align="center">من نحن ؟</h1> -->
 			<h5 class='text-block'>
 			بدأ نشاط الإستشعار من البعد فى مصر مع بداية السبعينات وتحديدا عام 1971 من خلال مشروع بحثى مشترك بأكاديمية البحث العلمى والتكنولوجيا مع جامعة أكلاهوما الأمريكية ثم تطور إلى إنشاء  مركز للاستشعار من البعد تابعا لأكاديمية البحث العلمى والتكنولوجيا عام 1972.
 

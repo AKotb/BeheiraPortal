@@ -27,14 +27,29 @@
 <body>
 	<div class="container">
 		<ul class="nav">
-			<a href="searchforfarms"><img src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
-			<a href="who_we_are"><img src="resources/css/css/css/css/images/WHO ARE WE.png" alt="WHO ARE WE"></a>
-			<a href="regulations_and_laws"><img src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png" alt="REGULATIONS AND LAWS"></a>
-			<a href="index"><img src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
+			<a href="searchforfarms"> <img
+				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
+			<a href="who_we_are"><img
+				src="resources/css/css/css/css/images/WHO ARE WE.png"
+				alt="WHO ARE WE"></a>
+			<a href="regulations_and_laws"><img
+				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
+				alt="REGULATIONS AND LAWS"></a>
+			<a href="index"><img
+				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
-		<img src="resources/css/css/css/css/images/projectname.png" alt="project name" class="projectname">
+		<p class='cur_title'>مرئيات فضائية</p>
+		<img src="resources/css/css/css/css/images/projectname.png"
+			alt="project name" class="projectname">
 	</div>
 	<div id="extra">
+		<div class="floating-menu">
+		    <h3>Layers Information</h3>
+		    <h4>Top Layer:</h4>
+		    <h5>Sentinel 2 Septemper 2018</h5>
+		    <h4>Bottom Layer:</h4>
+		    <h5>Peleades March 2007</h5>
+	  	</div>
 		<div id="floating-panel"  align='center' ><!-- id="floating-panel" class="slidecontainer" -->
 	  		<input class="slider" type="range" min="0" max="100" value="0"  id="myRange"><!-- class="slider" -->
 		</div>
@@ -45,8 +60,8 @@
 	</div>
 	<script>
 		var id = "${polygonID}";
-		document.getElementById('img1').src = 'resources/rasterimages/png_old/' + id + '.png';
-		document.getElementById('img2').src = 'resources/rasterimages/png_new/' + id + '.png';
+		document.getElementById('img1').src = 'resources/rasterimages/png_new/' + id + '.png';
+		document.getElementById('img2').src = 'resources/rasterimages/png_old/' + id + '.png';
 		var img_height = 500;
 		var img_width = 800;
 		window.onload = function() {

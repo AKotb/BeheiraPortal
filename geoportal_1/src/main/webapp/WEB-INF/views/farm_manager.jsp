@@ -26,7 +26,7 @@
 		<ul class="nav">
 			<a href="searchforfarms"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
-			<a href="who_we_are" id="myvoucher"><img
+			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
 			<a href="regulations_and_laws"><img
@@ -35,13 +35,14 @@
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
+		<p class='cur_title'>بحث عن قطعة أرض</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
 	<div class="extra_noheight">
 		<div id="searchForm" class="modal-content" align="center">
 
-			<h1 class="formheader" align="center">بحث عن قطعة أرض</h1>
+			<!-- <h1 class="formheader" align="center">بحث عن قطعة أرض</h1> -->
 
 			<table border="0" style="dir: rtl;">
 				<tr>

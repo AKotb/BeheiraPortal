@@ -36,12 +36,13 @@
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
+		<p class='cur_title'>اللوائح والقوانين</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
 	<div class="extra_noheight">
 		<div id="searchForm" class="modal-content" align="center">
-			<h1 class="formheader" align="right">اللوائح والقوانين</h1>
+			<!-- <h1 class="formheader" align="right">اللوائح والقوانين</h1> -->
 			<h5 class='text-block'>
 			يعتبر حصر و تقدير مساحات إستخدامات الأراضى الصحراوية فى مصر متطلبا أساسيا وذو أولوية وطنية عالية للخطط القومية للتنمية المتمثلة فى إدارة الموارد الأرضية والمائية فى مصر ووقف التعديات عليها، وعلاوة على تخطيط الاستخدام الأمثل لتنمية هذه الموارد والتى تعتمد إلى حد كبير على توافر مثل هذه البيانات الدقيقة عن الأراضى ومتابعة التغيرات الحادثة عليها.
 			<br>

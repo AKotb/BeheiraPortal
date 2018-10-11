@@ -1,5 +1,52 @@
 /* All Views (5 JSP files) will be found in /BeheiraPortal/src/main/webapp/WEB-INF/views/ */
 
+.floating-menu {
+    font-family: sans-serif;
+    background: #dfd;
+    padding: 5px;;
+    width: 300px;
+    z-index: 100;
+    position: fixed;
+    right:25px;
+    top:150px;
+    float:right;
+    
+    border-radius: 5%;
+  }
+  .floating-menu h3 {
+      font-weight: bold;
+      padding: 15px;
+    display: block;
+    margin: 0.5em;
+      background-color:#ada;
+    color: green;
+      border-radius: 5%;
+  }
+  .floating-menu h4 {
+    display: block;
+    padding: 10px;
+    margin: 0 1.5em;
+    color: #8a8;
+  }
+  .floating-menu h5 {
+    display: block;
+    padding: 5px;
+    color: #355;
+     margin: 0 3.5em;
+  }
+  
+.cur_title {
+	float: left;
+	font-weight:bold;
+	padding: 0px 20px 0px 40px;
+	height: 25px;
+	width: 500px;
+	text-align:right;
+	font-size: 36px;
+	color:#afa;
+	text-shadow: -1px 2px #ff0;
+}
+
 #extra {
 	height: 614px;
 	width: 100%;
@@ -35,7 +82,7 @@
 	border-collapse: collapse; 	
 	width: 500px; 	
 	text-align: right; 	
-	padding: 8px; 	
+	padding: 5px; 	
 	border: 1px solid black; 
 }
 
@@ -87,6 +134,7 @@
 	display: block; 	
 	margin-left: auto; 	
 	margin-right: auto;
+	margin-bottom: 10px;
 }
 
 .divider {
@@ -135,7 +183,7 @@ input.input-box {
 .searchClose, .voucherClose {
 	color: #aaaaaa;
 	float: left;
-	font-size: 28px;
+	font-size: 24px;
 	font-weight: bold;
 }
 

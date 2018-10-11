@@ -24,9 +24,8 @@
 <body>
 	<div class="container">
 		<ul class="nav">
-
-			<a href="searchforfarms"><img
-				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH"></a>
+			<a href="searchforfarms"> <img
+				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
 			<a href="who_we_are"><img
 				src="resources/css/css/css/css/images/WHO ARE WE.png"
 				alt="WHO ARE WE"></a>
@@ -36,14 +35,15 @@
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
+		<p class='cur_title'>طلب إجراءات التقنين_المعاينة/الفحص</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
 	<div class="extra_noheight">
 		<div class="modal-content">
 
-			<h1 class="formheader" align="center">طلب إجراءات
-				التقنين_المعاينة/الفحص</h1>
+			<!-- <h1 class="formheader" align="center">طلب إجراءات
+				التقنين_المعاينة/الفحص</h1> -->
 			<div align="center">
 
 				<table border="0" align="center">
@@ -342,8 +342,11 @@
 			}
 
 			//set visibility options
-			document.getElementById("voucher_edit_form").style.visibility = "collapse";
-			document.getElementById("voucher_add_form").style.visibility = "collapse";
+			//document.getElementById("voucher_edit_form").style.visibility = "collapse";
+			//document.getElementById("voucher_add_form").style.visibility = "collapse";
+			// set display options
+			document.getElementById("voucher_edit_form").style.display = "none";
+			document.getElementById("voucher_add_form").style.display = "none";
 
 		}
 
@@ -470,16 +473,22 @@
 						} else {
 							document.getElementById("edit_Issuing_document_No").value = "";
 						}
-						document.getElementById("voucher_edit_form").style.visibility = "visible";
-						document.getElementById("voucher_add_form").style.visibility = "collapse";
+						// set display options
+						document.getElementById("voucher_edit_form").style.display = "block";
+						document.getElementById("voucher_add_form").style.display = "none";
+						//document.getElementById("voucher_edit_form").style.visibility = "visible";
+						//document.getElementById("voucher_add_form").style.visibility = "collapse";
 					}
 				}
 			}
 		}
 
 		function voucher_add(id) {
-			document.getElementById("voucher_add_form").style.visibility = "visible";
-			document.getElementById("voucher_edit_form").style.visibility = "collapse";
+			// set display options
+			document.getElementById("voucher_add_form").style.display = "block";
+			document.getElementById("voucher_edit_form").style.display = "none";
+			//document.getElementById("voucher_add_form").style.visibility = "visible";
+			//document.getElementById("voucher_edit_form").style.visibility = "collapse";
 		}
 	</script>
 
