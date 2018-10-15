@@ -43,20 +43,20 @@
 			alt="project name" class="projectname">
 	</div>
 	<div id="extra">
-		<div class="floating-menu">
+		<!-- <div class="floating-menu">
 		    <h3>Layers Information</h3>
 		    <h4>Top Layer:</h4>
 		    <h5>Sentinel2 Septemper 2018</h5>
 		    <h4>Bottom Layer:</h4>
-		    <h5>Peleades March 2017</h5>
-	  	</div>
+		    <h5>Pleiades March 2017</h5>
+	  	</div> -->
 		<div id="floating-panel"  align='center' ><!-- id="floating-panel" class="slidecontainer" -->
 	  		<input class="slider" type="range" min="0" max="100" value="0"  id="myRange"><!-- class="slider" -->
 		</div>
 		<div id="raster_view">
 			<img id='img1' class='img_slider' src='resources/rasterimages/0.png'>
 			<div id='img1_title' class='legend'>
-				<p class='img_title bottom_title'>Peleades March 2017</p>
+				<p class='img_title bottom_title'>Pleiades March 2017</p>
 			</div>
 	        <img id='img2' class='img_slider'src='resources/rasterimages/0.png'>
 	        <div id='img2_title' class='legend' >
