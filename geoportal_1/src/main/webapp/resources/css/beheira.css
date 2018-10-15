@@ -1,5 +1,32 @@
 /* All Views (5 JSP files) will be found in /BeheiraPortal/src/main/webapp/WEB-INF/views/ */
 
+.top_title{
+    background-color:rgba(127,255,127,0.2); 
+    align:right; 
+    border: 0px; 
+    color:yellow;
+}
+.bottom_title{
+    background-color:rgba(255,255,127,0.2); 
+    align:left; 
+    border: 0px; 
+    color:red;
+}
+.legend{
+    width:500px;
+    height:400px;
+    position:absolute;
+    border: 0px;
+	padding: 0px;
+}
+.img_title{
+    position:relative;
+    border: 2px solid;
+	text-align:left;
+	width: 250px;
+	
+}
+  
 .floating-menu {
     font-family: sans-serif;
     background: #dfd;
@@ -183,7 +210,7 @@ input.input-box {
 .searchClose, .voucherClose {
 	color: #aaaaaa;
 	float: left;
-	font-size: 24px;
+	font-size: 18px;
 	font-weight: bold;
 }
 

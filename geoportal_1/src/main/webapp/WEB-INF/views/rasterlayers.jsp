@@ -46,16 +46,23 @@
 		<div class="floating-menu">
 		    <h3>Layers Information</h3>
 		    <h4>Top Layer:</h4>
-		    <h5>Sentinel 2 Septemper 2018</h5>
+		    <h5>Sentinel2 Septemper 2018</h5>
 		    <h4>Bottom Layer:</h4>
-		    <h5>Peleades March 2007</h5>
+		    <h5>Peleades March 2017</h5>
 	  	</div>
 		<div id="floating-panel"  align='center' ><!-- id="floating-panel" class="slidecontainer" -->
 	  		<input class="slider" type="range" min="0" max="100" value="0"  id="myRange"><!-- class="slider" -->
 		</div>
 		<div id="raster_view">
 			<img id='img1' class='img_slider' src='resources/rasterimages/0.png'>
+			<div id='img1_title' class='legend'>
+				<p class='img_title bottom_title'>Peleades March 2017</p>
+			</div>
 	        <img id='img2' class='img_slider'src='resources/rasterimages/0.png'>
+	        <div id='img2_title' class='legend' >
+				<p class='img_title top_title'>Sentinel2 Septemper 2018</p>
+			</div>
+	        
 		</div>
 	</div>
 	<script>
@@ -84,11 +91,19 @@
 			document.getElementById("img2").height = img_height;
 			document.getElementById("img1").width = img_width;
 			document.getElementById("img1").height = img_height;
+			
+			document.getElementById("img2_title").width = img_width;
+			document.getElementById("img2_title").height = img_height;
+			document.getElementById("img1_title").width = img_width;
+			document.getElementById("img1_title").height = img_height;
 			//document.getElementById("myRange").style.width = img_width;
 			
 			shift = (document.getElementById("img2").parentElement.clientWidth - img_width) / 2;
 			document.getElementById("img1").style.left = shift + 'px';
 			document.getElementById("img2").style.left = shift + 'px';
+			
+			document.getElementById("img1_title").style.left = shift + 'px';
+			document.getElementById("img2_title").style.left = shift + 'px';
 			//document.getElementById("myRange").style.left = shift + 'px';
 			
 		};
@@ -98,6 +113,9 @@
 		slider.oninput = function() {
 			document.getElementById("img1").style.clip = "rect(0," + img_width+"px, " + img_height+"px, " + "0px)";
 		  	document.getElementById("img2").style.clip = "rect(0," + img_width+"px, " + img_height+"px, " + 0.01* img_width * this.value + "px)";
+		  	
+		  	document.getElementById("img1_title").style.clip = "rect(0," + img_width+"px, " + img_height+"px, " + "0px)";
+		  	document.getElementById("img2_title").style.clip = "rect(0," + img_width+"px, " + img_height+"px, " + 0.01* img_width * this.value + "px)";
 		  
 		  
 		}
