@@ -61,6 +61,8 @@
 			distirct_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json'); 
 			var db_layer = new google.maps.Data({map: map});
 			db_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
+			var db2_layer = new google.maps.Data({map: map});
+			db2_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db_23.json');
 			/* var db = (function() {
 		        var json = null;
 		        $.ajax({
