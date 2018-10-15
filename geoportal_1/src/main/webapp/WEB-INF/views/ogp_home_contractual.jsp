@@ -141,6 +141,34 @@
 					}
 				}
 			});
+			db2_layer.setStyle(function(feature) {
+				var folderpath = feature.getProperty('FolderPath');
+				if (folderpath) {
+					return ({
+						fillColor : 'transparent',
+						strokeColor : 'black',
+						strokeWeight : 2
+					});
+				} else {
+					var color = '#088da5';
+					var color_selected = 'red';
+					var showfarm_id = "${showfarm_id}";
+					
+					if (feature.getProperty('M_ID') == showfarm_id) {
+						return ({
+							fillColor : color_selected,
+							strokeColor : color_selected,
+							strokeWeight : 4
+						});
+					} else {
+						return ({
+							fillColor : color,
+							strokeColor : color,
+							strokeWeight : 2
+						});
+					}
+				}
+			});
 
 			db_layer
 					.addListener(
@@ -392,6 +420,23 @@
 
 			db_layer.addListener('mouseout', function(event) {
 				db_layer.revertStyle();
+			});
+			
+			db2_layer.addListener('mouseover', function(event) {
+				var folderpath = event.feature.getProperty('FolderPath');
+				if (folderpath) {
+					folderpath = folderpath;
+				} else {
+					db2_layer.revertStyle();
+					db2_layer.overrideStyle(event.feature, {
+						strokeWeight : 4,
+						fillColor : 'yellow'
+					});
+				}
+			});
+
+			db2_layer.addListener('mouseout', function(event) {
+				db2_layer.revertStyle();
 			});
 		}
 
