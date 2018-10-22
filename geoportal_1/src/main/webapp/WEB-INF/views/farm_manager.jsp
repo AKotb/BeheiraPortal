@@ -387,8 +387,7 @@
 		} */
 
 		function showSearchResults(id) {
-			
-			var params = [ id, "lat", "lng" ];
+			var params = [ id, '30.2519715', '30.2761235' ];
 			var location = "<c:url value='showonmap'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;

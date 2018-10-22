@@ -192,13 +192,21 @@
 					</h2>
 				</div>
 			</div>
+			<div id='controlbuttons' class='floating-menu'>
+					<div class='vm_control_button_1'><a href="javascript:void(0);" onclick="move();" class="button">استخدامات الأراضى</a> </div>
+					<div class='vm_control_button_2'><a href="javascript:void(0);" onclick="move_raster();" class="button"> مرئيات فضائية </a></div> 
+					<div class='vm_control_button_3'><a href="javascript:void(0);" onclick="gotoMahdar();" target="_blank" class="button">محضر معاينة</a></div> 
+					<div class='vm_control_button_4'><a href="javascript:void(0);" onclick="back();" class="button">رجوع</a></div>
+			</div>
 		</div>
 	</div>
 	<script>
+		var lat = "${lat}";
+		var lng = "${lng}";
+		var selectedfarmid = '${selectedfarmid}';
+		var parsedselectedfarmid = JSON.parse(selectedfarmid);
 		window.onload = function() {
 			voucherjson = '${vouchers}';
-			selectedfarmid = '${selectedfarmid}';
-			parsedselectedfarmid = JSON.parse(selectedfarmid);
 			var farmID;
 			var num_of_voucher = 0;
 			if (voucherjson != 'null') {
@@ -489,6 +497,51 @@
 			document.getElementById("voucher_edit_form").style.display = "none";
 			//document.getElementById("voucher_add_form").style.visibility = "visible";
 			//document.getElementById("voucher_edit_form").style.visibility = "collapse";
+		}
+		
+		function move_raster() {
+			var id = document.getElementById("vm_farm_ID").value;
+			var params = [ id, lat, lng ];
+			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+		
+		function move() {
+			var id = document.getElementById("vm_farm_ID").value;
+			var params = [ id, lat, lng ];
+			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+
+		function back() {
+			var id = document.getElementById("vm_farm_ID").value;
+			var params = [ id, lat, lng ];
+			var location = "<c:url value='showonmap'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+		
+		function gotoMahdar() {
+			var location;
+			var id = document.getElementById("vm_farm_ID").value;
+			if (200 == urlExists('resources/mahader/' + id + '.png')) {
+				location = "resources/mahader/" + id + ".png";
+			}else{
+				location = "resources/mahader/" + 0 + ".png";
+			}
+			window.location.href = location;
+		}
+		
+		function urlExists(checkedurl) {
+			var http = $.ajax({
+				type : "HEAD",
+				url : checkedurl,
+				async : false
+			})
+			return http.status;
+			// this will return 200 on success, and 0 or negative value on error
 		}
 	</script>
 

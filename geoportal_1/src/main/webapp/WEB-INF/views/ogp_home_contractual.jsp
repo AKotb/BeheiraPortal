@@ -44,8 +44,8 @@
 	<script>
 		var map;
 		var infowindow;
-		var lat;
-		var lng;
+		var farmlat;
+		var farmlng;
 		var farms;
 		function initMap() {
 			var Egypt = {
@@ -57,6 +57,13 @@
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
+			farmtozoomto='${showfarm_id}';
+			if(farmtozoomto){
+				selectedfarmlat = parseFloat('${selectedlat}');
+				selectedfarmlng = parseFloat('${selectedlng}');
+				map.setCenter({lat: selectedfarmlat, lng: selectedfarmlng});
+				map.setZoom(map.getZoom() + 4);
+			}
 			var distirct_layer = new google.maps.Data({map: map});
 			distirct_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json'); 
 			var db_layer = new google.maps.Data({map: map});
@@ -183,7 +190,9 @@
 										strokeWeight : 4,
 										fillColor : 'green'
 									});
-									var coord0 = event.feature.getGeometry()
+									farmlat = event.latLng.lat();
+									farmlng = event.latLng.lng();
+									/* var coord0 = event.feature.getGeometry()
 											.getAt(0).getAt(0);
 									coord0 = String(coord0);
 									coord0 = coord0.slice(1, -1);
@@ -220,7 +229,7 @@
 									}
 									mapcenter = bounds.getCenter();
 									lat = mapcenter.lat();
-									lng = mapcenter.lng();
+									lng = mapcenter.lng(); */
 									var owner = event.feature
 											.getProperty('Farm_Owner');
 									if (owner) {
@@ -394,15 +403,13 @@
 											+ "<span onclick='colse_infowindow()' class='searchClose'>[Close]</span></div>";
 
 									infowindow.setContent(content);
-									infowindow.setPosition(event.feature
-											.getGeometry().getAt(0).getAt(0));
-									infowindow.setOptions({
+									infowindow.setPosition(event.latLng);
+									/* infowindow.setOptions({
 										pixelOffset : new google.maps.Size(0,
 												-30)
-									});
+									}); */
 									infowindow.open(map);
 								}
-
 							});
 
 			db_layer.addListener('mouseover', function(event) {
@@ -441,27 +448,27 @@
 		}
 
 		function move(id) {
-			var params = [ id, lat, lng ];
+			var params = [ id, farmlat, farmlng ];
 			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
 
 		function move_raster(id) {
-			var params = [ id, lat, lng ];
+			var params = [ id, farmlat, farmlng ];
 			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
 
 		function vouchers(id) {
+			var params = [ id, farmlat, farmlng ];
 			var location = "<c:url value='vouchers'><c:param name='params' value='paramsvalues'/></c:url>";
-			location = location.replace("paramsvalues", id);
+			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
 		
 		function colse_infowindow() {
-			//alert("Closing info window");
 			infowindow.close();
 		}
 
@@ -471,7 +478,11 @@
 				farms = JSON.parse(farmsjson);
 			} else {
 				var location = "<c:url value='getallavailablefarms'><c:param name='params' value='paramsvalues'/></c:url>";
-				var params = ["${showfarm_id}", "lat", "lng"];
+				if("${showfarm_id}"){
+					farmlat='${selectedlat}';
+					farmlng='${selectedlng}';
+				}
+				var params = ["${showfarm_id}", farmlat, farmlng];
 				location = location.replace("paramsvalues", params);
 				window.location.href = location;
 			}

@@ -232,12 +232,13 @@
 				} else {
 					db_cropsArea = "لا يوجد";
 				}
+				
+				
 				var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 				if (200 == urlExists('resources/mahader/'+db_farmid+'.png')) {
 					link0 = "<a href=\'resources/mahader/"+db_farmid+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 				}
-
-				//var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
+				var link1 = "<a href=\'javascript:void(0);\' onclick=\'back();\' class=\'button\'> رجوع </a>";
 				var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
 							+ db_farmid
 							+ ");\' class=\'button\'> مرئيات فضائية </a>";
@@ -272,6 +273,8 @@
 					+ arname
 					+ "</h2>"
 					+ "<table style= \"margin: auto;\"><tr><td class=\'td-button\'>"
+					+ link1
+					+ "</td><td class=\'td-button\'>"
 					+ link0
 					+ "</td><td class=\'td-button\'>"
 					+ link3
@@ -330,8 +333,9 @@
 		}
 
 		function vouchers(id) {
+			var params = [ id, lat, lng ];
 			var location = "<c:url value='vouchers'><c:param name='params' value='paramsvalues'/></c:url>";
-			location = location.replace("paramsvalues", id);
+			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
 		
@@ -339,6 +343,14 @@
 			//alert("Closing info window");
 			infowindow.close();
 		}
+		
+		function back() {
+			var params = [ id, lat, lng ];
+			var location = "<c:url value='showonmap'><c:param name='params' value='paramsvalues'/></c:url>";
+			location = location.replace("paramsvalues", params);
+			window.location.href = location;
+		}
+		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap">

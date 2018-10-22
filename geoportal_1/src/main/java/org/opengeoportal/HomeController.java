@@ -68,12 +68,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
-	public ModelAndView getVouchers(@RequestParam(value = "params") String param) throws Exception {
+	public ModelAndView getVouchers(@RequestParam(value = "params") String[] params) throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
 		List<Voucher> vouchers = null;
 		try {
 			VoucherDAO voucherdao = new VoucherDAO();
-			vouchers = voucherdao.getVouchersByFarmID(param);
+			vouchers = voucherdao.getVouchersByFarmID(params[0]);
 			voucherdao.closeDBConn();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,11 @@ public class HomeController {
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String vouchersInjson = mapper.writeValueAsString(vouchers);
-		String selectedfarmid = mapper.writeValueAsString(param);
+		String selectedfarmid = mapper.writeValueAsString(params[0]);
 		mav.addObject("vouchers", vouchersInjson);
 		mav.addObject("selectedfarmid", selectedfarmid);
+		mav.addObject("lat", params[1]);
+		mav.addObject("lng", params[2]);
 		return mav;
 	}
 
@@ -247,6 +249,8 @@ public class HomeController {
 		String farmsInjson = mapper.writeValueAsString(farmsList);
 		mav.addObject("farms", farmsInjson);
 		mav.addObject("showfarm_id", params[0]);
+		mav.addObject("selectedlat", params[1]);
+		mav.addObject("selectedlng", params[2]);
 		return mav;
 	}
 
@@ -254,6 +258,8 @@ public class HomeController {
 	public ModelAndView showFarmOnMap(@RequestParam(value = "params") String[] params) throws Exception {
 		ModelAndView mav = new ModelAndView("ogp_home_contractual");
 		mav.addObject("showfarm_id", params[0]);
+		mav.addObject("selectedlat", params[1]);
+		mav.addObject("selectedlng", params[2]);
 		return mav;
 	}
 
