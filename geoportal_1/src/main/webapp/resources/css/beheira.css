@@ -31,7 +31,7 @@
     font-family: sans-serif;
     background: #dfd;
     padding: 5px;;
-    width: 300px;
+    width: 150px;
     z-index: 100;
     position: fixed;
     right:25px;
@@ -352,5 +352,51 @@ input.readonly-box {
 	height: 25px; 
 	background: #44a959;
 	cursor: e-resize;
+}
+
+.control_buttons {
+	width: 359px;
+    height: 30px;
+    position: relative;
+    left: 580px;
+    bottom: -524px;
+    border: 3px solid #f6f6f6;
+}
+
+.vm_control_buttons {
+	width: 109px;
+    height: 0px;
+    position: relative;
+    left: 800px;
+    bottom: 260px;
+    text-align: right;
+    border: 3px solid #f6f6f6;
+}
+
+.vm_control_button_1 {
+	padding-top: 4px;
+    width: 110px;
+    float: right;
+}
+
+.vm_control_button_2 {
+    padding-top: 45px;
+    width: 77px;
+    float: right;
+    margin-right: -100px;
+}
+
+.vm_control_button_3 {
+    padding-top: 86px;
+    width: 80px;
+    float: right;
+    margin-right: -109px;
+}
+
+.vm_control_button_4 {
+    padding-top: 128px;
+    width: 46px;
+    float: right;
+    margin-right: -109px;
 }
 
