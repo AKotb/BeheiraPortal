@@ -17,8 +17,7 @@
 <!-- CSS -->
 <link rel="stylesheet"
 	href="resources/css/css/css/css/tooplate-style.css">
-<link rel="stylesheet"
-	href="resources/css/beheira.css">
+<link rel="stylesheet" href="resources/css/beheira.css">
 </head>
 
 <body>
@@ -39,7 +38,6 @@
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
-	<!--<jsp:include page="jspf/header.jspf" />-->
 	<div id="extra"></div>
 	<script>
 		var map;
@@ -57,82 +55,55 @@
 				center : Egypt,
 				mapTypeId : 'hybrid'
 			});
-			farmtozoomto='${showfarm_id}';
-			if(farmtozoomto){
+			farmtozoomto = '${showfarm_id}';
+			if (farmtozoomto) {
 				selectedfarmlat = parseFloat('${selectedlat}');
 				selectedfarmlng = parseFloat('${selectedlng}');
-				map.setCenter({lat: selectedfarmlat, lng: selectedfarmlng});
-				map.setZoom(map.getZoom() + 4);
+				map.setCenter({
+					lat : selectedfarmlat,
+					lng : selectedfarmlng
+				});
+				map.setZoom(map.getZoom() + 3);
 			}
-			var distirct_layer = new google.maps.Data({map: map});
-			distirct_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json'); 
-			var db_layer = new google.maps.Data({map: map});
-			db_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
-			var db2_layer = new google.maps.Data({map: map});
-			db2_layer.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db_23.json');
-			/* var db = (function() {
-		        var json = null;
-		        $.ajax({
-		            'async': false,
-		            'global': false,
-		            'url': "https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json",
-		            'dataType': "json",
-		            'success': function (data) {
-		                json = data;
-		            }
-		        });
-		        return json;
-		    })();
-			map.data.addGeoJson(db);
-			var distirct = (function() {
-		        var json = null;
-		        $.ajax({
-		            'async': false,
-		            'global': false,
-		            'url': "https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json",
-		            'dataType': "json",
-		            'success': function (data) {
-		                json = data;
-		            }
-		        });
-		        return json;
-		    })();
-			map.data.addGeoJson(distirct); */
-			
-			/* map.data
-					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json'); */
-			/* map.data
-			.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json'); */
-			/*var kmbuffer2Layer = new google.maps.KmlLayer(
-					{
-						url : 'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/2km_buffer.kml',
-						map : map
-					});*/
-					
+			var distirct_layer = new google.maps.Data({
+				map : map
+			});
+			distirct_layer
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
+			var db_layer = new google.maps.Data({
+				map : map
+			});
+			db_layer
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
+			var db2_layer = new google.maps.Data({
+				map : map
+			});
+			db2_layer
+					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db_2.json');
 			infowindow = new google.maps.InfoWindow();
 			distirct_layer.setStyle(function(feature) {
-						var folderpath = feature.getProperty('FolderPath');
-						if (folderpath) {
-							return ({
-								fillColor : 'transparent',
-								strokeColor : 'black',
-								strokeWeight : 2
-							});
-						}
+				var folderpath = feature.getProperty('FolderPath');
+				if (folderpath) {
+					return ({
+						fillColor : 'transparent',
+						strokeColor : 'black',
+						strokeWeight : 4
 					});
+				}
+			});
 			db_layer.setStyle(function(feature) {
 				var folderpath = feature.getProperty('FolderPath');
 				if (folderpath) {
 					return ({
 						fillColor : 'transparent',
 						strokeColor : 'black',
-						strokeWeight : 2
+						strokeWeight : 4
 					});
 				} else {
 					var color = '#088da5';
 					var color_selected = 'red';
 					var showfarm_id = "${showfarm_id}";
-					
+
 					if (feature.getProperty('M_ID') == showfarm_id) {
 						return ({
 							fillColor : color_selected,
@@ -154,13 +125,12 @@
 					return ({
 						fillColor : 'transparent',
 						strokeColor : 'black',
-						strokeWeight : 2
+						strokeWeight : 4
 					});
 				} else {
 					var color = '#088da5';
 					var color_selected = 'red';
 					var showfarm_id = "${showfarm_id}";
-					
 					if (feature.getProperty('M_ID') == showfarm_id) {
 						return ({
 							fillColor : color_selected,
@@ -186,50 +156,14 @@
 								if (folderpath) {
 									folderpath = folderpath;
 								} else {
+									//db_layer.revertStyle();
 									db_layer.overrideStyle(event.feature, {
 										strokeWeight : 4,
+										strokeColor : 'red',
 										fillColor : 'green'
 									});
 									farmlat = event.latLng.lat();
 									farmlng = event.latLng.lng();
-									/* var coord0 = event.feature.getGeometry()
-											.getAt(0).getAt(0);
-									coord0 = String(coord0);
-									coord0 = coord0.slice(1, -1);
-									var coord0arr = coord0.split(",");
-									var coord1 = event.feature.getGeometry()
-											.getAt(0).getAt(1);
-									coord1 = String(coord1);
-									coord1 = coord1.slice(1, -1);
-									var coord1arr = coord1.split(",");
-									var coord2 = event.feature.getGeometry()
-											.getAt(0).getAt(2);
-									coord2 = String(coord2);
-									coord2 = coord2.slice(1, -1);
-									var coord2arr = coord2.split(",");
-									var coord3 = event.feature.getGeometry()
-											.getAt(0).getAt(3);
-									coord3 = String(coord3);
-									coord3 = coord3.slice(1, -1);
-									var coord3arr = coord3.split(",");
-									var coordinates = [];
-									coordinates.push([ coord0arr[0],
-											coord0arr[1] ]);
-									coordinates.push([ coord1arr[0],
-											coord1arr[1] ]);
-									coordinates.push([ coord2arr[0],
-											coord2arr[1] ]);
-									coordinates.push([ coord3arr[0],
-											coord3arr[1] ]);
-									var bounds = new google.maps.LatLngBounds();
-									for (var i = 0; i < coordinates.length; i++) {
-										bounds.extend(new google.maps.LatLng(
-												coordinates[i][0],
-												coordinates[i][1]));
-									}
-									mapcenter = bounds.getCenter();
-									lat = mapcenter.lat();
-									lng = mapcenter.lng(); */
 									var owner = event.feature
 											.getProperty('Farm_Owner');
 									if (owner) {
@@ -341,29 +275,20 @@
 												db_ownership = "غير متوفر";
 												db_displayedownership = "غير متوفر";
 											}
-										} 
-										/* else {
-											db_farmname = farm_name;
-											db_ownerid = sid;
-											db_ownername = owner;
-											db_ownertel = phone;
-											db_displayedownership = ownership;
-										} */
+										}
 									}
 									var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
-									if (200 == urlExists('resources/mahader/'+area_id+'.png')) {
+									if (200 == urlExists('resources/mahader/'
+											+ area_id + '.png')) {
 										link0 = "<a href=\'resources/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									}
-
-									//var link0 = "<a href=\'resources/mahader/"+area_id+".jpg\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
-												+ area_id
-												+ ");\' class=\'button\'> مرئيات فضائية </a>";
+											+ area_id
+											+ ");\' class=\'button\'> مرئيات فضائية </a>";
 									var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
 											+ area_id
 											+ ");\' class=\'button\'>"
-											+ "طلب إجراءات التقنين"
-											+ "</a>";
+											+ "طلب إجراءات التقنين" + "</a>";
 									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
 											+ area_id
@@ -401,17 +326,197 @@
 											+ link1
 											+ "</td></tr></table>"
 											+ "<span onclick='colse_infowindow()' class='searchClose'>[Close]</span></div>";
-
 									infowindow.setContent(content);
 									infowindow.setPosition(event.latLng);
-									/* infowindow.setOptions({
-										pixelOffset : new google.maps.Size(0,
-												-30)
-									}); */
 									infowindow.open(map);
 								}
 							});
 
+			db2_layer
+			.addListener(
+					'click',
+					function(event) {
+						var folderpath = event.feature
+								.getProperty('FolderPath');
+						if (folderpath) {
+							folderpath = folderpath;
+						} else {
+							//db2_layer.revertStyle();
+							db2_layer.overrideStyle(event.feature, {
+								strokeWeight : 4,
+								strokeColor : 'red',
+								fillColor : 'green'
+							});
+							farmlat = event.latLng.lat();
+							farmlng = event.latLng.lng();
+							var owner = event.feature
+									.getProperty('Farm_Owner');
+							if (owner) {
+								owner = owner;
+							} else {
+								owner = "غير متوفر";
+							}
+							var farm_name = event.feature
+									.getProperty('Farm_Name');
+							if (farm_name) {
+								farm_name = farm_name;
+							} else {
+								farm_name = "غير متوفر";
+							}
+							var sid = event.feature
+									.getProperty('Owner_ID');
+							if (sid) {
+								sid = sid;
+							} else {
+								sid = "غير متوفر";
+							}
+							var phone = event.feature
+									.getProperty('Tel');
+							if (phone) {
+								phone = phone;
+							} else {
+								phone = "غير متوفر";
+							}
+							var ownership = event.feature
+									.getProperty('Ownership');
+							if (ownership) {
+								ownership = ownership;
+							} else {
+								ownership = "غير متوفر";
+							}
+							var area_id = event.feature
+									.getProperty('M_ID');
+							if (area_id) {
+								area_id = area_id;
+							} else {
+								area_id = "0";
+							}
+							var farm_area = event.feature
+									.getProperty('Farm_Area');
+							var feddan;
+							var qirat;
+							var sahm;
+							if (farm_area) {
+								var area = farm_area.toString();
+								var fedarr = area.split("-");
+								feddan = fedarr[0];
+								qirat = fedarr[1];
+								sahm = fedarr[2];
+							} else {
+								feddan = "غير متوفر";
+								qirat = "غير متوفر";
+								sahm = "غير متوفر";
+							}
+							var db_farmname = "";
+							var db_ownerid = "";
+							var db_ownername = "";
+							var db_ownertel = "";
+							var db_ownership = "";
+							var db_displayedownership = "";
+							for ( var i in farms) {
+								if (farms[i].farmID === area_id) {
+									if (farms[i].farmName) {
+										db_farmname = farms[i].farmName;
+									} else {
+										db_farmname = "غير متوفر";
+									}
+
+									if (farms[i].ownerID) {
+										db_ownerid = farms[i].ownerID;
+									} else {
+										db_ownerid = "غير متوفر";
+									}
+
+									if (farms[i].ownerName) {
+										db_ownername = farms[i].ownerName;
+									} else {
+										db_ownername = "غير متوفر";
+									}
+
+									if (farms[i].telephone) {
+										db_ownertel = farms[i].telephone;
+									} else {
+										db_ownertel = "غير متوفر";
+									}
+
+									if (farms[i].ownership) {
+										db_ownership = farms[i].ownership;
+										if (db_ownership === '1') {
+											db_displayedownership = "تمليك";
+										}
+										if (db_ownership === '2') {
+											db_displayedownership = "إيجار";
+										}
+										if (db_ownership === '3') {
+											db_displayedownership = "وضع اليد";
+										}
+										if (db_ownership === '') {
+											db_displayedownership = "غير متوفر";
+										}
+										if (db_ownership === 'غير متوفر') {
+											db_displayedownership = "غير متوفر";
+										}
+									} else {
+										db_ownership = "غير متوفر";
+										db_displayedownership = "غير متوفر";
+									}
+								}
+							}
+							var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+							if (200 == urlExists('resources/mahader/'
+									+ area_id + '.png')) {
+								link0 = "<a href=\'resources/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+							}
+							var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
+									+ area_id
+									+ ");\' class=\'button\'> مرئيات فضائية </a>";
+							var link3 = "<a href=\'javascript:void(0);\' onclick=\'vouchers("
+									+ area_id
+									+ ");\' class=\'button\'>"
+									+ "طلب إجراءات التقنين" + "</a>";
+							var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+							var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
+									+ area_id
+									+ ");\' class=\'button\'> استخدامات الأراضى </a>";
+							var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
+									+ "بيانات قطعة الأرض" + "</h1>"
+									+ link4
+									+ "<table class=\"outertable\" style=\"dir: rtl;\"><tr><td class=\'td\'>"
+									+ area_id
+									+ "</td><td class=\'rightcolumn\'>كود المزرعة / الشركة</td></tr><tr><td class=\'td\'>"
+									+ db_farmname
+									+ "</td><td class=\'rightcolumn\'>اسم المزرعة / الشركة</td></tr><tr><td class=\'td\'><table class=\"innertable\"><tr><td class=\'td\'>س</td><td class=\'td\'>ط</td><td class=\'td\'>ف</td></tr><tr><td class=\'td\'>"
+									+ sahm
+									+ "</td><td class=\'td\'>"
+									+ qirat
+									+ "</td><td class=\'td\'>"
+									+ feddan
+									+ "</td></tr></table>"
+									+ "</td><td class=\'rightcolumn\'>المساحة</td></tr><tr><td class=\'td\'>"
+									+ db_displayedownership
+									+ "</td><td class=\'rightcolumn\'>نوع الحيازة</td></tr><tr><td class=\'td\'>"
+									+ db_ownername
+									+ "</td><td class=\'rightcolumn\'>اسم المالك / واضع اليد</td></tr><tr><td class=\'td\'>"
+									+ db_ownerid
+									+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td class=\'td\'>"
+									+ db_ownertel
+									+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
+									+ "<table><tr><td class=\'td-button\'>"
+									+ link0
+									+ "</td><td class=\'td-button\'>"
+									+ link3
+									+ "</td><td class=\'td-button\'>"
+									+ link2
+									+ "</td><td class=\'td-button\'>"
+									+ link1
+									+ "</td></tr></table>"
+									+ "<span onclick='colse_infowindow()' class='searchClose'>[Close]</span></div>";
+							infowindow.setContent(content);
+							infowindow.setPosition(event.latLng);
+							infowindow.open(map);
+						}
+					});
+			
 			db_layer.addListener('mouseover', function(event) {
 				var folderpath = event.feature.getProperty('FolderPath');
 				if (folderpath) {
@@ -428,7 +533,7 @@
 			db_layer.addListener('mouseout', function(event) {
 				db_layer.revertStyle();
 			});
-			
+
 			db2_layer.addListener('mouseover', function(event) {
 				var folderpath = event.feature.getProperty('FolderPath');
 				if (folderpath) {
@@ -467,7 +572,7 @@
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
 		}
-		
+
 		function colse_infowindow() {
 			infowindow.close();
 		}
@@ -478,11 +583,11 @@
 				farms = JSON.parse(farmsjson);
 			} else {
 				var location = "<c:url value='getallavailablefarms'><c:param name='params' value='paramsvalues'/></c:url>";
-				if("${showfarm_id}"){
-					farmlat='${selectedlat}';
-					farmlng='${selectedlng}';
+				if ("${showfarm_id}") {
+					farmlat = '${selectedlat}';
+					farmlng = '${selectedlng}';
 				}
-				var params = ["${showfarm_id}", farmlat, farmlng];
+				var params = [ "${showfarm_id}", farmlat, farmlng ];
 				location = location.replace("paramsvalues", params);
 				window.location.href = location;
 			}
@@ -521,7 +626,7 @@
 		function voucherPrint() {
 			window.print();
 		}
-		
+
 		function urlExists(checkedurl) {
 			var http = $.ajax({
 				type : "HEAD",
@@ -531,7 +636,6 @@
 			return http.status;
 			// this will return 200 on success, and 0 or negative value on error
 		}
-		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxcedr1zrD8h225vpj3hNseos5mHGEDVY&callback=initMap">
