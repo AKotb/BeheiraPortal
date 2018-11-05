@@ -524,12 +524,10 @@
 		}
 		
 		function gotoMahdar() {
-			var location;
+			var location = 'resources/mahader/0.png';
 			var id = document.getElementById("vm_farm_ID").value;
 			if (200 == urlExists('resources/mahader/' + id + '.png')) {
-				location = "resources/mahader/" + id + ".png";
-			}else{
-				location = "resources/mahader/" + 0 + ".png";
+				location = 'resources/mahader/' + id + '.png';
 			}
 			window.location.href = location;
 		}
