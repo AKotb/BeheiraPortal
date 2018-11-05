@@ -92,39 +92,53 @@
 		window.onload = function() {
 			new_width = document.getElementById("img2").width;
 			new_height = document.getElementById("img2").height;
+			img_height = new_height;
+			img_width = new_width;
 			document.getElementById("img1").width = new_width;
 			document.getElementById("img1").height = new_height;
-			if (new_width > 800) {
+			if(new_width > 800){
 				ratio = new_height / new_width;
-				img_height = ratio * 800;
-				img_width = 800;
+				new_height = ratio * 800;
+				new_width = 800;
 			}
-			if (new_height > 500) {
+			
+			ratio = new_width / new_height;
+			new_height = 500;
+			new_width = ratio * 500;
+			
+			img_height = new_height;
+			img_width = new_width;
+			/*if(new_height > 500){
 				ratio = new_width / new_height;
 				img_height = 500;
 				img_width = ratio * 500;
 			}
-
+			else{
+				img_width = new_width;
+				img_height = new_height;
+				
+			}*/
+			
 			document.getElementById("img2").width = img_width;
 			document.getElementById("img2").height = img_height;
 			document.getElementById("img1").width = img_width;
 			document.getElementById("img1").height = img_height;
-
+			
 			document.getElementById("img2_title").width = img_width;
 			document.getElementById("img2_title").height = img_height;
 			document.getElementById("img1_title").width = img_width;
 			document.getElementById("img1_title").height = img_height;
 			//document.getElementById("myRange").style.width = img_width;
-
+			
 			shift = (document.getElementById("img2").parentElement.clientWidth - img_width) / 2;
 			document.getElementById("img1").style.left = shift + 'px';
 			document.getElementById("img2").style.left = shift + 'px';
-
+			
 			document.getElementById("img1_title").style.left = shift + 'px';
 			document.getElementById("img2_title").style.left = shift + 'px';
 			//document.getElementById("myRange").style.left = shift + 'px';
-
-		}
+			
+		};
 
 		var slider = document.getElementById("myRange");
 		slider.oninput = function() {
