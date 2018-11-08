@@ -8,3 +8,8 @@ There is some basic installation and configuration material in the following lin
 [basic installation and configuration](https://docs.google.com/a/tufts.edu/document/d/1eiUHulB4N0iWV_OZAyVwuJr6HAE6DqOi0nz5cP0a7LE/edit?pli=1#)
 
 This project is licensed under GPL v3.
+
+main users  : 
+زائر :123
+موظف:123
+مشرف موقع:123
