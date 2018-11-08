@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,8 @@ public class HomeController {
 
 	@Autowired
 	private OgpConfigRetriever ogpConfigRetriever;
-	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	//final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final static Logger LOGGER = Logger.getRootLogger();
 
 	@RequestMapping(value = { "/index", "/" }, method = RequestMethod.GET)
 	public ModelAndView getHomePage() throws Exception {
@@ -143,7 +146,23 @@ public class HomeController {
 						boolean addresult = voucherdao.addVoucher(voucher);
 						vouchers = voucherdao.getVouchersByFarmID(params[2]);
 						voucherdao.closeDBConn();
+						//Logging into BeheiraPortal log file
+						LOGGER.info("\n========================================================\n"+
+								"Request: Add Voucher\n"+
+								"Date: " + date+ "\n"+
+								"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+								"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+								"Result: Succeeded\n"+
+								"============================================================");
 					} catch (Exception e) {
+						LOGGER.info("\n========================================================\n"+
+								"\nRequest: Add Voucher\n"+
+								"Date: " + date+ "\n"+
+								"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+								"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+								"Result: Failed\n"+
+								"Cause: " + e.getMessage()+
+								"\n============================================================");
 						e.printStackTrace();
 					}
 					ObjectMapper mapper = new ObjectMapper();
@@ -153,6 +172,13 @@ public class HomeController {
 				}
 
 				else {
+					LOGGER.info("\n========================================================\n"+
+							"\nRequest: Add Voucher\n"+
+							"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+							"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+							"Result: Failed\n"+
+							"Cause: برجاء المراجعة مع الموظف المختص لتسجيل الايصال"+
+							"\n============================================================");
 					httpsession.setAttribute("addNewVoucher", "برجاء مراجعة مع موظف لتسجيل ايصال");
 				}
 			}
@@ -194,7 +220,23 @@ public class HomeController {
 						boolean updateResult = voucherdao.updateVoucher(voucher);
 						vouchers = voucherdao.getVouchersByFarmID(params[2]);
 						voucherdao.closeDBConn();
+						//Logging into BeheiraPortal log file
+						LOGGER.info("\n========================================================\n"+
+								"Request: Edit Voucher\n"+
+								"Date: " + date+ "\n"+
+								"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+								"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+								"Result: Succeeded\n"+
+								"============================================================");
 					} catch (Exception e) {
+						LOGGER.info("\n========================================================\n"+
+								"\nRequest: Edit Voucher\n"+
+								"Date: " + date+ "\n"+
+								"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+								"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+								"Result: Failed\n"+
+								"Cause: " + e.getMessage()+
+								"\n============================================================");
 						e.printStackTrace();
 					}
 					ObjectMapper mapper = new ObjectMapper();
@@ -202,6 +244,13 @@ public class HomeController {
 					mav.addObject("selectedfarmid", params[2]);
 					mav.addObject("vouchers", vouchersInjson);
 				} else {
+					LOGGER.info("\n========================================================\n"+
+							"\nRequest: Edit Voucher\n"+
+							"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+							"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+							"Result: Failed\n"+
+							"Cause: برجاء المراجعة مع الموظف المختص"+
+							"\n============================================================");
 					httpsession.setAttribute("editVoucher", "برجاء مراجعة مع موظف لتسجيل ايصال");
 				}
 			}
@@ -228,7 +277,21 @@ public class HomeController {
 						boolean deleteResult = voucherdao.deleteByVoucherID(voucherID);
 						vouchers = voucherdao.getVouchersByFarmID(farmID);
 						voucherdao.closeDBConn();
+						//Logging into BeheiralPortal log file
+						LOGGER.info("\n========================================================\n"+
+								"Request: Delete Voucher\n"+
+								"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+								"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+								"Result: Succeeded\n"+
+								"============================================================");
 					} catch (Exception e) {
+						LOGGER.info("\n========================================================\n"+
+								"\nRequest: Delete Voucher\n"+
+								"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+								"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+								"Result: Failed\n"+
+								"Cause: " + e.getMessage()+
+								"\n============================================================");
 						e.printStackTrace();
 					}
 					ObjectMapper mapper = new ObjectMapper();
@@ -236,6 +299,13 @@ public class HomeController {
 					mav.addObject("vouchers", vouchersInjson);
 					mav.addObject("selectedfarmid", params[1]);
 				} else {
+					LOGGER.info("\n========================================================\n"+
+							"\nRequest: Delete Voucher\n"+
+							"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+							"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+							"Result: Failed\n"+
+							"Cause: برجاء المراجعة مع الموظف المختص"+
+							"\n============================================================");
 					httpsession.setAttribute("deletevoucher", "برجاء مراجعة مع موظف لتسجيل ايصال");
 				}
 			}
@@ -275,14 +345,41 @@ public class HomeController {
 					boolean updateResult = farmdao.updateFarm(farm);
 					farmsList = farmdao.getAllFarms(params[1], params[3], params[2], params[4], params[5]);
 					farmdao.closeDBConn();
+					//Logging into BeheiraPortal log file
+					LOGGER.info("\n========================================================\n"+
+							"Request: Update Farm Data\n"+
+							"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+							"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+							"Farm ID: " + Integer.parseInt(params[0]) + "\n"+
+							"Farm Name: " + params[1] + "\n"+
+							"Farm Owner: " + params[2] + "\n"+
+							"Result: Succeeded\n"+
+							"============================================================");
 				} catch (Exception e) {
+					LOGGER.info("\n========================================================\n"+
+							"Request: Update Farm Data\n"+
+							"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+							"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+							"Farm ID: " + Integer.parseInt(params[0]) + "\n"+
+							"Farm Name: " + params[1] + "\n"+
+							"Farm Owner: " + params[2] + "\n"+
+							"Result: Failed\n"+
+							"Cause: " + e.getMessage()+
+							"\n============================================================");
 					e.printStackTrace();
 				}
 				ObjectMapper mapper = new ObjectMapper();
 				String farmsInjson = mapper.writeValueAsString(farmsList);
 				mav.addObject("farms", farmsInjson);
 			} else {
-				httpsession.setAttribute("updateFarmData", "برجاء مراجعة مع موظف لتسجيل ايصال");
+				LOGGER.info("\n========================================================\n"+
+						"\nRequest: Update Farm Data\n"+
+						"Requested By: " + httpsession.getAttribute("UserName") + "\n"+
+						"Role: " + httpsession.getAttribute("UserRole") + "\n"+
+						"Result: Failed\n"+
+						"Cause: برجاء المراجعة مع الموظف المختص"+
+						"\n============================================================");
+				httpsession.setAttribute("updateFarmData", "برجاء مراجعة مع موظف المختص");
 			}
 		} else {
 			httpsession.setAttribute("updateFarmData", "برجاء قم بتسجيل الدخول");
@@ -407,6 +504,12 @@ public class HomeController {
 
 	@RequestMapping(value = { "/userlogout" }, method = RequestMethod.GET)
 	public String getuserLogout(HttpServletRequest request) {
+		//Logging into BeheiraPortal
+		LOGGER.info("\n========================================================\n"+
+				"Request: Log Out\n"+
+				"Requested By: " + request.getSession().getAttribute("UserName") + "\n"+
+				"Result: Logged out successfully"+
+				"\n============================================================");
 		request.getSession().removeAttribute("UserName");
 		org.apache.shiro.subject.Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
@@ -496,16 +599,37 @@ public class HomeController {
 		user.setPhoneNumber(phone);
 		user.setRoleid(1);
 		user.setIdentificationID(identificationID);
-
+		Date date = new Date();
+		//DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
 		generatePassword(user, plainTextPassword);
 		// user.getPassword();
              
 		session.save(user);
-                
-             
-           
-		System.err.println("User with email:" + user.getEmail() + " hashedPassword:" + user.getPassword() + " salt:"
-				+ user.getSalt());
+        try {
+        	//date = formatter.parse(date.toString());
+			//Logging into BeheiraPortal     
+			LOGGER.info("\n========================================================\n"+
+					"Request: User Registeration\n"+
+					"Date: " + date + "\n"+
+					"Requested By: " + user.getName() + "\n"+
+					"Result: Succeeded\n"+
+					"============================================================");  
+        } catch(Exception e)
+        {
+        	LOGGER.info("\n========================================================\n"+
+					"Request: User Registeration\n"+
+					"Date: " + date + "\n"+
+					"Requested By: " + user.getName() + "\n"+
+					"Result: Faild\n"+
+					"Cause: " + e.getMessage()+ 
+					"\n============================================================");  
+        	System.err.println("User with email:" + user.getEmail() + " hashedPassword:" + user.getPassword() + " salt:"
+    				+ user.getSalt());
+        }
+		/*System.err.println("User with email:" + user.getEmail() + " hashedPassword:" + user.getPassword() + " salt:"
+				+ user.getSalt());*/
 
 		// create role
 		/*
@@ -526,18 +650,49 @@ public class HomeController {
 			try {
 				currentUser.login(token);
 				// currentUser.isPermitted("admin:access");
-				System.out.println("User [" + currentUser.getPrincipal().toString() + "] logged in successfully.");
+				//Logging into BeheiraPortal
+				LOGGER.info("\n========================================================\n"+
+						"Request: Log In\n"+
+						"Requested By: " + currentUser.getPrincipal().toString() + "\n"+
+						"Date: " + currentUser.getSession().getLastAccessTime()+ "\n"+
+						"Result: Logged in successfully"+
+						"\n============================================================");
+				//System.out.println("User [" + currentUser.getPrincipal().toString() + "] logged in successfully.");
 
 				currentUser.getSession().setAttribute("username", username);
 
 				return true;
 			} catch (UnknownAccountException uae) {
-				System.out.println("There is no user with username of " + token.getPrincipal());
+				//Logging into BeheiraPortal
+				LOGGER.info("\n========================================================\n"+
+						"Request: Log In\n"+
+						"Requested By: " + currentUser.getPrincipal().toString() + "\n"+
+						"Date: " + currentUser.getSession().getLastAccessTime()+ "\n"+
+						"Result: Fail\n"+
+						"Cause: There is no user with username of " + token.getPrincipal() +
+						"\n============================================================");
+				//System.out.println("There is no user with username of " + token.getPrincipal());
 			} catch (IncorrectCredentialsException ice) {
-				System.out.println("Password for account " + token.getPrincipal() + " was incorrect!");
+				//Logging into BeheiraPortal
+				LOGGER.info("\n========================================================\n"+
+						"Request: Log In\n"+
+						"Requested By: " + currentUser.getPrincipal().toString() + "\n"+
+						"Date: " + currentUser.getSession().getLastAccessTime()+
+						"Result: Fail\n"+
+						"Cause: Password for account " + token.getPrincipal() + " was incorrect!"+
+						"\n============================================================");
+				//System.out.println("Password for account" + token.getPrincipal() + " was incorrect!");
 			} catch (LockedAccountException lae) {
-				System.out.println("The account for username " + token.getPrincipal() + " is locked.  "
-						+ "Please contact your administrator to unlock it.");
+				//Logging into BeheiraPortal
+				LOGGER.info("\n========================================================\n"+
+						"Request: Log In\n"+
+						"Requested By: " + currentUser.getPrincipal().toString() + "\n"+
+						"Date: " + currentUser.getSession().getLastAccessTime()+ "\n"+
+						"Result: Fail\n"+
+						"Cause: The account for username " + token.getPrincipal() + " is locked. Please contact your administrator to unlock it."+
+						"\n============================================================");
+				/*System.out.println("The account for username " + token.getPrincipal() + " is locked.  "
+						+ "Please contact your administrator to unlock it.");*/
 			} catch (AuthenticationException ae) {
 
 			}
@@ -596,7 +751,10 @@ public class HomeController {
 		List<PortalUser> users = null;
 		String userrole = params[0];
 		String userName = params[1];
+		Date date = new Date();
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		HttpSession httpSession = request.getSession(true);
 		session.beginTransaction();
 		try {
 
@@ -605,8 +763,25 @@ public class HomeController {
 			roledao.getRoleid(userrole);
 			users = userdao.getAllUsers();
 			updated = userdao.editUserRole(roledao.getRoleid(userrole), userName);
+			date = formatter.parse(date.toString());
+			//Logging into BeheiraPortal
+			LOGGER.info("\n========================================================\n"+
+					"Request: Edit User Role\n"+
+					"Requested By: " + httpSession.getAttribute("UserName") + "\n"+
+					"Role: Administrator\n"+
+					"Date: " + date + "\n" +
+					"Result: User Role Updated Successfully"+
+					"\n============================================================");
 
 		} catch (Exception e) {
+			LOGGER.info("\n========================================================\n"+
+					"Request: Edit User Role\n"+
+					"Requested By: " + httpSession.getAttribute("UserName") + "\n"+
+					"Role: Administrator\n"+
+					"Date: " + date + "\n" +
+					"Result: Failed"+
+					"Cause: "+ e.getMessage() +
+					"\n============================================================");
 			e.printStackTrace();
 		} finally {
 			session.getTransaction().commit();

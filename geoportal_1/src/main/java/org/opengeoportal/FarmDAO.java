@@ -38,7 +38,8 @@ public class FarmDAO {
 		Farm farm = new Farm();
 		PreparedStatement preparedStatement = null;
 		try {
-			String queryString = "select * from beheiraschema.farms where \"farm_id\"=?";
+			//String queryString = "select * from beheiraschema.farms where \"farm_id\"=?";
+			String queryString = "select * from beheiraschemafordev.farms where \"farm_id\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setInt(1, farmID);
 			ResultSet rset = preparedStatement.executeQuery();
@@ -66,7 +67,8 @@ public class FarmDAO {
 		PreparedStatement preparedStatement = null;
 		boolean updateResult = false;
 		try {
-			String queryString = "UPDATE beheiraschema.farms SET \"farm_name\"=?, \"owner_id\"=?, \"owner_name\"=?, \"telephone\"=?, \"ownership\"=?  WHERE \"farm_id\"=?";
+			//String queryString = "UPDATE beheiraschema.farms SET \"farm_name\"=?, \"owner_id\"=?, \"owner_name\"=?, \"telephone\"=?, \"ownership\"=?  WHERE \"farm_id\"=?";
+			String queryString = "UPDATE beheiraschemafordev.farms SET \"farm_name\"=?, \"owner_id\"=?, \"owner_name\"=?, \"telephone\"=?, \"ownership\"=?  WHERE \"farm_id\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, farm.getFarmName());
 			preparedStatement.setString(2, farm.getOwnerID());
@@ -89,7 +91,8 @@ public class FarmDAO {
 		PreparedStatement preparedStatement = null;
 		List<Farm> farmsList = new ArrayList<Farm>();
 		try {
-			String queryString = "select * from beheiraschema.farms where \"farm_name\" like ? and \"owner_id\" like ? and \"owner_name\" like ? and \"telephone\" like ? and \"ownership\" like ?";
+			//String queryString = "select * from beheiraschema.farms where \"farm_name\" like ? and \"owner_id\" like ? and \"owner_name\" like ? and \"telephone\" like ? and \"ownership\" like ?";
+			String queryString = "select * from beheiraschemafordev.farms where \"farm_name\" like ? and \"owner_id\" like ? and \"owner_name\" like ? and \"telephone\" like ? and \"ownership\" like ?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, "%" + farmName + "%");
 			preparedStatement.setString(2, "%" + ownerId + "%");
@@ -123,7 +126,8 @@ public class FarmDAO {
 		PreparedStatement preparedStatement = null;
 		List<Farm> farmsList = new ArrayList<Farm>();
 		try {
-			String queryString = "select * from beheiraschema.farms";
+			//String queryString = "select * from beheiraschema.farms";
+			String queryString = "select * from beheiraschemafordev.farms";
 			preparedStatement = con.prepareStatement(queryString);
 			ResultSet rset = preparedStatement.executeQuery();
 			while (rset.next()) {
