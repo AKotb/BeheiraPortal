@@ -616,17 +616,6 @@
 			var Issuing_document_No = document
 					.getElementById('Issuing_document_No').value;
 			var Notes = document.getElementById('Notes').value;
-
-			alert("[voucher_ID:" + voucher_ID + ", gov:" + gov + ", site:"
-					+ site + ", person_ID:" + person_ID + ", Person_Name:"
-					+ Person_Name + ", voucher_Date:" + voucher_Date
-					+ ", Fees_Status:" + Fees_Status + ", Amount:" + Amount
-					+ ", Payment_Status:" + Payment_Status
-					+ ", Issuing_document:" + Issuing_document
-					+ ", Issuing_document_section:" + Issuing_document_section
-					+ ", Issuing_Date:" + Issuing_Date
-					+ ", Issuing_document_No:" + Issuing_document_No
-					+ ", Notes:" + Notes + "]");
 		}
 
 		function voucherPrint() {
