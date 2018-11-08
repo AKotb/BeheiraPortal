@@ -1,5 +1,8 @@
 package org.opengeoportal.utilities;
-
+/**
+ * @author heba.alaa
+ *
+ */
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

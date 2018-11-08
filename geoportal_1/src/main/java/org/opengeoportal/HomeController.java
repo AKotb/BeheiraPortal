@@ -5,8 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.opengeoportal.config.ogp.OgpConfig;
-import org.opengeoportal.config.ogp.OgpConfigRetriever;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +19,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.subject.Subject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.exception.ConstraintViolationException;
+import org.opengeoportal.config.ogp.OgpConfig;
+import org.opengeoportal.config.ogp.OgpConfigRetriever;
+import org.opengeoportal.usermanagement.PortalUser;
+import org.opengeoportal.usermanagement.PortalUserDao;
+import org.opengeoportal.usermanagement.RoleDao;
+import org.opengeoportal.utilities.HibernateUtil;
 
 @Controller
 public class HomeController {
@@ -33,7 +53,7 @@ public class HomeController {
 		ObjectMapper mapper = new ObjectMapper();
 		String dataDirInjson = mapper.writeValueAsString(dataDir);
 		mav.addObject("dataDir", dataDirInjson);
-		System.out.println("========= Data Dir: "+dataDirInjson);
+		System.out.println("========= Data Dir: " + dataDirInjson);
 		return mav;
 	}
 
@@ -92,94 +112,136 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/addnewvoucher", method = RequestMethod.GET)
-	public ModelAndView addNewVoucher(@RequestParam(value = "params") String[] params) throws Exception {
+	public ModelAndView addNewVoucher(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
-		Voucher voucher = new Voucher();
-		voucher.setGov(params[0]);
-		voucher.setSite(params[1]);
-		voucher.setFarmID(params[2]);
-		voucher.setPersonID(params[3]);
-		voucher.setPersonName(params[4]);
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = formatter.parse(params[5]);
-		voucher.setVoucherDate(date);
-		voucher.setFeesStatus(params[6]);
-		voucher.setAmount(params[7]);
-		voucher.setPaymentStatus(params[8]);
-		voucher.setIssuingDocument(params[9]);
-		voucher.setIssuingDocumentSection(params[10]);
-		voucher.setIssuingDocumentNo(params[11]);
-		voucher.setNotes(params[12]);
-		List<Voucher> vouchers = null;
+		HttpSession httpsession = request.getSession(true);
+		String role = null;
 		try {
-			VoucherDAO voucherdao = new VoucherDAO();
-			boolean addresult = voucherdao.addVoucher(voucher);
-			vouchers = voucherdao.getVouchersByFarmID(params[2]);
-			voucherdao.closeDBConn();
-		} catch (Exception e) {
-			e.printStackTrace();
+			role = httpsession.getAttribute("UserRole").toString();
+			if (role != null) {
+				if (role.equals("2") || role.equals("3")) {
+					Voucher voucher = new Voucher();
+					voucher.setGov(params[0]);
+					voucher.setSite(params[1]);
+					voucher.setFarmID(params[2]);
+					voucher.setPersonID(params[3]);
+					voucher.setPersonName(params[4]);
+					DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					Date date = formatter.parse(params[5]);
+					voucher.setVoucherDate(date);
+					voucher.setFeesStatus(params[6]);
+					voucher.setAmount(params[7]);
+					voucher.setPaymentStatus(params[8]);
+					voucher.setIssuingDocument(params[9]);
+					voucher.setIssuingDocumentSection(params[10]);
+					voucher.setIssuingDocumentNo(params[11]);
+					voucher.setNotes(params[12]);
+					List<Voucher> vouchers = null;
+					try {
+						VoucherDAO voucherdao = new VoucherDAO();
+						boolean addresult = voucherdao.addVoucher(voucher);
+						vouchers = voucherdao.getVouchersByFarmID(params[2]);
+						voucherdao.closeDBConn();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ObjectMapper mapper = new ObjectMapper();
+					String vouchersInjson = mapper.writeValueAsString(vouchers);
+					mav.addObject("selectedfarmid", params[2]);
+					mav.addObject("vouchers", vouchersInjson);
+				}
+
+				else {
+					httpsession.setAttribute("addNewVoucher", "برجاء مراجعة مع موظف لتسجيل ايصال");
+				}
+			}
+		} catch (NullPointerException ne) {
+			httpsession.setAttribute("addNewVoucher", "برجاء قم بتسجيل الدخول");
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		String vouchersInjson = mapper.writeValueAsString(vouchers);
-		mav.addObject("selectedfarmid", params[2]);
-		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}
 
 	@RequestMapping(value = "/editvoucher", method = RequestMethod.GET)
-	public ModelAndView editVoucher(@RequestParam(value = "params") String[] params) throws Exception {
+	public ModelAndView editVoucher(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
-		Voucher voucher = new Voucher();
-		voucher.setGov(params[0]);
-		voucher.setSite(params[1]);
-		voucher.setFarmID(params[2]);
-		voucher.setPersonID(params[3]);
-		voucher.setPersonName(params[4]);
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = formatter.parse(params[5]);
-		voucher.setVoucherDate(date);
-		voucher.setFeesStatus(params[6]);
-		voucher.setAmount(params[7]);
-		voucher.setPaymentStatus(params[8]);
-		voucher.setIssuingDocument(params[9]);
-		voucher.setIssuingDocumentSection(params[10]);
-		voucher.setIssuingDocumentNo(params[11]);
-		voucher.setNotes(params[12]);
-		voucher.setVoucherID(Integer.parseInt(params[13]));
-		List<Voucher> vouchers = null;
+		HttpSession httpsession = request.getSession(true);
 		try {
-			VoucherDAO voucherdao = new VoucherDAO();
-			boolean updateResult = voucherdao.updateVoucher(voucher);
-			vouchers = voucherdao.getVouchersByFarmID(params[2]);
-			voucherdao.closeDBConn();
-		} catch (Exception e) {
-			e.printStackTrace();
+			String role = httpsession.getAttribute("UserRole").toString();
+			if (role != null) {
+				if (role.equals("2") || role.equals("3")) {
+					Voucher voucher = new Voucher();
+					voucher.setGov(params[0]);
+					voucher.setSite(params[1]);
+					voucher.setFarmID(params[2]);
+					voucher.setPersonID(params[3]);
+					voucher.setPersonName(params[4]);
+					DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					Date date = formatter.parse(params[5]);
+					voucher.setVoucherDate(date);
+					voucher.setFeesStatus(params[6]);
+					voucher.setAmount(params[7]);
+					voucher.setPaymentStatus(params[8]);
+					voucher.setIssuingDocument(params[9]);
+					voucher.setIssuingDocumentSection(params[10]);
+					voucher.setIssuingDocumentNo(params[11]);
+					voucher.setNotes(params[12]);
+					voucher.setVoucherID(Integer.parseInt(params[13]));
+					List<Voucher> vouchers = null;
+					try {
+						VoucherDAO voucherdao = new VoucherDAO();
+						boolean updateResult = voucherdao.updateVoucher(voucher);
+						vouchers = voucherdao.getVouchersByFarmID(params[2]);
+						voucherdao.closeDBConn();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ObjectMapper mapper = new ObjectMapper();
+					String vouchersInjson = mapper.writeValueAsString(vouchers);
+					mav.addObject("selectedfarmid", params[2]);
+					mav.addObject("vouchers", vouchersInjson);
+				} else {
+					httpsession.setAttribute("editVoucher", "برجاء مراجعة مع موظف لتسجيل ايصال");
+				}
+			}
+		} catch (NullPointerException ne) {
+			httpsession.setAttribute("editVoucher", "برجاء قم بتسجيل الدخول");
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		String vouchersInjson = mapper.writeValueAsString(vouchers);
-		mav.addObject("selectedfarmid", params[2]);
-		mav.addObject("vouchers", vouchersInjson);
 		return mav;
 	}
 
 	@RequestMapping(value = "/deletevoucher", method = RequestMethod.GET)
-	public ModelAndView deleteVoucher(@RequestParam(value = "params") String[] params) throws Exception {
+	public ModelAndView deleteVoucher(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
 		ModelAndView mav = new ModelAndView("vouchers_manager");
-		int voucherID = Integer.parseInt(params[0]);
-		String farmID = params[1];
-		List<Voucher> vouchers = null;
+		HttpSession httpsession = request.getSession(true);
 		try {
-			VoucherDAO voucherdao = new VoucherDAO();
-			boolean deleteResult = voucherdao.deleteByVoucherID(voucherID);
-			vouchers = voucherdao.getVouchersByFarmID(farmID);
-			voucherdao.closeDBConn();
-		} catch (Exception e) {
-			e.printStackTrace();
+			String role = httpsession.getAttribute("UserRole").toString();
+			if (role != null) {
+				if (role.equals("2") || role.equals("3")) {
+					int voucherID = Integer.parseInt(params[0]);
+					String farmID = params[1];
+					List<Voucher> vouchers = null;
+					try {
+						VoucherDAO voucherdao = new VoucherDAO();
+						boolean deleteResult = voucherdao.deleteByVoucherID(voucherID);
+						vouchers = voucherdao.getVouchersByFarmID(farmID);
+						voucherdao.closeDBConn();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ObjectMapper mapper = new ObjectMapper();
+					String vouchersInjson = mapper.writeValueAsString(vouchers);
+					mav.addObject("vouchers", vouchersInjson);
+					mav.addObject("selectedfarmid", params[1]);
+				} else {
+					httpsession.setAttribute("deletevoucher", "برجاء مراجعة مع موظف لتسجيل ايصال");
+				}
+			}
+		} catch (NullPointerException ne) {
+			httpsession.setAttribute("deletevoucher", "برجاء قم بتسجيل الدخول");
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		String vouchersInjson = mapper.writeValueAsString(vouchers);
-		mav.addObject("vouchers", vouchersInjson);
-		mav.addObject("selectedfarmid", params[1]);
 		return mav;
 	}
 
@@ -190,30 +252,41 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/editfarmdata", method = RequestMethod.GET)
-	public ModelAndView updateFarmData(@RequestParam(value = "params") String[] params) throws Exception {
+	public ModelAndView updateFarmData(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
 		ModelAndView mav = new ModelAndView("farm_manager");
-		Farm farm = new Farm();
-		farm.setFarmID(Integer.parseInt(params[0]));
-		farm.setFarmName(params[1]);
-		farm.setOwnerName(params[2]);
-		farm.setOwnerID(params[3]);
-		farm.setTelephone(params[4]);
-		if (params[5].equals("")) {
-			params[5] = "غير متوفر";
+		HttpSession httpsession = request.getSession(true);
+		String role = httpsession.getAttribute("UserRole").toString();
+		if (role != null) {
+			if (role.equals("2") || role.equals("3")) {
+				Farm farm = new Farm();
+				farm.setFarmID(Integer.parseInt(params[0]));
+				farm.setFarmName(params[1]);
+				farm.setOwnerName(params[2]);
+				farm.setOwnerID(params[3]);
+				farm.setTelephone(params[4]);
+				if (params[5].equals("")) {
+					params[5] = "غير متوفر";
+				}
+				farm.setOwnership(params[5]);
+				List<Farm> farmsList = null;
+				try {
+					FarmDAO farmdao = new FarmDAO();
+					boolean updateResult = farmdao.updateFarm(farm);
+					farmsList = farmdao.getAllFarms(params[1], params[3], params[2], params[4], params[5]);
+					farmdao.closeDBConn();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				ObjectMapper mapper = new ObjectMapper();
+				String farmsInjson = mapper.writeValueAsString(farmsList);
+				mav.addObject("farms", farmsInjson);
+			} else {
+				httpsession.setAttribute("updateFarmData", "برجاء مراجعة مع موظف لتسجيل ايصال");
+			}
+		} else {
+			httpsession.setAttribute("updateFarmData", "برجاء قم بتسجيل الدخول");
 		}
-		farm.setOwnership(params[5]);
-		List<Farm> farmsList = null;
-		try {
-			FarmDAO farmdao = new FarmDAO();
-			boolean updateResult = farmdao.updateFarm(farm);
-			farmsList = farmdao.getAllFarms(params[1], params[3], params[2], params[4], params[5]);
-			farmdao.closeDBConn();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		ObjectMapper mapper = new ObjectMapper();
-		String farmsInjson = mapper.writeValueAsString(farmsList);
-		mav.addObject("farms", farmsInjson);
 		return mav;
 	}
 
@@ -274,5 +347,283 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("regulations_and_laws");
 		return mav;
 	}
-	
+
+	/////////// user managment//////////
+	@RequestMapping(value = "/userlogin", method = RequestMethod.GET)
+	public ModelAndView getLogin() throws Exception {
+		ModelAndView mav = new ModelAndView("userlogin");
+		return mav;
+	}
+
+	@RequestMapping(value = { "/user_login" }, method = RequestMethod.GET)
+	public String validUser(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
+
+		ModelAndView mav = new ModelAndView("register_form");
+		HttpSession httpsession = request.getSession(true);
+		PortalUser user = new PortalUser();
+		String path;
+		int role;
+		String username = params[0];
+		String pwd = params[1];
+		if (username == null || pwd == null) {
+			httpsession.setAttribute("loginmessage", "تحقق من اسم المستخدم أو كلمة المرور");
+			path = "redirect:/userlogin";
+		} else {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			boolean exist = tryLogin(username, pwd);
+			if (exist) {
+				try {
+					// request.setAttribute(
+					// "message",
+					// "Login successful. Welcome. Open <a href='hello'>hello Servlet</a> to check
+					// if you are logged in.");
+					PortalUserDao userdao = new PortalUserDao(session);
+					user = userdao.getUserByName(username);
+					httpsession.setAttribute("UserName", params[0]);
+					httpsession.setAttribute("UserRole", user.getRoleid());
+					String rolel = httpsession.getAttribute("UserRole").toString();
+					if (user.getRoleid() == 2) {
+						path = "redirect:/adminManage";
+
+					} else {
+						path = "redirect:/index";
+					}
+				}
+
+				finally {
+					session.getTransaction().commit();
+					if (session.isOpen())
+						session.close();
+				}
+			} else {
+				httpsession.setAttribute("loginmessage", "تحقق من اسم المستخدم أو كلمة المرور");
+				path = "redirect:/userlogin";
+			}
+		}
+		return path;
+	}
+
+	@RequestMapping(value = { "/userlogout" }, method = RequestMethod.GET)
+	public String getuserLogout(HttpServletRequest request) {
+		request.getSession().removeAttribute("UserName");
+		org.apache.shiro.subject.Subject currentUser = SecurityUtils.getSubject();
+		currentUser.logout();
+		return "redirect:/index";
+	}
+
+	@RequestMapping(value = "/register_form", method = RequestMethod.GET)
+	public ModelAndView getRegisterForm() throws Exception {
+		ModelAndView mav = new ModelAndView("register_form");
+		return mav;
+	}
+
+	@RequestMapping(value = "/registerForm", method = RequestMethod.GET)
+	public ModelAndView addUserRegisterForm(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
+
+		ModelAndView mav = new ModelAndView("register_form");
+		PortalUser user = new PortalUser();
+
+		// HttpSession session = request.getSession(true);
+		int added;
+		String name = params[0];
+		String Email = params[1];
+		String Password = params[2];
+		String IdentificationID = params[3];
+		String Phone = params[4];
+		boolean exist;
+		if (name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Phone.isEmpty() || IdentificationID.isEmpty()) {
+			request.setAttribute("message", "برجاء ملاء كل بيانات");
+		} else {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			try {
+				PortalUserDao userdao = new PortalUserDao(session);
+				exist = userdao.SelectSpecificUser(name);
+				if (!exist) {
+					registrate(session, name, Password, Email, Phone, IdentificationID);
+					request.setAttribute("message", "تم اضافة المستخدم بنجاح");
+				} else {
+					request.setAttribute("message", "تم اضافةاسم المستخدم سابقا");
+				}
+			}
+			
+			finally {
+                           
+				try
+                                {
+                                    session.getTransaction().commit();
+                                   
+				if (session.isOpen())
+					session.close();
+                                }
+                           
+                            catch(HibernateException ex )
+			{
+                            request.setAttribute("message", "حدث خطا اثناء الحفظ برجاء محاولة لاحقا ");
+				
+			}
+			}
+                         
+			mav = new ModelAndView("userlogin");
+		}
+
+		return mav;
+	}
+
+	private void generatePassword(PortalUser user, String plainTextPassword) {
+		RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+		Object salt = rng.nextBytes();
+		// Now hash the plain-text password with the random salt and multiple
+		// iterations and then Base64-encode the value (requires less space than
+		// Hex):
+		String hashedPasswordBase64 = new Sha256Hash(plainTextPassword, salt, 1024).toBase64();
+
+		user.setPassword(hashedPasswordBase64);
+		user.setSalt(salt.toString());
+	}
+
+	private void registrate(Session session, String name, String plainTextPassword, String mail, String phone,
+			String identificationID) {
+		PortalUser user = new PortalUser();
+               // user.setId(1);
+
+		user.setName(name);
+		user.setPassword(plainTextPassword);
+		user.setEmail(mail);
+		user.setPhoneNumber(phone);
+		user.setRoleid(1);
+		user.setIdentificationID(identificationID);
+
+		generatePassword(user, plainTextPassword);
+		// user.getPassword();
+             
+		session.save(user);
+                
+             
+           
+		System.err.println("User with email:" + user.getEmail() + " hashedPassword:" + user.getPassword() + " salt:"
+				+ user.getSalt());
+
+		// create role
+		/*
+		 * if (isAdmin) { UserRole role = new UserRole(); role.setEmail(email);
+		 * role.setRoleName("admin"); session.save(role); }
+		 */
+
+	}
+
+	// login
+	public boolean tryLogin(String username, String password) {
+		// get the currently executing user:
+		Subject currentUser = SecurityUtils.getSubject();
+
+		if (!currentUser.isAuthenticated()) {
+
+			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+			try {
+				currentUser.login(token);
+				// currentUser.isPermitted("admin:access");
+				System.out.println("User [" + currentUser.getPrincipal().toString() + "] logged in successfully.");
+
+				currentUser.getSession().setAttribute("username", username);
+
+				return true;
+			} catch (UnknownAccountException uae) {
+				System.out.println("There is no user with username of " + token.getPrincipal());
+			} catch (IncorrectCredentialsException ice) {
+				System.out.println("Password for account " + token.getPrincipal() + " was incorrect!");
+			} catch (LockedAccountException lae) {
+				System.out.println("The account for username " + token.getPrincipal() + " is locked.  "
+						+ "Please contact your administrator to unlock it.");
+			} catch (AuthenticationException ae) {
+
+			}
+		} else {
+			return true; // already logged in
+		}
+
+		return false;
+	}
+
+	@RequestMapping(value = "/adminManage", method = RequestMethod.GET)
+	public ModelAndView getUsers(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView("adminManage");
+		List<PortalUser> users = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		HttpSession httpsession = request.getSession(true);
+		try {
+			String role = httpsession.getAttribute("UserRole").toString();
+			if (role != null) {
+				if (role.equals("2")) {
+					try {
+
+						PortalUserDao userdao = new PortalUserDao(session);
+						users = userdao.getAllUsers();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.getTransaction().commit();
+						if (session.isOpen())
+							session.close();
+					}
+					if (users.size() == 0) {
+						users = null;
+					}
+					ObjectMapper mapper = new ObjectMapper();
+					String usersInjson = mapper.writeValueAsString(users);
+					mav.addObject("users", usersInjson);
+				} else {
+					request.setAttribute("adminmessage", "غير مسموح بدخول هذه الصفحة");
+				}
+			}
+		} catch (NullPointerException ne) {
+			request.setAttribute("adminmessage", "غير مسموح بدخول هذه الصفحة");
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = { "/edituserrole" }, method = RequestMethod.GET)
+	public ModelAndView editUserRole(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+			throws Exception {
+		ModelAndView mav = new ModelAndView("adminManage");
+		boolean updated = false;
+		PortalUser user = new PortalUser();
+		List<PortalUser> users = null;
+		String userrole = params[0];
+		String userName = params[1];
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		try {
+
+			PortalUserDao userdao = new PortalUserDao(session);
+			RoleDao roledao = new RoleDao();
+			roledao.getRoleid(userrole);
+			users = userdao.getAllUsers();
+			updated = userdao.editUserRole(roledao.getRoleid(userrole), userName);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.getTransaction().commit();
+			if (session.isOpen())
+				session.close();
+		}
+		if (updated) {
+			request.setAttribute("adminmessage", "تم الحفظ بنجاح");
+
+		} else {
+			request.setAttribute("adminmessage", "حدث خطأ اثناء الحفظ");
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String usersInjson = mapper.writeValueAsString(users);
+		mav.addObject("users", usersInjson);
+
+		return mav;
+	}
+
 }

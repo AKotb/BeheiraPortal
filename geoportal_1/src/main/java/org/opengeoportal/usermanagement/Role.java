@@ -7,7 +7,7 @@ package org.opengeoportal.usermanagement;
 
 /**
  *
- * @author Administrator
+ * @author heba.alaa
  */
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -17,7 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity 
-@Table(name = "beheiraschema.userrole")
+@Table(name = "beheiraschemafordev.userrole")
 public class Role implements Serializable
 {
 

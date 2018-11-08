@@ -1,5 +1,8 @@
 package org.opengeoportal.usermanagement;
-
+/**
+ * @author heba.alaa
+ *
+ */
 import javax.servlet.http.HttpSession;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -8,9 +11,9 @@ import org.apache.shiro.authc.SaltedAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.hibernate.Session;
-
-
 import org.opengeoportal.utilities.HibernateUtil;
+
+
 
 public class CustomRealm extends JdbcRealm {
 	@Override

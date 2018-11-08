@@ -1,5 +1,8 @@
 package org.opengeoportal.usermanagement;
-
+/**
+ * @author heba.alaa
+ *
+ */
 import org.apache.shiro.authc.SaltedAuthenticationInfo;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.subject.PrincipalCollection;

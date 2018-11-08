@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity 
-@Table(name = "beheiraschema.beheirauser")
+@Table(name = "beheiraschemafordev.beheirauser")
 public class PortalUser implements Serializable
 {
 
@@ -19,6 +19,7 @@ public class PortalUser implements Serializable
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    
     @Column(name = "name")
     private String name;
     @Column

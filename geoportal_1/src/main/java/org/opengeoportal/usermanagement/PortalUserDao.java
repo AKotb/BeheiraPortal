@@ -12,11 +12,11 @@ import java.util.Set;
 import javax.persistence.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.opengeoportal.DBConPgSQL;
 
 //import org.apache.shiro.SecurityUtils;
 //import org.hibernate.Session;
 
-import org.opengeoportal.DBConPgSQL;
 import org.hibernate.Session;
 
 /**
@@ -44,7 +44,7 @@ private final Session session;
         try {
             c = DBConPgSQL.establishDBConn();
             stmt = c.createStatement(); 
-            String sql ="SELECT * FROM beheiraschema.beheirauser where name= ?;";
+            String sql ="SELECT * FROM beheiraschemafordev.beheirauser where name= ?;";
              PreparedStatement ps = c.prepareStatement(sql);
                  
             ps.setString(1, name);
@@ -81,7 +81,7 @@ private final Session session;
              try {
                  c = DBConPgSQL.establishDBConn();
                  stmt = c.createStatement(); 
-                 String sql ="SELECT * FROM beheiraschema.beheirauser where name= ?;";
+                 String sql ="SELECT * FROM beheiraschemafordev.beheirauser where name= ?;";
              PreparedStatement ps = c.prepareStatement(sql);
                  
             ps.setString(1, username);
@@ -120,7 +120,7 @@ private final Session session;
                  {
                      if (!exist)
                      {
-                         String sql = "INSERT INTO beheiraschema.beheirauser (name,password,email,identifynumber,phonenumber)"+"VALUES(?,?,?,?,?)";
+                         String sql = "INSERT INTO beheiraschemafordev.beheirauser (name,password,email,identifynumber,phonenumber)"+"VALUES(?,?,?,?,?)";
                          ps = conn.prepareStatement(sql);
                          ps.setString(1, usr.getName());
                          ps.setString(2,usr.getPassword());
@@ -156,7 +156,7 @@ private final Session session;
         try {
             c = DBConPgSQL.establishDBConn();
             stmt = c.createStatement(); 
-           SQLQuery query = session.createSQLQuery("select * from beheiraschema.beheirauser where name= ?");
+           SQLQuery query = session.createSQLQuery("select * from beheiraschemafordev.beheirauser where name= ?");
            query.setParameter(0, username);
            
            // ps.setString(1, pwd);
@@ -184,7 +184,7 @@ private final Session session;
 	   public PortalUser getUserByName(String name) {
 		PortalUser user = new PortalUser();
              // String pwd= password.toString();
-               SQLQuery query = session.createSQLQuery("select *from beheiraschema.beheirauser where name= ?");
+               SQLQuery query = session.createSQLQuery("select *from beheiraschemafordev.beheirauser where name= ?");
                query.setParameter(0, name);
                //query.setParameter(1, password);
                List<Object[]> rows = query.list();
@@ -204,9 +204,9 @@ private final Session session;
       
               // PortalUser user = new PortalUser();
                List<PortalUser> usersList = new ArrayList<PortalUser>();
-              // SQLQuery sq= session.createSQLQuery("select * FROM beheiraschema.beheirauser where name= ?")
+              // SQLQuery sq= session.createSQLQuery("select * FROM beheiraschemafordevfordev.beheirauser where name= ?")
 		//.setString(0, name).uniqueResult();
-               SQLQuery query = session.createSQLQuery("select *from beheiraschema.beheirauser");
+               SQLQuery query = session.createSQLQuery("select *from beheiraschemafordev.beheirauser");
                
                List<Object[]> rows = query.list();
                for(Object[] row : rows){
@@ -242,7 +242,7 @@ private final Session session;
                  try
                  {
                     
-                         String sql = "UPDATE beheiraschema.beheirauser SET roleid=? WHERE name=?;";
+                         String sql = "UPDATE beheiraschemafordev.beheirauser SET roleid=? WHERE name=?;";
                          ps = conn.prepareStatement(sql);
                          ps.setInt(1, roleid);
                          ps.setString(2,name);
