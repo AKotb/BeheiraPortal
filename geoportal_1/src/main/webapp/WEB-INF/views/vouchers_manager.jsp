@@ -23,6 +23,17 @@
 
 <body>
 	<div class="container">
+                 	   <% 
+               HttpSession sessions = request.getSession(true);
+               String username = (String)sessions.getAttribute("UserName");
+               if(username==null){
+               
+                   %>
+           <a href="userlogin">تسجيل دخول</a>
+           <%} else {%>
+           
+           <div>اهلا ب يا<%=username%> <a href="userlogout">الخروج</a></div> 
+           <%}%>
 		<ul class="nav">
 			<a href="searchforfarms"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
@@ -38,6 +49,7 @@
 		<p class='cur_title'>طلب إجراءات التقنين_المعاينة/الفحص</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
+             
 	</div>
 	<div class="extra_noheight">
 		<div class="modal-content">
@@ -74,6 +86,15 @@
 							id="vm_Person_Name"></td>
 						<td align="right" style="color: #396266; font: bold 24px Arial;">مقدم
 							الطلب</td>
+					</tr>
+                                        <tr>
+                                                    <td align="right"> <% 
+               HttpSession addvoucherssession = request.getSession(true);
+               String adderrormsg = (String)addvoucherssession.getAttribute("addNewVoucher");
+               if(adderrormsg==null){%><%}
+else{%>
+               
+               <h2 style="color:red;"><%=adderrormsg%></h2><%}%> </td>
 					</tr>
 				</table>
 				<br> <br> <a href='javascript:void(0);'
@@ -128,6 +149,15 @@
 									id="edit_Notes" value=""></textarea></td>
 							<td align="right" style="color: #3d6266;">ملاحظات</td>
 						</tr>
+                                                   <tr>
+                                                    <td align="right"> <% 
+               HttpSession editvoucherssession = request.getSession(true);
+               String editerrormsg = (String)editvoucherssession.getAttribute("editVoucher");
+               if(editerrormsg==null){%><%}
+else{%>
+               
+               <h2 style="color:red;"><%=editerrormsg%></h2><%}%> </td>
+					</tr>
 					</table>
 
 					<h2 align="center">
@@ -183,6 +213,16 @@
 									id="add_Notes" value=""></textarea></td>
 							<td align="right" style="color: #3d6266;">ملاحظات</td>
 						</tr>
+                                               <tr>
+                                                    <td align="right"> <% 
+               HttpSession addnewvoucherssession = request.getSession(true);
+               String addnewerrormsg = (String)addnewvoucherssession.getAttribute("addNewVoucher");
+               if(addnewerrormsg==null){%><%}
+else{%>
+               
+               <h2 style="color:red;"><%=addnewerrormsg%></h2><%}%></td>
+					</tr>   
+                                                
 					</table>
 
 					<h2 align="center">
@@ -192,21 +232,13 @@
 					</h2>
 				</div>
 			</div>
-			<div id='controlbuttons' class='floating-menu'>
-					<div class='vm_control_button_1'><a href="javascript:void(0);" onclick="move();" class="button">استخدامات الأراضى</a> </div>
-					<div class='vm_control_button_2'><a href="javascript:void(0);" onclick="move_raster();" class="button"> مرئيات فضائية </a></div> 
-					<div class='vm_control_button_3'><a href="javascript:void(0);" onclick="gotoMahdar();" target="_blank" class="button">محضر معاينة</a></div> 
-					<div class='vm_control_button_4'><a href="javascript:void(0);" onclick="back();" class="button">رجوع</a></div>
-			</div>
 		</div>
 	</div>
 	<script>
-		var lat = "${lat}";
-		var lng = "${lng}";
-		var selectedfarmid = '${selectedfarmid}';
-		var parsedselectedfarmid = JSON.parse(selectedfarmid);
 		window.onload = function() {
 			voucherjson = '${vouchers}';
+			selectedfarmid = '${selectedfarmid}';
+			parsedselectedfarmid = JSON.parse(selectedfarmid);
 			var farmID;
 			var num_of_voucher = 0;
 			if (voucherjson != 'null') {
@@ -492,54 +524,13 @@
 		}
 
 		function voucher_add(id) {
+                    
+                    
 			// set display options
 			document.getElementById("voucher_add_form").style.display = "block";
 			document.getElementById("voucher_edit_form").style.display = "none";
 			//document.getElementById("voucher_add_form").style.visibility = "visible";
 			//document.getElementById("voucher_edit_form").style.visibility = "collapse";
-		}
-		
-		function move_raster() {
-			var id = document.getElementById("vm_farm_ID").value;
-			var params = [ id, lat, lng ];
-			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
-			location = location.replace("paramsvalues", params);
-			window.location.href = location;
-		}
-		
-		function move() {
-			var id = document.getElementById("vm_farm_ID").value;
-			var params = [ id, lat, lng ];
-			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
-			location = location.replace("paramsvalues", params);
-			window.location.href = location;
-		}
-
-		function back() {
-			var id = document.getElementById("vm_farm_ID").value;
-			var params = [ id, lat, lng ];
-			var location = "<c:url value='showonmap'><c:param name='params' value='paramsvalues'/></c:url>";
-			location = location.replace("paramsvalues", params);
-			window.location.href = location;
-		}
-		
-		function gotoMahdar() {
-			var location = 'resources/mahader/0.png';
-			var id = document.getElementById("vm_farm_ID").value;
-			if (200 == urlExists('resources/mahader/' + id + '.png')) {
-				location = 'resources/mahader/' + id + '.png';
-			}
-			window.location.href = location;
-		}
-		
-		function urlExists(checkedurl) {
-			var http = $.ajax({
-				type : "HEAD",
-				url : checkedurl,
-				async : false
-			})
-			return http.status;
-			// this will return 200 on success, and 0 or negative value on error
 		}
 	</script>
 
