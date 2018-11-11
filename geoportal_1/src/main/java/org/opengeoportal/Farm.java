@@ -20,6 +20,10 @@ public class Farm {
 	private String unusedArea;
 	private String fieldCropsArea;
 	private String cropsArea;
+	private String managBuildings;
+	private String poulBuildings;
+	private String animBuildings;
+	private String agriBuildings;
 
 	/**
 	 * 
@@ -41,10 +45,14 @@ public class Farm {
 	 * @param unusedArea
 	 * @param fieldCropsArea
 	 * @param cropsArea
+	 * @param managBuildings
+	 * @param poulBuildings
+	 * @param animBuildings
+	 * @param agriBuildings
 	 */
 	public Farm(int id, int farmID, String farmName, String ownerID, String ownerName, String telephone,
 			String ownership, String reclamedArea, String urbanArea, String unusedArea, String fieldCropsArea,
-			String cropsArea) {
+			String cropsArea, String managBuildings, String poulBuildings, String animBuildings, String agriBuildings) {
 		super();
 		this.id = id;
 		this.farmID = farmID;
@@ -58,6 +66,10 @@ public class Farm {
 		this.unusedArea = unusedArea;
 		this.fieldCropsArea = fieldCropsArea;
 		this.cropsArea = cropsArea;
+		this.managBuildings = managBuildings;
+		this.poulBuildings = poulBuildings;
+		this.animBuildings = animBuildings;
+		this.agriBuildings = agriBuildings;
 	}
 
 	/**
@@ -238,6 +250,66 @@ public class Farm {
 	 */
 	public void setCropsArea(String cropsArea) {
 		this.cropsArea = cropsArea;
+	}
+
+	/**
+	 * @return the managBuildings
+	 */
+	public String getManagBuildings() {
+		return managBuildings;
+	}
+
+	/**
+	 * @param managBuildings
+	 *            the managBuildings to set
+	 */
+	public void setManagBuildings(String managBuildings) {
+		this.managBuildings = managBuildings;
+	}
+
+	/**
+	 * @return the poulBuildings
+	 */
+	public String getPoulBuildings() {
+		return poulBuildings;
+	}
+
+	/**
+	 * @param poulBuildings
+	 *            the poulBuildings to set
+	 */
+	public void setPoulBuildings(String poulBuildings) {
+		this.poulBuildings = poulBuildings;
+	}
+
+	/**
+	 * @return the animBuildings
+	 */
+	public String getAnimBuildings() {
+		return animBuildings;
+	}
+
+	/**
+	 * @param animBuildings
+	 *            the animBuildings to set
+	 */
+	public void setAnimBuildings(String animBuildings) {
+		this.animBuildings = animBuildings;
+	}
+
+	/**
+	 * @return the agriBuildings
+	 */
+	public String getAgriBuildings() {
+		return agriBuildings;
+	}
+
+	/**
+	 * @param agriBuildings
+	 *            the agriBuildings to set
+	 */
+	public void setAgriBuildings(String agriBuildings) {
+		this.agriBuildings = agriBuildings;
 	}
 
 }

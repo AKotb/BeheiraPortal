@@ -131,6 +131,38 @@
 						strokeWeight : 2
 					});
 				}
+				if(landusecode == '6'){
+					color='#FF0000';
+					return ({
+						fillColor : color,
+						strokeColor : color,
+						strokeWeight : 2
+					});
+				}
+				if(landusecode == '7'){
+					color='#FF00FF';
+					return ({
+						fillColor : color,
+						strokeColor : color,
+						strokeWeight : 2
+					});
+				}
+				if(landusecode == '8'){
+					color='#FFBEE8';
+					return ({
+						fillColor : color,
+						strokeColor : color,
+						strokeWeight : 2
+					});
+				}
+				if(landusecode == '9'){
+					color='#E64C00';
+					return ({
+						fillColor : color,
+						strokeColor : color,
+						strokeWeight : 2
+					});
+				}
 			});
 			landuse_layer.addListener('click', function(event) {
 				landuse_layer.revertStyle();
@@ -161,6 +193,22 @@
 				if(landusecode == '5'){
 					colorcode = '#D3D3D3';
 					arname = 'أراضي غير مستغلة';
+				}
+				if(landusecode == '6'){
+					colorcode = '#FF0000';
+					arname = 'مباني ادارية وسكنية';
+				}
+				if(landusecode == '7'){
+					colorcode = '#FF00FF';
+					arname = 'مباني انتاج داجني';
+				}
+				if(landusecode == '8'){
+					colorcode = '#FFBEE8';
+					arname = 'مباني انتاج حيواني';
+				}
+				if(landusecode == '9'){
+					colorcode = '#E64C00';
+					arname = 'مباني انتاج زراعي';
 				}
 				/* var arname = event.feature.getProperty('Ar_Name');
 				if (arname) {
@@ -232,6 +280,26 @@
 				} else {
 					db_cropsArea = "لا يوجد";
 				}
+				if (farmdata.managBuildings) {
+					db_managBuildings = farmdata.managBuildings;
+				} else {
+					db_managBuildings = "لا يوجد";
+				}
+				if (farmdata.poulBuildings) {
+					db_poulBuildings = farmdata.poulBuildings;
+				} else {
+					db_poulBuildings = "لا يوجد";
+				}
+				if (farmdata.animBuildings) {
+					db_animBuildings = farmdata.animBuildings;
+				} else {
+					db_animBuildings = "لا يوجد";
+				}
+				if (farmdata.agriBuildings) {
+					db_agriBuildings = farmdata.agriBuildings;
+				} else {
+					db_agriBuildings = "لا يوجد";
+				}
 				
 				
 				var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
@@ -265,10 +333,18 @@
 					+ "</td><td class=\'rightcolumn\'>محاصيل بستانية</td></tr><tr><td class=\'td\'>"
 					+ db_reclamedArea
 					+ "</td><td class=\'rightcolumn\'>أراضي مستصلحة ومعدة للزراعة</td></tr><tr><td class=\'td\'>"
-					+ db_urbanArea
-					+ "</td><td class=\'rightcolumn\'> مباني قائمة</td></tr><tr><td class=\'td\'>"
 					+ db_unusedArea
-					+ "</td><td class=\'rightcolumn\'>أراضي غير مستغلة</td></tr></table>"
+					+ "</td><td class=\'rightcolumn\'>أراضي غير مستغلة</td></tr><tr><td class=\'td\'>"
+					+ db_urbanArea
+					+ "</td><td class=\'rightcolumn\'>مباني قائمة</td></tr><tr><td class=\'td\'>"
+					+ db_managBuildings
+					+ "</td><td class=\'rightcolumn\'>مباني ادارية وسكنية</td></tr><tr><td class=\'td\'>"
+					+ db_poulBuildings
+					+ "</td><td class=\'rightcolumn\'>مباني انتاج داجني</td></tr><tr><td class=\'td\'>"
+					+ db_animBuildings
+					+ "</td><td class=\'rightcolumn\'>مباني انتاج حيواني</td></tr><tr><td class=\'td\'>"
+					+ db_agriBuildings
+					+ "</td><td class=\'rightcolumn\'>مباني انتاج زراعي</td></tr></table>"
 					+ "<br><h2 style=\"background-color: "+colorcode+";\">"
 					+ arname
 					+ "</h2>"
@@ -301,17 +377,13 @@
 						+ "</div>"; */
 
 				infowindow.setContent(content);
-				infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
-				infowindow.setOptions({
-					pixelOffset : new google.maps.Size(0, -30)
-				});
+				infowindow.setPosition(event.latLng);
 				infowindow.open(map);
 			});
 
 			landuse_layer.addListener('mouseover',function(event) {});
 			landuse_layer.addListener('mouseout', function(event) {
 				landuse_layer.revertStyle();
-				//infowindow.close();
 			});
 		}
 
@@ -340,7 +412,6 @@
 		}
 		
 		function close_infowindow() {
-			//alert("Closing info window");
 			infowindow.close();
 		}
 		
