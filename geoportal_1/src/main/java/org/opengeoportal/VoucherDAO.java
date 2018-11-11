@@ -35,8 +35,7 @@ public class VoucherDAO {
 		Voucher voucher = new Voucher();
 		PreparedStatement preparedStatement = null;
 		try {
-			//String queryString = "select * from beheiraschema.voucher where \"voucher_ID\"=?";
-			String queryString = "select * from beheiraschemafordev.voucher where \"voucher_ID\"=?";
+			String queryString = "select * from beheiraschema.voucher where \"voucher_ID\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, id);
 			ResultSet rset = preparedStatement.executeQuery();
@@ -67,8 +66,7 @@ public class VoucherDAO {
 		List<Voucher> vouchersList = new ArrayList<Voucher>();
 		PreparedStatement preparedStatement = null;
 		try {
-			//String queryString = "select * from beheiraschema.voucher where \"Farm_ID\" = ?";
-			String queryString = "select * from beheiraschemafordev.voucher where \"Farm_ID\" = ?";
+			String queryString = "select * from beheiraschema.voucher where \"Farm_ID\" = ?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, farmid);
 			ResultSet rset = preparedStatement.executeQuery();
@@ -101,8 +99,7 @@ public class VoucherDAO {
 		PreparedStatement preparedStatement = null;
 		boolean insertResult = false;
 		try {
-			//String queryString = "INSERT INTO beheiraschema.voucher(\"gov\", \"site\", \"Farm_ID\", \"Person_Name\", \"person_ID\", \"voucher_Date\", \"Amount\", \"Fees_Status\", \"Notes\", \"Payment_Status\", \"Issuing_document\", \"Issuing_document_section\", \"Issuing_document_No\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			String queryString = "INSERT INTO beheiraschemafordev.voucher(\"gov\", \"site\", \"Farm_ID\", \"Person_Name\", \"person_ID\", \"voucher_Date\", \"Amount\", \"Fees_Status\", \"Notes\", \"Payment_Status\", \"Issuing_document\", \"Issuing_document_section\", \"Issuing_document_No\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String queryString = "INSERT INTO beheiraschema.voucher(\"gov\", \"site\", \"Farm_ID\", \"Person_Name\", \"person_ID\", \"voucher_Date\", \"Amount\", \"Fees_Status\", \"Notes\", \"Payment_Status\", \"Issuing_document\", \"Issuing_document_section\", \"Issuing_document_No\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, voucher.getGov());
 			preparedStatement.setString(2, voucher.getSite());
@@ -132,8 +129,7 @@ public class VoucherDAO {
 		PreparedStatement preparedStatement = null;
 		boolean updateResult = false;
 		try {
-			//String queryString = "UPDATE beheiraschema.voucher SET \"gov\"=?, \"site\"=?, \"Farm_ID\"=?, \"Person_Name\"=?, \"person_ID\"=?, \"voucher_Date\"=?, \"Amount\"=?, \"Fees_Status\"=?, \"Notes\"=?, \"Payment_Status\"=?, \"Issuing_document\"=?, \"Issuing_document_section\"=?, \"Issuing_document_No\"=? WHERE \"voucher_ID\"=?";
-			String queryString = "UPDATE beheiraschemafordev.voucher SET \"gov\"=?, \"site\"=?, \"Farm_ID\"=?, \"Person_Name\"=?, \"person_ID\"=?, \"voucher_Date\"=?, \"Amount\"=?, \"Fees_Status\"=?, \"Notes\"=?, \"Payment_Status\"=?, \"Issuing_document\"=?, \"Issuing_document_section\"=?, \"Issuing_document_No\"=? WHERE \"voucher_ID\"=?";
+			String queryString = "UPDATE beheiraschema.voucher SET \"gov\"=?, \"site\"=?, \"Farm_ID\"=?, \"Person_Name\"=?, \"person_ID\"=?, \"voucher_Date\"=?, \"Amount\"=?, \"Fees_Status\"=?, \"Notes\"=?, \"Payment_Status\"=?, \"Issuing_document\"=?, \"Issuing_document_section\"=?, \"Issuing_document_No\"=? WHERE \"voucher_ID\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setString(1, voucher.getGov());
 			preparedStatement.setString(2, voucher.getSite());
@@ -164,8 +160,7 @@ public class VoucherDAO {
 		PreparedStatement preparedStatement = null;
 		boolean deleteResult = false;
 		try {
-			//String queryString = "DELETE FROM beheiraschema.voucher WHERE \"voucher_ID\"=?";
-			String queryString = "DELETE FROM beheiraschemafordev.voucher WHERE \"voucher_ID\"=?";
+			String queryString = "DELETE FROM beheiraschema.voucher WHERE \"voucher_ID\"=?";
 			preparedStatement = con.prepareStatement(queryString);
 			preparedStatement.setInt(1, voucherID);
 			int i = preparedStatement.executeUpdate();
