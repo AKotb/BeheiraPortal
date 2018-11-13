@@ -530,7 +530,6 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("register_form");
 		PortalUser user = new PortalUser();
 
-		// HttpSession session = request.getSession(true);
 		int added;
 		String name = params[0];
 		String Email = params[1];
