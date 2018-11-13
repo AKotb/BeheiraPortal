@@ -29,7 +29,7 @@ public class RoleDao {
         try {
             c = DBConPgSQL.establishDBConn();
             stmt = c.createStatement(); 
-            String sql ="SELECT role FROM beheiraschemafordev.userrole where id= ?;";
+            String sql ="SELECT role FROM beheiraschema.userrole where id= ?;";
              PreparedStatement ps = c.prepareStatement(sql);
            ps.setInt(1, id);
            ResultSet rs = ps.executeQuery();
@@ -63,7 +63,7 @@ public class RoleDao {
         try {
             c = DBConPgSQL.establishDBConn();
             stmt = c.createStatement(); 
-            String sql ="SELECT * FROM beheiraschemafordev.userrole where role= ?;";
+            String sql ="SELECT * FROM beheiraschema.userrole where role= ?;";
              PreparedStatement ps = c.prepareStatement(sql);
            ps.setString(1, name);
            ResultSet rs = ps.executeQuery();

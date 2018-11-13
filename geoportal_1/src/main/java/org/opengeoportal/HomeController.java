@@ -548,32 +548,26 @@ public class HomeController {
 				if (!exist) {
 					registrate(session, name, Password, Email, Phone, IdentificationID);
 					request.setAttribute("message", "تم اضافة المستخدم بنجاح");
+					 session.getTransaction().commit();
 				} else {
 					request.setAttribute("message", "تم اضافةاسم المستخدم سابقا");
 				}
 			}
+			catch(HibernateException ex )
+			{
+               request.setAttribute("message", "حدث خطا اثناء الحفظ برجاء محاولة لاحقا ");
+			}
 			
 			finally {
-                           
-				try
-                                {
-                                    session.getTransaction().commit();
-                                   
+                                                 
 				if (session.isOpen())
 					session.close();
-                                }
-                           
-                            catch(HibernateException ex )
-			{
-                            request.setAttribute("message", "حدث خطا اثناء الحفظ برجاء محاولة لاحقا ");
-				
-			}
-			}
-                         
+                              
 			mav = new ModelAndView("userlogin");
 		}
-
+		}
 		return mav;
+		
 	}
 
 	private void generatePassword(PortalUser user, String plainTextPassword) {

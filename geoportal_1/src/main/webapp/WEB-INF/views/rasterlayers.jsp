@@ -61,11 +61,11 @@
 			<!-- class="slider" -->
 		</div>
 		<div id="raster_view">
-			<img id='img1' class='img_slider' src='resources/rasterimages/0.png'>
+			<img id='img1' class='img_slider' src='datafiles/rasterimages/0.png'>
 			<div id='img1_title' class='legend'>
 				<p class='img_title bottom_title'>Pleiades March 2017</p>
 			</div>
-			<img id='img2' class='img_slider' src='resources/rasterimages/0.png'>
+			<img id='img2' class='img_slider' src='datafiles/rasterimages/0.png'>
 			<div id='img2_title' class='legend'>
 				<p class='img_title top_title'>Sentinel2 Septemper 2018</p>
 			</div>
@@ -83,9 +83,9 @@
 		var id = "${polygonID}";
 		var lat = "${lat}";
 		var lng = "${lng}";
-		document.getElementById('img1').src = 'resources/rasterimages/png_new/'
+		document.getElementById('img1').src = 'datafiles/rasterimages/png_new/'
 				+ id + '.png';
-		document.getElementById('img2').src = 'resources/rasterimages/png_old/'
+		document.getElementById('img2').src = 'datafiles/rasterimages/png_old/'
 				+ id + '.png';
 		var img_height = 500;
 		var img_width = 800;
@@ -178,9 +178,9 @@
 		}
 		
 		function gotoMahdar() {
-			var location = 'resources/mahader/0.png';
-			if (200 == urlExists('resources/mahader/' + id + '.png')) {
-				location = 'resources/mahader/' + id + '.png';
+			var location = 'datafiles/mahader/0.png';
+			if (200 == urlExists('datafiles/mahader/' + id + '.png')) {
+				location = 'datafiles/mahader/' + id + '.png';
 			}
 			window.location.href = location;
 		}

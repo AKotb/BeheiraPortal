@@ -17,7 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity 
-@Table(name = "beheiraschemafordev.userrole")
+@Table(name = "beheiraschema.userrole")
 public class Role implements Serializable
 {
 

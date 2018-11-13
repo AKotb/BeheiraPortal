@@ -302,9 +302,9 @@
 				}
 				
 				
-				var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
-				if (200 == urlExists('resources/mahader/'+db_farmid+'.png')) {
-					link0 = "<a href=\'resources/mahader/"+db_farmid+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+				var link0 = "<a href=\'datafiles/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+				if (200 == urlExists('datafiles/mahader/'+db_farmid+'.png')) {
+					link0 = "<a href=\'datafiles/mahader/"+db_farmid+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 				}
 				var link1 = "<a href=\'javascript:void(0);\' onclick=\'back();\' class=\'button\'> رجوع </a>";
 				var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
@@ -315,7 +315,7 @@
 						+ ");\' class=\'button\'>"
 						+ "طلب إجراءات التقنين"
 						+ "</a>";
-				var link4 = "<a href=\'resources/datafiles/landuse/"+db_farmid+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/landuse/"+db_farmid+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+				var link4 = "<a href=\'datafiles/landuse/"+db_farmid+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'datafiles/landuse/"+db_farmid+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 				var content = "<div style=\"text-align:center; overflow:hidden;\"><h1 style=\"background-color: #44a959;\">"
 					+ "بيانات قطعة الأرض" + "</h1><br>"
 					+ link4

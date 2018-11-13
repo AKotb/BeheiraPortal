@@ -294,10 +294,10 @@
 											}
 										}
 									}
-									var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
-									if (200 == urlExists('resources/mahader/'
+									var link0 = "<a href=\'datafiles/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+									if (200 == urlExists('datafiles/mahader/'
 											+ area_id + '.png')) {
-										link0 = "<a href=\'resources/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+										link0 = "<a href=\'datafiles/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									}
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
 											+ area_id
@@ -306,7 +306,7 @@
 											+ area_id
 											+ ");\' class=\'button\'>"
 											+ "طلب إجراءات التقنين" + "</a>";
-									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'datafiles/sketch/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'datafiles/sketch/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
 											+ area_id
 											+ ");\' class=\'button\'> استخدامات الأراضى </a>";
@@ -479,10 +479,10 @@
 											}
 										}
 									}
-									var link0 = "<a href=\'resources/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
-									if (200 == urlExists('resources/mahader/'
+									var link0 = "<a href=\'datafiles/mahader/0.png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+									if (200 == urlExists('datafiles/mahader/'
 											+ area_id + '.png')) {
-										link0 = "<a href=\'resources/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
+										link0 = "<a href=\'datafiles/mahader/"+area_id+".png\' target='_blank' class=\'button\'> محضر معاينة </a>";
 									}
 									var link2 = "<a href=\'javascript:void(0);\' onclick=\'move_raster("
 											+ area_id
@@ -491,7 +491,7 @@
 											+ area_id
 											+ ");\' class=\'button\'>"
 											+ "طلب إجراءات التقنين" + "</a>";
-									var link4 = "<a href=\'resources/datafiles/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'resources/datafiles/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
+									var link4 = "<a href=\'datafiles/sketch/"+area_id+".jpg\' target='_blank'><img class=\'infowindowimg\' src=\'datafiles/sketch/"+area_id+".jpg\' alt=\'Icon\' style=\"width:300px;height:170px;\"></a>";
 									var link1 = "<a href=\'javascript:void(0);\' onclick=\'move("
 											+ area_id
 											+ ");\' class=\'button\'> استخدامات الأراضى </a>";
