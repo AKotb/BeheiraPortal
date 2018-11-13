@@ -511,6 +511,7 @@ public class HomeController {
 				"Result: Logged out successfully"+
 				"\n============================================================");
 		request.getSession().removeAttribute("UserName");
+                request.getSession().invalidate();
 		org.apache.shiro.subject.Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
 		return "redirect:/index";
@@ -524,7 +525,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/registerForm", method = RequestMethod.GET)
 	public ModelAndView addUserRegisterForm(@RequestParam(value = "params") String[] params, HttpServletRequest request)
-			throws Exception {
+			  {
 
 		ModelAndView mav = new ModelAndView("register_form");
 		PortalUser user = new PortalUser();
@@ -549,13 +550,15 @@ public class HomeController {
 					registrate(session, name, Password, Email, Phone, IdentificationID);
 					request.setAttribute("message", "تم اضافة المستخدم بنجاح");
 					 session.getTransaction().commit();
-				} else {
+				}
+                                
+                                else {
 					request.setAttribute("message", "تم اضافةاسم المستخدم سابقا");
 				}
 			}
-			catch(HibernateException ex )
+			catch(Exception ex )
 			{
-               request.setAttribute("message", "حدث خطا اثناء الحفظ برجاء محاولة لاحقا ");
+                          request.setAttribute("message", "حدث خطا اثناء الحفظ برجاء محاولة لاحقا ");
 			}
 			
 			finally {
@@ -563,7 +566,7 @@ public class HomeController {
 				if (session.isOpen())
 					session.close();
                               
-			mav = new ModelAndView("userlogin");
+			//mav = new ModelAndView("userlogin");
 		}
 		}
 		return mav;
