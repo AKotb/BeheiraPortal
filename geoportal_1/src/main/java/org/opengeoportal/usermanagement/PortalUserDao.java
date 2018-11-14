@@ -66,10 +66,9 @@ private final Session session;
             c.close();
             
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.out.println(e.getClass().getName() + ": " + e.getMessage());
       }
-        System.out.println("Operation done successfully");
-       
+        
         return exist;
     }
          

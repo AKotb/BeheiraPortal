@@ -481,7 +481,8 @@ public class HomeController {
 					httpsession.setAttribute("UserName", params[0]);
 					httpsession.setAttribute("UserRole", user.getRoleid());
 					String rolel = httpsession.getAttribute("UserRole").toString();
-					if (user.getRoleid() == 2) {
+					session.getTransaction().commit();
+                                        if (user.getRoleid() == 2) {
 						path = "redirect:/adminManage";
 
 					} else {
@@ -490,7 +491,7 @@ public class HomeController {
 				}
 
 				finally {
-					session.getTransaction().commit();
+					
 					if (session.isOpen())
 						session.close();
 				}
@@ -538,7 +539,7 @@ public class HomeController {
 		String Phone = params[4];
 		boolean exist;
 		if (name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Phone.isEmpty() || IdentificationID.isEmpty()) {
-			request.setAttribute("message", "برجاء ملاء كل بيانات");
+			request.setAttribute("message", "برجاءاكمل كل بيانات");
 		} else {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
@@ -714,11 +715,12 @@ public class HomeController {
 
 						PortalUserDao userdao = new PortalUserDao(session);
 						users = userdao.getAllUsers();
+                                                session.getTransaction().commit();
 
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						session.getTransaction().commit();
+						
 						if (session.isOpen())
 							session.close();
 					}
@@ -760,6 +762,7 @@ public class HomeController {
 			users = userdao.getAllUsers();
 			updated = userdao.editUserRole(roledao.getRoleid(userrole), userName);
 			date = formatter.parse(date.toString());
+                        session.getTransaction().commit();
 			//Logging into BeheiraPortal
 			LOGGER.info("\n========================================================\n"+
 					"Request: Edit User Role\n"+
@@ -780,7 +783,7 @@ public class HomeController {
 					"\n============================================================");
 			e.printStackTrace();
 		} finally {
-			session.getTransaction().commit();
+			
 			if (session.isOpen())
 				session.close();
 		}
