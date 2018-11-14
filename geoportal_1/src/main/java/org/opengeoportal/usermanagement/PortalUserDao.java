@@ -68,8 +68,6 @@ private final Session session;
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());
       }
-        
-       
         return exist;
     }
          
