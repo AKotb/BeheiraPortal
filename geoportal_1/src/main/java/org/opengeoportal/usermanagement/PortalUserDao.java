@@ -44,13 +44,15 @@ private final Session session;
         try {
             c = DBConPgSQL.establishDBConn();
             stmt = c.createStatement(); 
-            String sql ="SELECT * FROM beheiraschema.beheirauser where name= ?;";
-             PreparedStatement ps = c.prepareStatement(sql);
+            String sql ="SELECT * FROM beheiraschema.beheirauser where name = '"+name+"'";
+            
+            //PreparedStatement ps = c.prepareStatement(sql);
                  
-            ps.setString(1, name);
+            //ps.setString(1, name);
           //  ps.setString(2, password);
            
-            ResultSet rs = ps.executeQuery();
+            //ResultSet rs = ps.executeQuery();
+            ResultSet rs = stmt.executeQuery(sql);
             
                 while (rs.next()) 
             {

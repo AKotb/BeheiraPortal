@@ -512,7 +512,7 @@ public class HomeController {
 				"Result: Logged out successfully"+
 				"\n============================================================");
 		request.getSession().removeAttribute("UserName");
-                request.getSession().invalidate();
+               
 		org.apache.shiro.subject.Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
 		return "redirect:/index";
@@ -549,7 +549,7 @@ public class HomeController {
 				if (!exist) {
 					registrate(session, name, Password, Email, Phone, IdentificationID);
 					request.setAttribute("message", "تم اضافة المستخدم بنجاح");
-					 session.getTransaction().commit();
+					session.getTransaction().commit();
 				}
                                 
                                 else {
@@ -559,6 +559,7 @@ public class HomeController {
 			catch(Exception ex )
 			{
                           request.setAttribute("message", "حدث خطا اثناء الحفظ برجاء محاولة لاحقا ");
+                          System.out.println("================"+ex.getMessage());
 			}
 			
 			finally {
