@@ -29,6 +29,7 @@
 
 <body>
 		<div class="container">
+		 
 		<ul class="nav">
 			<a href="searchforfarms"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>
@@ -45,12 +46,12 @@
 		<p class='cur_title'>تسجيل دخول</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
-                <a href="userlogin">تسجيل دخول</a>
+               
 	</div>
 	<div class="extra_noheight" style="dir: rtl;">
 		<div id="searchForm" class="modal-content" align="center" >
 		
-                    <table border="0" style="dir: rtl;"align="right">
+                    <table border="0" style="dir: rtl;">
                         <tr>
 					<td align="right" ><input type="text" class="input-box" id="username" name="username" /></td>
 					<td  style="color: #3d6266;">اسم المستخدم</td>

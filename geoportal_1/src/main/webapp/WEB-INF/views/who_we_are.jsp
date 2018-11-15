@@ -30,7 +30,7 @@
                if(username==null){
                
                    %>
-           <a href="userlogin">تسجيل دخول</a>
+           <a href="userlogin" class ="loginanchor">تسجيل دخول</a>
            <%} else {%>
            
            <div>اهلا ب يا<%=username%> <a href="userlogout">الخروج</a> </div> 

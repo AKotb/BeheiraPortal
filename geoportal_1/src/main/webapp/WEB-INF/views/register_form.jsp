@@ -45,12 +45,12 @@
 		<p class='cur_title'>تسجيل مستخدم</p>
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
-                <a href="userlogin">تسجيل دخول</a>
+                <a href="userlogin" class ="loginanchor">تسجيل دخول</a>
 	</div>
 	<div class="extra_noheight">
 		<div id="searchForm" class="modal-content" align="center">
 		
-                  			<table border="0" style="dir: rtl;"align="right" >
+                  			<table border="0" style="dir: rtl;" >
 				<tr>
 					<td align="right"><input class="input-box" type="text"
                                                                  id="name" name="name" value="" required></td>

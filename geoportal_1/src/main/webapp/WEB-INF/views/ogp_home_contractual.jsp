@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -28,7 +29,7 @@
                if(username==null){
                
                    %>
-           <a href="userlogin">تسجيل دخول</a>
+           <a class ="loginanchor" href="userlogin">تسجيل دخول</a>
            <%} else {%>
            
            <div>اهلا ب يا<%=username%> <a href="userlogout">الخروج</a></div> 
@@ -49,6 +50,7 @@
 		<img src="resources/css/css/css/css/images/projectname.png"
 			alt="project name" class="projectname">
 	</div>
+               
 	<div id="extra"></div>
 	<script>
 		var map;
@@ -333,6 +335,7 @@
 											+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td class=\'td\'>"
 											+ db_ownertel
 											+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
+                                                                                        +"<div id=\"errormsg\"></div>"
 											+ "<table><tr><td class=\'td-button\'>"
 											+ link0
 											+ "</td><td class=\'td-button\'>"
@@ -518,6 +521,7 @@
 											+ "</td><td class=\'rightcolumn\'>الرقم القومى</td></tr><tr><td class=\'td\'>"
 											+ db_ownertel
 											+ "</td><td class=\'rightcolumn\'>التليفون</td></tr></table><br>"
+                                                                                 +"<div id=\"errormsg\"></div>"
 											+ "<table><tr><td class=\'td-button\'>"
 											+ link0
 											+ "</td><td class=\'td-button\'>"
@@ -570,24 +574,77 @@
 		}
 
 		function move(id) {
+               var errordiv=document.getElementById("errormsg");
+               errordiv.style.color ="red";
+                var UserRole="<%=session.getAttribute("UserRole")%>";
+                if (UserRole!="null"){
+                    if(UserRole=="2"||UserRole=="3"){
 			var params = [ id, farmlat, farmlng ];
 			var location = "<c:url value='arealayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
-			window.location.href = location;
+			window.location.href = location;}
+                    else
+                    {
+                        
+                        errordiv.innerHTML = "غير مسموح بدخول هذا الصفحة";
+                        
+                    }
 		}
+                else
+                {
+                errordiv.innerHTML = "برجاء قم بتسجيل الدخول";
+                
+                }
+                }
 
-		function move_raster(id) {
+		function move_raster(id) 
+                {
+                    var errordiv=document.getElementById("errormsg");
+                    errordiv.style.color ="red";
+                 var UserRole="<%=session.getAttribute("UserRole")%>";
+                if (UserRole!="null"){
+                    if(UserRole=="2"||UserRole=="3"){
 			var params = [ id, farmlat, farmlng ];
 			var location = "<c:url value='rasterlayers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
-			window.location.href = location;
+			window.location.href = location;}
+                    else
+                    {
+                        
+                        errordiv.innerHTML = "غير مسموح بدخول هذا الصفحة";
+                        
+                    }
+		}
+                else
+                {
+                errordiv.innerHTML = "برجاء قم بتسجيل الدخول";
+                
+                }
 		}
 
 		function vouchers(id) {
+                var errordiv=document.getElementById("errormsg");
+                errordiv.style.color ="red";
+                 var UserRole="<%=session.getAttribute("UserRole")%>";
+                if (UserRole!="null"){
+                    if(UserRole=="2"||UserRole=="3"){
 			var params = [ id, farmlat, farmlng ];
 			var location = "<c:url value='vouchers'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
+                        }
+                    else
+                    {
+                        
+                        errordiv.innerHTML = "غير مسموح بدخول هذا الصفحة";
+                        
+                    }
+		}
+                else
+                {
+                errordiv.innerHTML = "برجاء قم بتسجيل الدخول";
+                
+                }
 		}
 
 		function close_infowindow() {

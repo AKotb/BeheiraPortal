@@ -35,7 +35,7 @@
                if(username==null){
                
                    %>
-           <a href="userlogin">تسجيل دخول</a>
+           <a class ="loginanchor" href="userlogin">تسجيل دخول</a>
            <%} else {%>
            
            <div>اهلا ب يا<%=username%> <a href="userlogout">الخروج</a></div> 
@@ -65,10 +65,10 @@
         <div align="center">     
                          <% 
              
-               if(request.getAttribute("adminmessage")==null){%> <%}
+               if(sessions.getAttribute("adminmessage")==null){%> <%}
            else{%>
                
-               <h2 style="color:red;"><%=request.getAttribute("adminmessage")%></h2><%}%> 
+               <h2 style="color:red;"><%=sessions.getAttribute("adminmessage")%></h2><%}%> 
                 </div>
       
         <script>
@@ -150,12 +150,16 @@
 							+  i
 							+ '\')\" class=\"button\" id=\"editselectedBtn\">حفظ</button>' +'</div></td>'
                                                  + '<td align=\"right\" style=\"width:10%;\"><div style=\"word-break:break-all;\">'+
-                                                 '<select id="user_role'+i+'" size="1" style="width:80px;">'
-							+"<option value=''>"+displayedownership+"</option>"
-							+"<option value="+'1'+">زائر</option>"
+                                                     
+                                                       '<select id="user_role'+i+'" size="1" style="width:80px;">'
+                                                       +"<option value=''>اختار </option>"
+                                                        +"<option value="+'1'+">زائر</option>"
 							+"<option value="+'2'+" >مشرف الموقع</option>"
-							+"<option value="+'3'+" >موظف</option></select>"+'</div></td>' 
-                                                + '<td align=\"right\" style=\"width:15%;\"><div style=\"word-break:break-all;\">' + userPhoneNumber
+							+"<option value="+'3'+" >موظف</option></select>"
+                                                      +'</div></td>' 
+                                            +'<td align=\"right\" style=\"width:15%;\"><div style=\"word-break:break-all;\">' + displayedownership
+							+ '</div></td>'
+                                            + '<td align=\"right\" style=\"width:15%;\"><div style=\"word-break:break-all;\">' + userPhoneNumber
 							+ '</div></td>'+ '<td align=\"right\" style=\"width:10%;\"><div style=\"word-break:break-all;\">' + userIdentifyNum
 							+ '</div></td>' + 
                                                         '<td align=\"right\" style=\"width:25%;\"><div style=\"word-break:break-all;\">' + userMail
@@ -169,9 +173,10 @@
 						+ num_of_items
 						+ ' من نتائج البحث </h3><br><table border=\"0\" align=\"center\" style=\"width:100%;\">'
 						+ '<tr>'
-                                                + '<th class=\"resultth\">تعديل</th>'
-						+ '<th class=\"resultth\">الوظيفة</th>'
-						+ '<th class=\"resultth\"> رقم التليفون </th>'
+                                                + '<th class=\"resultth\">حفظ</th>'
+						+ '<th class=\"resultth\">تعديل</th>'
+						+ '<th class=\"resultth\"> الوظيفة </th>'
+                                                + '<th class=\"resultth\"> رقم التليفون </th>'
 						+ '<th class=\"resultth\">رقم القومي</th>'
 						+ '<th class=\"resultth\">البريد الالكتروني</th>'
 						+ '<th class=\"resultth\"> اسم المستخدم </th>' + '</tr>';
@@ -191,15 +196,18 @@
                         userRole=res[4];
                         num=res[5];
 			
-                        var userroledrp = document.getElementById("user_role"+num);
+                        var userroledrp = document.getElementById("user_role"+num); 
+                       
                                 //  document.getElementById("usernametxt").value=userName;
                        var userrole= userroledrp.options[userroledrp.selectedIndex].text;
 			//var strrole=$ ("#user_role: selected").val();
-                      
+                     
                        var params = [userrole,userName];
 			var location = "<c:url value='edituserrole'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
+                        
+                       
 		}
          
 </script>

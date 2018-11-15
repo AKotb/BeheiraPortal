@@ -29,7 +29,7 @@
                if(username==null){
                
                    %>
-           <a href="userlogin">تسجيل دخول</a>
+           <a class ="loginanchor" href="userlogin">تسجيل دخول</a>
            <%} else {%>
            
            <div>اهلا ب يا<%=username%> <a href="userlogout">الخروج</a></div> 
@@ -88,6 +88,7 @@
 					<td align="right" style="color: #3d6266;">التليفون</td>
 				</tr>
 			</table>
+                         <div id="errormsg"></div>
 
 			<h2 align="center">
 				<button onclick="searchAction()" class="button btnsearch"
@@ -261,6 +262,11 @@
 		}
 
 		function searchAction() {
+                    var errordiv=document.getElementById("errormsg");
+               errordiv.style.color ="red";
+                var UserRole="<%=session.getAttribute("UserRole")%>";
+                if (UserRole!="null"){
+                    if(UserRole=="2"||UserRole=="3"){
 			var search_owner = document.getElementById('owner').value;
 			var search_farm_name = document.getElementById('farm_name').value;
 			var search_sid = document.getElementById('sid').value;
@@ -272,6 +278,19 @@
 			var location = "<c:url value='getallfarms'><c:param name='params' value='paramsvalues'/></c:url>";
 			location = location.replace("paramsvalues", params);
 			window.location.href = location;
+                        }
+                    else
+                    {
+                        
+                        errordiv.innerHTML = "غير مسموح بدخول هذا الصفحة";
+                        
+                    }
+		}
+                else
+                {
+                errordiv.innerHTML = "برجاء قم بتسجيل الدخول";
+                
+                }
 
 			/* readTextFile(
 					'https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json',

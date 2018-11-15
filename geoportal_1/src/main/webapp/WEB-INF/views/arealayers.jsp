@@ -25,6 +25,17 @@
 <script src="resources/jquery/jquery-3.1.1.min.js"></script>
 <script src="resources/leaflet/leaflet.js"></script>
 	<div class="container">
+            	   <% 
+               HttpSession sessions = request.getSession(true);
+               String username = (String)sessions.getAttribute("UserName");
+               if(username==null){
+               
+                   %>
+           <a class ="loginanchor" href="userlogin">تسجيل دخول</a>
+           <%} else {%>
+           
+           <div>اهلا ب يا<%=username%> <a href="userlogout">الخروج</a></div> 
+           <%}%>
 		<ul class="nav">
 			<a href="searchforfarms"> <img
 				src="resources/css/css/css/css/images/SEARCH.png" alt="SEARCH" /></a>

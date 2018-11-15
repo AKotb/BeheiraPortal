@@ -62,7 +62,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/arealayers", method = RequestMethod.GET)
 	public ModelAndView getAreaLayers(@RequestParam(value = "params") String[] params) throws Exception {
-		ModelAndView mav = new ModelAndView("arealayers");
+		//get page استخدمات اراضي
+            ModelAndView mav = new ModelAndView("arealayers");
 		int farmID = Integer.parseInt(params[0]);
 		Farm farm = null;
 		try {
@@ -83,7 +84,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/rasterlayers", method = RequestMethod.GET)
 	public ModelAndView getRasterLayers(@RequestParam(value = "params") String[] params) throws Exception {
-		ModelAndView mav = new ModelAndView("rasterlayers");
+		//get page مرئيات فضائية
+            ModelAndView mav = new ModelAndView("rasterlayers");
 		mav.addObject("polygonID", params[0]);
 		mav.addObject("lat", params[1]);
 		mav.addObject("lng", params[2]);
@@ -92,7 +94,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/vouchers", method = RequestMethod.GET)
 	public ModelAndView getVouchers(@RequestParam(value = "params") String[] params) throws Exception {
-		ModelAndView mav = new ModelAndView("vouchers_manager");
+		//get page of طلب اجراءت التقنين
+            ModelAndView mav = new ModelAndView("vouchers_manager");
 		List<Voucher> vouchers = null;
 		try {
 			VoucherDAO voucherdao = new VoucherDAO();
@@ -708,11 +711,14 @@ public class HomeController {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		HttpSession httpsession = request.getSession(true);
+                
+                
 		try {
 			String role = httpsession.getAttribute("UserRole").toString();
 			if (role != null) {
 				if (role.equals("2")) {
 					try {
+                                           
 
 						PortalUserDao userdao = new PortalUserDao(session);
 						users = userdao.getAllUsers();
@@ -742,7 +748,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = { "/edituserrole" }, method = RequestMethod.GET)
-	public ModelAndView editUserRole(@RequestParam(value = "params") String[] params, HttpServletRequest request)
+	public String editUserRole(@RequestParam(value = "params") String[] params, HttpServletRequest request)
 			throws Exception {
 		ModelAndView mav = new ModelAndView("adminManage");
 		boolean updated = false;
@@ -789,16 +795,17 @@ public class HomeController {
 				session.close();
 		}
 		if (updated) {
-			request.setAttribute("adminmessage", "تم الحفظ بنجاح");
+			httpSession.setAttribute("adminmessage", "تم الحفظ بنجاح");
 
 		} else {
-			request.setAttribute("adminmessage", "حدث خطأ اثناء الحفظ");
+			httpSession.setAttribute("adminmessage", "حدث خطأ اثناء الحفظ");
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String usersInjson = mapper.writeValueAsString(users);
 		mav.addObject("users", usersInjson);
 
-		return mav;
+		//return mav;
+                return "redirect:/adminManage";
 	}
 
 }
