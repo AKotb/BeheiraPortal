@@ -83,19 +83,22 @@
 				map : map
 			});
 			distirct_layer
-					.loadGeoJson('http://localhost:8080/JSON/165.json');
+					.loadGeoJson('http://wn.narss.sci.eg:8080/JSON/165.json'); // for production
+			//distirct_layer.loadGeoJson('http://localhost:8080/JSON/165.json'); //localhost for development
 			
 			var db_layer = new google.maps.Data({
 				map : map
 			});
 			db_layer
-					.loadGeoJson('http://localhost:8080/JSON/db.json');
+					.loadGeoJson('http://wn.narss.sci.eg:8080/JSON/db.json'); // for Production
+			//db_layer.loadGeoJson('http://localhost:8080/JSON/db.json'); //localhost for development
 			
 			var db2_layer = new google.maps.Data({
 				map : map
 			});
 			db2_layer
-					.loadGeoJson('http://localhost:8080/JSON/db_2.json');
+					.loadGeoJson('http://wn.narss.sci.eg:8080/JSON/db_2.json'); // for production
+			//db2_layer.loadGeoJson('http://wn.narss.sci.eg:8080/JSON/db_2.json'); //localhost for development
 			
 			infowindow = new google.maps.InfoWindow();
 			
