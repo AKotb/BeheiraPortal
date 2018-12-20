@@ -83,19 +83,19 @@
 				map : map
 			});
 			distirct_layer
-					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/165.json');
+					.loadGeoJson('http://localhost:8080/JSON/165.json');
 			
 			var db_layer = new google.maps.Data({
 				map : map
 			});
 			db_layer
-					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db.json');
+					.loadGeoJson('http://localhost:8080/JSON/db.json');
 			
 			var db2_layer = new google.maps.Data({
 				map : map
 			});
 			db2_layer
-					.loadGeoJson('https://raw.githubusercontent.com/AKotb/BeheiraPortal/master/geoportal_1/src/main/resources/json/home/db_2.json');
+					.loadGeoJson('http://localhost:8080/JSON/db_2.json');
 			
 			infowindow = new google.maps.InfoWindow();
 			
