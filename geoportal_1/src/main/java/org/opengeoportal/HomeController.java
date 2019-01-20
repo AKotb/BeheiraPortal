@@ -448,6 +448,28 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
+	public ModelAndView statistics() throws Exception {
+		ModelAndView mav = new ModelAndView("statistics");
+		List<Farm> farmsList = null;
+		try {
+			FarmDAO farmdao = new FarmDAO();
+			farmsList = farmdao.getAllAvailableFarms();
+			farmdao.closeDBConn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String farmsInjson = mapper.writeValueAsString(farmsList);
+		System.out.println(farmsList.size());
+		System.out.println(farmsInjson);
+		mav.addObject("farms", farmsInjson);
+		/*mav.addObject("showfarm_id", params[0]);
+		mav.addObject("selectedlat", params[1]);
+		mav.addObject("selectedlng", params[2]);*/
+		return mav;
+	}
+
 	/////////// user managment//////////
 	@RequestMapping(value = "/userlogin", method = RequestMethod.GET)
 	public ModelAndView getLogin() throws Exception {

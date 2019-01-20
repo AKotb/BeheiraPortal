@@ -18,7 +18,8 @@ public class DBConPgSQL {
 	// Server Password
 	// private static String dbPassword = "P@ssw0rd";
 	// Local Password
-	private static String dbPassword = "P@ssw0rd";
+	//private static String dbPassword = "P@ssw0rd";
+	private static String dbPassword = "root";
 
 	/**
 	 * 
@@ -32,6 +33,7 @@ public class DBConPgSQL {
 		try {
 			Class.forName(dbDriverName);
 			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbName, dbUserName, dbPassword);
+			//con = DriverManager.getConnection("jdbc:postgresql://192.168.2.236:5432/" + dbName, dbUserName, dbPassword);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

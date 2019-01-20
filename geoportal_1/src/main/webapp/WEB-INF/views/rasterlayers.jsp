@@ -50,6 +50,9 @@
 			<a href="regulations_and_laws"><img
 				src="resources/css/css/css/css/images/REGULATIONS AND LAWS.png"
 				alt="REGULATIONS AND LAWS"></a>
+			<a href="statistics"><img
+				src="resources/css/css/css/css/images/STATISTICS.png"
+				alt="STATISTICS"></a>
 			<a href="index"><img
 				src="resources/css/css/css/css/images/HOME.png" alt="HOME"></a>
 		</ul>
