@@ -18,8 +18,8 @@ public class DBConPgSQL {
 	// Server Password
 	// private static String dbPassword = "P@ssw0rd";
 	// Local Password
-	//private static String dbPassword = "P@ssw0rd";
-	private static String dbPassword = "root";
+	private static String dbPassword = "P@ssw0rd";
+	//private static String dbPassword = "root";
 
 	/**
 	 * 
