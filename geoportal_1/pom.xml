@@ -33,7 +33,7 @@
 		on a headless server use -Dheadless=true. additional information is at http://code.google.com/p/opengeoportal/wiki/AutomatedTesting -->
 	<!-- Shared version number properties -->
 	<properties>
-		<org.springframework.version>4.0.3.RELEASE</org.springframework.version>
+		<org.springframework.version>5.2.0.RELEASE</org.springframework.version>
 		<org.springframework.security.version>3.2.3.RELEASE</org.springframework.security.version>
 		<geotools.version>13.2</geotools.version>
 		<jackson.version>2.3.2</jackson.version>
