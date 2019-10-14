@@ -34,7 +34,7 @@
 	<!-- Shared version number properties -->
 	<properties>
 		<org.springframework.version>4.0.3.RELEASE</org.springframework.version>
-		<org.springframework.security.version>3.2.3.RELEASE</org.springframework.security.version>
+		<org.springframework.security.version>5.2.0.RELEASE</org.springframework.security.version>
 		<geotools.version>13.2</geotools.version>
 		<jackson.version>2.3.2</jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
